@@ -7,24 +7,24 @@ project(
 )
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
+
 if("${PROJECT_SOURCE_DIR}" STREQUAL "${PROJECT_BINARY_DIR}")
 	message(FATAL_ERROR "in-source builds are not allowed")
 endif()
 
 macro(set_from_environment VARIABLE)
-	if(NOT DEFINED ${VARIABLE} AND DEFINED ENV{${VARIABLE}})
-		set(${VARIABLE} $ENV{${VARIABLE}})
+	if(NOT DEFINED ${VARIABLE} AND DEFINED ENV{${CommonLibSSEPath_NG}})
+		set(${VARIABLE} $ENV{${CommonLibSSEPath_NG}})
 	endif()
 endmacro()
 
-set_from_environment(CompiledPluginsPath)
-if(NOT DEFINED CompiledPluginsPath)
-	message(FATAL_ERROR "CompiledPluginsPath is not set")
-endif()
 
-if (NOT DEFINED ENV{CommonLibSSEPath_NG})
-	message(FATAL_ERROR "CommonLibSSEPath_NG is not set")
-endif()
+macro(set_from_environment VARIABLE)
+	if(NOT DEFINED ${VARIABLE} AND DEFINED ENV{${CompiledPluginsPath}})
+		set(${VARIABLE} $ENV{${CompiledPluginsPath}})
+	endif()
+endmacro()
+
 
 option(COPY_OUTPUT "Copy the output of build operations to the game directory" ON)
 option(ENABLE_SKYRIM_SE "Enable support for Skyrim SE in the dynamic runtime feature." ON)
