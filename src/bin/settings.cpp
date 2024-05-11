@@ -75,6 +75,6 @@ inline bool settings::update_handler::Register()
 		return false;
 	}
 	eventSource->AddEventSink(&singleton);
-	INFO("Register {}", typeid(singleton).name());
+	info("Register {}", typeid(singleton).name());
 	return true;
 }

@@ -1,5 +1,9 @@
 {
     "files.associations": {
-        "random": "cpp"
+        "random": "cpp",
+        "xhash": "cpp",
+        "cstdlib": "cpp",
+        "mutex": "cpp",
+        "algorithm": "cpp"
     }
 }

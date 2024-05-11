@@ -1,6 +1,9 @@
 #include "Utils.h"
 #include "bin/APIHandler.h"
 #include "bin/settings.h"
+using writeLock = std::unique_lock<std::shared_mutex>;
+using readLock = std::shared_lock<std::shared_mutex>;
+
 void Utils::queueMessageBox(RE::BSFixedString a_message)
 {
 	auto factoryManager = RE::MessageDataFactoryManager::GetSingleton();
@@ -184,7 +187,7 @@ void AnimSpeedManager::setAnimSpeed(RE::ActorHandle a_actorHandle, float a_speed
 {
 	bool found = false;
 	{
-		READLOCK l(_animSpeedsLock);
+		readLock l(_animSpeedsLock);
 		auto it = _animSpeeds.find(a_actorHandle);
 		if (it != _animSpeeds.end()) {
 			found = true;
@@ -194,7 +197,7 @@ void AnimSpeedManager::setAnimSpeed(RE::ActorHandle a_actorHandle, float a_speed
 	}
 	if (!found) {
 		{
-			WRITELOCK l(_animSpeedsLock);
+			writeLock l(_animSpeedsLock);
 			_animSpeeds.emplace(a_actorHandle, AnimSpeedData{ a_speedMult, a_dur });
 		}
 	}
@@ -202,13 +205,13 @@ void AnimSpeedManager::setAnimSpeed(RE::ActorHandle a_actorHandle, float a_speed
 
 void AnimSpeedManager::revertAnimSpeed(RE::ActorHandle a_actorHandle)
 {
-	WRITELOCK l(_animSpeedsLock);
+	writeLock l(_animSpeedsLock);
 	_animSpeeds.erase(a_actorHandle);
 }
 
 void AnimSpeedManager::revertAllAnimSpeed()
 {
-	WRITELOCK l(_animSpeedsLock);
+	writeLock l(_animSpeedsLock);
 	_animSpeeds.clear();
 }
 
@@ -216,7 +219,7 @@ void AnimSpeedManager::update(RE::ActorHandle a_actorHandle, float& a_deltaTime)
 {
 	bool untrack = false;
 	if (a_deltaTime > 0.f) {
-		READLOCK l(_animSpeedsLock);
+		readLock l(_animSpeedsLock);
 		auto it = _animSpeeds.find(a_actorHandle);
 		if (it != _animSpeeds.end()) {
 			float newHitstopLength = it->second.dur - a_deltaTime;
@@ -231,7 +234,7 @@ void AnimSpeedManager::update(RE::ActorHandle a_actorHandle, float& a_deltaTime)
 		}
 	}
 	if (untrack) {
-		WRITELOCK l(_animSpeedsLock);
+		writeLock l(_animSpeedsLock);
 		_animSpeeds.erase(a_actorHandle);
 	}
 }
@@ -406,7 +409,7 @@ bool ValhallaUtils::is_adversary(RE::Actor* actor1, RE::Actor* actor2)
 
 bool ValhallaUtils::isBackFacing(RE::Actor* actor1, RE::Actor* actor2)
 {
-	auto angle = actor1->GetHeadingAngle(actor2);
+	auto angle = actor1->GetHeadingAngle(actor2->GetPosition(), true);
 	if (90 < angle || angle < -90) {
 		return true;
 	} else {

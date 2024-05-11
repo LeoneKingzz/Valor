@@ -5,6 +5,8 @@
 #include "APIHandler.h"
 #include <algorithm>
 #define PI 3.1415926535f
+using writeLock = std::unique_lock<std::shared_mutex>;
+using readLock = std::shared_lock<std::shared_mutex>;
 
 /*Get the dodge chance of a reactive dodger in case of an incoming attack.*/
 float get_dodge_chance(RE::Actor* a_dodger) {
@@ -55,7 +57,7 @@ void dodge::set_dodge_phase(RE::Actor* a_dodger, bool a_isDodging)
 {
 	auto handle = a_dodger->GetHandle();
 	if (handle) {
-		WRITELOCK l (dodging_actors_lock);
+		writeLock l (dodging_actors_lock);
 		if (a_isDodging) {
 			if (!dodging_actors.contains(handle)) {
 				dodging_actors.insert(handle);
@@ -70,7 +72,7 @@ bool dodge::get_is_dodging(RE::Actor* a_actor)
 {
 	auto handle = a_actor->GetHandle();
 	if (handle) {
-		READLOCK l(dodging_actors_lock);
+		readLock l(dodging_actors_lock);
 		return dodging_actors.contains(handle);
 	}
 	return false;
