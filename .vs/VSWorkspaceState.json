@@ -6,8 +6,11 @@
   },
   "ExpandedNodes": [
     "",
-    "\\src"
+    "\\cmake",
+    "\\src",
+    "\\src\\bin",
+    "\\src\\include"
   ],
-  "SelectedNode": "\\src\\bin",
+  "SelectedNode": "\\src\\bin\\dodge.h",
   "PreviewInSolutionExplorer": false
 }
