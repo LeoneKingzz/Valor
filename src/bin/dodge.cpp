@@ -133,6 +133,8 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	return true;
 }
 
+
+
 #define MAX_DIST_DIFFERENCE 50
 bool dodge::can_goto(RE::Actor* a_actor, RE::NiPoint3 a_dest)
 {
@@ -144,15 +146,15 @@ bool dodge::can_goto(RE::Actor* a_actor, RE::NiPoint3 a_dest)
 	bool gotoNavdest = false;
 	float expect_dist = a_actor->GetPosition().GetDistance(a_dest);
 	
-	/*Use Skyrim's internal check*/
-	if (a_actor->UpdateNavPos(a_actor->GetPosition(), nav_dest, 4.0f, a_actor->GetBoundRadius()) 
-		&& abs(nav_dest.GetDistance(a_actor->GetPosition()) - expect_dist) < MAX_DIST_DIFFERENCE) {
-		RE::NiPoint3 nav_dest_raycast = nav_dest;                   // make a copy of nav_dest to use for raycast
-		if (DtryUtils::rayCast::object_exists(nav_dest_raycast)) {//check if the actor can stand on the nav dest
-			gotoNavdest = true;
-			canNavigate = true;
-		}
-	}
+	// /*Use Skyrim's internal check*/
+	// if (a_actor->UpdateNavPos(a_actor->GetPosition(), nav_dest, 4.0f, a_actor->GetBoundRadius()) 
+	// 	&& abs(nav_dest.GetDistance(a_actor->GetPosition()) - expect_dist) < MAX_DIST_DIFFERENCE) {
+	// 	RE::NiPoint3 nav_dest_raycast = nav_dest;                   // make a copy of nav_dest to use for raycast
+	// 	if (DtryUtils::rayCast::object_exists(nav_dest_raycast)) {//check if the actor can stand on the nav dest
+	// 		gotoNavdest = true;
+	// 		canNavigate = true;
+	// 	}
+	// }
 	
 	/*Use our own pathing check, if skyrim's check fails.*/
 	if (!gotoNavdest) {
