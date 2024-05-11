@@ -35,8 +35,8 @@ public:
 	
 	static inline float fDodgeAI_Chance_Mult = 1; /*Chance multiplier for reactive dodge AI.*/
 	static inline float fDodgeAI_Reactive_Dist = 350.0f;               /**/
-	static inline float fDodgeAI_DodgeDist = 300.0f;          /*Distance of a single dodge, used for pathing.*/
-	static inline float fDodgeAI_DodgeDist2 = fDodgeAI_DodgeDist / SQRT2; /* Cached coordinate distance.*/
+	static inline double fDodgeAI_DodgeDist = 300.0;          /*Distance of a single dodge, used for pathing.*/
+	static inline double fDodgeAI_DodgeDist2 = fDodgeAI_DodgeDist / SQRT2; /* Cached coordinate distance.*/
 	
 	static inline float fDodgeAI_DodgeDist_Permissible = 200.0f; /*Acceptable distance of a single dodge. 
 													  * Sometimes the dodger can get obstructed by a wall before completing the whole dodge while already making a big displacement.
