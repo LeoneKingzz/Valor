@@ -105,7 +105,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 
 	for (dodge_direction direction : directions_shuffled) {
 		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
-		if (can_goto(a_actor, dodge_dest)) {
+		if ((can_goto(a_actor, dodge_dest)) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 25) {
 			do_dodge(a_actor, direction);
 			return;
 		}
@@ -187,8 +187,15 @@ dodge_direction dodge::get_dodge_direction(RE::Actor* a_actor, RE::Actor* a_atta
 	return dodge_direction::kForward; /*defaults to backward dodging for now*/
 }
 
+int dodge::GenerateRandomInt(int value_a, int value_b) {
+	std::random_device rd;
+	std::mt19937 generator(rd());
+	std::uniform_int_distribution<int> dist(value_a, value_b);
+	return dist(generator);
+}
+
 static const char* GVI_dodge_dir = "Dodge_Direction";
-static const char* AE_dodge = "Dodge";
+// static const char* AE_dodge = "Dodge";
 void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_event) {
 	auto task = SKSE::GetTaskInterface();
 	if (!task) {
@@ -197,7 +204,9 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 	task->AddTask([a_actor, a_direction, a_event]() {
 		a_actor->SetGraphVariableInt(GVI_dodge_dir, a_direction);
 		a_actor->NotifyAnimationGraph(a_event);
-		a_actor->NotifyAnimationGraph(AE_dodge);
+		if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 25) {
+			a_actor->NotifyAnimationGraph(a_event);
+		}
 	});
 }
 
@@ -210,7 +219,7 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 			a_actor->NotifyAnimationGraph("TKDodgeForward");
 			break;
 		case 1:
-			dmco_dodge(a_actor, a_direction, "Dodge_F");
+			dmco_dodge(a_actor, a_direction, "Dodge");
 			break;
 		}
 		break;
@@ -220,7 +229,7 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 			a_actor->NotifyAnimationGraph("TKDodgeBack");
 			break;
 		case 1:
-			dmco_dodge(a_actor, a_direction, "Dodge_B");
+			dmco_dodge(a_actor, a_direction, "Dodge");
 			break;
 		}
 		break;
@@ -230,7 +239,7 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 			a_actor->NotifyAnimationGraph("TKDodgeLeft");
 			break;
 		case 1:
-			dmco_dodge(a_actor, a_direction, "Dodge_L");
+			dmco_dodge(a_actor, a_direction, "Dodge");
 			break;
 		}
 		break;
@@ -240,7 +249,7 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 			a_actor->NotifyAnimationGraph("TKDodgeRight");
 			break;
 		case 1:
-			dmco_dodge(a_actor, a_direction, "Dodge_R");
+			dmco_dodge(a_actor, a_direction, "Dodge");
 			break;
 		}
 		break;
@@ -248,28 +257,28 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 	case dodge_direction::kLeftBackward:
 		switch (settings::iDodgeAI_Framework) {
 		case 1:
-			dmco_dodge(a_actor, a_direction, "Dodge_LB");
+			dmco_dodge(a_actor, a_direction, "Dodge");
 			break;
 		}
 		break;
 	case dodge_direction::kLeftForward:
 		switch (settings::iDodgeAI_Framework) {
 		case 1:
-			dmco_dodge(a_actor, a_direction, "Dodge_LF");
+			dmco_dodge(a_actor, a_direction, "Dodge");
 			break;
 		}
 		break;
 	case dodge_direction::kRightBackward:
 		switch (settings::iDodgeAI_Framework) {
 		case 1:
-			dmco_dodge(a_actor, a_direction, "Dodge_RB");
+			dmco_dodge(a_actor, a_direction, "Dodge");
 			break;
 		}
 		break;
 	case dodge_direction::kRightForward:
 		switch (settings::iDodgeAI_Framework) {
 		case 1:
-			dmco_dodge(a_actor, a_direction, "Dodge_RF");
+			dmco_dodge(a_actor, a_direction, "Dodge");
 			break;
 		}
 		break;

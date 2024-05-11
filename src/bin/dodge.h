@@ -47,6 +47,8 @@ public:
 		static dodge singleton;
 		return &singleton;
 	}
+
+	int GenerateRandomInt(int value_a, int value_b);
 		
 	void attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
 
