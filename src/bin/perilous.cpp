@@ -2,6 +2,8 @@
 #include "include/Utils.h"
 #include "APIHandler.h"
 #include "settings.h"
+using writeLock = std::unique_lock<std::shared_mutex>;
+using readLock = std::shared_lock<std::shared_mutex>;
 
 void perilous::init()
 {
@@ -63,7 +65,7 @@ void perilous::attempt_start_perilous_attack(RE::Actor* a_actor, PERILOUS_TYPE a
 	
 	if (success) {
 		{
-			READLOCK lock(perilous_counter_lock);
+			readLock lock(perilous_counter_lock);
 			auto it = perilous_counter.find(target);
 			if (it != perilous_counter.end()) {
 				success = it->second < MAX_PERILOUS_ATTACKER;  // limit max # of actors doing perilous attacks to a specific actor to avoid chaos
@@ -103,7 +105,7 @@ void perilous::attempt_end_perilous_attack(RE::Actor* a_actor)
 
 	/* Decrement counter for target*/
 	{
-		WRITELOCK lock(perilous_counter_lock);
+		writeLock lock(perilous_counter_lock);
 		auto it = perilous_counter.find(target);
 		if (it != perilous_counter.end()) {
 			if (it->second-- <= 0) {
@@ -114,7 +116,7 @@ void perilous::attempt_end_perilous_attack(RE::Actor* a_actor)
 
 	/*Remove the actor from the perilous_attacks map*/
 	{
-		WRITELOCK lock(perilous_attacks_lock);
+		writeLock lock(perilous_attacks_lock);
 		perilous_attacks.erase(a_actor->GetHandle());
 	}
 }
@@ -128,7 +130,7 @@ bool perilous::is_perilous_attacking(RE::Actor* a_actor, RE::ActorHandle& r_targ
 			return false;
 		}
 	}
-	READLOCK lock(perilous_attacks_lock);
+	readLock lock(perilous_attacks_lock);
 	auto it = perilous_attacks.find(a_actor->GetHandle());
 	if (it != perilous_attacks.end()) {
 		r_target = it->second;
@@ -165,7 +167,7 @@ void perilous::perform_perilous_attack(RE::Actor* a_actor, RE::ActorHandle a_tar
 {
 	/*increment counter*/
 	{
-		WRITELOCK lock(perilous_counter_lock);
+		writeLock lock(perilous_counter_lock);
 		auto it = perilous_counter.find(a_target);
 		if (it != perilous_counter.end()) {
 			it->second++;
@@ -175,7 +177,7 @@ void perilous::perform_perilous_attack(RE::Actor* a_actor, RE::ActorHandle a_tar
 	}
 	/*add to map*/
 	{
-		WRITELOCK lock(perilous_attacks_lock);
+		writeLock lock(perilous_attacks_lock);
 		perilous_attacks.emplace(a_actor->GetHandle(), a_target);
 	}
 
@@ -199,19 +201,19 @@ void perilous::perform_perilous_attack(RE::Actor* a_actor, RE::ActorHandle a_tar
 
 void perilous::clear()
 {
-	WRITELOCK l1(perilous_attacks_lock);
+	writeLock l1(perilous_attacks_lock);
 	perilous_attacks.clear();
 	l1.unlock();
 	
 	
-	WRITELOCK l2(perilous_counter_lock);
+	writeLock l2(perilous_counter_lock);
 	perilous_counter.clear();
 	l2.unlock();
 }
 
 bool perilous::is_perilous_attacking(RE::Actor* a_actor)
 {
-	READLOCK lock(perilous_attacks_lock);
+	writeLock lock(perilous_attacks_lock);
 	return perilous_attacks.contains(a_actor->GetHandle());
 }
 

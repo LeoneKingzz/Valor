@@ -23,13 +23,13 @@ namespace hooks
 		if (!settings::bPerilousAttack_Enable || !a_actionData) {
 			return _perform_atk_action(a_actionData);
 		}
-		static RE::BSFixedString bashStart;
-		if (settings::bPerilousBash_Enable) { /* Turn all regular bash into power bash*/
-			if (a_actionData->unk28 == "bashStart"sv) {
-				a_actionData->unk28 = cPtr_bashPowerStart;
-			}
-		}
-		return _perform_atk_action(a_actionData);
+		//static RE::BSFixedString bashStart;
+		//if (settings::bPerilousBash_Enable) { /* Turn all regular bash into power bash*/
+		//	if (a_actionData->unk28 == "bashStart"sv) {
+		//		a_actionData->unk28 = cPtr_bashPowerStart;
+		//	}
+		//}
+		//return _perform_atk_action(a_actionData);
 	}
 
 	void on_animation_event::ProcessEvent(RE::BSTEventSink<RE::BSAnimationGraphEvent>* a_sink, RE::BSAnimationGraphEvent* a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* a_eventSource)
