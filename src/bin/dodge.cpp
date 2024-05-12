@@ -35,7 +35,8 @@ void dodge::react_to_attack(RE::Actor* a_attacker)
 			if (ValhallaUtils::isBackFacing(a_attacker, refr)) { //no need to react to an attack if the attacker isn't facing you.
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			if (refr->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) {
+			bool MCO_Recovery = false;
+			if ((refr->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) || (refr->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			switch (settings::iDodgeAI_Framework) {
