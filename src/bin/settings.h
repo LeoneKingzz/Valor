@@ -15,16 +15,6 @@ public:
 	static void read();
 	static void init();
 
-	/*Perilous attack*/
-	inline static bool bPerilousAttack_Enable = true;
-	static inline bool bPerilousAttack_ChargeTime_Enable = true; /*Beginning of perilous attacks are performed slower to simulate a charging effect and giving the player time to react.*/ 
-	static inline float fPerilousAttack_ChargeTime_Mult = 0.1f /*Animation speed during the charge phase.*/;
-	static inline float fPerilousAttack_ChargeTime_Duration = 0.5f; /*Duration of the charge phase.*/
-	static inline float fPerilousAttack_Chance_Mult = 1.0f;
-	/*Perilous bash*/
-	static inline bool bPerilousBash_Enable = true;
-	static inline float fPerilousBash_ChargeTime_Mult = 0.05f;
-	static inline float fPerilousBash_ChargeTime_Duration = 1.0f;
 
 	/*Dodging*/
 	inline static bool bDodgeAI_Enable = true; /*Global switch for dodge AI*/
@@ -42,15 +32,6 @@ public:
 													  * Sometimes the dodger can get obstructed by a wall before completing the whole dodge while already making a big displacement.
 													  * AI would take dodges that can make this displacement as a permissible(tho suboptimal) dodge and still make the dodge.*/
 	static inline bool bDodgeAI_DebugDraw_Enable = false;
-	
-	/*NPC Commitment*/
-	static inline bool bNPCCommitment_Enable = true;
-	static inline float fNPCCommitment_AttackStartMult = 1.0f;
-	static inline float fNPCCommitment_AttackMidMult = 0.1f;
-	static inline float fNPCCommitment_AttackEndMult = 0.f;
 
-	/*Timed block*/
-	static inline bool bPerfectBlock_enable = true;
-	static inline float fPerfectBlock_chance_mult = 1.0f;
 
 };

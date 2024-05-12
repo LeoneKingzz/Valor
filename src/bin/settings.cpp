@@ -21,28 +21,6 @@ void settings::read()
 	
 	reader.FETCH(bDodgeAI_DebugDraw_Enable);
 
-	reader.setActiveSection("Perilous");
-	reader.FETCH(bPerilousAttack_Enable);
-	reader.FETCH(bPerilousAttack_ChargeTime_Enable);
-	reader.FETCH(fPerilousAttack_ChargeTime_Mult);
-	reader.FETCH(fPerilousAttack_ChargeTime_Duration);
-	reader.FETCH(fPerilousAttack_Chance_Mult);
-	
-	reader.FETCH(bPerilousBash_Enable);
-	reader.FETCH(fPerilousBash_ChargeTime_Mult);
-	reader.FETCH(fPerilousBash_ChargeTime_Duration);
-	
-	reader.setActiveSection("AttackCommitment");
-	reader.FETCH(bNPCCommitment_Enable);
-	reader.FETCH(fNPCCommitment_AttackStartMult);
-	reader.FETCH(fNPCCommitment_AttackMidMult);
-	reader.FETCH(fNPCCommitment_AttackEndMult);
-
-	reader.setActiveSection("PerfectBlock");
-	reader.FETCH(bPerfectBlock_enable);
-	reader.FETCH(fPerfectBlock_chance_mult);
-
-
 	reader.log();
 	
 }
