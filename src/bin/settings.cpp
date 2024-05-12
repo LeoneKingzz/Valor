@@ -52,7 +52,7 @@ void settings::init()
 	update_handler::Register();
 }
 
-inline EventResult settings::update_handler::ProcessEvent(const SKSE::ModCallbackEvent* a_event, RE::BSTEventSource<SKSE::ModCallbackEvent>* a_eventSource)
+inline EventResult settings::update_handler::ProcessEvent(const SKSE::ModCallbackEvent* a_event, RE::BSTEventSource<SKSE::ModCallbackEvent>*)
 {
 	if (!a_event) {
 		return EventResult::kContinue;
