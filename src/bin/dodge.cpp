@@ -24,8 +24,8 @@ void dodge::react_to_attack(RE::Actor* a_attacker)
 	}
 
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
-		if (!_refr.IsDisabled() && _refr.GetFormType() == RE::FormType::ActorCharacter && _refr.GetPosition().GetDistance(a_attacker->GetPosition()) < settings::fDodgeAI_Reactive_Dist) {
-			RE::Actor* refr = _refr.As<RE::Actor>();
+		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) < settings::fDodgeAI_Reactive_Dist) {
+			RE::Actor* refr = _refr->As<RE::Actor>();
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
