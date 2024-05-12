@@ -155,11 +155,11 @@ bool dodge::can_goto(RE::Actor* a_actor, RE::NiPoint3 a_dest)
 	
 	if (canNavigate) {
 		RE::NiPoint3 dest = gotoNavdest ? nav_dest : raycast_dest;
-		if (settings::bDodgeAI_DebugDraw_Enable) {
-			if (API::TrueHUD_API_acquired) {
-				API::_TrueHud_API->DrawLine(a_actor->GetPosition(), dest, 1.f, 0xff00ff);  //green line
-			}
-		}
+		//if (settings::bDodgeAI_DebugDraw_Enable) {
+		//	if (API::TrueHUD_API_acquired) {
+		//		API::_TrueHud_API->DrawLine(a_actor->GetPosition(), dest, 1.f, 0xff00ff);  //green line
+		//	}
+		//}
 		
 		/*Cast 3 rays from the actor, parallel to the dodging path to check for any obstacles.*/
 		float obstacleDist = 0; /*Distance to the obstacle, if any*/
@@ -184,7 +184,7 @@ dodge_direction dodge::get_dodge_direction(RE::Actor* a_actor, RE::Actor* a_atta
 }
 
 int dodge::GenerateRandomInt(int value_a, int value_b) {
-	std::random_device rd;
+
 	std::mt19937 generator(rd());
 	std::uniform_int_distribution<int> dist(value_a, value_b);
 	return dist(generator);

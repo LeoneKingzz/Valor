@@ -71,10 +71,10 @@ inline bool settings::update_handler::Register()
 	auto eventSource = SKSE::GetModCallbackEventSource();
 
 	if (!eventSource) {
-		ERROR("EventSource not found!");
+		/*ERROR("EventSource not found!");*/
 		return false;
 	}
 	eventSource->AddEventSink(&singleton);
-	info("Register {}", typeid(singleton).name());
+	logger::info("Register {}", typeid(singleton).name());
 	return true;
 }
