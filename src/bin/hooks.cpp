@@ -22,10 +22,13 @@ namespace hooks
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
 		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
-			//if (settings::bPerilousBash_Enable) {
-			//	perilous::GetSingleton()->attempt_start_perilous_attack(actor, perilous::PERILOUS_TYPE::blue);
-			//}
-			//break;
+		case "PowerAttack_Start_end"_h:
+		case "NextPowerAttackInitiate"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
+		case "NextAttackInitiate"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "preHitFrame"_h:
 			dodge::GetSingleton()->react_to_attack(actor);
 			break;
