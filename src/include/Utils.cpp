@@ -182,61 +182,6 @@ void DtryUtils::formLoader::log()
 }
 
 
-void AnimSpeedManager::setAnimSpeed(RE::ActorHandle a_actorHandle, float a_speedMult, float a_dur)
-{
-	bool found = false;
-	{
-		readLock l(_animSpeedsLock);
-		auto it = _animSpeeds.find(a_actorHandle);
-		if (it != _animSpeeds.end()) {
-			found = true;
-			it->second.speedMult = a_speedMult;
-			it->second.dur = a_dur;
-		}
-	}
-	if (!found) {
-		{
-			writeLock l(_animSpeedsLock);
-			_animSpeeds.emplace(a_actorHandle, AnimSpeedData{ a_speedMult, a_dur });
-		}
-	}
-}
-
-void AnimSpeedManager::revertAnimSpeed(RE::ActorHandle a_actorHandle)
-{
-	writeLock l(_animSpeedsLock);
-	_animSpeeds.erase(a_actorHandle);
-}
-
-void AnimSpeedManager::revertAllAnimSpeed()
-{
-	writeLock l(_animSpeedsLock);
-	_animSpeeds.clear();
-}
-
-void AnimSpeedManager::update(RE::ActorHandle a_actorHandle, float& a_deltaTime)
-{
-	bool untrack = false;
-	if (a_deltaTime > 0.f) {
-		readLock l(_animSpeedsLock);
-		auto it = _animSpeeds.find(a_actorHandle);
-		if (it != _animSpeeds.end()) {
-			float newHitstopLength = it->second.dur - a_deltaTime;
-			it->second.dur = newHitstopLength;
-
-			float mult = 1.f;
-			if (newHitstopLength <= 0.f) {
-				mult = (a_deltaTime + newHitstopLength) / a_deltaTime;
-				untrack = true;
-			}
-			a_deltaTime *= it->second.speedMult + ((1.f - it->second.speedMult) * (1.f - mult));
-		}
-	}
-	if (untrack) {
-		writeLock l(_animSpeedsLock);
-		_animSpeeds.erase(a_actorHandle);
-	}
-}
 
 RE::TESObjectWEAP* Utils::Actor::getWieldingWeapon(RE::Actor* a_actor)
 {
@@ -474,18 +419,18 @@ RE::TESObjectREFR* DtryUtils::rayCast::cast_ray(RE::Actor* a_actor, RE::NiPoint3
 	pick_data.rayInput.filterInfo = (static_cast<uint32_t>(collisionGroup) << 16) | static_cast<uint32_t>(RE::COL_LAYER::kCharController);
 	/*Do*/
 
-	if (settings::bDodgeAI_DebugDraw_Enable && API::TrueHUD_API_acquired) {
+	/*if (settings::bDodgeAI_DebugDraw_Enable && API::TrueHUD_API_acquired) {
 		API::_TrueHud_API->DrawArrow(rayStart, a_rayEnd, 10, 1);
-	}
+	}*/
 	a_actor->GetParentCell()->GetbhkWorld()->PickObject(pick_data);
 	if (pick_data.rayOutput.HasHit()) {
 		RE::NiPoint3 hitpos = rayStart + (a_rayEnd - rayStart) * pick_data.rayOutput.hitFraction;
 		if (ret_rayDist) {
 			*ret_rayDist = hitpos.GetDistance(rayStart);
 		}
-		if (settings::bDodgeAI_DebugDraw_Enable && API::TrueHUD_API_acquired) {
+		/*if (settings::bDodgeAI_DebugDraw_Enable && API::TrueHUD_API_acquired) {
 			API::_TrueHud_API->DrawPoint(hitpos, 10, 3);
-		}
+		}*/
 		auto collidable = pick_data.rayOutput.rootCollidable;
 		if (collidable) {
 			RE::TESObjectREFR* ref = RE::TESHavokUtilities::FindCollidableRef(*collidable);
