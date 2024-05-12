@@ -62,7 +62,7 @@ private:
 
 	bool can_goto(RE::Actor* a_actor, RE::NiPoint3 a_dest);
 	
-	dodge_direction get_dodge_direction(RE::Actor* a_actor, RE::Actor* a_attacker);
+	/*dodge_direction get_dodge_direction(RE::Actor* a_actor, RE::Actor* a_attacker);*/
 
 	void do_dodge(RE::Actor* a_actor, dodge_direction a_direction);
 

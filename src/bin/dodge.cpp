@@ -136,7 +136,7 @@ bool dodge::can_goto(RE::Actor* a_actor, RE::NiPoint3 a_dest)
 	RE::NiPoint3 nav_dest = a_dest;
 
 	bool gotoNavdest = false;
-	float expect_dist = a_actor->GetPosition().GetDistance(a_dest);
+	/*float expect_dist = a_actor->GetPosition().GetDistance(a_dest);*/
 	
 	// /*Use Skyrim's internal check*/
 	// if (a_actor->UpdateNavPos(a_actor->GetPosition(), nav_dest, 4.0f, a_actor->GetBoundRadius()) 
@@ -178,10 +178,10 @@ bool dodge::can_goto(RE::Actor* a_actor, RE::NiPoint3 a_dest)
 
 
 /*Get the direction the actor should dodge in.*/
-dodge_direction dodge::get_dodge_direction(RE::Actor* a_actor, RE::Actor* a_attacker)
-{
-	return dodge_direction::kForward; /*defaults to backward dodging for now*/
-}
+//dodge_direction dodge::get_dodge_direction(RE::Actor* a_actor, RE::Actor* a_attacker)
+//{
+//	return dodge_direction::kForward; /*defaults to backward dodging for now*/
+//}
 
 int dodge::GenerateRandomInt(int value_a, int value_b) {
 
