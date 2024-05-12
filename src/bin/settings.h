@@ -19,7 +19,7 @@ public:
 	inline static bool bPerilousAttack_Enable = true;
 	static inline bool bPerilousAttack_ChargeTime_Enable = true; /*Beginning of perilous attacks are performed slower to simulate a charging effect and giving the player time to react.*/ 
 	static inline float fPerilousAttack_ChargeTime_Mult = 0.1f /*Animation speed during the charge phase.*/;
-	static inline float fPerilousAttack_ChargeTime_Duration = 0.5; /*Duration of the charge phase.*/
+	static inline float fPerilousAttack_ChargeTime_Duration = 0.5f; /*Duration of the charge phase.*/
 	static inline float fPerilousAttack_Chance_Mult = 1.0f;
 	/*Perilous bash*/
 	static inline bool bPerilousBash_Enable = true;
@@ -33,7 +33,7 @@ public:
 	static inline bool bDodgeAI_AttackCancel_enable = false; /*Cancel attack animations when dodging.*/
 	static inline int iDodgeAI_Framework = 0;            /*TKRE = 0; DMCO = 1*/
 	
-	static inline float fDodgeAI_Chance_Mult = 1; /*Chance multiplier for reactive dodge AI.*/
+	static inline float fDodgeAI_Chance_Mult = 1.0f; /*Chance multiplier for reactive dodge AI.*/
 	static inline float fDodgeAI_Reactive_Dist = 350.0f;               /**/
 	static inline float fDodgeAI_DodgeDist = 300.0f;          /*Distance of a single dodge, used for pathing.*/
 	static inline float fDodgeAI_DodgeDist2 = fDodgeAI_DodgeDist / SQRT2; /* Cached coordinate distance.*/
@@ -45,12 +45,12 @@ public:
 	
 	/*NPC Commitment*/
 	static inline bool bNPCCommitment_Enable = true;
-	static inline float fNPCCommitment_AttackStartMult = 1.f;
+	static inline float fNPCCommitment_AttackStartMult = 1.0f;
 	static inline float fNPCCommitment_AttackMidMult = 0.1f;
 	static inline float fNPCCommitment_AttackEndMult = 0.f;
 
 	/*Timed block*/
 	static inline bool bPerfectBlock_enable = true;
-	static inline float fPerfectBlock_chance_mult = 1.f;
+	static inline float fPerfectBlock_chance_mult = 1.0f;
 
 };

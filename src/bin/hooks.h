@@ -1,22 +1,7 @@
 #include "SKSE/Trampoline.h"
+
 namespace hooks
 {
-	class on_attack_action
-	{
-	public:
-		static void install()
-		{
-			auto& trampoline = SKSE::GetTrampoline();
-			REL::Relocation<std::uintptr_t> AttackActionBase{ RELOCATION_ID(48139, 49170) };
-			_perform_atk_action = trampoline.write_call<5>(AttackActionBase.address() + RELOCATION_OFFSET(0x4D7, 0x435), perform_atk_action);
-			logger::info("hook:on_attack_action");
-		}
-
-	private:
-		static bool perform_atk_action(RE::TESActionData* a_actionData);
-
-		static inline REL::Relocation<decltype(perform_atk_action)> _perform_atk_action;
-	};
 
 	using EventResult = RE::BSEventNotifyControl;
 
@@ -109,22 +94,7 @@ namespace hooks
 		static inline REL::Relocation<decltype(create_path)> _create_path;
 	};
 	
-	
-	class on_melee_hit
-	{
-	public:
-		static void install()
-		{
-			REL::Relocation<uintptr_t> hook{ RELOCATION_ID(37673, 38627) };  //140628C20       14064E760
-			auto& trampoline = SKSE::GetTrampoline();
-			_ProcessHit = trampoline.write_call<5>(hook.address() + RELOCATION_OFFSET(0x3C0, 0x4A8), processHit);
-			logger::info("hook:on_melee_hit");
-		}
 
-	private:
-		static void processHit(RE::Actor* victim, RE::HitData& hitData);
-		static inline REL::Relocation<decltype(processHit)> _ProcessHit;  //140626400       14064BAB0
-	};
 
 
 	class on_set_rotation

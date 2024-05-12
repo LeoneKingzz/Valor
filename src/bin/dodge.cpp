@@ -1,8 +1,6 @@
 #include "dodge.h"
 #include "settings.h"
-#include "include/Utils.h"
-#include "include/lib/TrueHUDAPI.h"
-#include "APIHandler.h"
+#include "util.h"
 #include <algorithm>
 #define PI 3.1415926535f
 using writeLock = std::unique_lock<std::shared_mutex>;
@@ -122,12 +120,6 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 {
 	if (a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) {
 		return false;
-	}
-
-	if (API::ValhallaCombat_API_acquired) {
-		if (API::_ValhallaCombat_API->isActorExhausted(a_actor) || API::_ValhallaCombat_API->isActorStunned(a_actor)) {
-			return false;
-		}
 	}
 		
 	return true;

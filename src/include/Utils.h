@@ -3,8 +3,7 @@
 #include  <random>
 #include  <iterator>
 #include "PCH.h"
-#include "bin/offsets.h"
-#include "include/lib/TrueHUDAPI.h"
+#include "offsets.h"
 #include <shared_mutex>
 
 #define CONSOLELOG(msg) RE::ConsoleLog::GetSingleton()->Print(msg);
@@ -37,7 +36,7 @@ namespace Utils
 
 	void PushActorAway(RE::Actor* causer, RE::Actor* target, float magnitude);
 
-	void SetRotationMatrix(RE::NiMatrix3& a_matrix, float sacb, float cacb, float sb);
+	void SetRotationMatrix(RE::NiMatrix3 &a_matrix, float sacb, float cacb, float sb);
 
 	void slowTime(float a_duration, float a_percentage);
 
@@ -139,73 +138,7 @@ namespace DtryUtils
 }
 
 
-/*Interface for manipulating all actor's animation speeds. Manipulation is done by hooking animation_update function. Doesn't work for player.*/
-class AnimSpeedManager
-{
-	class on_updateAnimation_internal;
-	class on_updateAnimation_player;
 
-public:
-	static void setAnimSpeed(RE::ActorHandle a_actorHandle, float a_speedMult, float a_dur);
-	static void revertAnimSpeed(RE::ActorHandle a_actorHandle);
-	static void revertAllAnimSpeed();
-	
-	static void init() {
-		on_updateAnimation_internal::install();
-		on_updateAnimation_player::install();
-	}
-
-private:
-	struct AnimSpeedData
-	{
-		float speedMult;
-		float dur;
-	};
-	static inline std::unordered_map<RE::ActorHandle, AnimSpeedData> _animSpeeds = {};
-	static inline std::shared_mutex _animSpeedsLock;
-
-	static void update(RE::ActorHandle a_actorHandle, float& a_deltaTime);
-	
-	class on_updateAnimation_player
-	{
-	public:
-		static void install()
-		{
-			auto& trampoline = SKSE::GetTrampoline();
-			REL::Relocation<std::uintptr_t> PlayerCharacterVtbl{ RE::VTABLE_PlayerCharacter[0] };
-			_PlayerCharacter_UpdateAnimation = PlayerCharacterVtbl.write_vfunc(0x7D, PlayerCharacter_UpdateAnimation);
-			logger::info("hook:on_updateAnimation_player");
-		}
-
-	private:
-		static void PlayerCharacter_UpdateAnimation(RE::PlayerCharacter* a_this, float a_deltaTime)
-		{
-			AnimSpeedManager::update(a_this->GetHandle(), a_deltaTime);
-			_PlayerCharacter_UpdateAnimation(a_this, a_deltaTime);
-		}
-		static inline REL::Relocation<decltype(PlayerCharacter_UpdateAnimation)> _PlayerCharacter_UpdateAnimation;
-	};
-
-	class on_updateAnimation_internal
-	{
-	public:
-		static void install()
-		{
-			auto& trampoline = SKSE::GetTrampoline();
-			REL::Relocation<uintptr_t> hook{ RELOCATION_ID(40436, 41453) };                                                                // 6E1990, 70A840, RunOneActorAnimationUpdateJob
-			_UpdateAnimationInternal = trampoline.write_call<5>(hook.address() + RELOCATION_OFFSET(0x74, 0x74), UpdateAnimationInternal);  // 6E1A04, 70A8B4;
-			logger::info("hook:on_updateAnimation_internal");
-		}
-
-	private:
-		static void UpdateAnimationInternal(RE::Actor* a_this, float a_deltaTime)
-		{
-			AnimSpeedManager::update(a_this->GetHandle(), a_deltaTime);
-			_UpdateAnimationInternal(a_this, a_deltaTime);
-		}
-		static inline REL::Relocation<decltype(UpdateAnimationInternal)> _UpdateAnimationInternal;
-	};
-};
 
 constexpr uint32_t hash(const char* data, size_t const size) noexcept
 {
