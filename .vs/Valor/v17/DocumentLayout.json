@@ -62,8 +62,7 @@
               "RelativeToolTip": "src\\include\\Utils.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAALABAAAFAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:28:49.662Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:28:49.662Z"
             },
             {
               "$type": "Document",
@@ -75,8 +74,7 @@
               "RelativeToolTip": "src\\include\\Utils.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:28:45.604Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:28:45.604Z"
             },
             {
               "$type": "Document",
@@ -88,8 +86,7 @@
               "RelativeToolTip": "src\\bin\\settings.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:24:03.096Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:24:03.096Z"
             },
             {
               "$type": "Document",
@@ -101,8 +98,7 @@
               "RelativeToolTip": "src\\bin\\settings.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAE4AAAANAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:22:56.127Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:22:56.127Z"
             },
             {
               "$type": "Document",
@@ -114,8 +110,7 @@
               "RelativeToolTip": "src\\bin\\offsets.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:22:54.612Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:22:54.612Z"
             },
             {
               "$type": "Document",
@@ -127,8 +122,7 @@
               "RelativeToolTip": "src\\bin\\main.cpp",
               "ViewState": "AQIAAGwAAAAAAAAAAAApwHgAAAADAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:21:11.948Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:21:11.948Z"
             },
             {
               "$type": "Document",
@@ -140,8 +134,7 @@
               "RelativeToolTip": "src\\bin\\hooks.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:21:10.209Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:21:10.209Z"
             },
             {
               "$type": "Document",
@@ -153,8 +146,7 @@
               "RelativeToolTip": "src\\bin\\hooks.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAASAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:21:01.047Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:21:01.047Z"
             },
             {
               "$type": "Document",
@@ -166,8 +158,7 @@
               "RelativeToolTip": "src\\bin\\dodge.h",
               "ViewState": "AQIAABsAAAAAAAAAAAAAACgAAAAWAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:20:58.484Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:20:58.484Z"
             },
             {
               "$type": "Document",
@@ -175,9 +166,9 @@
               "Title": "dodge.cpp",
               "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\dodge.cpp",
               "RelativeDocumentMoniker": "src\\bin\\dodge.cpp",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\dodge.cpp",
-              "RelativeToolTip": "src\\bin\\dodge.cpp",
-              "ViewState": "AQIAABEAAAAAAAAAAAAQwDIAAAADAAAA",
+              "ToolTip": "C:\\Code\\Valor\\src\\bin\\dodge.cpp*",
+              "RelativeToolTip": "src\\bin\\dodge.cpp*",
+              "ViewState": "AQIAAA8AAAAAAAAAAAAAACEAAAAEAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-12T03:20:44.644Z",
               "EditorCaption": ""
