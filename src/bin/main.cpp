@@ -1,8 +1,6 @@
 #pragma once
 #include "hooks.h"
-#include "perilous.h"
 #include "dodge.h"
-#include "APIHandler.h"
 #include "include/Utils.h"
 #include "settings.h"
 
@@ -11,9 +9,7 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 {
 	switch (a_msg->type) {
 	case SKSE::MessagingInterface::kDataLoaded:
-		perilous::GetSingleton()->init();
 		hooks::on_animation_event::install();
-		hooks::on_melee_hit::install();
 		hooks::on_set_rotation::install();
 		if (settings::bDodgeAI_Passive_enable) {  //install hooks for passive dodge
 			hooks::on_combatBehavior_backoff_createPath::install();
@@ -21,14 +17,11 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 			hooks::on_combatBehavior_dodgethreat_createPath::install();
 			hooks::on_combatBehavior_fallback_createPath::install();
 		}
-		AnimSpeedManager::init();
 		settings::init();
 		break;
 	case SKSE::MessagingInterface::kPostLoad:
-		API::init();
 		break;
 	case SKSE::MessagingInterface::kPostLoadGame:
-		perilous::GetSingleton()->clear();
 		break;
 	}
 }
@@ -37,7 +30,6 @@ void onSKSEInit()
 {
 	settings::read();
 	hooks::alloc();
-	hooks::on_attack_action::install(); /*Install this hook prior to all other plugins(SCAR, VC) to ensure attack cancellation consistency.*/
 }
 
 namespace

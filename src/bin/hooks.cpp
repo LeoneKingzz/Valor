@@ -1,7 +1,7 @@
-#include "hook.h"
+#include "hooks.h"
 #include "settings.h"
 #include "dodge.h"
-#include "util.h"
+#include "include/Utils.h"
 
 namespace hooks
 {
