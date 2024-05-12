@@ -7,7 +7,7 @@
 #include <SKSE/SKSE.h>
 
 #pragma warning(disable: 4702)
-#pragma warning(disable: 4100)
+
 #include <SimpleIni.h>
 
 #ifdef NDEBUG
