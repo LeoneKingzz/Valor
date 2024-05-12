@@ -3,28 +3,8 @@
   "WorkspaceRootPath": "C:\\Code\\Valor\\",
   "Documents": [
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\settings.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\settings.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\hooks.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\hooks.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\PCH.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\PCH.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\hooks.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -37,22 +17,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\dodge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\dodge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\offsets.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\offsets.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\include\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\include\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\include\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\include\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\settings.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\settings.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -67,115 +31,6 @@
             {
               "$type": "Document",
               "DocumentIndex": 0,
-              "Title": "settings.cpp",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\settings.cpp",
-              "RelativeDocumentMoniker": "src\\bin\\settings.cpp",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\settings.cpp",
-              "RelativeToolTip": "src\\bin\\settings.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T17:54:16.09Z",
-              "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 1,
-              "Title": "CMakeLists.txt",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\CMakeLists.txt",
-              "RelativeDocumentMoniker": "src\\CMakeLists.txt",
-              "ToolTip": "C:\\Code\\Valor\\src\\CMakeLists.txt",
-              "RelativeToolTip": "src\\CMakeLists.txt",
-              "ViewState": "AQIAAGkAAAAAAAAAAAAAAHsAAACCAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-05-12T17:45:16.516Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CMakeLists.txt",
-              "DocumentMoniker": "C:\\Code\\Valor\\CMakeLists.txt",
-              "RelativeDocumentMoniker": "CMakeLists.txt",
-              "ToolTip": "C:\\Code\\Valor\\CMakeLists.txt",
-              "RelativeToolTip": "CMakeLists.txt",
-              "ViewState": "AQIAAA4AAAAAAAAAAAAnwBwAAAAOAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-05-12T17:12:50.219Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "PCH.h",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\PCH.h",
-              "RelativeDocumentMoniker": "src\\PCH.h",
-              "ToolTip": "C:\\Code\\Valor\\src\\PCH.h",
-              "RelativeToolTip": "src\\PCH.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAkAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T16:46:30.982Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "Utils.cpp",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\include\\Utils.cpp",
-              "RelativeDocumentMoniker": "src\\include\\Utils.cpp",
-              "ToolTip": "C:\\Code\\Valor\\src\\include\\Utils.cpp",
-              "RelativeToolTip": "src\\include\\Utils.cpp",
-              "ViewState": "AQIAAIABAAAAAAAAAAAAALABAAAFAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:28:49.662Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "Utils.h",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\include\\Utils.h",
-              "RelativeDocumentMoniker": "src\\include\\Utils.h",
-              "ToolTip": "C:\\Code\\Valor\\src\\include\\Utils.h",
-              "RelativeToolTip": "src\\include\\Utils.h",
-              "ViewState": "AQIAAGAAAAAAAAAAAAAAAAIAAAASAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:28:45.604Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 12,
-              "Title": "settings.h",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\settings.h",
-              "RelativeDocumentMoniker": "src\\bin\\settings.h",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\settings.h",
-              "RelativeToolTip": "src\\bin\\settings.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:24:03.096Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "offsets.h",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\offsets.h",
-              "RelativeDocumentMoniker": "src\\bin\\offsets.h",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\offsets.h",
-              "RelativeToolTip": "src\\bin\\offsets.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:22:54.612Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\main.cpp",
-              "RelativeDocumentMoniker": "src\\bin\\main.cpp",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\main.cpp",
-              "RelativeToolTip": "src\\bin\\main.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAHgAAAADAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:21:11.948Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
               "Title": "hooks.h",
               "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\hooks.h",
               "RelativeDocumentMoniker": "src\\bin\\hooks.h",
@@ -183,11 +38,12 @@
               "RelativeToolTip": "src\\bin\\hooks.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:21:10.209Z"
+              "WhenOpened": "2024-05-12T03:21:10.209Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 1,
               "Title": "hooks.cpp",
               "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\hooks.cpp",
               "RelativeDocumentMoniker": "src\\bin\\hooks.cpp",
@@ -199,7 +55,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 8,
+              "DocumentIndex": 3,
               "Title": "dodge.h",
               "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\dodge.h",
               "RelativeDocumentMoniker": "src\\bin\\dodge.h",
@@ -211,7 +67,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 2,
               "Title": "dodge.cpp",
               "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\dodge.cpp",
               "RelativeDocumentMoniker": "src\\bin\\dodge.cpp",
