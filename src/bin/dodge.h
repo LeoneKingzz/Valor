@@ -24,6 +24,7 @@ const dodge_dir_set dodge_directions_tk_all = { dodge_direction::kForward, dodge
 const dodge_dir_set dodge_directions_dmco_horizontal = { dodge_direction::kLeft, dodge_direction::kRight, dodge_direction::kLeftForward, dodge_direction::kRightForward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward };
 const dodge_dir_set dodge_directions_dmco_back = { dodge_direction::kBackward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward };
 const dodge_dir_set dodge_directions_dmco_vertical = { dodge_direction::kForward, dodge_direction::kBackward, dodge_direction::kLeftForward, dodge_direction::kRightForward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward };
+const dodge_dir_set dodge_directions_dmco_reactive = { dodge_direction::kLeft, dodge_direction::kRight, dodge_direction::kBackward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward };
 const dodge_dir_set dodge_directions_dmco_all = {
 	dodge_direction::kForward,
 	dodge_direction::kBackward,
@@ -51,10 +52,12 @@ public:
 		
 	void attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
 
-	void react_to_attack(RE::Actor* a_attacker);
+	void react_to_attack(RE::Actor* a_attacker, float attack_range);
 
 	void set_dodge_phase(RE::Actor* a_dodger, bool a_isDodging);
 	bool get_is_dodging(RE::Actor* a_actor);
+
+	float Get_ReactiveDodge_Distance(RE::Actor *actor);
 
 private:
 	

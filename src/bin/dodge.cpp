@@ -85,7 +85,7 @@ void dodge::react_to_attack(RE::Actor* a_attacker, float attack_range)
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
 				break;
 			case 1:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_all);
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
 				break;
 			}
 		}
