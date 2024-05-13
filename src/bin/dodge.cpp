@@ -18,7 +18,7 @@ float get_dodge_chance(RE::Actor* a_dodger) {
 }
 
 float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
-	auto defenderLeftEquipped = actor->GetEquippedObject(true);
+	
 	auto defenderRightEquipped = actor->GetEquippedObject(false);
 	auto distance = 250.0f;
 

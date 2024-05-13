@@ -66,15 +66,17 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_backoff_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
-		if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
-			return;
-		} 
+	
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_back);
+			if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
+				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_back);
+			} 
 			break;
 		case 1:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_back);
+			if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
+				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_back);
+			}
 			break;
 		}
 		
