@@ -126,7 +126,7 @@ namespace hooks
 			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_all, true);
 			break;
 		case 1:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_all, true);
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_reactive, true);
 			break;
 		}
 		
