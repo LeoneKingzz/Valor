@@ -35,7 +35,9 @@ void dodge::react_to_attack(RE::Actor* a_attacker)
 			if (ValhallaUtils::isBackFacing(a_attacker, refr)) { //no need to react to an attack if the attacker isn't facing you.
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-	
+			if (refr->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
@@ -92,7 +94,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 		return;
 	}
 
-	if (able_dodge(a_actor) == true) {
+	if (!able_dodge(a_actor)) {
 		return;
 	}
 	
@@ -117,14 +119,11 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 bool dodge::able_dodge(RE::Actor* a_actor)
 {
 	
-	if (a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kNone || a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kDraw 
-	|| a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kNextAttack || a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kFollowThrough 
-	|| a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBowDraw || a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBowAttached
-	|| a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBowReleased || a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBowNextAttack) {
-		return true;
+	if (a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) {
+		return false;
 	}
 		
-	return false;
+	return true;
 }
 
 

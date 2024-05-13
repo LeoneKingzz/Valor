@@ -21,22 +21,11 @@ namespace hooks
 		std::string_view eventTag = a_event->tag.data();
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
+		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
 		case "preHitFrame"_h:
 			dodge::GetSingleton()->react_to_attack(actor);
 			break;
-		case "BeginCastVoice"_h:
-			dodge::GetSingleton()->react_to_attack(actor);
-			break;
-		case "BeginCastLeft"_h:
-			dodge::GetSingleton()->react_to_attack(actor);
-			break;
-		case "BeginCastRight"_h:
-			dodge::GetSingleton()->react_to_attack(actor);
-			break;
-		case "BowFullDrawn"_h:
-		    dodge::GetSingleton()->react_to_attack(actor);
-			break;
-
+	
 		case "MCO_DodgeInitiate"_h:
 			dodge::GetSingleton()->set_dodge_phase(const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>(), true);
 			break;
