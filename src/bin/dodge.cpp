@@ -36,7 +36,8 @@ void dodge::react_to_attack(RE::Actor* a_attacker)
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			bool MCO_Recovery = false;
-			if ((refr->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) || (refr->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) {
+			bool Isblocking = false;
+			if ((refr->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) || (refr->GetGraphVariableBool("MCO_Recovery", MCO_Recovery)) || (refr->GetGraphVariableBool("Isblocking", Isblocking))) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			switch (settings::iDodgeAI_Framework) {
@@ -119,7 +120,9 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 /*Check if the actor is able to dodge.*/
 bool dodge::able_dodge(RE::Actor* a_actor)
 {
-	if (a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) {
+	bool MCO_Recovery = false;
+	bool Isblocking = false;
+	if (a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone || (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery)) || (a_actor->GetGraphVariableBool("Isblocking", Isblocking))) {
 		return false;
 	}
 		
