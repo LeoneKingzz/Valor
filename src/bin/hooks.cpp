@@ -24,7 +24,7 @@ namespace hooks
 		case "bashPowerStart"_h:
 		case "PowerAttack_Start_end"_h:
 		case "NextPowerAttackInitiate"_h:
-			if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 30) {
+			if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 90) {
 				dodge::GetSingleton()->react_to_attack(actor);
 			}
 			break;
@@ -33,7 +33,7 @@ namespace hooks
 		case "NextAttackInitiate"_h:
 		case "MCO_AttackInitiate"_h:
 		case "SCAR_ComboStart"_h:
-			if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 20) {
+			if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 60) {
 				dodge::GetSingleton()->react_to_attack(actor);
 			}
 			break;
@@ -42,9 +42,9 @@ namespace hooks
         case "weaponSwing"_h:
 		case "weaponLeftSwing"_h:
 			if (!Utils::Actor::isHumanoid(actor) && (actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kDraw || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kSwing)) {
-				if ((Utils::Actor::isPowerAttacking(actor) == true) && (dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 30) {
+				if ((Utils::Actor::isPowerAttacking(actor) == true) && (dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 90) {
 					dodge::GetSingleton()->react_to_attack(actor);
-				} else if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 25) {
+				} else if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 75) {
 					dodge::GetSingleton()->react_to_attack(actor);
 				}
 			}
@@ -53,13 +53,13 @@ namespace hooks
 		case "BeginCastVoice"_h:
 		case "BeginCastLeft"_h:
 		case "BeginCastRight"_h:
-			if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 25) {
+			if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 75) {
 				dodge::GetSingleton()->react_to_attack(actor);
 			}
 			break;
 
 		case "BowFullDrawn"_h:
-		    if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 5) {
+		    if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 15) {
 				dodge::GetSingleton()->react_to_attack(actor);
 			}
 			break;
