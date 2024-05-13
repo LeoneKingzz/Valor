@@ -22,17 +22,41 @@ namespace hooks
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
 		case "bashPowerStart"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "PowerAttack_Start_end"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "NextPowerAttackInitiate"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "NextAttackInitiate"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "MCO_AttackInitiate"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "SCAR_ComboStart"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "preHitFrame"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
         case "weaponSwing"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "weaponLeftSwing"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "BeginCastVoice"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "BeginCastLeft"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "BeginCastRight"_h:
+			dodge::GetSingleton()->react_to_attack(actor);
+			break;
 		case "BowFullDrawn"_h:
 		    dodge::GetSingleton()->react_to_attack(actor);
 			break;
