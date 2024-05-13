@@ -38,8 +38,7 @@
               "RelativeToolTip": "src\\bin\\hooks.h",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:21:10.209Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:21:10.209Z"
             },
             {
               "$type": "Document",
@@ -49,7 +48,7 @@
               "RelativeDocumentMoniker": "src\\bin\\hooks.cpp",
               "ToolTip": "C:\\Code\\Valor\\src\\bin\\hooks.cpp",
               "RelativeToolTip": "src\\bin\\hooks.cpp",
-              "ViewState": "AQIAAGAAAAAAAAAAAAAAAIsAAAA4AAAA",
+              "ViewState": "AQIAAJAAAAAAAAAAAAAAAIsAAAA4AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-12T03:21:01.047Z",
               "EditorCaption": ""
@@ -64,8 +63,7 @@
               "RelativeToolTip": "src\\bin\\dodge.h",
               "ViewState": "AQIAADMAAAAAAAAAAAAAAEAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:20:58.484Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:20:58.484Z"
             },
             {
               "$type": "Document",
@@ -77,8 +75,7 @@
               "RelativeToolTip": "src\\bin\\dodge.cpp",
               "ViewState": "AQIAAGAAAAAAAAAAAAApwG4AAAAaAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:20:44.644Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:20:44.644Z"
             }
           ]
         }
