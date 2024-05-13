@@ -128,10 +128,10 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 
 	set_dodge_phase(a_actor, true);
 
-	if (!able_dodge(a_actor)) {
-		set_dodge_phase(a_actor, false);
-		return;
-	}
+	// if (!able_dodge(a_actor)) {
+	// 	set_dodge_phase(a_actor, false);
+	// 	return;
+	// }
 	
 	float dodge_chance = a_forceDodge ? 1.f : get_dodge_chance(a_actor);
 	
@@ -152,6 +152,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
 		if ((can_goto(a_actor, dodge_dest)) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 25) {
 			do_dodge(a_actor, direction);
+			set_dodge_phase(a_actor, false);
 			return;
 		} else {
 			set_dodge_phase(a_actor, false);

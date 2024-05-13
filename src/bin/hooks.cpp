@@ -44,11 +44,6 @@ namespace hooks
 		case "BeginCastRight"_h:
 			dodge::GetSingleton()->react_to_attack(actor, 1024.0f);
 			break;
-
-		case "MCO_DodgeStop"_h:
-		case "DodgeStop"_h:
-			dodge::GetSingleton()->set_dodge_phase(const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>(), false);
-			break;
 		}
 	}
 
