@@ -69,12 +69,12 @@ namespace hooks
 	
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
+			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
 				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_back);
 			} 
 			break;
 		case 1:
-			if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
+			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
 				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_back);
 			}
 			break;
@@ -85,33 +85,36 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_circle_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
-		if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
-			return;
-		} 
+
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_horizontal);
+			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
+				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_horizontal);
+			}
 			break;
 		case 1:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_horizontal);
+			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
+				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_horizontal);
+			}
 			break;
 		}
-		
-
+	
 		return _create_path(a_actor, a_newPos, a3, speed_ind);
 	}
 
 	ptr_CombatPath on_combatBehavior_fallback_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
-		if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
-			return;
-		} 
+	
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_back);
+			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
+				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_back);
+			}
 			break;
 		case 1:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_back);
+			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
+				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_back);
+			}
 			break;
 		}
 		
@@ -120,21 +123,21 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_dodgethreat_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
-		if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
-			return;
-		} 
+	
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_all, true);
+			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
+				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_all, true);
+			}
 			break;
 		case 1:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_reactive, true);
+			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
+				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_reactive, true);
+			}
 			break;
 		}
 		
-
 		return _create_path(a_actor, a_newPos, a3, speed_ind);
-
 	}
 	
 
