@@ -16,16 +16,58 @@ float get_dodge_chance(RE::Actor* a_dodger) {
 	}
 	return 0.f;
 }
+
+float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
+	auto defenderLeftEquipped = actor->GetEquippedObject(true);
+	auto defenderRightEquipped = actor->GetEquippedObject(false);
+	auto distance = 0.0f;
+
+	if (defenderRightEquipped && (defenderRightEquipped->IsWeapon())) {
+		RE::TESObjectWEAP* weapon = (defenderRightEquipped->As<RE::TESObjectWEAP>());
+		switch (weapon->GetWeaponType()) {
+		case RE::WEAPON_TYPE::kOneHandSword:
+			distance = 310.0f;
+			break;
+		case RE::WEAPON_TYPE::kOneHandAxe:
+			distance = 305.0f;
+			break;
+		case RE::WEAPON_TYPE::kOneHandMace:
+			distance = 300.0f;;
+			break;
+		case RE::WEAPON_TYPE::kOneHandDagger:
+			distance = 250.0f;
+			break;
+		case RE::WEAPON_TYPE::kTwoHandAxe:
+			distance = 350.0f;
+			break;
+		case RE::WEAPON_TYPE::kTwoHandSword:
+			distance = 370.0;
+			break;
+		case RE::WEAPON_TYPE::kHandToHandMelee:
+		    if (!Utils::Actor::isHumanoid(actor)) {
+				distance = 350.0f;
+			} else {
+				distance = 130.0f;
+			}
+			break;
+		}
+	}
+	return distance;
+}
+
 /*Trigger reactive AI surrounding the attacker.*/
-void dodge::react_to_attack(RE::Actor* a_attacker)
+void dodge::react_to_attack(RE::Actor* a_attacker, float attack_range)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
 	}
 
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
-		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) < settings::fDodgeAI_Reactive_Dist) {
+		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
+			if (get_is_dodging(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -35,9 +77,7 @@ void dodge::react_to_attack(RE::Actor* a_attacker)
 			if (ValhallaUtils::isBackFacing(a_attacker, refr)) { //no need to react to an attack if the attacker isn't facing you.
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			if (refr->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) {
-				return RE::BSContainer::ForEachResult::kContinue;
-			}
+	
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
@@ -80,8 +120,14 @@ bool dodge::get_is_dodging(RE::Actor* a_actor)
 /*Attempt to dodge an incoming threat, choosing one of the directions from A_DIRECTIONS.*/
 void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
 {
-	
 	if (!settings::bDodgeAI_Enable) {
+		return;
+	}
+
+	set_dodge_phase(a_actor, true);
+
+	if (!able_dodge(a_actor)) {
+		set_dodge_phase(a_actor, false);
 		return;
 	}
 	
@@ -91,10 +137,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	/*Check dodge chance using PRNG*/
 	std::uniform_real_distribution<> dis(0.f, 1.f);
 	if (dis(gen) > dodge_chance) {
-		return;
-	}
-
-	if (!able_dodge(a_actor)) {
+		set_dodge_phase(a_actor, false);
 		return;
 	}
 	
@@ -107,6 +150,9 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
 		if ((can_goto(a_actor, dodge_dest)) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 25) {
 			do_dodge(a_actor, direction);
+			return;
+		} else {
+			set_dodge_phase(a_actor, false);
 			return;
 		}
 	}

@@ -21,11 +21,12 @@ namespace hooks
 		std::string_view eventTag = a_event->tag.data();
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
-		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
 		case "preHitFrame"_h:
-			dodge::GetSingleton()->react_to_attack(actor);
+		    if (!Utils::Actor::isHumanoid(actor)) {
+				dodge::GetSingleton()->react_to_attack(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
+			}
 			break;
-	
+		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
 		case "MCO_DodgeInitiate"_h:
 			dodge::GetSingleton()->set_dodge_phase(const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>(), true);
 			break;
@@ -51,6 +52,9 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_backoff_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
+		if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
+			return;
+		} 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
 			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_back);
@@ -65,6 +69,9 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_circle_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
+		if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
+			return;
+		} 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
 			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_horizontal);
@@ -80,6 +87,9 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_fallback_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
+		if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
+			return;
+		} 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
 			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_back);
@@ -94,6 +104,9 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_dodgethreat_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
+		if (dodge::GetSingleton()->get_is_dodging(a_actor)) {
+			return;
+		} 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
 			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_all, true);
