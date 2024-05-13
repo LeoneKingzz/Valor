@@ -24,51 +24,22 @@ namespace hooks
 		case "bashPowerStart"_h:
 		case "PowerAttack_Start_end"_h:
 		case "NextPowerAttackInitiate"_h:
-			if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 90) {
-				dodge::GetSingleton()->react_to_attack(actor);
-			}
-			break;
-
-
 		case "NextAttackInitiate"_h:
 		case "MCO_AttackInitiate"_h:
 		case "SCAR_ComboStart"_h:
-			if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 60) {
-				dodge::GetSingleton()->react_to_attack(actor);
-			}
-			break;
-		
 		case "preHitFrame"_h:
         case "weaponSwing"_h:
 		case "weaponLeftSwing"_h:
-			if (!Utils::Actor::isHumanoid(actor) && (actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kDraw || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kSwing)) {
-				if ((Utils::Actor::isPowerAttacking(actor) == true) && (dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 90) {
-					dodge::GetSingleton()->react_to_attack(actor);
-				} else if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 75) {
-					dodge::GetSingleton()->react_to_attack(actor);
-				}
-			}
-			break;
-		
 		case "BeginCastVoice"_h:
 		case "BeginCastLeft"_h:
 		case "BeginCastRight"_h:
-			if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 75) {
-				dodge::GetSingleton()->react_to_attack(actor);
-			}
-			break;
-
 		case "BowFullDrawn"_h:
-		    if ((dodge::GetSingleton()->GenerateRandomInt(0, 100)) <= 15) {
-				dodge::GetSingleton()->react_to_attack(actor);
-			}
+		    dodge::GetSingleton()->react_to_attack(actor);
 			break;
-
 
 		case "MCO_DodgeInitiate"_h:
 			dodge::GetSingleton()->set_dodge_phase(const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>(), true);
 			break;
-
 
 		case "MCO_DodgeStop"_h:
 		case "DodgeStop"_h:

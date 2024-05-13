@@ -35,11 +35,7 @@ void dodge::react_to_attack(RE::Actor* a_attacker)
 			if (ValhallaUtils::isBackFacing(a_attacker, refr)) { //no need to react to an attack if the attacker isn't facing you.
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			bool MCO_Recovery = false;
-			bool Isblocking = false;
-			if ((refr->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) || (refr->GetGraphVariableBool("MCO_Recovery", MCO_Recovery)) || (refr->GetGraphVariableBool("Isblocking", Isblocking))) {
-				return RE::BSContainer::ForEachResult::kContinue;
-			}
+	
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
