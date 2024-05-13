@@ -12,6 +12,7 @@ namespace hooks
 	/// </summary>
 	/// <param name="a_actionData"></param>
 	/// <returns>Whether the attack action is performed.</returns>
+	// "MCO_DodgeInitiate"_h:
 
 	void on_animation_event::ProcessEvent(RE::BSTEventSink<RE::BSAnimationGraphEvent>* a_sink, RE::BSAnimationGraphEvent* a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* a_eventSource)
 	{
@@ -26,9 +27,15 @@ namespace hooks
 				dodge::GetSingleton()->react_to_attack(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
 			}
 			break;
-		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
-		case "MCO_DodgeInitiate"_h:
-			dodge::GetSingleton()->set_dodge_phase(const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>(), true);
+		case "bashPowerStart"_h:
+		case "PowerAttack_Start_end"_h:
+		case "NextAttackInitiate"_h:
+		case "NextPowerAttackInitiate"_h:
+		case "MCO_AttackInitiate"_h:
+		case "SCAR_ComboStart"_h:
+			if (Utils::Actor::isHumanoid(actor)) {
+				dodge::GetSingleton()->react_to_attack(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
+			}
 			break;
 
 		case "MCO_DodgeStop"_h:

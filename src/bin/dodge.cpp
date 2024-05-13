@@ -20,7 +20,7 @@ float get_dodge_chance(RE::Actor* a_dodger) {
 float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
 	auto defenderLeftEquipped = actor->GetEquippedObject(true);
 	auto defenderRightEquipped = actor->GetEquippedObject(false);
-	auto distance = 0.0f;
+	auto distance = 250.0f;
 
 	if (defenderRightEquipped && (defenderRightEquipped->IsWeapon())) {
 		RE::TESObjectWEAP* weapon = (defenderRightEquipped->As<RE::TESObjectWEAP>());
@@ -55,6 +55,8 @@ float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
 	return distance;
 }
 
+
+
 /*Trigger reactive AI surrounding the attacker.*/
 void dodge::react_to_attack(RE::Actor* a_attacker, float attack_range)
 {
@@ -74,7 +76,7 @@ void dodge::react_to_attack(RE::Actor* a_attacker, float attack_range)
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			if (ValhallaUtils::isBackFacing(a_attacker, refr)) { //no need to react to an attack if the attacker isn't facing you.
+			if (ValhallaUtils::isBackFacing(refr, a_attacker)) { //no need to react to an attack if the attacker isn't facing you.
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 	
