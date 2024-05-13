@@ -92,7 +92,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 		return;
 	}
 
-	if (!able_dodge(a_actor)) {
+	if (able_dodge(a_actor) == true) {
 		return;
 	}
 	
@@ -116,13 +116,15 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 /*Check if the actor is able to dodge.*/
 bool dodge::able_dodge(RE::Actor* a_actor)
 {
-	bool MCO_Recovery = false;
-	bool Isblocking = false;
-	if (a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone || (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery)) || (a_actor->GetGraphVariableBool("Isblocking", Isblocking))) {
-		return false;
+	
+	if (a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kNone || a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kDraw 
+	|| a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kNextAttack || a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kFollowThrough 
+	|| a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBowDraw || a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBowAttached
+	|| a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBowReleased || a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBowNextAttack) {
+		return true;
 	}
 		
-	return true;
+	return false;
 }
 
 
