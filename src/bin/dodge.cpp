@@ -169,7 +169,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 	auto magicTarget = a_actor->AsMagicTarget();
 	
-	if ((a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kNone || (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) 
+	if ((a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kNone || (a_actor->IsBlocking()) || (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) 
 	&& (! ((magicTarget->HasMagicEffect(magicEffect)) || (a_actor->GetGraphVariableBool("IsRecoiling", IsRecoiling) && IsRecoiling) 
 	|| (a_actor->GetGraphVariableBool("IsStaggering", IsStaggering) && IsStaggering) || (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) < 25)) )){
 		return true;
@@ -252,6 +252,16 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 	}
 	task->AddTask([a_actor, a_direction, a_event]() {
 		a_actor->SetGraphVariableInt(GVI_dodge_dir, a_direction);
+		bool MCO_Recovery = false;
+		if (a_actor->IsBlocking()) {
+			a_actor->NotifyAnimationGraph("blockStop");
+			a_actor->NotifyAnimationGraph("recoilStop");
+			a_actor->NotifyAnimationGraph("staggerStop");
+		}
+		if (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery) {
+			a_actor->NotifyAnimationGraph("MCO_EndAnimation");
+			a_actor->NotifyAnimationGraph("attackStop");
+		}
 		a_actor->NotifyAnimationGraph(a_event);
 		if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 25) {
 			a_actor->NotifyAnimationGraph(a_event);
