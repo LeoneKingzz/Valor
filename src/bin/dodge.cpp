@@ -171,7 +171,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	
 	if ((a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone || (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) 
 	&& (! ((magicTarget->HasMagicEffect(magicEffect)) || (a_actor->GetGraphVariableBool("IsRecoiling", IsRecoiling) && IsRecoiling) 
-	|| (a_actor->GetGraphVariableBool("IsRecoiling", IsStaggering) && IsStaggering) || (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) < 25)) )){
+	|| (a_actor->GetGraphVariableBool("IsStaggering", IsStaggering) && IsStaggering) || (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) < 25)) )){
 		return true;
 	}
 
