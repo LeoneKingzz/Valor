@@ -299,6 +299,7 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 		}
 		if (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery) {
 			a_actor->NotifyAnimationGraph("MCO_EndAnimation");
+			a_actor->NotifyAnimationGraph("MCO_AnimStop");
 			a_actor->NotifyAnimationGraph("attackStop");
 		}
 		a_actor->NotifyAnimationGraph(a_event);
