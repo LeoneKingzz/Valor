@@ -59,7 +59,7 @@ float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
 
 
 /*Trigger reactive AI surrounding the attacker.*/
-void dodge::react_to_attack(RE::Actor* a_attacker, float attack_range)
+void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
@@ -72,6 +72,45 @@ void dodge::react_to_attack(RE::Actor* a_attacker, float attack_range)
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (!Utils::Actor::isHumanoid(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (ValhallaUtils::isBackFacing(refr, a_attacker)) { //no need to react to an attack if the attacker isn't facing you.
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+	
+			switch (settings::iDodgeAI_Framework) {
+			case 0:
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
+				break;
+			case 1:
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
+				break;
+			}
+		}
+		return RE::BSContainer::ForEachResult::kContinue;
+	});
+}
+
+void dodge::react_to_ranged_and_shouts(RE::Actor* a_attacker, float attack_range)
+{
+	if (!settings::bDodgeAI_Reactive_enable) {
+		return;
+	}
+
+	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
+		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+			RE::Actor* refr = _refr->As<RE::Actor>();
+			if (get_is_dodging(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			bool hasLOS = false;
+			if (!(refr->HasLineOfSight(a_attacker, hasLOS) && hasLOS)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {

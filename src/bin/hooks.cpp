@@ -24,7 +24,7 @@ namespace hooks
 		switch (hash(eventTag.data(), eventTag.size())) {
 		case "preHitFrame"_h:
 		    if (!Utils::Actor::isHumanoid(actor)) {
-				dodge::GetSingleton()->react_to_attack(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
+				dodge::GetSingleton()->react_to_melee(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
 			}
 			break;
 		case "bashPowerStart"_h:
@@ -34,7 +34,7 @@ namespace hooks
 		case "MCO_AttackInitiate"_h:
 		case "SCAR_ComboStart"_h:
 			if (Utils::Actor::isHumanoid(actor)) {
-				dodge::GetSingleton()->react_to_attack(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
+				dodge::GetSingleton()->react_to_melee(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
 			}
 			break;
 
@@ -42,7 +42,7 @@ namespace hooks
 		case "BeginCastVoice"_h:
 		case "BeginCastLeft"_h:
 		case "BeginCastRight"_h:
-			dodge::GetSingleton()->react_to_attack(actor, 1024.0f);
+			dodge::GetSingleton()->react_to_ranged_and_shouts(actor, 1024.0f);
 			break;
 		}
 	}
