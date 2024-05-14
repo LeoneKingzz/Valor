@@ -38,13 +38,15 @@ namespace hooks
 		    if (!(actor->IsPlayerRef())) {
 				int a_value = 2;
 				while (!(actor->GetGraphVariableInt("MCO_nextdodge", a_value) && a_value)) {
-					if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 25) {
+					if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 45) {
 						actor->NotifyAnimationGraph("Dodge");
 						break;
 					} else {
 						break;
 					}
 				}
+			} else {
+				break;
 			}
 		}
 	}
