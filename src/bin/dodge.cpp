@@ -129,10 +129,6 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 
 	set_dodge_phase(a_actor, true);
 
-	if (!able_dodge(a_actor)) {
-		set_dodge_phase(a_actor, false);
-		return;
-	}
 	
 	float dodge_chance = a_forceDodge ? 1.f : get_dodge_chance(a_actor);
 	
@@ -151,7 +147,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 
 	for (dodge_direction direction : directions_shuffled) {
 		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
-		if (can_goto(a_actor, dodge_dest)) {
+		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			do_dodge(a_actor, direction);
 			set_dodge_phase(a_actor, false);
 			return;
@@ -160,7 +156,6 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 			return;
 		}
 	}
-
 }
 
 
@@ -179,7 +174,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	|| (a_actor->GetGraphVariableBool("IsRecoiling", IsStaggering) && IsStaggering) || (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) < 25) )) ){
 		return true;
 	}
-		
+
 	return false;
 }
 
