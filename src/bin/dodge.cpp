@@ -169,7 +169,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 	auto magicTarget = a_actor->AsMagicTarget();
 	
-	if ((a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone || (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) 
+	if ((a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kNone || (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) 
 	&& (! ((magicTarget->HasMagicEffect(magicEffect)) || (a_actor->GetGraphVariableBool("IsRecoiling", IsRecoiling) && IsRecoiling) 
 	|| (a_actor->GetGraphVariableBool("IsStaggering", IsStaggering) && IsStaggering) || (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) < 25)) )){
 		return true;
