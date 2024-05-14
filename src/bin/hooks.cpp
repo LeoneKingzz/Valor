@@ -23,31 +23,22 @@ namespace hooks
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
 		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
+		case "PowerAttack_Start_end"_h:
+		case "NextAttackInitiate"_h:
+		case "NextPowerAttackInitiate"_h:
 		case "preHitFrame"_h:
 		    dodge::GetSingleton()->react_to_melee(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
 			break;
 
 		case "BowFullDrawn"_h:
+		case "BeginCastVoice"_h:
+		case "BeginCastLeft"_h:
+		case "BeginCastRight"_h:
 		case "Voice_SpellFire_Event"_h:
 		case "MLh_SpellFire_Event"_h:
 		case "MRh_SpellFire_Event"_h:
-			dodge::GetSingleton()->react_to_ranged_and_shouts(actor, 1024.0f);
+			dodge::GetSingleton()->react_to_ranged_and_shouts(actor, 1500.0f);
 			break;
-
-		case "MCO_DodgeInitiate"_h:
-		    if (!(actor->IsPlayerRef())) {
-				int a_value = 2;
-				if (actor->GetGraphVariableInt("MCO_nextdodge", a_value)) {
-					if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 45) {
-						actor->NotifyAnimationGraph("Dodge");
-						break;
-					} else {
-						break;
-					}
-				}
-			} else {
-				break;
-			}
 		}
 	}
 
