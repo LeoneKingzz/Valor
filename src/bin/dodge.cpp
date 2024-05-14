@@ -128,10 +128,10 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 
 	set_dodge_phase(a_actor, true);
 
-	// if (!able_dodge(a_actor)) {
-	// 	set_dodge_phase(a_actor, false);
-	// 	return;
-	// }
+	if (!able_dodge(a_actor)) {
+		set_dodge_phase(a_actor, false);
+		return;
+	}
 	
 	float dodge_chance = a_forceDodge ? 1.f : get_dodge_chance(a_actor);
 	
@@ -167,12 +167,17 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 /*Check if the actor is able to dodge.*/
 bool dodge::able_dodge(RE::Actor* a_actor)
 {
+	bool IsStaggering = false;
+	bool IsRecoiling = false;
+	bool MCO_Recovery = false;
+	const auto IUbusy = RE::BGSKeyword::LookupByEditorID("IUbusy")->As<RE::BGSKeyword>();
 	
-	if (a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone) {
-		return false;
+	if ((a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone || a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) 
+	&& (a_actor) {
+		return true;
 	}
 		
-	return true;
+	return false;
 }
 
 
