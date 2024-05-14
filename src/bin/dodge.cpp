@@ -303,9 +303,6 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 			a_actor->NotifyAnimationGraph("attackStop");
 		}
 		a_actor->NotifyAnimationGraph(a_event);
-		if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 25) {
-			a_actor->NotifyAnimationGraph(a_event);
-		}
 	});
 }
 

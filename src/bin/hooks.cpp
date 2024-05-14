@@ -33,6 +33,19 @@ namespace hooks
 		case "MRh_SpellFire_Event"_h:
 			dodge::GetSingleton()->react_to_ranged_and_shouts(actor, 1024.0f);
 			break;
+
+		case "MCO_DodgeOpen"_h:
+		    if (!(actor->IsPlayerRef())) {
+				int a_value = 2;
+				while (!(actor->GetGraphVariableInt("MCO_nextdodge", a_value) && a_value)) {
+					if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 25) {
+						actor->NotifyAnimationGraph("Dodge");
+						break;
+					} else {
+						break;
+					}
+				}
+			}
 		}
 	}
 
