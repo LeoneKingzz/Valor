@@ -22,26 +22,15 @@ namespace hooks
 		std::string_view eventTag = a_event->tag.data();
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
+		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
 		case "preHitFrame"_h:
-		    if (!Utils::Actor::isHumanoid(actor)) {
-				dodge::GetSingleton()->react_to_melee(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
-			}
-			break;
-		case "bashPowerStart"_h:
-		case "PowerAttack_Start_end"_h:
-		case "NextAttackInitiate"_h:
-		case "NextPowerAttackInitiate"_h:
-		case "MCO_AttackInitiate"_h:
-		case "SCAR_ComboStart"_h:
-			if (Utils::Actor::isHumanoid(actor)) {
-				dodge::GetSingleton()->react_to_melee(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
-			}
+		    dodge::GetSingleton()->react_to_melee(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
 			break;
 
 		case "BowFullDrawn"_h:
-		case "BeginCastVoice"_h:
-		case "BeginCastLeft"_h:
-		case "BeginCastRight"_h:
+		case "Voice_SpellFire_Event"_h:
+		case "MLh_SpellFire_Event"_h:
+		case "MRh_SpellFire_Event"_h:
 			dodge::GetSingleton()->react_to_ranged_and_shouts(actor, 1024.0f);
 			break;
 		}
