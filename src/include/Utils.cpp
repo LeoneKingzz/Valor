@@ -354,11 +354,8 @@ bool ValhallaUtils::is_adversary(RE::Actor* actor1, RE::Actor* actor2)
 bool ValhallaUtils::isBackFacing(RE::Actor* actor1, RE::Actor* actor2)
 {
 	auto angle = actor1->GetHeadingAngle(actor2->GetPosition(), true);
-	auto bBowAttack = ((actor1->GetEquippedObject(true))->As<RE::TESObjectWEAP>()->GetWeaponType() == RE::WEAPON_TYPE::kBow) && (actor1->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone);
 	
-	if (angle <= 7.0f && bBowAttack == true) {
-		return false;
-	} else if (angle <= 35.0f && bBowAttack == false) {
+	if (angle <= 35.0f) {
 		return false;
 	} else {
 		return true;
