@@ -2,6 +2,7 @@
 #include "settings.h"
 #include "include/Utils.h"
 #include <algorithm>
+#include "RE/M/Misc.h"
 #define PI 3.1415926535f
 using writeLock = std::unique_lock<std::shared_mutex>;
 using readLock = std::shared_lock<std::shared_mutex>;
@@ -150,7 +151,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 
 	for (dodge_direction direction : directions_shuffled) {
 		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
-		if ((can_goto(a_actor, dodge_dest)) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 25) {
+		if (can_goto(a_actor, dodge_dest)) {
 			do_dodge(a_actor, direction);
 			set_dodge_phase(a_actor, false);
 			return;
@@ -170,10 +171,12 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	bool IsStaggering = false;
 	bool IsRecoiling = false;
 	bool MCO_Recovery = false;
-	const auto IUbusy = RE::BGSKeyword::LookupByEditorID("IUbusy")->As<RE::BGSKeyword>();
+	const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
+	auto magicTarget = a_actor->AsMagicTarget();
 	
-	if ((a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone || a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) 
-	&& (a_actor) {
+	if ((a_actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kNone || (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) 
+	&& (! ((magicTarget->HasMagicEffect(magicEffect)) || (a_actor->GetGraphVariableBool("IsRecoiling", IsRecoiling) && IsRecoiling) 
+	|| (a_actor->GetGraphVariableBool("IsRecoiling", IsStaggering) && IsStaggering) || (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) < 25) )) ){
 		return true;
 	}
 		
