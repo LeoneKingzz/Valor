@@ -26,8 +26,8 @@ namespace hooks
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
 		case "NextPowerAttackInitiate"_h:
-		case "preHitFrame"_h:
-		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
+		case "weaponSwing"_h:
+		case "weaponLeftSwing"_h:
 		    dodge::GetSingleton()->react_to_melee(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
 			break;
 
