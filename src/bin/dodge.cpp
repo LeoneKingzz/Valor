@@ -116,10 +116,10 @@ void dodge::react_to_ranged_and_shouts(RE::Actor* a_attacker, float attack_range
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			if (ValhallaUtils::isBackFacing(refr, a_attacker)) { //no need to react to an attack if the attacker isn't facing you.
+			if (ValhallaUtils::isBackFacing(a_attacker, refr)) {  //no need to react to an attack if the attacker isn't facing you.
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-	
+
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);

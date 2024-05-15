@@ -353,12 +353,11 @@ bool ValhallaUtils::is_adversary(RE::Actor* actor1, RE::Actor* actor2)
 
 bool ValhallaUtils::isBackFacing(RE::Actor* actor1, RE::Actor* actor2)
 {
-	auto angle = actor1->GetHeadingAngle(actor2->GetPosition(), true);
-	
-	if (angle <= 35.0f) {
-		return false;
-	} else {
+	auto angle = actor1->GetHeadingAngle(actor2->GetPosition(), false);
+	if (90 < angle || angle < -90) {
 		return true;
+	} else {
+		return false;
 	}
 }
 
