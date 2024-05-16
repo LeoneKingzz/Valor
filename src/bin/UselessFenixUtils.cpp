@@ -3,9 +3,9 @@
 namespace Utils
 {
 	RE::BGSAttackData* get_attackData(RE::Actor* a) {
-		if (!a->currentProcess || !a->currentProcess->high)
+		if (!a->GetActorRuntimeData().currentProcess || !a->GetActorRuntimeData().currentProcess->high)
 			return nullptr;
-		return a->currentProcess->high->attackData.get();
+		return a->GetActorRuntimeData().currentProcess->high->attackData.get();
 	}
 }
 
@@ -27,7 +27,7 @@ float Actor__GetActorValueModifier(RE::Actor* a, RE::ACTOR_VALUE_MODIFIER mod, R
 
 float get_total_av(RE::Actor* a, RE::ActorValue av)
 {
-	float permanent = a->GetPermanentActorValue(av);
+	float permanent = a->AsActorValueOwner()->GetPermanentActorValue(av);
 	float temporary = Actor__GetActorValueModifier(a, RE::ACTOR_VALUE_MODIFIER::kTemporary, av);
 	return permanent + temporary;
 }

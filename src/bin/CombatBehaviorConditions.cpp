@@ -9,14 +9,14 @@ using PA = Utils::PolarAngle;
 
 bool has_manyStamina(RE::Actor* a)
 {
-	auto cur = a->GetActorValue(RE::ActorValue::kStamina);
+	auto cur = a->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina);
 	auto total = get_total_av(a, RE::ActorValue::kStamina);
 	return total >= 100.0f && total * 0.5 <= cur;
 }
 
 bool has_enoughStamina(RE::Actor* a)
 {
-	auto cur = a->GetActorValue(RE::ActorValue::kStamina);
+	auto cur = a->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina);
 	auto total = get_total_av(a, RE::ActorValue::kStamina);
 	return total >= 25.0f && total * 0.25 <= cur;
 }
@@ -27,12 +27,12 @@ bool is_powerattacking(RE::Actor* a)
 }
 
 bool is_staying(RE::Actor* a) {
-	return !a->actorState1.running && !a->actorState1.walking && !a->actorState1.sprinting;
+	return !a->AsActorState()->actorState1.running && !a->AsActorState()->actorState1.walking && !a->AsActorState()->actorState1.sprinting;
 }
 
 bool has_stamina(RE::Actor* a)
 {
-	auto cur = a->GetActorValue(RE::ActorValue::kStamina);
+	auto cur = a->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina);
 	auto total = get_total_av(a, RE::ActorValue::kStamina);
 	return total <= 20.0f || cur >= 15.0f;
 }
@@ -54,7 +54,7 @@ bool is_blocking(RE::Actor* a)
 
 bool is_bashing(RE::Actor* a)
 {
-	if (a->actorState1.meleeAttackState == RE::ATTACK_STATE_ENUM::kNone)
+	if (a->AsActorState()->actorState1.meleeAttackState == RE::ATTACK_STATE_ENUM::kNone)
 		return false;
 
 	auto adata = Utils::get_attackData(a);
@@ -69,7 +69,7 @@ bool is_attacking(RE::Actor* a)
 	auto adata = Utils::get_attackData(a);
 	if (!adata)
 		return false;
-	auto state = a->actorState1.meleeAttackState;
+	auto state = a->AsActorState()->actorState1.meleeAttackState;
 	return state == RE::ATTACK_STATE_ENUM::kDraw || state == RE::ATTACK_STATE_ENUM::kSwing || state == RE::ATTACK_STATE_ENUM::kHit;
 }
 
@@ -78,13 +78,13 @@ bool is_juststarted_attacking(RE::Actor* a)
 	auto adata = Utils::get_attackData(a);
 	if (!adata)
 		return false;
-	auto state = a->actorState1.meleeAttackState;
+	auto state = a->AsActorState()->actorState1.meleeAttackState;
 	return state == RE::ATTACK_STATE_ENUM::kDraw;
 }
 
 bool is_moving(RE::Actor* a)
 {
-	auto state = a->actorState1;
+	auto state = a->AsActorState()->actorState1;
 	return state.running || state.walking || state.sprinting;
 }
 
@@ -106,7 +106,7 @@ void interruptattack(RE::Actor* me)
 
 bool is_AttackEnded(RE::Actor* a)
 {
-	auto state = a->actorState1.meleeAttackState;
+	auto state = a->AsActorState()->actorState1.meleeAttackState;
 	return state != RE::ATTACK_STATE_ENUM::kDraw && state != RE::ATTACK_STATE_ENUM::kSwing && state != RE::ATTACK_STATE_ENUM::kNone;
 }
 
@@ -157,7 +157,7 @@ namespace Movement
 	{
 
         bool isInDanger(RE::Actor* me, AttackInfo* info = nullptr) {
-            auto he = me->currentCombatTarget.get().get();
+            auto he = me->GetActorRuntimeData().currentCombatTarget.get().get();
             if (!he) return false;
 
             auto R = get_combat_reach(he);
@@ -178,7 +178,7 @@ namespace Movement
 
             if (is_blocking(he) || !is_attacking(he)) return false;
 
-            auto attackState = he->GetAttackState();
+            auto attackState = he->AsActorState()->GetAttackState();
             if (attackState != RE::ATTACK_STATE_ENUM::kSwing && attackState != RE::ATTACK_STATE_ENUM::kDraw) {
 				return false;
 			}
@@ -205,7 +205,7 @@ namespace Movement
 			if (!isInDanger(me, &info))
 				return false;
 
-			auto he = me->currentCombatTarget.get().get();
+			auto he = me->GetActorRuntimeData().currentCombatTarget.get().get();
 			if (!he)
 				return false;
 
