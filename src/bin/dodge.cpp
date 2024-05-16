@@ -289,8 +289,12 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 		a_actor->SetGraphVariableInt(GVI_dodge_dir, a_direction);
 		interruptattack(a_actor);
 		a_actor->NotifyAnimationGraph(a_event);
-		if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 45) {
-			a_actor->NotifyAnimationGraph(a_event);
+		if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && has_enoughStamina(a_actor)) {
+			int two = 2;
+			while (a_actor->GetGraphVariableInt("MCO_nextdodge", two)) {
+				a_actor->NotifyAnimationGraph(a_event);
+				break;
+			}	
 		}
 	});
 }
