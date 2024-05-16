@@ -52,7 +52,7 @@
               "RelativeDocumentMoniker": "src\\bin\\CombatBehaviorConditions.h",
               "ToolTip": "C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.h",
               "RelativeToolTip": "src\\bin\\CombatBehaviorConditions.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAIAAAASAAAA",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAA8AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
               "WhenOpened": "2024-05-16T02:12:37.302Z",
               "EditorCaption": ""
@@ -67,8 +67,7 @@
               "RelativeToolTip": "src\\bin\\UselessFenixUtils.cpp",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-16T02:10:07.07Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T02:10:07.07Z"
             },
             {
               "$type": "Document",
@@ -80,8 +79,7 @@
               "RelativeToolTip": "src\\bin\\UselessFenixUtils.h",
               "ViewState": "AQIAAEUAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-16T02:10:03.182Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-16T02:10:03.182Z"
             },
             {
               "$type": "Document",
@@ -91,7 +89,7 @@
               "RelativeDocumentMoniker": "src\\bin\\CombatBehaviorConditions.cpp",
               "ToolTip": "C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.cpp",
               "RelativeToolTip": "src\\bin\\CombatBehaviorConditions.cpp",
-              "ViewState": "AQIAAJMAAAAAAAAAAAAAAHQAAAAPAAAA",
+              "ViewState": "AQIAANoAAAAAAAAAAAApwOEAAABCAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-05-16T01:58:44.359Z",
               "EditorCaption": ""
@@ -142,8 +140,7 @@
               "RelativeToolTip": "src\\bin\\dodge.cpp",
               "ViewState": "AQIAAFkBAAAAAAAAAAAAACwBAAA1AAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:20:44.644Z",
-              "EditorCaption": ""
+              "WhenOpened": "2024-05-12T03:20:44.644Z"
             }
           ]
         }
