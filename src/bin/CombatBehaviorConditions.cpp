@@ -263,6 +263,50 @@ namespace Movement
 	namespace Dodging
 	{
 
+		template <bool change = false>
+		uint32_t should_danger_alwaysDanger(RE::Character* me, RE::Actor*, const AttackInfo& info)
+		{
+			auto dir = choose_moving_direction_circle(&info, me);
+			if (dir == CircleDirestions::Left || dir == CircleDirestions::Right) {
+				if (change) {
+					auto nir = dir == CircleDirestions::Left ? &dodge_directions_dmco_left : &dodge_directions_dmco_right;
+					dodge::GetSingleton()->attempt_dodge(me, nir);
+				}
+
+				return true;
+			}
+
+			return false;
+		}
+
+		template <bool change = false>
+		uint32_t should_alwaysDanger(RE::Character* a, RE::Actor* he, const AttackInfo& info)
+		{
+			const float DIST_BORDER = 60.0f;
+
+			const float r = info.r;
+			const float R = info.R;
+			const PA me = info.me;
+			float back_dist = R - r;
+
+			if (!is_powerattacking(he) && back_dist <= DIST_BORDER) {
+				RE::NiPoint3 he_me = a->GetPosition() - he->GetPosition(), new_pos;
+				auto he_me_len = he_me.Unitize();
+				auto walk_distance = get_FallbackDistance(info) - he_me_len;
+				new_pos = he_me * walk_distance + a->GetPosition();
+
+				if (check_collisions(a, &a->data.location, &new_pos)) {
+					if (change) {
+						dodge::GetSingleton()->attempt_dodge(a, &dodge_directions_dmco_reactive);
+					}
+					return true;
+				} else {
+				}
+			}
+
+			return false;
+		}
+
 		uint32_t should([[maybe_unused]] RE::Character* me)
 		{
 			if (is_powerattacking(me) && !is_juststarted_attacking(me))
@@ -301,46 +345,5 @@ namespace Movement
 			return should_danger_alwaysDanger<true>(me, he, info);
 		}
 
-		template <bool change = false>
-        uint32_t should_danger_alwaysDanger(RE::Character* me, RE::Actor*, const AttackInfo& info) {
-            auto dir = choose_moving_direction_circle(&info, me);
-            if (dir == CircleDirestions::Left || dir == CircleDirestions::Right) {
-                if (change) {
-					auto nir = dir == CircleDirestions::Left ? &dodge_directions_dmco_left : &dodge_directions_dmco_right;
-					dodge::GetSingleton()->attempt_dodge(me, nir);
-                }
-
-                return true;
-            }
-
-            return false;
-        }
-
-        template <bool change = false>
-        uint32_t should_alwaysDanger(RE::Character* a, RE::Actor* he, const AttackInfo& info) {
-            const float DIST_BORDER = 60.0f;
-
-            const float r = info.r;
-            const float R = info.R;
-            const PA me = info.me;
-            float back_dist = R - r;
-
-            if (!is_powerattacking(he) && back_dist <= DIST_BORDER) {
-                RE::NiPoint3 he_me = a->GetPosition() - he->GetPosition(), new_pos;
-                auto he_me_len = he_me.Unitize();
-                auto walk_distance = get_FallbackDistance(info) - he_me_len;
-                new_pos = he_me * walk_distance + a->GetPosition();
-
-                if (check_collisions(a, &a->data.location, &new_pos)) {
-                    if (change) {
-                        dodge::GetSingleton()->attempt_dodge(a, &dodge_directions_dmco_reactive);
-                    }
-                    return true;
-                } else {
-                }
-            }
-
-            return false;
-        }
     }
 }
