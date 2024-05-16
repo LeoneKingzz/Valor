@@ -1,5 +1,6 @@
 #include "UselessFenixUtils.h"
 #include "CombatBehaviorConditions.h"
+#include "dodge.h"
 
 
 
@@ -278,13 +279,32 @@ namespace Movement
 			return should_alwaysDanger<true>(me, he, info);
 		}
 
+		uint32_t should_danger([[maybe_unused]] RE::Character* me)
+		{
+			if (is_powerattacking(me) && !is_juststarted_attacking(me))
+				return false;
+
+			if (is_bashing(me))
+				return false;
+
+			auto he = me->GetActorRuntimeData().currentCombatTarget.get().get();
+			if (!he)
+				return false;
+
+			AttackInfo info;
+			if (!isInDanger(me, &info))
+				return false;
+
+			return should_danger_alwaysDanger<true>(me, he, info);
+		}
+
 		template <bool change = false>
         uint32_t should_danger_alwaysDanger(RE::Character* me, RE::Actor*, const AttackInfo& info) {
             auto dir = choose_moving_direction_circle(&info, me);
             if (dir == CircleDirestions::Left || dir == CircleDirestions::Right) {
                 if (change) {
-                    interruptattack(me);
-                    Dodging::dodge_circle(me, dir);
+					auto nir = dir == CircleDirestions::Left ? &dodge_directions_dmco_left : &dodge_directions_dmco_right;
+					dodge::GetSingleton()->attempt_dodge(me, nir);
                 }
 
                 return true;
@@ -310,8 +330,7 @@ namespace Movement
 
                 if (check_collisions(a, &a->data.location, &new_pos)) {
                     if (change) {
-                        interruptattack(a);
-                        Dodging::dodge_back(a);
+                        dodge::GetSingleton()->attempt_dodge(a, &dodge_directions_dmco_reactive);
                     }
                     return true;
                 } else {
@@ -323,4 +342,3 @@ namespace Movement
     }
 
 }
-

@@ -3,6 +3,7 @@
 #include "include/Utils.h"
 #include <algorithm>
 #include "RE/M/Misc.h"
+#include "CombatBehaviorConditions.h"
 #define PI 3.1415926535f
 using writeLock = std::unique_lock<std::shared_mutex>;
 using readLock = std::shared_lock<std::shared_mutex>;
@@ -80,13 +81,13 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 			if (ValhallaUtils::isBackFacing(a_attacker, refr)) {  //no need to react to an attack if the attacker isn't facing you.
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-
+			RE::Character* a_refr = refr->As<RE::Character>();
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
+				Movement::Dodging::should(a_refr);
 				break;
 			case 1:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
+				Movement::Dodging::should(a_refr);
 				break;
 			}
 		}
@@ -202,15 +203,10 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 /*Check if the actor is able to dodge.*/
 bool dodge::able_dodge(RE::Actor* a_actor)
 {
-	bool IsStaggering = false;
-	bool IsRecoiling = false;
-	bool MCO_Recovery = false;
 	const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 	auto magicTarget = a_actor->AsMagicTarget();
 	
-	if ((a_actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kNone || (a_actor->IsBlocking()) || (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery)) 
-	&& (! ((magicTarget->HasMagicEffect(magicEffect)) || (a_actor->GetGraphVariableBool("IsRecoiling", IsRecoiling) && IsRecoiling) 
-	|| (a_actor->GetGraphVariableBool("IsStaggering", IsStaggering) && IsStaggering) || (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) < 25)) )){
+	if (has_enoughStamina(a_actor) && !magicTarget->HasMagicEffect(magicEffect)){
 		return true;
 	}
 
@@ -291,16 +287,7 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 	}
 	task->AddTask([a_actor, a_direction, a_event]() {
 		a_actor->SetGraphVariableInt(GVI_dodge_dir, a_direction);
-		bool MCO_Recovery = false;
-		if (a_actor->IsBlocking()) {
-			a_actor->NotifyAnimationGraph("blockStop");
-			a_actor->NotifyAnimationGraph("recoilStop");
-			a_actor->NotifyAnimationGraph("staggerStop");
-		}
-		if (a_actor->GetGraphVariableBool("MCO_Recovery", MCO_Recovery) && MCO_Recovery) {
-			a_actor->NotifyAnimationGraph("MCO_EndAnimation");
-			a_actor->NotifyAnimationGraph("attackStop");
-		}
+		interruptattack(a_actor);
 		a_actor->NotifyAnimationGraph(a_event);
 		if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 45) {
 			a_actor->NotifyAnimationGraph(a_event);
