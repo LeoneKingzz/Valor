@@ -29,7 +29,7 @@ namespace hooks
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
 		case "NextPowerAttackInitiate"_h:
-		    dodge::GetSingleton()->react_to_melee(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
+		    dodge::GetSingleton()->react_to_melee(actor, 750.0f);
 			break;
 
 		case "BowFullDrawn"_h:
