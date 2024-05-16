@@ -173,6 +173,46 @@ namespace Movement
 		new_pos.z = he_me.z + he.z;
 	}
 
+	bool isInDanger(RE::Actor* me, AttackInfo* info = nullptr)
+	{
+		auto he = me->GetActorRuntimeData().currentCombatTarget.get().get();
+		if (!he)
+			return false;
+
+		auto R = get_combat_reach(he);
+		auto r2 = get_dist2(me, he);
+
+		RE::BGSAttackData* attackdata = Utils::get_attackData(he);
+		auto angle = get_angle_he_me(me, he, attackdata);
+
+		float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
+
+		if (info) {
+			info->R = R;
+			info->r = sqrt(r2);
+			info->reflected = angle < 0.0f;
+			info->me = abs(angle);
+			info->attackAngle = attackAngle;
+		}
+
+		if (is_blocking(he) || !is_attacking(he))
+			return false;
+
+		auto attackState = he->AsActorState()->GetAttackState();
+		if (attackState != RE::ATTACK_STATE_ENUM::kSwing && attackState != RE::ATTACK_STATE_ENUM::kDraw) {
+			return false;
+		}
+		if (abs(angle) > attackAngle) {
+			return false;
+		}
+
+		if (r2 > R * R && (!is_powerattacking(he) || r2 > 500.0f * 500.0f)) {
+			return false;
+		}
+
+		return true;
+	}
+
 	float get_FallbackDistance(const AttackInfo& info)
 	{
 		// info.r subs after
@@ -182,7 +222,7 @@ namespace Movement
 	float get_FallbackDistance(RE::Character* me)
 	{
 		AttackInfo info;
-		if (!Dodging::isInDanger(me, &info))
+		if (!isInDanger(me, &info))
 			return 80.0f;
 
 		return get_FallbackDistance(info);
@@ -223,43 +263,6 @@ namespace Movement
 	namespace Dodging
 	{
 
-        bool isInDanger(RE::Actor* me, AttackInfo* info = nullptr) {
-            auto he = me->GetActorRuntimeData().currentCombatTarget.get().get();
-            if (!he) return false;
-
-            auto R = get_combat_reach(he);
-            auto r2 = get_dist2(me, he);
-
-            RE::BGSAttackData* attackdata = Utils::get_attackData(he);
-            auto angle = get_angle_he_me(me, he, attackdata);
-
-            float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
-
-            if (info) {
-                info->R = R;
-                info->r = sqrt(r2);
-                info->reflected = angle < 0.0f;
-                info->me = abs(angle);
-                info->attackAngle = attackAngle;
-            }
-
-            if (is_blocking(he) || !is_attacking(he)) return false;
-
-            auto attackState = he->AsActorState()->GetAttackState();
-            if (attackState != RE::ATTACK_STATE_ENUM::kSwing && attackState != RE::ATTACK_STATE_ENUM::kDraw) {
-				return false;
-			}
-            if (abs(angle) > attackAngle) {
-				return false;
-			}
-
-            if (r2 > R * R && (!is_powerattacking(he) || r2 > 500.0f * 500.0f)) {
-				return false;
-			}
-
-            return true;
-        }
-
 		uint32_t should([[maybe_unused]] RE::Character* me)
 		{
 			if (is_powerattacking(me) && !is_juststarted_attacking(me))
@@ -292,7 +295,7 @@ namespace Movement
 				return false;
 
 			AttackInfo info;
-			if (!isInDanger(me, &info))
+			if (!isInDanger(me, &info)) 
 				return false;
 
 			return should_danger_alwaysDanger<true>(me, he, info);
