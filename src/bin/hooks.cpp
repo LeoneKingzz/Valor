@@ -2,6 +2,7 @@
 #include "settings.h"
 #include "dodge.h"
 #include "include/Utils.h"
+#include "CombatBehaviorConditions.h"
 
 namespace hooks
 {
@@ -57,11 +58,13 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_backoff_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
+		RE::Character* actor = a_actor->As<RE::Character>();
 	
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
 			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
 				dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_back);
+				Movement::Dodging::should(actor);
 			} 
 			break;
 		case 1:
