@@ -10,7 +10,6 @@ namespace Movement
 		uint32_t should_danger(RE::Character*);
 		uint32_t is_indanger(RE::Character*);
 	}
-	float get_FallbackWaitTime(RE::Character*);
 
 }
 
