@@ -156,36 +156,6 @@ namespace Movement
 	namespace Dodging
 	{
 
-		void dodge_circle(RE::Actor* me, CircleDirestions dir)
-		{
-			if (*Settings::DodgingModIndex == -1) {
-				// himself
-			}
-			if (*Settings::DodgingModIndex == 0) {
-				me->NotifyAnimationGraph(dir == CircleDirestions::Left ? "TKDodgeRight" : "TKDodgeLeft");
-			}
-			if (*Settings::DodgingModIndex == 1) {
-				me->SetGraphVariableInt("DodgeID", DODGE_ID);
-				me->SetGraphVariableFloat("DodgeSpeed", DODGE_SPEED);
-				me->NotifyAnimationGraph("RollStart");
-			}
-		}
-
-		void dodge_back(RE::Actor* a)
-		{
-			if (*Settings::DodgingModIndex == -1) {
-				// himself
-			}
-			if (*Settings::DodgingModIndex == 0) {
-				a->NotifyAnimationGraph("TKDodgeBack");
-			}
-			if (*Settings::DodgingModIndex == 1) {
-				a->SetGraphVariableInt("DodgeID", DODGE_ID);
-				a->SetGraphVariableFloat("DodgeSpeed", DODGE_SPEED);
-				a->NotifyAnimationGraph("RollStart");
-			}
-		}
-
         bool isInDanger(RE::Actor* me, AttackInfo* info = nullptr) {
             auto he = me->currentCombatTarget.get().get();
             if (!he) return false;
@@ -209,17 +179,40 @@ namespace Movement
             if (is_blocking(he) || !is_attacking(he)) return false;
 
             auto attackState = he->GetAttackState();
-            if (attackState != RE::ATTACK_STATE_ENUM::kSwing && attackState != RE::ATTACK_STATE_ENUM::kDraw)
-                return false;
+            if (attackState != RE::ATTACK_STATE_ENUM::kSwing && attackState != RE::ATTACK_STATE_ENUM::kDraw) {
+				return false;
+			}
+            if (abs(angle) > attackAngle) {
+				return false;
+			}
 
-            if (abs(angle) > attackAngle) return false;
-
-            if (r2 > R * R && (!is_powerattacking(he) || r2 > 500.0f * 500.0f)) return false;
+            if (r2 > R * R && (!is_powerattacking(he) || r2 > 500.0f * 500.0f)) {
+				return false;
+			}
 
             return true;
         }
 
-        template <bool change = false>
+		uint32_t should([[maybe_unused]] RE::Character* me)
+		{
+			if (is_powerattacking(me) && !is_juststarted_attacking(me))
+				return false;
+
+			if (is_bashing(me))
+				return false;
+
+			AttackInfo info;
+			if (!isInDanger(me, &info))
+				return false;
+
+			auto he = me->currentCombatTarget.get().get();
+			if (!he)
+				return false;
+
+			return should_alwaysDanger<true>(me, he, info);
+		}
+
+		template <bool change = false>
         uint32_t should_danger_alwaysDanger(RE::Character* me, RE::Actor*, const AttackInfo& info) {
             auto dir = choose_moving_direction_circle(&info, me);
             if (dir == CircleDirestions::Left || dir == CircleDirestions::Right) {
@@ -264,4 +257,3 @@ namespace Movement
     }
 
 }
-
