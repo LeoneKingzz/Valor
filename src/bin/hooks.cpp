@@ -23,12 +23,12 @@ namespace hooks
 		std::string_view eventTag = a_event->tag.data();
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
+		case "preHitFrame"_h:
+		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
 		case "bashPowerStart"_h:
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
 		case "NextPowerAttackInitiate"_h:
-		case "weaponSwing"_h:
-		case "weaponLeftSwing"_h:
 		    dodge::GetSingleton()->react_to_melee(actor,(dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor)));
 			break;
 
