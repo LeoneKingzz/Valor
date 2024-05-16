@@ -1,4 +1,5 @@
 #include "UselessFenixUtils.h"
+#include "CombatBehaviorConditions.h"
 
 
 
@@ -153,6 +154,71 @@ namespace Movement
 		bool reflected;
 	};
 
+	static float _get_circle_angle(float attackAngle, float angle, bool notreflected)
+	{
+		angle = fmaxf(attackAngle + angle + attackAngle * 0.2f, 20.0f);
+		if (notreflected)
+			angle = -angle;
+		return angle;
+	}
+
+	void rotate(const RE::NiPoint3& me, const RE::NiPoint3& he, RE::NiPoint3& new_pos, float angle)
+	{
+		auto he_me = me - he;
+		auto angle_sin = sin(angle);
+		auto angle_cos = cos(angle);
+		new_pos.x = he_me.x * angle_cos - he_me.y * angle_sin + he.x;
+		new_pos.y = he_me.y * angle_cos + he_me.x * angle_sin + he.y;
+		new_pos.z = he_me.z + he.z;
+	}
+
+	float get_FallbackDistance(const AttackInfo& info)
+	{
+		// info.r subs after
+		return fmaxf(info.R - 137.76f, 60.0f);
+	}
+
+	float get_FallbackDistance(RE::Character* me)
+	{
+		AttackInfo info;
+		if (!Dodging::isInDanger(me, &info))
+			return 80.0f;
+
+		return get_FallbackDistance(info);
+	}
+
+	bool check_angle(RE::Actor* me, RE::Actor* he, const AttackInfo& info, float me_angle)
+	{
+		auto angle = _get_circle_angle(info.attackAngle, me_angle, !info.reflected) / 180.0f * PI;
+
+		RE::NiPoint3 new_pos;
+		rotate(me->GetPosition(), he->GetPosition(), new_pos, angle);
+
+		bool ans = check_collisions(me, &me->data.location, &new_pos);
+
+		return ans;
+	}
+
+	CircleDirestions choose_moving_direction_circle(const AttackInfo* const info, RE::Actor* a)
+	{
+		auto he = a->GetActorRuntimeData().currentCombatTarget.get().get();
+		if (!he)
+			return CircleDirestions::None;
+
+		const float DIST_BORDER = 100.0f;
+
+		const float r = info->r;
+		const float me = info->me;
+
+		if (PA::dist(r, info->attackAngle - me) <= DIST_BORDER && check_angle(a, he, *info, -me)) {
+			return info->reflected ? CircleDirestions::Left : CircleDirestions::Right;
+		} else if (PA::dist(r, info->attackAngle + me) <= DIST_BORDER && check_angle(a, he, *info, me)) {
+			return info->reflected ? CircleDirestions::Right : CircleDirestions::Left;
+		}
+
+		return CircleDirestions::None;
+	}
+
 	namespace Dodging
 	{
 
@@ -257,3 +323,4 @@ namespace Movement
     }
 
 }
+
