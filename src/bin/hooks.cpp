@@ -31,13 +31,15 @@ namespace hooks
 		case "blockHitStart"_h:
 		case "blockHitStop"_h:
 		case "bashStop"_h:
-		    if (Utils::Actor::isHumanoid(actor) && actor->IsInCombat()) {
+		case "blockStart"_h:
+		    if (Utils::Actor::isHumanoid(actor) && !actor->IsPlayerRef() && actor->IsInCombat()) {
 				RE::Character* a_actor = actor->As<RE::Character>();
 				Movement::Dodging::should(a_actor);
 			}
 			break;
 			
 		case "bashPowerStart"_h:
+		case "BlockBashSprint"_h:
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
 		case "NextPowerAttackInitiate"_h:
@@ -71,14 +73,10 @@ namespace hooks
 	
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
-				Movement::Dodging::should(actor);
-			} 
+			Movement::Dodging::should(actor); 
 			break;
 		case 1:
-			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
-				Movement::Dodging::should(actor);
-			}
+			Movement::Dodging::should(actor);
 			break;
 		}
 		
@@ -91,14 +89,10 @@ namespace hooks
 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
-				Movement::Dodging::should_danger(actor);
-			}
+			Movement::Dodging::should_danger(actor);
 			break;
 		case 1:
-			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
-				Movement::Dodging::should_danger(actor);
-			}
+			Movement::Dodging::should_danger(actor);
 			break;
 		}
 	
@@ -111,14 +105,10 @@ namespace hooks
 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
-				Movement::Dodging::should(actor);
-			}
+			Movement::Dodging::should(actor);
 			break;
 		case 1:
-			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
-				Movement::Dodging::should(actor);
-			}
+			Movement::Dodging::should(actor);
 			break;
 		}
 		
@@ -131,14 +121,10 @@ namespace hooks
 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
-				Movement::Dodging::should_danger(actor);
-			}
+			Movement::Dodging::should_danger(actor);
 			break;
 		case 1:
-			if (!(dodge::GetSingleton()->get_is_dodging(a_actor))) {
-				Movement::Dodging::should_danger(actor);
-			}
+			Movement::Dodging::should_danger(actor);
 			break;
 		}
 		

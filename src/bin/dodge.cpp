@@ -69,9 +69,7 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
-			if (get_is_dodging(refr)) {
-				return RE::BSContainer::ForEachResult::kContinue;
-			}
+
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -104,9 +102,7 @@ void dodge::react_to_ranged_and_shouts(RE::Actor* a_attacker, float attack_range
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
-			if (get_is_dodging(refr)) {
-				return RE::BSContainer::ForEachResult::kContinue;
-			}
+	
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -166,9 +162,6 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	if (!settings::bDodgeAI_Enable) {
 		return;
 	}
-
-	set_dodge_phase(a_actor, true);
-
 	
 	float dodge_chance = a_forceDodge ? 1.f : get_dodge_chance(a_actor);
 	
@@ -176,7 +169,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	/*Check dodge chance using PRNG*/
 	std::uniform_real_distribution<> dis(0.f, 1.f);
 	if (dis(gen) > dodge_chance) {
-		set_dodge_phase(a_actor, false);
+		
 		return;
 	}
 	
@@ -189,10 +182,10 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			do_dodge(a_actor, direction);
-			set_dodge_phase(a_actor, false);
+			
 			return;
 		} else {
-			set_dodge_phase(a_actor, false);
+			
 			return;
 		}
 	}
