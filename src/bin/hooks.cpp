@@ -54,6 +54,11 @@ namespace hooks
 			break;
 
 		case "BowFullDrawn"_h:
+		    if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1)	{
+				dodge::GetSingleton()->react_to_ranged_and_shouts(actor, 1500.0f);
+			}
+			break;
+			
 		case "Voice_SpellFire_Event"_h:
 		case "MLh_SpellFire_Event"_h:
 		case "MRh_SpellFire_Event"_h:
