@@ -69,7 +69,9 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
-
+			if (get_is_dodging(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -102,7 +104,9 @@ void dodge::react_to_ranged_and_shouts(RE::Actor* a_attacker, float attack_range
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
-	
+			if (get_is_dodging(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -279,6 +283,7 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 		return;
 	}
 	task->AddTask([a_actor, a_direction, a_event]() {
+		dodge::GetSingleton()->set_dodge_phase(a_actor, true);
 		a_actor->SetGraphVariableInt(GVI_dodge_dir, a_direction);
 		interruptattack(a_actor);
 		a_actor->NotifyAnimationGraph(a_event);
