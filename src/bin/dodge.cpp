@@ -206,7 +206,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 	auto magicTarget = a_actor->AsMagicTarget();
 	
-	if (has_enoughStamina(a_actor) && !magicTarget->HasMagicEffect(magicEffect)){
+	if (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 25 && !magicTarget->HasMagicEffect(magicEffect)){
 		return true;
 	}
 
@@ -289,7 +289,7 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 		a_actor->SetGraphVariableInt(GVI_dodge_dir, a_direction);
 		interruptattack(a_actor);
 		a_actor->NotifyAnimationGraph(a_event);
-		if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && has_enoughStamina(a_actor)) {
+		if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1 && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 40) {
 			int two = 2;
 			while (a_actor->GetGraphVariableInt("MCO_nextdodge", two)) {
 				a_actor->SetGraphVariableInt(GVI_dodge_dir, a_direction);
