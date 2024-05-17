@@ -274,24 +274,16 @@ int dodge::GenerateRandomInt(int value_a, int value_b) {
 static const char* GVI_dodge_dir = "Dodge_Direction";
 // static const char* AE_dodge = "Dodge";
 void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_event) {
-	a_actor->SetGraphVariableInt(GVI_dodge_dir, a_direction);
-	interruptattack(a_actor);
-	a_actor->NotifyAnimationGraph(a_event);
+	auto task = SKSE::GetTaskInterface();
+	if (!task) {
+		return;
+	}
+	task->AddTask([a_actor, a_direction, a_event]() {
+		a_actor->SetGraphVariableInt(GVI_dodge_dir, a_direction);
+		interruptattack(a_actor);
+		a_actor->NotifyAnimationGraph(a_event);
+	});
 }
-
-
-
-// void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_event) {
-// 	auto task = SKSE::GetTaskInterface();
-// 	if (!task) {
-// 		return;
-// 	}
-// 	task->AddTask([a_actor, a_direction, a_event]() {
-// 		a_actor->SetGraphVariableInt(GVI_dodge_dir, a_direction);
-// 		interruptattack(a_actor);
-// 		a_actor->NotifyAnimationGraph(a_event);
-// 	});
-// }
 
 
 
