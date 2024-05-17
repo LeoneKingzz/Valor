@@ -32,6 +32,8 @@ namespace hooks
 		case "blockHitStop"_h:
 		case "bashStop"_h:
 		case "blockStart"_h:
+		case "attackStop"_h:
+		case "MCO_Recovery"_h:
 		    if (Utils::Actor::isHumanoid(actor) && !actor->IsPlayerRef() && actor->IsInCombat()) {
 				RE::Character* a_actor = actor->As<RE::Character>();
 				Movement::Dodging::should(a_actor);
