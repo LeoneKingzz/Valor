@@ -23,13 +23,25 @@ namespace hooks
 		std::string_view eventTag = a_event->tag.data();
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
-		case "preHitFrame"_h:
-		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
+		case "blockStop"_h:
+		case "FootLeft"_h:
+		case "FootRight"_h:
+		case "staggerStop"_h:
+		case "recoilStop"_h:
+		case "blockHitStart"_h:
+		case "blockHitStop"_h:
+		case "bashStop"_h:
+		    if (Utils::Actor::isHumanoid(actor) && actor->IsInCombat()) {
+				RE::Character* a_actor = actor->As<RE::Character>();
+				Movement::Dodging::should(a_actor);
+			}
+			break;
+			
 		case "bashPowerStart"_h:
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
 		case "NextPowerAttackInitiate"_h:
-		    dodge::GetSingleton()->react_to_melee(actor, 750.0f);
+		    dodge::GetSingleton()->react_to_melee(actor, 500.0f);
 			break;
 
 		case "BowFullDrawn"_h:
