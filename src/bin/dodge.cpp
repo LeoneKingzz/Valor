@@ -93,6 +93,40 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 	});
 }
 
+
+void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
+{
+	if (!settings::bDodgeAI_Reactive_enable) {
+		return;
+	}
+
+	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
+		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+			RE::Actor* refr = _refr->As<RE::Actor>();
+			
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (!Utils::Actor::isHumanoid(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (ValhallaUtils::isBackFacing(a_attacker, refr)) {  //no need to react to an attack if the attacker isn't facing you.
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			RE::Character* a_refr = refr->As<RE::Character>();
+			switch (settings::iDodgeAI_Framework) {
+			case 0:
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_reactive);
+				break;
+			case 1:
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
+				break;
+			}
+		}
+		return RE::BSContainer::ForEachResult::kContinue;
+	});
+}
+
 void dodge::react_to_ranged_and_shouts(RE::Actor* a_attacker, float attack_range)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {

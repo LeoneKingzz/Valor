@@ -42,10 +42,13 @@ namespace hooks
 
 		case "bashPowerStart"_h:
 		case "BlockBashSprint"_h:
+		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
+		    dodge::GetSingleton()->react_to_bash(actor, 350.0f);
+			break;
+
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
 		case "NextPowerAttackInitiate"_h:
-		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
 		case "preHitFrame"_h:
 		    dodge::GetSingleton()->react_to_melee(actor, 500.0f);
 			break;

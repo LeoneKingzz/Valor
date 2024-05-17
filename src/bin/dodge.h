@@ -59,6 +59,7 @@ public:
 	void attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
 
 	void react_to_melee(RE::Actor* a_attacker, float attack_range);
+	void react_to_bash(RE::Actor* a_attacker, float attack_range);
 	void react_to_ranged_and_shouts(RE::Actor* a_attacker, float attack_range);
 
 	void set_dodge_phase(RE::Actor* a_dodger, bool a_isDodging);
