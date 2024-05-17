@@ -21,7 +21,7 @@ public:
 	inline static bool bDodgeAI_Passive_enable = true; /*Passive dodge AI that's built on top of vanilla's combat movement AI.*/
 	inline static bool bDodgeAI_Reactive_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
 	static inline bool bDodgeAI_AttackCancel_enable = false; /*Cancel attack animations when dodging.*/
-	static inline int iDodgeAI_Framework = 1;            /*TKRE = 0; DMCO = 1*/
+	static inline int iDodgeAI_Framework = 0;            /*TKRE = 0; DMCO = 1*/
 	
 	static inline float fDodgeAI_Chance_Mult = 2.0f; /*Chance multiplier for reactive dodge AI.*/
 	static inline float fDodgeAI_Reactive_Dist = 350.0f;               /**/

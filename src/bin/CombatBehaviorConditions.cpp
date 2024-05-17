@@ -269,7 +269,7 @@ namespace Movement
 			auto dir = choose_moving_direction_circle(&info, me);
 			if (dir == CircleDirestions::Left || dir == CircleDirestions::Right) {
 				if (change) {
-					auto nir = dir == CircleDirestions::Left ? &dodge_directions_dmco_right : &dodge_directions_dmco_left;
+					auto nir = dir == CircleDirestions::Left ? &dodge_directions_tk_right : &dodge_directions_tk_left;
 					dodge::GetSingleton()->attempt_dodge(me, nir, true);
 				}
 
@@ -297,7 +297,7 @@ namespace Movement
 
 				if (check_collisions(a, &a->data.location, &new_pos)) {
 					if (change) {
-						dodge::GetSingleton()->attempt_dodge(a, &dodge_directions_dmco_reactive, true);
+						dodge::GetSingleton()->attempt_dodge(a, &dodge_directions_tk_reactive, true);
 					}
 					return true;
 				} else {

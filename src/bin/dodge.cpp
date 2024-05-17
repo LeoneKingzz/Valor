@@ -119,7 +119,7 @@ void dodge::react_to_ranged_and_shouts(RE::Actor* a_attacker, float attack_range
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_reactive);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
@@ -293,7 +293,9 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 	switch (a_direction) {
 	case dodge_direction::kForward:
 		switch (settings::iDodgeAI_Framework) {
-		case 0: 
+		case 0:
+			a_actor->NotifyAnimationGraph("MCO_Recovery");
+			interruptattack(a_actor);
 			a_actor->NotifyAnimationGraph("TKDodgeForward");
 			break;
 		case 1:
@@ -304,6 +306,8 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 	case dodge_direction::kBackward:
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
+			a_actor->NotifyAnimationGraph("MCO_Recovery");
+			interruptattack(a_actor);
 			a_actor->NotifyAnimationGraph("TKDodgeBack");
 			break;
 		case 1:
@@ -314,6 +318,8 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 	case dodge_direction::kLeft:
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
+			a_actor->NotifyAnimationGraph("MCO_Recovery");
+			interruptattack(a_actor);
 			a_actor->NotifyAnimationGraph("TKDodgeLeft");
 			break;
 		case 1:
@@ -324,6 +330,8 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 	case dodge_direction::kRight:
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
+			a_actor->NotifyAnimationGraph("MCO_Recovery");
+			interruptattack(a_actor);
 			a_actor->NotifyAnimationGraph("TKDodgeRight");
 			break;
 		case 1:
