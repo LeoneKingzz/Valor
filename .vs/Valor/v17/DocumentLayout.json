@@ -7,32 +7,8 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\hooks.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\dodge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\dodge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\CombatBehaviorConditions.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\CombatBehaviorConditions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\UselessFenixUtils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\UselessFenixUtils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\dodge.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\dodge.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\UselessFenixUtils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\UselessFenixUtils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\hooks.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\hooks.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     }
   ],
   "DocumentGroupContainers": [
@@ -42,68 +18,8 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 5,
+          "SelectedChildIndex": 0,
           "Children": [
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CombatBehaviorConditions.h",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.h",
-              "RelativeDocumentMoniker": "src\\bin\\CombatBehaviorConditions.h",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.h",
-              "RelativeToolTip": "src\\bin\\CombatBehaviorConditions.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAABEAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-16T02:12:37.302Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "UselessFenixUtils.cpp",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\UselessFenixUtils.cpp",
-              "RelativeDocumentMoniker": "src\\bin\\UselessFenixUtils.cpp",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\UselessFenixUtils.cpp",
-              "RelativeToolTip": "src\\bin\\UselessFenixUtils.cpp",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-16T02:10:07.07Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "UselessFenixUtils.h",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\UselessFenixUtils.h",
-              "RelativeDocumentMoniker": "src\\bin\\UselessFenixUtils.h",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\UselessFenixUtils.h",
-              "RelativeToolTip": "src\\bin\\UselessFenixUtils.h",
-              "ViewState": "AQIAAEUAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-16T02:10:03.182Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "CombatBehaviorConditions.cpp",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.cpp",
-              "RelativeDocumentMoniker": "src\\bin\\CombatBehaviorConditions.cpp",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.cpp",
-              "RelativeToolTip": "src\\bin\\CombatBehaviorConditions.cpp",
-              "ViewState": "AQIAAAkBAAAAAAAAAAAAAA8BAABDAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-16T01:58:44.359Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
-              "Title": "hooks.h",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\hooks.h",
-              "RelativeDocumentMoniker": "src\\bin\\hooks.h",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\hooks.h",
-              "RelativeToolTip": "src\\bin\\hooks.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAeAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:21:10.209Z"
-            },
             {
               "$type": "Document",
               "DocumentIndex": 0,
@@ -112,26 +28,14 @@
               "RelativeDocumentMoniker": "src\\bin\\hooks.cpp",
               "ToolTip": "C:\\Code\\Valor\\src\\bin\\hooks.cpp",
               "RelativeToolTip": "src\\bin\\hooks.cpp",
-              "ViewState": "AQIAADAAAAAAAAAAAAAAAIsAAAACAAAA",
+              "ViewState": "AQIAADAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:21:01.047Z",
+              "WhenOpened": "2024-05-26T07:36:58.948Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "dodge.h",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\dodge.h",
-              "RelativeDocumentMoniker": "src\\bin\\dodge.h",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\dodge.h",
-              "RelativeToolTip": "src\\bin\\dodge.h",
-              "ViewState": "AQIAAAwAAAAAAAAAAAApwCMAAAAcAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-05-12T03:20:58.484Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
               "Title": "dodge.cpp",
               "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\dodge.cpp",
               "RelativeDocumentMoniker": "src\\bin\\dodge.cpp",
@@ -139,7 +43,8 @@
               "RelativeToolTip": "src\\bin\\dodge.cpp",
               "ViewState": "AQIAAFkBAAAAAAAAAAAAACwBAAAgAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:20:44.644Z"
+              "WhenOpened": "2024-05-12T03:20:44.644Z",
+              "EditorCaption": ""
             }
           ]
         }
