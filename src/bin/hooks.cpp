@@ -36,8 +36,8 @@ namespace hooks
 			break;
 
 		case "MCO_Recovery"_h:
-			// bool bIsDodging = false;
-			if (Utils::Actor::isHumanoid(actor) && actor->IsAttacking()) {
+			bool bIsDodging = false;
+			if (Utils::Actor::isHumanoid(actor) && actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
 				if (actor->AsActorState()->actorState2.wantBlocking) {
 					actor->NotifyAnimationGraph("MCO_EndAnimation");
 					actor->NotifyAnimationGraph("MCO_AnimStop");
