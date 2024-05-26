@@ -23,46 +23,14 @@ namespace hooks
 		std::string_view eventTag = a_event->tag.data();
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
-		case "blockStop"_h:
-		case "FootLeft"_h:
-		case "FootRight"_h:
-		case "staggerStop"_h:
-		case "recoilStop"_h:
-		case "blockHitStart"_h:
-		case "blockHitStop"_h:
-		case "bashStop"_h:
-		case "blockStart"_h:
-		case "attackStop"_h:
-		case "MCO_Recovery"_h:
-		    if (Utils::Actor::isHumanoid(actor) && !actor->IsPlayerRef() && actor->IsInCombat()) {
-				RE::Character* a_actor = actor->As<RE::Character>();
-				Movement::Dodging::should(a_actor);
+		case "TKDodgeBack"_h:
+		case "TKDodgeLeft"_h:
+		case "TKDodgeRight"_h:
+		case "TKDodgeForward"_h:
+			if (!actor->IsPlayerRef()) {
+				actor->NotifyAnimationGraph("MCO_Recovery");
+				interruptattack(actor);
 			}
-			break;
-
-		case "bashPowerStart"_h:
-		case "BlockBashSprint"_h:
-		case "SoundPlay.NPCHumanCombatShieldBashPower"_h:
-		    dodge::GetSingleton()->react_to_bash(actor, 350.0f);
-			break;
-
-		case "PowerAttack_Start_end"_h:
-		case "NextAttackInitiate"_h:
-		case "NextPowerAttackInitiate"_h:
-		case "preHitFrame"_h:
-		    dodge::GetSingleton()->react_to_melee(actor, 500.0f);
-			break;
-
-		case "BowFullDrawn"_h:
-		    if ((dodge::GetSingleton()->GenerateRandomInt(0, 10)) <= 1)	{
-				dodge::GetSingleton()->react_to_ranged_and_shouts(actor, 1500.0f);
-			}
-			break;
-			
-		case "Voice_SpellFire_Event"_h:
-		case "MLh_SpellFire_Event"_h:
-		case "MRh_SpellFire_Event"_h:
-			dodge::GetSingleton()->react_to_ranged_and_shouts(actor, 1500.0f);
 			break;
 		}
 	}
