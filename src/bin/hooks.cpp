@@ -85,10 +85,10 @@ namespace hooks
 	
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			Movement::Dodging::should(actor); 
+			// Movement::Dodging::should(actor); 
 			break;
 		case 1:
-			Movement::Dodging::should(actor);
+			// Movement::Dodging::should(actor);
 			break;
 		}
 		
@@ -101,10 +101,10 @@ namespace hooks
 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			Movement::Dodging::should_danger(actor);
+			// Movement::Dodging::should_danger(actor);
 			break;
 		case 1:
-			Movement::Dodging::should_danger(actor);
+			// Movement::Dodging::should_danger(actor);
 			break;
 		}
 	
@@ -117,10 +117,10 @@ namespace hooks
 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			Movement::Dodging::should(actor);
+			// Movement::Dodging::should(actor);
 			break;
 		case 1:
-			Movement::Dodging::should(actor);
+			// Movement::Dodging::should(actor);
 			break;
 		}
 		
@@ -133,10 +133,10 @@ namespace hooks
 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			Movement::Dodging::should_danger(actor);
+			// Movement::Dodging::should_danger(actor);
 			break;
 		case 1:
-			Movement::Dodging::should_danger(actor);
+			// Movement::Dodging::should_danger(actor);
 			break;
 		}
 		
