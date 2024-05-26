@@ -103,7 +103,10 @@ static float get_angle_he_me(RE::Actor* me, RE::Actor* he, RE::BGSAttackData* at
 void interruptattack(RE::Actor* me)
 {
 	me->NotifyAnimationGraph("attackStop");
+	me->NotifyAnimationGraph("bashStop");
 	me->NotifyAnimationGraph("blockStop");
+	me->NotifyAnimationGraph("staggerStop");
+	me->NotifyAnimationGraph("recoilStop");
 }
 
 bool is_AttackEnded(RE::Actor* a)
