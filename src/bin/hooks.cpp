@@ -27,6 +27,7 @@ namespace hooks
 		case "TKDodgeLeft"_h:
 		case "TKDodgeRight"_h:
 		case "TKDodgeForward"_h:
+		case "TKDodgeStop"_h:
 			if (!actor->IsPlayerRef()) {
 				actor->NotifyAnimationGraph("MCO_Recovery");
 				actor->NotifyAnimationGraph("MCO_EndAnimation");
@@ -44,15 +45,6 @@ namespace hooks
 					actor->NotifyAnimationGraph("attackStop");
 					actor->NotifyAnimationGraph("blockStart");
 				}
-			}
-			break;
-
-		case "TKDodgeStop"_h:
-			if (!actor->IsPlayerRef()) {
-				actor->NotifyAnimationGraph("MCO_Recovery");
-				actor->NotifyAnimationGraph("MCO_EndAnimation");
-				actor->NotifyAnimationGraph("MCO_AnimStop");
-				interruptattack(actor);
 			}
 			break;
 		
