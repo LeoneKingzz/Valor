@@ -12,10 +12,10 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 		hooks::on_animation_event::install();
 		// hooks::on_set_rotation::install();
 		if (settings::bDodgeAI_Passive_enable) {  //install hooks for passive dodge
-			// hooks::on_combatBehavior_backoff_createPath::install();
-			// hooks::on_combatBehavior_circle_createPath::install();
-			// hooks::on_combatBehavior_dodgethreat_createPath::install();
-			// hooks::on_combatBehavior_fallback_createPath::install();
+			hooks::on_combatBehavior_backoff_createPath::install();
+			hooks::on_combatBehavior_circle_createPath::install();
+			hooks::on_combatBehavior_dodgethreat_createPath::install();
+			hooks::on_combatBehavior_fallback_createPath::install();
 		}
 		settings::init();
 		break;

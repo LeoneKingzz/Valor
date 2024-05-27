@@ -64,14 +64,14 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_backoff_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
-		RE::Character* actor = a_actor->As<RE::Character>();
+		// RE::Character* actor = a_actor->As<RE::Character>();
 	
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			// Movement::Dodging::should(actor); 
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_back);
 			break;
 		case 1:
-			// Movement::Dodging::should(actor);
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_back);
 			break;
 		}
 		
@@ -80,14 +80,14 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_circle_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
-		RE::Character* actor = a_actor->As<RE::Character>();
+		// RE::Character* actor = a_actor->As<RE::Character>();
 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			// Movement::Dodging::should_danger(actor);
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_horizontal);
 			break;
 		case 1:
-			// Movement::Dodging::should_danger(actor);
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_horizontal);
 			break;
 		}
 	
@@ -96,14 +96,14 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_fallback_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
-		RE::Character* actor = a_actor->As<RE::Character>();
+		// RE::Character* actor = a_actor->As<RE::Character>();
 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			// Movement::Dodging::should(actor);
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_back);
 			break;
 		case 1:
-			// Movement::Dodging::should(actor);
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_back);
 			break;
 		}
 		
@@ -112,14 +112,14 @@ namespace hooks
 
 	ptr_CombatPath on_combatBehavior_dodgethreat_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
-		RE::Character* actor = a_actor->As<RE::Character>();
+		// RE::Character* actor = a_actor->As<RE::Character>();
 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			// Movement::Dodging::should_danger(actor);
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_all, true);
 			break;
 		case 1:
-			// Movement::Dodging::should_danger(actor);
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_all, true);
 			break;
 		}
 		

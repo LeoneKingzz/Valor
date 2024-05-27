@@ -215,8 +215,10 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	for (dodge_direction direction : directions_shuffled) {
 		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
-			do_dodge(a_actor, direction);
-			
+			bool bIsDodging = false;
+			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				do_dodge(a_actor, direction);
+			}
 			return;
 		} else {
 			
