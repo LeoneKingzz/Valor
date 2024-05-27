@@ -46,6 +46,15 @@ namespace hooks
 				}
 			}
 			break;
+
+		case "TKDodgeStop"_h:
+			if (!actor->IsPlayerRef()) {
+				actor->NotifyAnimationGraph("MCO_Recovery");
+				actor->NotifyAnimationGraph("MCO_EndAnimation");
+				actor->NotifyAnimationGraph("MCO_AnimStop");
+				interruptattack(actor);
+			}
+			break;
 		
 		}
 	}
