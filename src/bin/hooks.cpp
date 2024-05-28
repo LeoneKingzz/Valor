@@ -30,23 +30,23 @@ namespace hooks
 		case "TKDodgeStop"_h:
 			if (!actor->IsPlayerRef()) {
 				actor->NotifyAnimationGraph("MCO_Recovery");
-				actor->NotifyAnimationGraph("MCO_EndAnimation");
-				actor->NotifyAnimationGraph("MCO_AnimStop");
-				interruptattack(actor);
+				// actor->NotifyAnimationGraph("MCO_EndAnimation");
+				// actor->NotifyAnimationGraph("MCO_AnimStop");
+				// interruptattack(actor);
 			}
 			break;
 
-		case "MCO_Recovery"_h:
-			bool bIsDodging = false;
-			if (Utils::Actor::isHumanoid(actor) && actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-				if (actor->AsActorState()->actorState2.wantBlocking) {
-					actor->NotifyAnimationGraph("MCO_EndAnimation");
-					actor->NotifyAnimationGraph("MCO_AnimStop");
-					actor->NotifyAnimationGraph("attackStop");
-					actor->NotifyAnimationGraph("blockStart");
-				}
-			}
-			break;
+		// case "MCO_Recovery"_h:
+		// 	bool bIsDodging = false;
+		// 	if (Utils::Actor::isHumanoid(actor) && actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+		// 		if (actor->AsActorState()->actorState2.wantBlocking) {
+		// 			actor->NotifyAnimationGraph("MCO_EndAnimation");
+		// 			actor->NotifyAnimationGraph("MCO_AnimStop");
+		// 			actor->NotifyAnimationGraph("attackStop");
+		// 			actor->NotifyAnimationGraph("blockStart");
+		// 		}
+		// 	}
+		// 	break;
 		
 		}
 	}
