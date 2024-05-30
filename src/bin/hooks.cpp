@@ -26,6 +26,10 @@ namespace hooks
 	// 		}
 	// 	}
 	// 	break;
+	// if (!actor->IsPlayerRef()) {
+	// 	actor->NotifyAnimationGraph("recoilStop");
+	// }
+	// break;
 
 	void on_animation_event::ProcessEvent(RE::BSTEventSink<RE::BSAnimationGraphEvent>* a_sink, RE::BSAnimationGraphEvent* a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* a_eventSource)
 	{
@@ -39,9 +43,9 @@ namespace hooks
 		case "TKDodgeLeft"_h:
 		case "TKDodgeRight"_h:
 		case "TKDodgeForward"_h:
-			if (!actor->IsPlayerRef()) {
-				actor->NotifyAnimationGraph("recoilStop");
-			}
+		case "Dodge"_h:
+		
+			actor->NotifyAnimationGraph("recoilStop");
 			break;
 		}
 	}
