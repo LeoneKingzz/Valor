@@ -23,7 +23,7 @@ public:
 	static inline bool bDodgeAI_AttackCancel_enable = false; /*Cancel attack animations when dodging.*/
 	static inline int iDodgeAI_Framework = 0;            /*TKRE = 0; DMCO = 1*/
 	
-	static inline float fDodgeAI_Chance_Mult = 2.0f; /*Chance multiplier for reactive dodge AI.*/
+	static inline float fDodgeAI_Chance_Mult = 1.0f; /*Chance multiplier for reactive dodge AI.*/
 	static inline float fDodgeAI_Reactive_Dist = 350.0f;               /**/
 	static inline float fDodgeAI_DodgeDist = 300.0f;          /*Distance of a single dodge, used for pathing.*/
 	static inline float fDodgeAI_DodgeDist2 = fDodgeAI_DodgeDist / SQRT2; /* Cached coordinate distance.*/
