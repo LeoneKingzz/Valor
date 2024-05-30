@@ -8,13 +8,11 @@ void settings::read()
 	DtryUtils::settingsLoader reader(SETTINGFILE_PATH);
 	reader.setActiveSection("General");
 	reader.FETCH(bRecoilStunBreak_enable);
-
 	reader.FETCH(biFrames_enable);
-	// reader.FETCH(bDodgeAI_Passive_enable);
-	// reader.FETCH(bDodgeAI_Reactive_enable);
-	// reader.FETCH(bDodgeAI_AttackCancel_enable);
-	
-	// reader.FETCH(iDodgeAI_Framework);
+	reader.FETCH(bHasSilentRollperk_enable);
+	reader.FETCH(fSideStep_staminacost);
+	reader.FETCH(fDodgeRoll_staminacost);
+	reader.FETCH(bStaminaCost_enable);
 	// reader.FETCH(fDodgeAI_DodgeDist);
 	// fDodgeAI_DodgeDist2 = fDodgeAI_DodgeDist / SQRT2;
 	// reader.FETCH(fDodgeAI_DodgeDist_Permissible);
