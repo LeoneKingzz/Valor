@@ -9,7 +9,7 @@ void settings::read()
 	reader.setActiveSection("General");
 	reader.FETCH(bRecoilStunBreak_enable);
 
-	// reader.FETCH(bDodgeAI_Enable);
+	reader.FETCH(biFrames_enable);
 	// reader.FETCH(bDodgeAI_Passive_enable);
 	// reader.FETCH(bDodgeAI_Reactive_enable);
 	// reader.FETCH(bDodgeAI_AttackCancel_enable);
