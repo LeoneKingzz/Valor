@@ -14,8 +14,7 @@ void settings::read()
 	reader.FETCH(fDodgeRoll_staminacost);
 	reader.FETCH(bStaminaCost_enable);
 	reader.FETCH(iDodgeRoll_ActorScaled_Chance);
-	// fDodgeAI_DodgeDist2 = fDodgeAI_DodgeDist / SQRT2;
-	// reader.FETCH(fDodgeAI_DodgeDist_Permissible);
+	reader.FETCH(bTacticalDodgeAI_enable);
 	// reader.FETCH(fDodgeAI_Reactive_Dist);
 	// reader.FETCH(fDodgeAI_Chance_Mult);
 	
