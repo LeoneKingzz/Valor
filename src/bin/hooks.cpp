@@ -63,15 +63,18 @@ namespace hooks
 				bool bUND_IsDodgeRolling = false;
 				if (actor->GetGraphVariableBool("bUND_IsDodgeRolling", bUND_IsDodgeRolling) && bUND_IsDodgeRolling) {
 					caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -40, actor);
+					dodge::Set_iFrames(actor);
 					break;
 				} else {
 					caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -25, actor);
+					dodge::Set_iFrames(actor);
 				}
 			}
 			break;
 		case "TKDodgeStop"_h:
 			if (!actor->IsPlayerRef()) {
 				actor->SetGraphVariableBool("bUND_IsDodgeRolling", false);
+				dodge::Reset_iFrames(actor);
 			}
 			break;
 		}
