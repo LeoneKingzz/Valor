@@ -13,7 +13,19 @@ namespace hooks
 	/// </summary>
 	/// <param name="a_actionData"></param>
 	/// <returns>Whether the attack action is performed.</returns>
+	// "TKDodgeStop"_h:
 	// "MCO_DodgeInitiate"_h:
+	// case "MCO_Recovery"_h:
+	// 	bool bIsDodging = false;
+	// 	if (Utils::Actor::isHumanoid(actor) && actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+	// 		if (actor->AsActorState()->actorState2.wantBlocking) {
+	// 			actor->NotifyAnimationGraph("MCO_EndAnimation");
+	// 			actor->NotifyAnimationGraph("MCO_AnimStop");
+	// 			actor->NotifyAnimationGraph("attackStop");
+	// 			actor->NotifyAnimationGraph("blockStart");
+	// 		}
+	// 	}
+	// 	break;
 
 	void on_animation_event::ProcessEvent(RE::BSTEventSink<RE::BSAnimationGraphEvent>* a_sink, RE::BSAnimationGraphEvent* a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* a_eventSource)
 	{
@@ -27,27 +39,10 @@ namespace hooks
 		case "TKDodgeLeft"_h:
 		case "TKDodgeRight"_h:
 		case "TKDodgeForward"_h:
-		case "TKDodgeStop"_h:
-			// if (!actor->IsPlayerRef()) {
-			// 	actor->NotifyAnimationGraph("MCO_Recovery");
-			// 	// actor->NotifyAnimationGraph("MCO_EndAnimation");
-			// 	// actor->NotifyAnimationGraph("MCO_AnimStop");
-			// 	// interruptattack(actor);
-			// }
+			if (!actor->IsPlayerRef()) {
+				actor->NotifyAnimationGraph("recoilStop");
+			}
 			break;
-
-		// case "MCO_Recovery"_h:
-		// 	bool bIsDodging = false;
-		// 	if (Utils::Actor::isHumanoid(actor) && actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-		// 		if (actor->AsActorState()->actorState2.wantBlocking) {
-		// 			actor->NotifyAnimationGraph("MCO_EndAnimation");
-		// 			actor->NotifyAnimationGraph("MCO_AnimStop");
-		// 			actor->NotifyAnimationGraph("attackStop");
-		// 			actor->NotifyAnimationGraph("blockStart");
-		// 		}
-		// 	}
-		// 	break;
-		
 		}
 	}
 
@@ -117,10 +112,10 @@ namespace hooks
 
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_all, true);
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_all);
 			break;
 		case 1:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_all, true);
+			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_all);
 			break;
 		}
 		
