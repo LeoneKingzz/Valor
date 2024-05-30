@@ -57,14 +57,18 @@ namespace hooks
 				break;
 			}
 		case "TKDR_DodgeStart"_h:
-			const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
-			const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
-			bool bUND_IsDodgeRolling = false;
-			if (actor->GetGraphVariableBool("bUND_IsDodgeRolling", bUND_IsDodgeRolling) && bUND_IsDodgeRolling) {
-				caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -40, actor);
-				break;
-			} else {
-				caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -25, actor);
+		    if (!actor->IsPlayerRef()) {
+				const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
+				const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
+				bool bUND_IsDodgeRolling = false;
+				if (actor->GetGraphVariableBool("bUND_IsDodgeRolling", bUND_IsDodgeRolling) && bUND_IsDodgeRolling) {
+					caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -40, actor);
+					actor->SetGraphVariableFloat("TKDR_IframeDuration", 0.4f);
+					break;
+				} else {
+					caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -25, actor);
+					actor->SetGraphVariableFloat("TKDR_IframeDuration", 0.533f);
+				}
 			}
 			break;
 		case "TKDodgeStop"_h:
