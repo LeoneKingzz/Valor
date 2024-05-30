@@ -44,7 +44,9 @@ namespace hooks
 		case "TKDodgeRight"_h:
 		case "TKDodgeForward"_h:
 		case "Dodge"_h:
-			actor->NotifyAnimationGraph("recoilStop");
+		    if (settings::bRecoilStunBreak_enable) {
+				actor->NotifyAnimationGraph("recoilStop");
+			}
 			if (!actor->IsPlayerRef()) {
 				const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
 				const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
