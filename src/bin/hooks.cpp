@@ -63,11 +63,9 @@ namespace hooks
 				bool bUND_IsDodgeRolling = false;
 				if (actor->GetGraphVariableBool("bUND_IsDodgeRolling", bUND_IsDodgeRolling) && bUND_IsDodgeRolling) {
 					caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -40, actor);
-					actor->SetGraphVariableFloat("TKDR_IframeDuration", 0.4f);
 					break;
 				} else {
 					caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -25, actor);
-					actor->SetGraphVariableFloat("TKDR_IframeDuration", 0.533f);
 				}
 			}
 			break;

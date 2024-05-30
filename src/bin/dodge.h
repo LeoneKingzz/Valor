@@ -57,6 +57,8 @@ public:
 	int GenerateRandomInt(int value_a, int value_b);
 		
 	void attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
+	static void Set_iFrames(RE::Actor* actor);
+	static void Reset_iFrames(RE::Actor* actor);
 
 	void react_to_melee(RE::Actor* a_attacker, float attack_range);
 	void react_to_bash(RE::Actor* a_attacker, float attack_range);

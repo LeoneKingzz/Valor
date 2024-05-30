@@ -65,6 +65,16 @@ float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
 	return distance;
 }
 
+void dodge::Set_iFrames(RE::Actor* actor){
+	actor->SetGraphVariableBool("bIframeActive", true);
+	actor->SetGraphVariableBool("bInIframe", true);
+}
+
+void dodge::Reset_iFrames(RE::Actor* actor){
+	actor->SetGraphVariableBool("bIframeActive", false);
+	actor->SetGraphVariableBool("bInIframe", false);
+}
+
 
 
 /*Trigger reactive AI surrounding the attacker.*/
