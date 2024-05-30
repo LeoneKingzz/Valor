@@ -16,13 +16,13 @@ float get_dodge_chance(RE::Actor* a_dodger) {
 	if (a_dodger->GetActorRuntimeData().combatController) {
 		RE::TESCombatStyle* style = a_dodger->GetActorRuntimeData().combatController->combatStyle;
 		if (style) {
-			score += (style->generalData.avoidThreatChance / 1.0) * 0.3;
+			score += (style->generalData.avoidThreatChance / 1.0f) * 0.3f;
 		} else {
-			score += (0.1 / 1.0) * 0.3;
+			score += (0.1f / 1.0f) * 0.3f;
 		}
 	}
 
-	score += (a_dodger->AsActorValueOwner()->GetActorValue(RE::ActorValue::kSneak) / 100.0) * 0.7;
+	score += (a_dodger->AsActorValueOwner()->GetActorValue(RE::ActorValue::kSneak) / 100.0f) * 0.7f;
 
 	return score;
 }
@@ -121,7 +121,7 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 			if (ValhallaUtils::isBackFacing(a_attacker, refr)) {  //no need to react to an attack if the attacker isn't facing you.
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			RE::Character* a_refr = refr->As<RE::Character>();
+			/*RE::Character* a_refr = refr->As<RE::Character>();*/
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_reactive);
