@@ -10,13 +10,21 @@ using readLock = std::shared_lock<std::shared_mutex>;
 
 /*Get the dodge chance of a reactive dodger in case of an incoming attack.*/
 float get_dodge_chance(RE::Actor* a_dodger) {
+
+	float score = 0.0f;
+
 	if (a_dodger->GetActorRuntimeData().combatController) {
 		RE::TESCombatStyle* style = a_dodger->GetActorRuntimeData().combatController->combatStyle;
 		if (style) {
-			return style->generalData.avoidThreatChance * settings::fDodgeAI_Chance_Mult;
+			score += (style->generalData.avoidThreatChance / 1.0) * 0.3;
+		} else {
+			score += (0.1 / 1.0) * 0.3;
 		}
 	}
-	return 0.f;
+
+	score += (a_dodger->AsActorValueOwner()->GetActorValue(RE::ActorValue::kSneak) / 100.0) * 0.7;
+
+	return score;
 }
 
 float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
