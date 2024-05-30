@@ -47,7 +47,6 @@ namespace hooks
 		    if (settings::bRecoilStunBreak_enable) {
 				actor->NotifyAnimationGraph("recoilStop");
 			}
-			break;
 			if (!actor->IsPlayerRef()) {
 			
 				auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
@@ -56,6 +55,7 @@ namespace hooks
 				}
 				break;
 			}
+			break;
 		case "TKDR_DodgeStart"_h:
 		    if (!actor->IsPlayerRef()) {
 				const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
