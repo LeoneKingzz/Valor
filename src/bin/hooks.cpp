@@ -47,17 +47,24 @@ namespace hooks
 		    if (settings::bRecoilStunBreak_enable) {
 				actor->NotifyAnimationGraph("recoilStop");
 			}
+			break;
 			if (!actor->IsPlayerRef()) {
-				const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
-				const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
+			
 				auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
 				if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= 2 && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 41) {
 					actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
-					caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -40, actor);
-					break;
 				}
-				caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -25, actor);
 				break;
+			}
+		case "TKDR_DodgeStart"_h:
+			const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
+			const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
+			bool bUND_IsDodgeRolling = false;
+			if (actor->GetGraphVariableBool("bUND_IsDodgeRolling", bUND_IsDodgeRolling) && bUND_IsDodgeRolling) {
+				caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -40, actor);
+				break;
+			} else {
+				caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -25, actor);
 			}
 			break;
 		case "TKDodgeStop"_h:
