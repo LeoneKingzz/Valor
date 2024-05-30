@@ -28,6 +28,7 @@ public:
 
 	static inline float fSideStep_staminacost = 25.0f; /*Chance multiplier for reactive dodge AI.*/
 	static inline float fDodgeRoll_staminacost = 40.0f; /*Chance multiplier for reactive dodge AI.*/
+	static inline int iDodgeRoll_ActorScaled_Chance = 2;           /*TKRE = 0; DMCO = 1*/
 
 	static inline bool bDodgeAI_AttackCancel_enable = false; /*Cancel attack animations when dodging.*/
 	static inline int iDodgeAI_Framework = 0;            /*TKRE = 0; DMCO = 1*/

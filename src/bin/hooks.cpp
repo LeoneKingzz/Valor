@@ -48,10 +48,16 @@ namespace hooks
 				actor->NotifyAnimationGraph("recoilStop");
 			}
 			if (!actor->IsPlayerRef()) {
-			
-				auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
-				if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= 2 && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 41) {
-					actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
+				if (settings::bHasSilentRollperk_enable) {
+					auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
+					if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
+						actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
+					}
+					break;
+				} else {
+					if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
+						actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
+					}
 				}
 				break;
 			}
@@ -62,13 +68,17 @@ namespace hooks
 				const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
 				bool bUND_IsDodgeRolling = false;
 				if (actor->GetGraphVariableBool("bUND_IsDodgeRolling", bUND_IsDodgeRolling) && bUND_IsDodgeRolling) {
-					caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -40, actor);
+					if (settings::bStaminaCost_enable) {
+						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(settings::fDodgeRoll_staminacost), actor);
+					}
 					if (settings::biFrames_enable) {
 						dodge::Set_iFrames(actor);
 					}
 					break;
 				} else {
-					caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -25, actor);
+					if (settings::bStaminaCost_enable) {
+						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(settings::fSideStep_staminacost), actor);
+					}
 					if (settings::biFrames_enable) {
 						dodge::Set_iFrames(actor);
 					}
