@@ -44,8 +44,24 @@ namespace hooks
 		case "TKDodgeRight"_h:
 		case "TKDodgeForward"_h:
 		case "Dodge"_h:
-		
 			actor->NotifyAnimationGraph("recoilStop");
+			if (!actor->IsPlayerRef()) {
+				const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
+				const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
+				auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
+				if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= 2 && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= 41) {
+					actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
+					caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -40, actor);
+					break;
+				}
+				caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -25, actor);
+				break;
+			}
+			break;
+		case "TKDodgeStop"_h:
+			if (!actor->IsPlayerRef()) {
+				actor->SetGraphVariableBool("bUND_IsDodgeRolling", false);
+			}
 			break;
 		}
 	}
