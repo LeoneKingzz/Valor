@@ -85,7 +85,7 @@ namespace hooks
 				}
 			}
 			break;
-		case "TKDodgeStop"_h:
+		case "TKDR_DodgeEnd"_h:
 			if (!actor->IsPlayerRef()) {
 				actor->SetGraphVariableBool("bUND_IsDodgeRolling", false);
 				if (settings::biFrames_enable) {
