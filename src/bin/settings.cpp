@@ -16,8 +16,8 @@ void settings::read()
 	reader.FETCH(iDodgeRoll_ActorScaled_Chance);
 	reader.FETCH(bTacticalDodgeAI_enable);
 	reader.FETCH(bZUPA_mod_Check);
-	// reader.FETCH(fDodgeAI_Chance_Mult);
-	
+	reader.FETCH(bUAPNG_mod_Check);
+
 	// reader.FETCH(bDodgeAI_DebugDraw_Enable);
 
 	reader.log();

@@ -26,6 +26,7 @@ public:
 	inline static bool bHasSilentRollperk_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bStaminaCost_enable = true;   /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bZUPA_mod_Check = false;   /*Reactive dodge AI that dodges incoming attacks.*/
+	inline static bool bUAPNG_mod_Check = false;   /*Reactive dodge AI that dodges incoming attacks.*/
 
 	static inline float fSideStep_staminacost = 25.0f; /*Chance multiplier for reactive dodge AI.*/
 	static inline float fDodgeRoll_staminacost = 40.0f; /*Chance multiplier for reactive dodge AI.*/
