@@ -15,7 +15,7 @@ void settings::read()
 	reader.FETCH(bStaminaCost_enable);
 	reader.FETCH(iDodgeRoll_ActorScaled_Chance);
 	reader.FETCH(bTacticalDodgeAI_enable);
-	// reader.FETCH(fDodgeAI_Reactive_Dist);
+	reader.FETCH(bZUPA_mod_Check);
 	// reader.FETCH(fDodgeAI_Chance_Mult);
 	
 	// reader.FETCH(bDodgeAI_DebugDraw_Enable);

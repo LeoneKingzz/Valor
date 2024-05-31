@@ -250,28 +250,20 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 /*Check if the actor is able to dodge.*/
 bool dodge::able_dodge(RE::Actor* a_actor)
 {
-	const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
-	auto magicTarget = a_actor->AsMagicTarget();
 	auto attackState = a_actor->AsActorState()->GetAttackState();
 	auto IsStaggered = static_cast<bool>(a_actor->AsActorState()->actorState2.staggered);
 
-	if (magicEffect) {
-		if (!IsStaggered && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost && !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit 
-		|| attackState == RE::ATTACK_STATE_ENUM::kNextAttack || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
-		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing 
-		|| attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
+	if (settings::bZUPA_mod_Check) {
+		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
+		auto magicTarget = a_actor->AsMagicTarget();
+		if (!IsStaggered && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost && !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit || attackState == RE::ATTACK_STATE_ENUM::kNextAttack || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash || attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
 			return true;
 		}
-	} else {
-		if (!IsStaggered && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost && !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit 
-		|| attackState == RE::ATTACK_STATE_ENUM::kNextAttack || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
-		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing 
-		|| attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
+	} else{
+		if (!IsStaggered && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost && !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit || attackState == RE::ATTACK_STATE_ENUM::kNextAttack || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash || attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
 			return true;
 		}
-
 	}
-
 	return false;
 }
 
