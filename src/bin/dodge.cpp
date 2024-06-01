@@ -361,23 +361,17 @@ void TRKE_dodge(RE::Actor* actor, const char* a_event)
 		auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
 		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
 			actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
-			actor->NotifyAnimationGraph(a_event);
-			return;
-		} else {
-			actor->NotifyAnimationGraph(a_event);
-			return;
 		}
+		actor->NotifyAnimationGraph(a_event);
+		return;
 
 	} else {
 		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
-			actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
-			actor->NotifyAnimationGraph(a_event);
-			return;
-		} else {
-			actor->NotifyAnimationGraph(a_event);
+			actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);	
 		}
+		actor->NotifyAnimationGraph(a_event);
+		return;
 	}
-	return;
 }
 
 void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
