@@ -255,12 +255,14 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
 	auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
 	auto CT_RecoilState = static_cast<int>(CombatTarget->AsActorState()->actorState2.recoil);
+	auto CT_attackState = CombatTarget->AsActorState()->GetAttackState();
 
 
 	if (settings::bZUPA_mod_Check) {
 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 		auto magicTarget = a_actor->AsMagicTarget();
-		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !IsStaggered && !IsStaggeredCT && !CombatTarget->AsActorState()->IsBleedingOut() && CT_RecoilState == 0
+		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !IsStaggered && !IsStaggeredCT && !CombatTarget->AsActorState()->IsBleedingOut() && CT_RecoilState == 0 
+		&& !(CT_attackState == RE::ATTACK_STATE_ENUM::kHit || CT_attackState == RE::ATTACK_STATE_ENUM::kNextAttack || CT_attackState == RE::ATTACK_STATE_ENUM::kBowNextAttack)
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit || attackState == RE::ATTACK_STATE_ENUM::kNextAttack || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
@@ -269,6 +271,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	} else if (settings::bUAPNG_mod_Check){
 		bool IUBusy = false;
 		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !IsStaggered && !IsStaggeredCT && !CombatTarget->AsActorState()->IsBleedingOut() && CT_RecoilState == 0 
+		&& !(CT_attackState == RE::ATTACK_STATE_ENUM::kHit || CT_attackState == RE::ATTACK_STATE_ENUM::kNextAttack || CT_attackState == RE::ATTACK_STATE_ENUM::kBowNextAttack)
 		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit || attackState == RE::ATTACK_STATE_ENUM::kNextAttack || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -277,6 +280,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 
 	} else{
 		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !IsStaggered && !IsStaggeredCT && !CombatTarget->AsActorState()->IsBleedingOut() && CT_RecoilState == 0 
+		&& !(CT_attackState == RE::ATTACK_STATE_ENUM::kHit || CT_attackState == RE::ATTACK_STATE_ENUM::kNextAttack || CT_attackState == RE::ATTACK_STATE_ENUM::kBowNextAttack)
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit || attackState == RE::ATTACK_STATE_ENUM::kNextAttack || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -373,14 +377,18 @@ void TRKE_dodge(RE::Actor* actor, const char* a_event)
 	if (settings::bHasSilentRollperk_enable) {
 		auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
 		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
-			actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
+			actor->SetGraphVariableInt("iStep", 1);
+		} else {
+			actor->SetGraphVariableInt("iStep", 2);
 		}
 		actor->NotifyAnimationGraph(a_event);
 		return;
 
 	} else {
 		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
-			actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);	
+			actor->SetGraphVariableInt("iStep", 1);	
+		} else {
+			actor->SetGraphVariableInt("iStep", 2);
 		}
 		actor->NotifyAnimationGraph(a_event);
 		return;
