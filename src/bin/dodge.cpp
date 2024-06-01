@@ -352,8 +352,33 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 	});
 }
 
+void TRKE_dodge(RE::Actor* actor, const char* a_event)
+{
+	if (settings::bRecoilStunBreak_enable) {
+		actor->NotifyAnimationGraph("recoilStop");
+	}
+	if (settings::bHasSilentRollperk_enable) {
+		auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
+		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
+			actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
+			actor->NotifyAnimationGraph(a_event);
+			return;
+		} else {
+			actor->NotifyAnimationGraph(a_event);
+			return;
+		}
 
-
+	} else {
+		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
+			actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
+			actor->NotifyAnimationGraph(a_event);
+			return;
+		} else {
+			actor->NotifyAnimationGraph(a_event);
+		}
+	}
+	return;
+}
 
 void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 {
@@ -361,8 +386,8 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 	case dodge_direction::kForward:
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-		
-			a_actor->NotifyAnimationGraph("TKDodgeForward");
+
+			TRKE_dodge(a_actor, "TKDodgeForward");
 			break;
 		case 1:
 			dmco_dodge(a_actor, a_direction, "Dodge");
@@ -372,8 +397,8 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 	case dodge_direction::kBackward:
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			
-			a_actor->NotifyAnimationGraph("TKDodgeBack");
+
+			TRKE_dodge(a_actor, "TKDodgeBack");
 			break;
 		case 1:
 			dmco_dodge(a_actor, a_direction, "Dodge");
@@ -383,8 +408,8 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 	case dodge_direction::kLeft:
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			
-			a_actor->NotifyAnimationGraph("TKDodgeLeft");
+
+			TRKE_dodge(a_actor, "TKDodgeLeft");
 			break;
 		case 1:
 			dmco_dodge(a_actor, a_direction, "Dodge");
@@ -394,8 +419,8 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 	case dodge_direction::kRight:
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
-			
-			a_actor->NotifyAnimationGraph("TKDodgeRight");
+
+			TRKE_dodge(a_actor, "TKDodgeRight");
 			break;
 		case 1:
 			dmco_dodge(a_actor, a_direction, "Dodge");

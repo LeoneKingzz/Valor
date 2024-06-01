@@ -39,29 +39,6 @@ namespace hooks
 		std::string_view eventTag = a_event->tag.data();
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
-		case "TKDodgeBack"_h:
-		case "TKDodgeLeft"_h:
-		case "TKDodgeRight"_h:
-		case "TKDodgeForward"_h:
-		case "Dodge"_h:
-		    if (settings::bRecoilStunBreak_enable) {
-				actor->NotifyAnimationGraph("recoilStop");
-			}
-			if (!actor->IsPlayerRef()) {
-				if (settings::bHasSilentRollperk_enable) {
-					auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
-					if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
-						actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
-					}
-					break;
-				} else {
-					if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
-						actor->SetGraphVariableBool("bUND_IsDodgeRolling", true);
-					}
-				}
-				break;
-			}
-			break;
 		case "TKDR_DodgeStart"_h:
 		    if (!actor->IsPlayerRef()) {
 				const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
