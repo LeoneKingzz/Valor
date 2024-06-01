@@ -391,7 +391,7 @@ void TRKE_dodge(RE::Actor* actor, const char* a_event)
 			actor->SetGraphVariableInt("iStep", 2);
 		}
 		actor->NotifyAnimationGraph(a_event);
-		return;
+
 	}
 }
 
