@@ -18,11 +18,11 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 			hooks::on_combatBehavior_fallback_createPath::install();
 		}
 		settings::init();
-		settings::setglobals();
 		break;
 	case SKSE::MessagingInterface::kPostLoad:
 		break;
 	case SKSE::MessagingInterface::kPostLoadGame:
+	    settings::setglobals();
 		break;
 	}
 }
