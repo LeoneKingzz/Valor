@@ -236,7 +236,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 		
 	// 	return;
 	// }
-	if ((static_cast<float>(dodge::GetSingleton()->GenerateRandomInt(1, 100))/(dodge_chance)) > 20.0f) {
+	if ((static_cast<float>(dodge::GetSingleton()->GenerateRandomInt(1, 100))/(dodge_chance)) > 18.0f) {
 		return;
 	}
 	
@@ -385,11 +385,14 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 	});
 }
 
-void TRKE_dodge(RE::Actor* actor, const char* a_event)
+void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 {
-	// if (settings::bRecoilStunBreak_enable) {
-	// 	actor->NotifyAnimationGraph("recoilStop");
-	// }
+	if (backingoff) {
+		actor->SetGraphVariableInt("iStep", 2);
+		actor->NotifyAnimationGraph(a_event);
+		return;
+	}
+
 	if (settings::bHasSilentRollperk_enable == 1) {
 		auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
 		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
@@ -418,7 +421,7 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
 
-			TRKE_dodge(a_actor, "TKDodgeForward");
+			TRKE_dodge(a_actor, "TKDodgeForward", true);
 			break;
 		case 1:
 			dmco_dodge(a_actor, a_direction, "Dodge");
@@ -429,7 +432,7 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
 
-			TRKE_dodge(a_actor, "TKDodgeBack");
+			TRKE_dodge(a_actor, "TKDodgeBack", true);
 			break;
 		case 1:
 			dmco_dodge(a_actor, a_direction, "Dodge");

@@ -78,6 +78,7 @@ private:
 	/*dodge_direction get_dodge_direction(RE::Actor* a_actor, RE::Actor* a_attacker);*/
 
 	void do_dodge(RE::Actor* a_actor, dodge_direction a_direction);
+	void TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff = false);
 
 	RE::NiPoint3 get_dodge_vector(dodge_direction a_direction);
 
