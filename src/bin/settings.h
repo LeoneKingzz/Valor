@@ -1,5 +1,6 @@
 #pragma once
 #define SQRT2 1.4142135624f
+#include <SimpleIni.h>
 using EventResult = RE::BSEventNotifyControl;
 
 class settings
@@ -12,7 +13,7 @@ public:
 
 		static bool Register();
 	};
-	static void read();
+	static void read(const wchar_t* a_path);
 	static void init();
 
 
@@ -23,7 +24,7 @@ public:
 
 	// inline static bool bRecoilStunBreak_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool biFrames_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
-	inline static bool bHasSilentRollperk_enable = false; /*Reactive dodge AI that dodges incoming attacks.*/
+	inline static int bHasSilentRollperk_enable = 1; /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bStaminaCost_enable = true;   /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bZUPA_mod_Check = false;   /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bUAPNG_mod_Check = false;   /*Reactive dodge AI that dodges incoming attacks.*/
@@ -31,6 +32,7 @@ public:
 	static inline float fSideStep_staminacost = 25.0f; /*Chance multiplier for reactive dodge AI.*/
 	static inline float fDodgeRoll_staminacost = 40.0f; /*Chance multiplier for reactive dodge AI.*/
 	static inline int iDodgeRoll_ActorScaled_Chance = 2;           /*TKRE = 0; DMCO = 1*/
+	static inline int iReactiveDodgeAI_enable = 1;
 
 	static inline bool bDodgeAI_AttackCancel_enable = false; /*Cancel attack animations when dodging.*/
 	static inline int iDodgeAI_Framework = 0;            /*TKRE = 0; DMCO = 1*/

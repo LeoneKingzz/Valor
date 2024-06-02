@@ -378,7 +378,7 @@ void TRKE_dodge(RE::Actor* actor, const char* a_event)
 	// if (settings::bRecoilStunBreak_enable) {
 	// 	actor->NotifyAnimationGraph("recoilStop");
 	// }
-	if (settings::bHasSilentRollperk_enable) {
+	if (settings::bHasSilentRollperk_enable == 1) {
 		auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
 		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
 			actor->SetGraphVariableInt("iStep", 0);
