@@ -211,7 +211,19 @@ bool dodge::get_is_dodging(RE::Actor* a_actor)
 /*Attempt to dodge an incoming threat, choosing one of the directions from A_DIRECTIONS.*/
 void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
 {
-	if (!settings::bDodgeAI_Enable) {
+
+	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+
+	if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
+		return;
+	}
+
+	bool hasLOS = false;
+	if (a_actor->HasLineOfSight(CombatTarget, hasLOS) && !hasLOS) {
+		return;
+	}
+
+	if (a_actor->GetPosition().GetDistance(CombatTarget->GetPosition()) > dodge::GetSingleton()->Get_ReactiveDodge_Distance(CombatTarget)) {
 		return;
 	}
 	
