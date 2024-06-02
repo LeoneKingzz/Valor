@@ -218,10 +218,13 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	float dodge_chance = a_forceDodge ? 1.f : get_dodge_chance(a_actor);
 	
 	std::mt19937 gen(rd());
-	/*Check dodge chance using PRNG*/
-	std::uniform_real_distribution<> dis(0.f, 1.f);
-	if (dis(gen) > dodge_chance) {
+	// /*Check dodge chance using PRNG*/
+	// std::uniform_real_distribution<> dis(0.f, 1.f);
+	// if (dis(gen) > dodge_chance) {
 		
+	// 	return;
+	// }
+	if ((static_cast<float>(dodge::GetSingleton()->GenerateRandomInt(1, 100))/(dodge_chance)) > 25.0) {
 		return;
 	}
 	
