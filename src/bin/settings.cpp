@@ -55,10 +55,12 @@ void settings::read(const wchar_t* a_path)
 	auto UND_iDodgeRoll_ActorScaled_Chance = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80F, "Ultimate NPC Dodging.esp"));
 
 	UND_fSideStep_staminacost->value = fSideStep_staminacost;
-	UND_bReactiveDodgeAI_enable->value = iReactiveDodgeAI_enable;
-	UND_bHasSilentRollperk_enable->value = bHasSilentRollperk_enable;
-	UND_iDodgeRoll_ActorScaled_Chance->value = iDodgeRoll_ActorScaled_Chance;
 	UND_fDodgeRoll_staminacost->value = fDodgeRoll_staminacost;
+	UND_bReactiveDodgeAI_enable->value = static_cast<float>(iReactiveDodgeAI_enable);
+	UND_bHasSilentRollperk_enable->value = static_cast<float>(bHasSilentRollperk_enable);
+	UND_iDodgeRoll_ActorScaled_Chance->value = static_cast<float>(iDodgeRoll_ActorScaled_Chance);
+
+	(void)ini.SaveFile(a_path);
 	
 }
 
@@ -73,7 +75,7 @@ inline EventResult settings::update_handler::ProcessEvent(const SKSE::ModCallbac
 		return EventResult::kContinue;
 	}
 	if (a_event->eventName == "dmenu_updateSettings" && a_event->strArg == "UND") {
-		settings::read();
+		settings::read(L"Data/SKSE/Plugins/UltimateNPCDodging.ini");
 	}
 
 	return EventResult::kContinue;

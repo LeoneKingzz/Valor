@@ -28,7 +28,7 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 
 void onSKSEInit()
 {
-	settings::read();
+	settings::read(L"Data/SKSE/Plugins/UltimateNPCDodging.ini");
 	hooks::alloc();
 }
 
