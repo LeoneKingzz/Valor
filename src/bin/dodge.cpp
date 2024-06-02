@@ -257,6 +257,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	auto IsStaggered = static_cast<bool>(a_actor->AsActorState()->actorState2.staggered);
 	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
 	auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
+	auto RecoilState = static_cast<int>(a_actor->AsActorState()->actorState2.recoil);
 	auto CT_RecoilState = static_cast<int>(CombatTarget->AsActorState()->actorState2.recoil);
 	auto CT_attackState = CombatTarget->AsActorState()->GetAttackState();
 
@@ -264,7 +265,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	if (settings::bZUPA_mod_Check) {
 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 		auto magicTarget = a_actor->AsMagicTarget();
-		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !IsStaggered && !IsStaggeredCT && !CombatTarget->AsActorState()->IsBleedingOut() && CT_RecoilState == 0 
+		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !IsStaggered && !IsStaggeredCT && !CombatTarget->AsActorState()->IsBleedingOut() && CT_RecoilState == 0 && RecoilState == 0 
 		&& !(CT_attackState == RE::ATTACK_STATE_ENUM::kHit || CT_attackState == RE::ATTACK_STATE_ENUM::kNextAttack || CT_attackState == RE::ATTACK_STATE_ENUM::kBowNextAttack)
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit || attackState == RE::ATTACK_STATE_ENUM::kNextAttack || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
@@ -273,7 +274,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 		}
 	} else if (settings::bUAPNG_mod_Check){
 		bool IUBusy = false;
-		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !IsStaggered && !IsStaggeredCT && !CombatTarget->AsActorState()->IsBleedingOut() && CT_RecoilState == 0 
+		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !IsStaggered && !IsStaggeredCT && !CombatTarget->AsActorState()->IsBleedingOut() && CT_RecoilState == 0 && RecoilState == 0 
 		&& !(CT_attackState == RE::ATTACK_STATE_ENUM::kHit || CT_attackState == RE::ATTACK_STATE_ENUM::kNextAttack || CT_attackState == RE::ATTACK_STATE_ENUM::kBowNextAttack)
 		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit || attackState == RE::ATTACK_STATE_ENUM::kNextAttack || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
@@ -282,7 +283,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 		}
 
 	} else{
-		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !IsStaggered && !IsStaggeredCT && !CombatTarget->AsActorState()->IsBleedingOut() && CT_RecoilState == 0 
+		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !IsStaggered && !IsStaggeredCT && !CombatTarget->AsActorState()->IsBleedingOut() && CT_RecoilState == 0 && RecoilState == 0 
 		&& !(CT_attackState == RE::ATTACK_STATE_ENUM::kHit || CT_attackState == RE::ATTACK_STATE_ENUM::kNextAttack || CT_attackState == RE::ATTACK_STATE_ENUM::kBowNextAttack)
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit || attackState == RE::ATTACK_STATE_ENUM::kNextAttack || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
