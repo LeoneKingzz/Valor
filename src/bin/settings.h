@@ -23,7 +23,7 @@ public:
 
 	// inline static bool bRecoilStunBreak_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool biFrames_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
-	inline static bool bHasSilentRollperk_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
+	inline static bool bHasSilentRollperk_enable = false; /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bStaminaCost_enable = true;   /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bZUPA_mod_Check = false;   /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bUAPNG_mod_Check = false;   /*Reactive dodge AI that dodges incoming attacks.*/
