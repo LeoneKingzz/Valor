@@ -43,7 +43,7 @@ namespace hooks
 		    if (!actor->IsPlayerRef()) {
 				const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
 				const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
-				int iStep = 1;
+				int iStep = 0;
 				if (actor->GetGraphVariableInt("iStep", iStep) && iStep) {
 					if (settings::bStaminaCost_enable) {
 						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(settings::fDodgeRoll_staminacost), actor);

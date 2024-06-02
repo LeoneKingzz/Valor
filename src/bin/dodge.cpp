@@ -377,7 +377,7 @@ void TRKE_dodge(RE::Actor* actor, const char* a_event)
 	if (settings::bHasSilentRollperk_enable) {
 		auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
 		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
-			actor->SetGraphVariableInt("iStep", 1);
+			actor->SetGraphVariableInt("iStep", 0);
 		} else {
 			actor->SetGraphVariableInt("iStep", 2);
 		}
@@ -386,7 +386,7 @@ void TRKE_dodge(RE::Actor* actor, const char* a_event)
 
 	} else {
 		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fDodgeRoll_staminacost) {
-			actor->SetGraphVariableInt("iStep", 1);	
+			actor->SetGraphVariableInt("iStep", 0);	
 		} else {
 			actor->SetGraphVariableInt("iStep", 2);
 		}
