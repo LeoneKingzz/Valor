@@ -21,7 +21,7 @@ public:
 	inline static bool bTacticalDodgeAI_enable = true; /*Passive dodge AI that's built on top of vanilla's combat movement AI.*/
 	inline static bool bDodgeAI_Reactive_enable = false; /*Reactive dodge AI that dodges incoming attacks.*/
 
-	inline static bool bRecoilStunBreak_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
+	// inline static bool bRecoilStunBreak_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool biFrames_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bHasSilentRollperk_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bStaminaCost_enable = true;   /*Reactive dodge AI that dodges incoming attacks.*/

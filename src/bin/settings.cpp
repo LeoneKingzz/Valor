@@ -7,7 +7,7 @@ void settings::read()
 {
 	DtryUtils::settingsLoader reader(SETTINGFILE_PATH);
 	reader.setActiveSection("General");
-	reader.FETCH(bRecoilStunBreak_enable);
+	// reader.FETCH(bRecoilStunBreak_enable);
 	reader.FETCH(biFrames_enable);
 	reader.FETCH(bHasSilentRollperk_enable);
 	reader.FETCH(fSideStep_staminacost);
