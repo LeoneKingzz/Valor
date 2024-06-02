@@ -224,7 +224,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 		
 	// 	return;
 	// }
-	if ((static_cast<float>(dodge::GetSingleton()->GenerateRandomInt(1, 100))/(dodge_chance)) > 25.0f) {
+	if ((static_cast<float>(dodge::GetSingleton()->GenerateRandomInt(1, 100))/(dodge_chance)) > 20.0f) {
 		return;
 	}
 	
