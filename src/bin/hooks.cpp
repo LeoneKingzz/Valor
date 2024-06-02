@@ -137,14 +137,14 @@ namespace hooks
 	{
 		// RE::Character* actor = a_actor->As<RE::Character>();
 
-		switch (settings::iDodgeAI_Framework) {
-		case 0:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_all);
-			break;
-		case 1:
-			dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_all);
-			break;
-		}
+		// switch (settings::iDodgeAI_Framework) {
+		// case 0:
+		// 	dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_tk_reactive);
+		// 	break;
+		// case 1:
+		// 	dodge::GetSingleton()->attempt_dodge(a_actor, &dodge_directions_dmco_all);
+		// 	break;
+		// }
 		
 		return _create_path(a_actor, a_newPos, a3, speed_ind);
 	}
