@@ -46,8 +46,13 @@ void settings::read(const wchar_t* a_path)
 	bZUPA_mod_Check = ini.GetBoolValue("General", "bZUPA_mod_Check", bZUPA_mod_Check);
 	bUAPNG_mod_Check = ini.GetBoolValue("General", "bUAPNG_mod_Check", bUAPNG_mod_Check);
 
-	auto HdSingle = RE::TESDataHandler::GetSingleton();
+	(void)ini.SaveFile(a_path);
+	
+}
 
+void settings::setglobals(){
+
+	auto HdSingle = RE::TESDataHandler::GetSingleton();
 	auto UND_fSideStep_staminacost = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80B, "Ultimate NPC Dodging.esp"));
 	auto UND_bReactiveDodgeAI_enable = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80C, "Ultimate NPC Dodging.esp"));
 	auto UND_fDodgeRoll_staminacost = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80D, "Ultimate NPC Dodging.esp"));
@@ -59,9 +64,6 @@ void settings::read(const wchar_t* a_path)
 	UND_bReactiveDodgeAI_enable->value = static_cast<float>(iReactiveDodgeAI_enable);
 	UND_bHasSilentRollperk_enable->value = static_cast<float>(bHasSilentRollperk_enable);
 	UND_iDodgeRoll_ActorScaled_Chance->value = static_cast<float>(iDodgeRoll_ActorScaled_Chance);
-
-	(void)ini.SaveFile(a_path);
-	
 }
 
 void settings::init()

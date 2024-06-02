@@ -15,6 +15,7 @@ public:
 	};
 	static void read(const wchar_t* a_path);
 	static void init();
+	static void setglobals();
 
 
 	/*Dodging*/
