@@ -212,21 +212,21 @@ bool dodge::get_is_dodging(RE::Actor* a_actor)
 void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
 {
 
-	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+	// auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
 
-	if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
-		return;
-	}
+	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
+	// 	return;
+	// }
 
-	bool hasLOS = false;
-	if (a_actor->HasLineOfSight(CombatTarget, hasLOS) && !hasLOS) {
-		return;
-	}
+	// bool hasLOS = false;
+	// if (a_actor->HasLineOfSight(CombatTarget, hasLOS) && !hasLOS) {
+	// 	return;
+	// }
 
-	if (a_actor->GetPosition().GetDistance(CombatTarget->GetPosition()) > dodge::GetSingleton()->Get_ReactiveDodge_Distance(CombatTarget)) {
-		return;
-	}
-	
+	// if (a_actor->GetPosition().GetDistance(CombatTarget->GetPosition()) > get_combat_reach(CombatTarget)) {
+	// 	return;
+	// }
+
 	float dodge_chance = a_forceDodge ? 1.f : get_dodge_chance(a_actor);
 	
 	std::mt19937 gen(rd());
