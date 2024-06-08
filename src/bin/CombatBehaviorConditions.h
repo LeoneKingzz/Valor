@@ -15,3 +15,4 @@ namespace Movement
 
 bool has_enoughStamina(RE::Actor* a);
 void interruptattack(RE::Actor* me);
+float get_combat_reach(RE::Actor* a);
