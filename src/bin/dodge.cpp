@@ -10,7 +10,7 @@ using readLock = std::shared_lock<std::shared_mutex>;
 
 
 //Native Functions for Papyrus
-float dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
+int dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
 	float Score = 0.0f;
 
  /////////////////////////////////////////////////Armour Weighting////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -119,7 +119,7 @@ float dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
 
 	Score += (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kSneak)/100.0f) * Protagnist_Reflexes.Sneak_Weighting;
 
-	return Score;
+	return static_cast<int>(Score);
 }
 
 bool dodge::BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm)

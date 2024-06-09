@@ -86,7 +86,7 @@ public:
 
 	} CStyle;
 
-	float GetProtaganist_ReflexScore(RE::Actor* a_actor);
+	int GetProtaganist_ReflexScore(RE::Actor* a_actor);
 
 	bool BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm);
 
