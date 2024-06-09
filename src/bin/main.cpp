@@ -4,6 +4,7 @@
 #include "include/Utils.h"
 #include "settings.h"
 
+using namespace RE::BSScript;
 
 void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 {
