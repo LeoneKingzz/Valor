@@ -89,7 +89,7 @@ public:
 
 	int GetProtaganist_ReflexScore(RE::Actor* a_actor);
 
-	bool BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm);
+	static bool BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm);
 
 	int GenerateRandomInt(int value_a, int value_b);
 		
