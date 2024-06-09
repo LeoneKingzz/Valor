@@ -23,6 +23,8 @@ int dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
 	auto Boots = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kFeet);
 
 	auto Shield = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kShield);
+	
+
 
 	if (Helm) {
 		switch (Helm->GetArmorType()) {
