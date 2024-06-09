@@ -54,6 +54,42 @@ public:
 		return &singleton;
 	}
 
+	struct
+	{
+		float Heavyarm_mult{ 0.25 };
+		float Lightarm_mult{ 0.75 };
+		float clothing_mult{ 1.0 };
+
+		float Helm_weight{ 0.1 };
+		float Gauntlet_weight{ 0.1 };
+		float Boots_weight{ 0.1 };
+		float Chest_weight{ 0.6 };
+		float Shield_weight{ 0.1 };
+
+	} Armour;
+
+	struct
+	{
+		float Sneak_Weighting{ 0.2 };
+		float Skirmish_Weighting{ 0.2 };
+		float Defensive_Weighting{ 0.3 };
+		float Armour_Weighting{ 0.3 };
+
+	} Protagnist_Reflexes;
+
+	struct
+	{
+		float Skirmish_AvoidThreat_Weighting{ 0.25 };
+		float Skirmish_Fallback_Weighting{ 0.3 };
+		float Skirmish_Circle_Weighting{ 0.3 };
+		float Skirmish_Strafe_Weighting{ 0.15 };
+
+	} CStyle;
+
+	float GetProtaganist_ReflexScore(RE::Actor* a_actor);
+
+	bool BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm);
+
 	int GenerateRandomInt(int value_a, int value_b);
 		
 	void attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
