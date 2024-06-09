@@ -1,5 +1,6 @@
 #include "settings.h"
 #include "include/Utils.h"
+#include "dodge.h"
 // #define SETTINGFILE_PATH "Data\\SKSE\\Plugins\\UltimateNPCDodging.ini"
 
 // #define FETCH(setting) load(setting, #setting)
@@ -45,6 +46,28 @@ void settings::read(const wchar_t* a_path)
 	bTacticalDodgeAI_enable = ini.GetBoolValue("General", "bTacticalDodgeAI_enable", bTacticalDodgeAI_enable);
 	bZUPA_mod_Check = ini.GetBoolValue("General", "bZUPA_mod_Check", bZUPA_mod_Check);
 	bUAPNG_mod_Check = ini.GetBoolValue("General", "bUAPNG_mod_Check", bUAPNG_mod_Check);
+
+	auto DS = dodge::GetSingleton();
+
+	DS->Protagnist_Reflexes.Armour_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Armour_Weighting", DS->Protagnist_Reflexes.Armour_Weighting));
+	DS->Protagnist_Reflexes.Defensive_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Defensive_Weighting", DS->Protagnist_Reflexes.Defensive_Weighting));
+	DS->Protagnist_Reflexes.Skirmish_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Skirmish_Weighting", DS->Protagnist_Reflexes.Skirmish_Weighting));
+	DS->Protagnist_Reflexes.Sneak_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Sneak_Weighting", DS->Protagnist_Reflexes.Sneak_Weighting));
+
+	DS->Armour.Heavyarm_mult = static_cast<float>(ini.GetDoubleValue("Armour", "Heavyarm_mult", DS->Armour.Heavyarm_mult));
+	DS->Armour.Lightarm_mult = static_cast<float>(ini.GetDoubleValue("Armour", "Lightarm_mult", DS->Armour.Lightarm_mult));
+	DS->Armour.clothing_mult = static_cast<float>(ini.GetDoubleValue("Armour", "clothing_mult", DS->Armour.clothing_mult));
+
+	DS->Armour.Helm_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Helm_weight", DS->Armour.Helm_weight));
+	DS->Armour.Chest_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Chest_weight", DS->Armour.Chest_weight));
+	DS->Armour.Gauntlet_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Gauntlet_weight", DS->Armour.Gauntlet_weight));
+	DS->Armour.Boots_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Boots_weight", DS->Armour.Boots_weight));
+	DS->Armour.Shield_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Shield_weight", DS->Armour.Shield_weight));
+
+	DS->CStyle.Skirmish_AvoidThreat_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_AvoidThreat_Weighting", DS->CStyle.Skirmish_AvoidThreat_Weighting));
+	DS->CStyle.Skirmish_Circle_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Circle_Weighting", DS->CStyle.Skirmish_Circle_Weighting));
+	DS->CStyle.Skirmish_Fallback_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Fallback_Weighting", DS->CStyle.Skirmish_Fallback_Weighting));
+	DS->CStyle.Skirmish_Strafe_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Strafe_Weighting", DS->CStyle.Skirmish_Strafe_Weighting));
 
 	(void)ini.SaveFile(a_path);
 	

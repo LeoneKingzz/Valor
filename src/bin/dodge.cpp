@@ -91,10 +91,10 @@ float dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
 	if (Utils::Actor::isEquippedShield(a_actor)) {
 		switch (Shield->GetArmorType()) {
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			Score -= Armour.Shield_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			Score += Armour.Shield_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			Score -= Armour.Shield_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			Score += Armour.Shield_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
 			break;
 		}
 	} else {
