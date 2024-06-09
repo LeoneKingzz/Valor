@@ -130,15 +130,6 @@ bool dodge::BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm)
 
 
 
-
-
-
-
-
-
-
-//Native Functions for Papyrus************************************************************************************************************************************************
-
 /*Get the dodge chance of a reactive dodger in case of an incoming attack.*/
 float get_dodge_chance(RE::Actor* a_dodger) {
 
@@ -358,8 +349,8 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	// 	return;
 	// }
 
-	float dodge_chance = a_forceDodge ? 1.f : get_dodge_chance(a_actor);
-	
+	float dodge_chance = a_forceDodge ? 1.f : GetProtaganist_ReflexScore(a_actor);
+
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
 	// std::uniform_real_distribution<> dis(0.f, 1.f);
@@ -367,7 +358,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 		
 	// 	return;
 	// }
-	if (static_cast<float>(dodge::GetSingleton()->GenerateRandomInt(1, 100)) > (dodge_chance * 100.0f)) {
+	if (dodge::GetSingleton()->GenerateRandomInt(1, 100) > dodge_chance) {
 		return;
 	}
 	
