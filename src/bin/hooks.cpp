@@ -34,6 +34,7 @@ namespace hooks
 		}
 		std::string_view eventTag = a_event->tag.data();
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
+		Movement::AttackInfo* info;
 		switch (hash(eventTag.data(), eventTag.size())) {
 		case "TKDR_DodgeStart"_h:
 		    if (!actor->IsPlayerRef()) {
@@ -70,7 +71,7 @@ namespace hooks
 	
 		case "preHitFrame"_h:
 			if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
-				Movement::AttackInfo* info;
+				
 				dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor), info);
 			}
 			break;
@@ -78,7 +79,7 @@ namespace hooks
 		case "Voice_SpellFire_Event"_h:
 		case "BeginCastVoice"_h:
 			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
-				Movement::AttackInfo* info;
+				
 				dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f, info);
 			}
 			break;
@@ -86,7 +87,7 @@ namespace hooks
 		case "MLh_SpellFire_Event"_h:
 		case "BeginCastLeft"_h:
 			if (actor->GetEquippedObject(true)->As<RE::MagicItem>()->IsHostile()) {
-				Movement::AttackInfo* info;
+				
 				dodge::GetSingleton()->react_to_shouts_spells(actor, 2000.0f, info);
 			}
 			break;
@@ -94,7 +95,7 @@ namespace hooks
 		case "MRh_SpellFire_Event"_h:
 		case "BeginCastRight"_h:
 			if (actor->GetEquippedObject(false)->As<RE::MagicItem>()->IsHostile()) {
-				Movement::AttackInfo* info;
+				
 				dodge::GetSingleton()->react_to_shouts_spells(actor, 2000.0f, info);
 			}
 			break;
@@ -102,18 +103,18 @@ namespace hooks
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
 		case "NextPowerAttackInitiate"_h:
-		    Movement::AttackInfo* info;
+		   
 			dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor), info);
 			break;
 
 		case "bashPowerStart"_h:
 		case "BlockBashSprint"_h:
-			Movement::AttackInfo* info;
+			
 			dodge::GetSingleton()->react_to_bash(actor, 300.0f, info); 
 			break;
 
 		case "BowFullDrawn"_h:
-			Movement::AttackInfo* info;
+			
 			dodge::GetSingleton()->react_to_ranged(actor, 1500.0f, info);
 			break;
 		}
