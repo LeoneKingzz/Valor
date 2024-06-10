@@ -297,7 +297,7 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range, Movement::A
 			/*RE::Character* a_refr = refr->As<RE::Character>();*/
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_reactive);
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
@@ -321,20 +321,37 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range, Movement:
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
+			if (!Utils::Actor::isHumanoid(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			bool hasLOS = false;
 			if (refr->HasLineOfSight(a_attacker, hasLOS) && !hasLOS) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			if (!Utils::Actor::isHumanoid(refr)) {
-				return RE::BSContainer::ForEachResult::kContinue;
+
+			auto R = attack_range;
+			auto r2 = get_dist2(refr, a_attacker);
+
+			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
+			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
+
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 10.0f;
+
+			if (info) {
+				info->R = R;
+				info->r = sqrt(r2);
+				info->reflected = angle < 0.0f;
+				info->me = abs(angle);
+				info->attackAngle = attackAngle;
 			}
-			if (ValhallaUtils::isBackFacing(a_attacker, refr)) {  //no need to react to an attack if the attacker isn't facing you.
+
+			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_reactive);
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
@@ -358,17 +375,37 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range, Mo
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
+			if (!Utils::Actor::isHumanoid(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			bool hasLOS = false;
 			if (refr->HasLineOfSight(a_attacker, hasLOS) && !hasLOS) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			if (!Utils::Actor::isHumanoid(refr)) {
+
+			auto R = attack_range;
+			auto r2 = get_dist2(refr, a_attacker);
+
+			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
+			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
+
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 10.0f;
+
+			if (info) {
+				info->R = R;
+				info->r = sqrt(r2);
+				info->reflected = angle < 0.0f;
+				info->me = abs(angle);
+				info->attackAngle = attackAngle;
+			}
+
+			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_reactive);
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
