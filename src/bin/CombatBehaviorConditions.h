@@ -5,6 +5,14 @@
 namespace Movement
 {
 	using PA = Utils::PolarAngle;
+	struct AttackInfo
+	{
+		float R;
+		float attackAngle;
+		float r;
+		PA me;
+		bool reflected;
+	};
 	const float default_angle = 50.0f;
 
 	float get_FallbackDistance(RE::Character* me);
@@ -16,15 +24,6 @@ namespace Movement
 		Left,
 		Right,
 		Back
-	};
-
-	struct AttackInfo
-	{
-		float R;
-		float attackAngle;
-		float r;
-		PA me;
-		bool reflected;
 	};
 
 	namespace Dodging
