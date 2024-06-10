@@ -5,7 +5,7 @@ using readLock = std::shared_lock<std::shared_mutex>;
 
 
 //Native Functions for Papyrus
-int dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
+float dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
 	float Score = 0.0f;
 
  /////////////////////////////////////////////////Armour Weighting////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -116,12 +116,13 @@ int dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
 
 	Score += (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kSneak)/100.0f) * Protagnist_Reflexes.Sneak_Weighting;
 
-	return (static_cast<int>(Score)) * 100;
+	return Score;
 }
 
 bool dodge::BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm)
 {
 	vm->RegisterFunction("GetProtaganist_ReflexScore", "_SM_UND_NativeFunctions", GetProtaganist_ReflexScore);
+	vm->RegisterFunction("Protagnist_can_dodge", "_SM_UND_NativeFunctions", Protagnist_can_dodge);
 	return true;
 }
 
@@ -585,6 +586,44 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	return false;
 }
 
+bool dodge::Protagnist_can_dodge(RE::Actor* a_actor)
+{
+	auto attackState = a_actor->AsActorState()->GetAttackState();
+	// auto IsStaggered = static_cast<bool>(a_actor->AsActorState()->actorState2.staggered);
+	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+	// auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
+	// auto RecoilState = static_cast<int>(a_actor->AsActorState()->actorState2.recoil);
+	// auto CT_RecoilState = static_cast<int>(CombatTarget->AsActorState()->actorState2.recoil);
+
+
+	if (settings::bZUPA_mod_Check) {
+		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
+		auto magicTarget = a_actor->AsMagicTarget();
+		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
+		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough 
+		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
+			return true;
+		}
+	} else if (settings::bUAPNG_mod_Check){
+		bool IUBusy = false;
+		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
+		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough 
+		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
+			return true;
+		}
+
+	} else{
+		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
+		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough 
+		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
+			return true;
+		}
+	}
+	return false;
+}
 
 
 #define MAX_DIST_DIFFERENCE 50
