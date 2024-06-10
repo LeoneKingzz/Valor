@@ -42,7 +42,7 @@ void settings::read(const wchar_t* a_path)
 	bHasSilentRollperk_enable = ini.GetLongValue("General", "bHasSilentRollperk_enable", bHasSilentRollperk_enable);
 	bStaminaCost_enable = ini.GetBoolValue("General", "bStaminaCost_enable", bStaminaCost_enable);
 	bTacticalDodgeAI_enable = ini.GetBoolValue("General", "bTacticalDodgeAI_enable", bTacticalDodgeAI_enable);
-	bDodgeAI_Reactive_enable = ini.GetBoolValue("General", "bDodgeAI_Reactive_enable", bDodgeAI_Reactive_enable);
+	// bDodgeAI_Reactive_enable = ini.GetBoolValue("General", "bDodgeAI_Reactive_enable", bDodgeAI_Reactive_enable);
 
 	bZUPA_mod_Check = ini.GetBoolValue("General", "bZUPA_mod_Check", bZUPA_mod_Check);
 	bUAPNG_mod_Check = ini.GetBoolValue("General", "bUAPNG_mod_Check", bUAPNG_mod_Check);
