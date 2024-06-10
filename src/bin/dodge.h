@@ -9,38 +9,6 @@
 #include <algorithm>
 #include "RE/M/Misc.h"
 
-namespace Movement
-{
-	using PA = Utils::PolarAngle;
-	struct AttackInfo
-	{
-		float R;
-		float attackAngle;
-		float r;
-		PA me;
-		bool reflected;
-	};
-	const float default_angle = 50.0f;
-
-	float get_FallbackDistance(RE::Character* me);
-	// bool isInDanger(RE::Actor* me, AttackInfo* info = nullptr);
-
-	enum class CircleDirestions
-	{
-		None,
-		Left,
-		Right,
-		Back
-	};
-
-	namespace Dodging
-	{
-		uint32_t should(RE::Character*);
-		uint32_t should_danger(RE::Character*);
-	}
-
-}
-
 enum dodge_direction
 {
 	kForward = 1,
@@ -162,3 +130,35 @@ private:
 	mutable std::shared_mutex dodging_actors_lock;
 	
 };
+
+// namespace Movement
+// {
+// 	using PA = Utils::PolarAngle;
+// 	struct AttackInfo
+// 	{
+// 		float R;
+// 		float attackAngle;
+// 		float r;
+// 		PA me;
+// 		bool reflected;
+// 	};
+// 	const float default_angle = 50.0f;
+
+// 	float get_FallbackDistance(RE::Character* me);
+// 	// bool isInDanger(RE::Actor* me, AttackInfo* info = nullptr);
+
+// 	enum class CircleDirestions
+// 	{
+// 		None,
+// 		Left,
+// 		Right,
+// 		Back
+// 	};
+
+// 	namespace Dodging
+// 	{
+// 		uint32_t should(RE::Character*);
+// 		uint32_t should_danger(RE::Character*);
+// 	}
+
+// }
