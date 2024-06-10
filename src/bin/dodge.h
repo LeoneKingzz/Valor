@@ -8,6 +8,7 @@
 #include "include/Utils.h"
 #include <algorithm>
 #include "RE/M/Misc.h"
+#include <windows.h>
 
 enum dodge_direction
 {
@@ -107,6 +108,10 @@ public:
 	float GenerateRandomFloat(float value_a, float value_b);
 		
 	void attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
+	void Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
+	void NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
+	void Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
+	void Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
 
 	static void Set_iFrames(RE::Actor* actor);
 	static void Reset_iFrames(RE::Actor* actor);

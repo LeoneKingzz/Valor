@@ -586,6 +586,248 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	return false;
 }
 
+
+void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
+{
+
+	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
+	// 	return;
+	// }
+
+	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
+
+	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+
+	std::mt19937 gen(rd());
+	// /*Check dodge chance using PRNG*/
+	// std::uniform_real_distribution<> dis(0.f, 1.f);
+	// if (dis(gen) > dodge_chance) {
+		
+	// 	return;
+	// }
+	if (dodge::GetSingleton()->GenerateRandomFloat(0.0, 1.0) > dodge_chance) {
+		return;
+	}
+
+	
+	/* Make a copy and shuffle directions. */
+	dodge_dir_set directions_shuffled = *a_directions;
+	std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen); 
+
+
+	for (dodge_direction direction : directions_shuffled) {
+		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
+		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
+			bool bIsDodging = false;
+			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				do_dodge(a_actor, direction);
+			}
+			return;
+		} else {
+			
+			return;
+		}
+	}
+}
+
+void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
+{
+	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
+	// 	return;
+	// }
+
+	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
+
+	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+
+	std::mt19937 gen(rd());
+	// /*Check dodge chance using PRNG*/
+	// std::uniform_real_distribution<> dis(0.f, 1.f);
+	// if (dis(gen) > dodge_chance) {
+
+	// 	return;
+	// }
+	if (dodge::GetSingleton()->GenerateRandomFloat(0.0, 1.0) > dodge_chance) {
+		return;
+	}
+
+	/* Make a copy and shuffle directions. */
+	dodge_dir_set directions_shuffled = *a_directions;
+	std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen);
+
+	for (dodge_direction direction : directions_shuffled) {
+		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
+		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
+			bool bIsDodging = false;
+			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				do_dodge(a_actor, direction);
+			}
+			return;
+		} else {
+			return;
+		}
+	}
+}
+
+void dodge::NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
+{
+	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
+	// 	return;
+	// }
+
+	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
+
+	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+
+	std::mt19937 gen(rd());
+	// /*Check dodge chance using PRNG*/
+	// std::uniform_real_distribution<> dis(0.f, 1.f);
+	// if (dis(gen) > dodge_chance) {
+
+	// 	return;
+	// }
+	if (dodge::GetSingleton()->GenerateRandomFloat(0.0, 1.0) > dodge_chance) {
+		return;
+	}
+
+	/* Make a copy and shuffle directions. */
+	dodge_dir_set directions_shuffled = *a_directions;
+	std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen);
+
+	for (dodge_direction direction : directions_shuffled) {
+		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
+		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
+			bool bIsDodging = false;
+			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				do_dodge(a_actor, direction);
+			}
+			return;
+		} else {
+			return;
+		}
+	}
+}
+
+void dodge::Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
+{
+	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
+	// 	return;
+	// }
+
+	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
+
+	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+
+	std::mt19937 gen(rd());
+	// /*Check dodge chance using PRNG*/
+	// std::uniform_real_distribution<> dis(0.f, 1.f);
+	// if (dis(gen) > dodge_chance) {
+
+	// 	return;
+	// }
+	if (dodge::GetSingleton()->GenerateRandomFloat(0.0, 1.0) > dodge_chance) {
+		return;
+	}
+
+	/* Make a copy and shuffle directions. */
+	dodge_dir_set directions_shuffled = *a_directions;
+	std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen);
+
+	for (dodge_direction direction : directions_shuffled) {
+		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
+		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
+			bool bIsDodging = false;
+			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				do_dodge(a_actor, direction);
+			}
+			return;
+		} else {
+			return;
+		}
+	}
+}
+
+void dodge::Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
+{
+	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
+	// 	return;
+	// }
+
+	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
+
+	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+
+	std::mt19937 gen(rd());
+	// /*Check dodge chance using PRNG*/
+	// std::uniform_real_distribution<> dis(0.f, 1.f);
+	// if (dis(gen) > dodge_chance) {
+
+	// 	return;
+	// }
+	if (dodge::GetSingleton()->GenerateRandomFloat(0.0, 1.0) > dodge_chance) {
+		return;
+	}
+
+	/* Make a copy and shuffle directions. */
+	dodge_dir_set directions_shuffled = *a_directions;
+	std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen);
+
+	for (dodge_direction direction : directions_shuffled) {
+		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
+		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
+			bool bIsDodging = false;
+			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				do_dodge(a_actor, direction);
+			}
+			return;
+		} else {
+			return;
+		}
+	}
+}
+
+/*Check if the actor is able to dodge.*/
+bool dodge::able_dodge(RE::Actor* a_actor)
+{
+	auto attackState = a_actor->AsActorState()->GetAttackState();
+	// auto IsStaggered = static_cast<bool>(a_actor->AsActorState()->actorState2.staggered);
+	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+	// auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
+	// auto RecoilState = static_cast<int>(a_actor->AsActorState()->actorState2.recoil);
+	// auto CT_RecoilState = static_cast<int>(CombatTarget->AsActorState()->actorState2.recoil);
+
+
+	if (settings::bZUPA_mod_Check) {
+		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
+		auto magicTarget = a_actor->AsMagicTarget();
+		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
+		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough 
+		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
+			return true;
+		}
+	} else if (settings::bUAPNG_mod_Check){
+		bool IUBusy = false;
+		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
+		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough 
+		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
+			return true;
+		}
+
+	} else{
+		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
+		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough 
+		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
+			return true;
+		}
+	}
+	return false;
+}
+
+
+
 bool dodge::Protagnist_can_dodge(RE::Actor* a_actor)
 {
 	auto attackState = a_actor->AsActorState()->GetAttackState();
@@ -741,6 +983,7 @@ void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 
 void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 {
+	Sleep(1000);
 	switch (a_direction) {
 	case dodge_direction::kForward:
 		switch (settings::iDodgeAI_Framework) {
@@ -895,7 +1138,7 @@ RE::NiPoint3 dodge::get_dodge_vector(dodge_direction a_direction)
 
 // 		float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
 
-// 		/*if (info) {
+// 		if (info) {
 // 			info->R = R;
 // 			info->r = sqrt(r2);
 // 			info->reflected = angle < 0.0f;
@@ -904,7 +1147,7 @@ RE::NiPoint3 dodge::get_dodge_vector(dodge_direction a_direction)
 // 		}
 
 // 		if (is_blocking(he) || !is_attacking(he))
-// 			return false*/
+// 			return false
 // 		;
 
 // 		auto attackState = he->AsActorState()->GetAttackState();
@@ -937,7 +1180,7 @@ RE::NiPoint3 dodge::get_dodge_vector(dodge_direction a_direction)
 // 		return get_FallbackDistance(info);
 // 	}
 
-// 	/*bool check_angle(RE::Actor* me, RE::Actor* he, const AttackInfo& info, float me_angle)
+// 	bool check_angle(RE::Actor* me, RE::Actor* he, const AttackInfo& info, float me_angle)
 // 	{
 // 		auto angle = _get_circle_angle(info.attackAngle, me_angle, !info.reflected) / 180.0f * PI;
 
@@ -947,7 +1190,7 @@ RE::NiPoint3 dodge::get_dodge_vector(dodge_direction a_direction)
 // 		bool ans = check_collisions(me, &me->data.location, &new_pos);
 
 // 		return ans;
-// 	}*/
+// 	}
 
 // 	CircleDirestions choose_moving_direction_circle(const AttackInfo* const info, RE::Actor* a)
 // 	{
@@ -960,11 +1203,11 @@ RE::NiPoint3 dodge::get_dodge_vector(dodge_direction a_direction)
 // 		const float r = info->r;
 // 		const float me = info->me;
 
-// 		/*if (PA::dist(r, info->attackAngle - me) <= DIST_BORDER && check_angle(a, he, *info, -me)) {
+// 		if (PA::dist(r, info->attackAngle - me) <= DIST_BORDER && check_angle(a, he, *info, -me)) {
 // 			return info->reflected ? CircleDirestions::Left : CircleDirestions::Right;
 // 		} else if (PA::dist(r, info->attackAngle + me) <= DIST_BORDER && check_angle(a, he, *info, me)) {
 // 			return info->reflected ? CircleDirestions::Right : CircleDirestions::Left;
-// 		}*/
+// 		}
 
 // 		return CircleDirestions::None;
 // 	}
@@ -1006,13 +1249,13 @@ RE::NiPoint3 dodge::get_dodge_vector(dodge_direction a_direction)
 
 // 				return false;
 
-// 				/*if (check_collisions(a, &a->data.location, &new_pos)) {
+// 				if (check_collisions(a, &a->data.location, &new_pos)) {
 // 					if (change) {
 // 						dodge::GetSingleton()->attempt_dodge(a, &dodge_directions_tk_reactive, true);
 // 					}
 // 					return true;
 // 				} else {
-// 				}*/
+// 				}
 // 			}
 
 // 			return false;
