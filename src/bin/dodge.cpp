@@ -510,7 +510,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
-	logger::info("Protagnist {} ReflexScore{}"sv, a_actor->GetName(), dodge_chance);
+	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
 
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
