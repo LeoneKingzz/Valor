@@ -520,7 +520,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	// 	return;
 	// }
 
-	if (dodge_chance < 100) {
+	if (dodge_chance > 0) {
 		/* Make a copy and shuffle directions. */
 		dodge_dir_set directions_shuffled = *a_directions;
 		std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen);
