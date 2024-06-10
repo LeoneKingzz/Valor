@@ -653,7 +653,7 @@ int dodge::GenerateRandomInt(int value_a, int value_b) {
 float dodge::GenerateRandomFloat(float value_a, float value_b)
 {
 	std::mt19937 generator(rd());
-	std::uniform_int_distribution<float> dist(value_a, value_b);
+	std::uniform_real_distribution<float> dist(value_a, value_b);
 	return dist(generator);
 }
 
