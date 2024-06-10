@@ -389,7 +389,7 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range, Mo
 			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
 			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
 
-			float attackAngle = attackdata ? attackdata->data.strikeAngle : 10.0f;
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 40.0f;
 
 			if (info) {
 				info->R = R;
@@ -450,7 +450,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	// 	return;
 	// }
 
-	float dodge_chance = a_forceDodge ? 1.f : GetProtaganist_ReflexScore(a_actor);
+	int dodge_chance = a_forceDodge ? 1 : GetProtaganist_ReflexScore(a_actor);
 
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
@@ -640,7 +640,7 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
 
-			TRKE_dodge(a_actor, "TKDodgeForward", true);
+			TRKE_dodge(a_actor, "TKDodgeForward");
 			break;
 		case 1:
 			dmco_dodge(a_actor, a_direction, "Dodge");
@@ -651,7 +651,7 @@ void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 		switch (settings::iDodgeAI_Framework) {
 		case 0:
 
-			TRKE_dodge(a_actor, "TKDodgeBack", true);
+			TRKE_dodge(a_actor, "TKDodgeBack");
 			break;
 		case 1:
 			dmco_dodge(a_actor, a_direction, "Dodge");
