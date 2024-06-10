@@ -34,7 +34,6 @@ namespace hooks
 		}
 		std::string_view eventTag = a_event->tag.data();
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
-		Movement::AttackInfo* info = nullptr;
 		switch (hash(eventTag.data(), eventTag.size())) {
 		case "TKDR_DodgeStart"_h:
 		    if (!actor->IsPlayerRef()) {
@@ -72,7 +71,7 @@ namespace hooks
 		case "preHitFrame"_h:
 			if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
 				
-				dodge::GetSingleton()->react_to_melee(actor, dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor), info);
+				dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
 			}
 			break;
 
@@ -80,7 +79,7 @@ namespace hooks
 		case "BeginCastVoice"_h:
 			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
 				
-				dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f, info);
+				dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
 			}
 			break;
 
@@ -88,7 +87,7 @@ namespace hooks
 		case "BeginCastLeft"_h:
 			if (actor->GetEquippedObject(true)->As<RE::MagicItem>()->IsHostile()) {
 				
-				dodge::GetSingleton()->react_to_shouts_spells(actor, 2000.0f, info);
+				dodge::GetSingleton()->react_to_shouts_spells(actor, 2000.0f);
 			}
 			break;
 
@@ -96,26 +95,26 @@ namespace hooks
 		case "BeginCastRight"_h:
 			if (actor->GetEquippedObject(false)->As<RE::MagicItem>()->IsHostile()) {
 				
-				dodge::GetSingleton()->react_to_shouts_spells(actor, 2000.0f, info);
+				dodge::GetSingleton()->react_to_shouts_spells(actor, 2000.0f);
 			}
 			break;
 
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
 		case "NextPowerAttackInitiate"_h:
-		   
-			dodge::GetSingleton()->react_to_melee(actor, dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor), info);
+
+			dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
 			break;
 
 		case "bashPowerStart"_h:
 		case "BlockBashSprint"_h:
 			
-			dodge::GetSingleton()->react_to_bash(actor, 300.0f, info); 
+			dodge::GetSingleton()->react_to_bash(actor, 300.0f); 
 			break;
 
 		case "BowFullDrawn"_h:
 			
-			dodge::GetSingleton()->react_to_ranged(actor, 1500.0f, info);
+			dodge::GetSingleton()->react_to_ranged(actor, 1500.0f);
 			break;
 		}
 	}

@@ -396,7 +396,7 @@ void dodge::Reset_iFrames(RE::Actor* actor){
 
 
 /*Trigger reactive AI surrounding the attacker.*/
-void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info)
+void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
@@ -421,11 +421,6 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range, Movement::
 
 			float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
 
-			info->R = R;
-			info->r = sqrt(r2);
-			info->reflected = angle < 0.0f;
-			info->me = abs(angle);
-			info->attackAngle = attackAngle;
 
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
@@ -448,7 +443,7 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range, Movement::
 	});
 }
 
-void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info)
+void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
@@ -473,12 +468,6 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range, Movement::A
 
 			float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
 
-			info->R = R;
-			info->r = sqrt(r2);
-			info->reflected = angle < 0.0f;
-			info->me = abs(angle);
-			info->attackAngle = attackAngle;
-
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -497,7 +486,7 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range, Movement::A
 	});
 }
 
-void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info)
+void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
@@ -526,12 +515,6 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range, Movement:
 
 			float attackAngle = attackdata ? attackdata->data.strikeAngle : 10.0f;
 
-			info->R = R;
-			info->r = sqrt(r2);
-			info->reflected = angle < 0.0f;
-			info->me = abs(angle);
-			info->attackAngle = attackAngle;
-
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -549,7 +532,7 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range, Movement:
 	});
 }
 
-void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info)
+void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
@@ -577,12 +560,6 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range, Mo
 			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
 
 			float attackAngle = attackdata ? attackdata->data.strikeAngle : 40.0f;
-
-			info->R = R;
-			info->r = sqrt(r2);
-			info->reflected = angle < 0.0f;
-			info->me = abs(angle);
-			info->attackAngle = attackAngle;
 
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;

@@ -92,10 +92,10 @@ public:
 		return &singleton;
 	}
 
-	void react_to_melee(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info);
-	void react_to_bash(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info);
-	void react_to_ranged(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info);
-	void react_to_shouts_spells(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info);
+	void react_to_melee(RE::Actor* a_attacker, float attack_range);
+	void react_to_bash(RE::Actor* a_attacker, float attack_range);
+	void react_to_ranged(RE::Actor* a_attacker, float attack_range);
+	void react_to_shouts_spells(RE::Actor* a_attacker, float attack_range);
 
 	struct
 	{
