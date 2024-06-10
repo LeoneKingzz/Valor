@@ -315,7 +315,7 @@ int dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
 
 	Score += (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kSneak)/100.0f) * Protagnist_Reflexes.Sneak_Weighting;
 
-	return static_cast<int>(Score) * 100;
+	return (static_cast<int>(Score)) * 100;
 }
 
 bool dodge::BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm)
