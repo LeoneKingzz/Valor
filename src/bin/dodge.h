@@ -22,21 +22,21 @@ enum dodge_direction
 };
 typedef std::vector<dodge_direction> dodge_dir_set;
 
-const dodge_dir_set dodge_directions_tk_horizontal = { dodge_direction::kLeft, dodge_direction::kRight };
-const dodge_dir_set dodge_directions_tk_back = { dodge_direction::kBackward };
-const dodge_dir_set dodge_directions_tk_vertical = { dodge_direction::kForward, dodge_direction::kBackward };
-const dodge_dir_set dodge_directions_tk_all = { dodge_direction::kForward, dodge_direction::kBackward, dodge_direction::kLeft, dodge_direction::kRight };
-const dodge_dir_set dodge_directions_tk_reactive = { dodge_direction::kBackward, dodge_direction::kLeft, dodge_direction::kRight };
-const dodge_dir_set dodge_directions_tk_right = { dodge_direction::kRight };
-const dodge_dir_set dodge_directions_tk_left = { dodge_direction::kLeft };
+const dodge_dir_set dodge_directions_tk_horizontal =  = dodge_direction::kLeft, dodge_direction::kRight;
+const dodge_dir_set dodge_directions_tk_back =  = dodge_direction::kBackward;
+const dodge_dir_set dodge_directions_tk_vertical =  = dodge_direction::kForward, dodge_direction::kBackward;
+const dodge_dir_set dodge_directions_tk_all =  = dodge_direction::kForward, dodge_direction::kBackward, dodge_direction::kLeft, dodge_direction::kRight;
+const dodge_dir_set dodge_directions_tk_reactive =  = dodge_direction::kBackward, dodge_direction::kLeft, dodge_direction::kRight;
+const dodge_dir_set dodge_directions_tk_right =  = dodge_direction::kRight;
+const dodge_dir_set dodge_directions_tk_left =  = dodge_direction::kLeft;
 
-const dodge_dir_set dodge_directions_dmco_horizontal = { dodge_direction::kLeft, dodge_direction::kRight, dodge_direction::kLeftForward, dodge_direction::kRightForward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward };
-const dodge_dir_set dodge_directions_dmco_left = { dodge_direction::kLeft, dodge_direction::kLeftForward, dodge_direction::kLeftBackward };
-const dodge_dir_set dodge_directions_dmco_right = { dodge_direction::kRight, dodge_direction::kRightForward, dodge_direction::kRightBackward };
+const dodge_dir_set dodge_directions_dmco_horizontal =  = dodge_direction::kLeft, dodge_direction::kRight, dodge_direction::kLeftForward, dodge_direction::kRightForward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward;
+const dodge_dir_set dodge_directions_dmco_left =  = dodge_direction::kLeft, dodge_direction::kLeftForward, dodge_direction::kLeftBackward;
+const dodge_dir_set dodge_directions_dmco_right =  = dodge_direction::kRight, dodge_direction::kRightForward, dodge_direction::kRightBackward;
 
-const dodge_dir_set dodge_directions_dmco_back = { dodge_direction::kBackward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward };
-const dodge_dir_set dodge_directions_dmco_vertical = { dodge_direction::kForward, dodge_direction::kBackward, dodge_direction::kLeftForward, dodge_direction::kRightForward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward };
-const dodge_dir_set dodge_directions_dmco_reactive = { dodge_direction::kLeft, dodge_direction::kRight, dodge_direction::kBackward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward };
+const dodge_dir_set dodge_directions_dmco_back =  = dodge_direction::kBackward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward;
+const dodge_dir_set dodge_directions_dmco_vertical =  = dodge_direction::kForward, dodge_direction::kBackward, dodge_direction::kLeftForward, dodge_direction::kRightForward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward;
+const dodge_dir_set dodge_directions_dmco_reactive =  = dodge_direction::kLeft, dodge_direction::kRight, dodge_direction::kBackward, dodge_direction::kLeftBackward, dodge_direction::kRightBackward;
 const dodge_dir_set dodge_directions_dmco_all = {
 	dodge_direction::kForward,
 	dodge_direction::kBackward,
@@ -67,33 +67,33 @@ public:
 
 	struct
 	{
-		inline static float Heavyarm_mult{ 0.25f };
-		inline static float Lightarm_mult{ 0.75f };
-		inline static float clothing_mult{ 1.0f };
+		inline static float Heavyarm_mult = 0.25f;
+		inline static float Lightarm_mult = 0.75f;
+		inline static float clothing_mult = 1.0f;
 
-		inline static float Helm_weight{ 0.1f };
-		inline static float Gauntlet_weight{ 0.1f };
-		inline static float Boots_weight{ 0.1f };
-		inline static float Chest_weight{ 0.6f };
-		inline static float Shield_weight{ 0.1f };
+		inline static float Helm_weight = 0.1f;
+		inline static float Gauntlet_weight = 0.1f;
+		inline static float Boots_weight = 0.1f;
+		inline static float Chest_weight = 0.6f;
+		inline static float Shield_weight = 0.1f;
 
 	} inline static Armour;
 
 	struct
 	{
-		inline static float Sneak_Weighting{ 0.2f };
-		inline static float Skirmish_Weighting{ 0.2f };
-		inline static float Defensive_Weighting{ 0.3f };
-		inline static float Armour_Weighting{ 0.3f };
+		inline static float Sneak_Weighting = 0.2f;
+		inline static float Skirmish_Weighting = 0.2f;
+		inline static float Defensive_Weighting = 0.3f;
+		inline static float Armour_Weighting = 0.3f;
 
 	} inline static Protagnist_Reflexes;
 
 	struct
 	{
-		inline static float Skirmish_AvoidThreat_Weighting{ 0.25f };
-		inline static float Skirmish_Fallback_Weighting{ 0.3f };
-		inline static float Skirmish_Circle_Weighting{ 0.3f };
-		inline static float Skirmish_Strafe_Weighting{ 0.15f };
+		inline static float Skirmish_AvoidThreat_Weighting = 0.25f;
+		inline static float Skirmish_Fallback_Weighting = 0.3f;
+		inline static float Skirmish_Circle_Weighting = 0.3f;
+		inline static float Skirmish_Strafe_Weighting = 0.15f;
 
 	} inline static CStyle;
 
@@ -161,4 +161,4 @@ private:
 // 		uint32_t should_danger(RE::Character*);
 // 	}
 
-// }
+//
