@@ -1,5 +1,5 @@
 #pragma once
-
+#include "include/Utils.h"
 
 template <int id, typename T, typename... Args>
 T _generic_foo(Args... args)
@@ -9,7 +9,7 @@ T _generic_foo(Args... args)
 	return func(std::forward<Args>(args)...);
 }
 
-static const float PI = 3.141592653f;
+// static const float PI = 3.141592653f;
 
 namespace Utils
 {
