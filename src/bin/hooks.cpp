@@ -34,7 +34,7 @@ namespace hooks
 		}
 		std::string_view eventTag = a_event->tag.data();
 		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
-		Movement::AttackInfo* info;
+		Movement::AttackInfo* info = nullptr;
 		switch (hash(eventTag.data(), eventTag.size())) {
 		case "TKDR_DodgeStart"_h:
 		    if (!actor->IsPlayerRef()) {
