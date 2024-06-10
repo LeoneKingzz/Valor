@@ -72,7 +72,7 @@ namespace hooks
 		case "preHitFrame"_h:
 			if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
 				
-				dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor), info);
+				dodge::GetSingleton()->react_to_melee(actor, dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor), info);
 			}
 			break;
 
@@ -104,7 +104,7 @@ namespace hooks
 		case "NextAttackInitiate"_h:
 		case "NextPowerAttackInitiate"_h:
 		   
-			dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor), info);
+			dodge::GetSingleton()->react_to_melee(actor, dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor), info);
 			break;
 
 		case "bashPowerStart"_h:
