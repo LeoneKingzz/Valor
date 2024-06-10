@@ -76,7 +76,7 @@ namespace hooks
 			break;
 
 		case "Voice_SpellFire_Event"_h:
-		case "BeginCastVoice"_h:
+		// case "BeginCastVoice"_h:
 			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
 				
 				dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
@@ -84,7 +84,7 @@ namespace hooks
 			break;
 
 		case "MLh_SpellFire_Event"_h:
-		case "BeginCastLeft"_h:
+		// case "BeginCastLeft"_h:
 			if (actor->GetEquippedObject(true)->As<RE::MagicItem>()->IsHostile()) {
 				
 				dodge::GetSingleton()->react_to_shouts_spells(actor, 2000.0f);
@@ -92,19 +92,19 @@ namespace hooks
 			break;
 
 		case "MRh_SpellFire_Event"_h:
-		case "BeginCastRight"_h:
+		// case "BeginCastRight"_h:
 			if (actor->GetEquippedObject(false)->As<RE::MagicItem>()->IsHostile()) {
 				
 				dodge::GetSingleton()->react_to_shouts_spells(actor, 2000.0f);
 			}
 			break;
 
-		case "PowerAttack_Start_end"_h:
-		case "NextAttackInitiate"_h:
-		case "NextPowerAttackInitiate"_h:
+		// case "PowerAttack_Start_end"_h:
+		// case "NextAttackInitiate"_h:
+		// case "NextPowerAttackInitiate"_h:
 
-			dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
-			break;
+		// 	dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
+		// 	break;
 
 		case "bashPowerStart"_h:
 		case "BlockBashSprint"_h:

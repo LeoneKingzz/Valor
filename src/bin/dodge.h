@@ -102,6 +102,7 @@ public:
 	static bool BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm);
 
 	int GenerateRandomInt(int value_a, int value_b);
+	float GenerateRandomFloat(float value_a, float value_b);
 		
 	void attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
 

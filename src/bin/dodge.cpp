@@ -509,6 +509,8 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
+	logger::info("{} v{}"sv, a_actor->GetName(), dodge_chance);
+
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
 	// std::uniform_real_distribution<> dis(0.f, 1.f);
@@ -516,48 +518,29 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 		
 	// 	return;
 	// }
-	// if (dodge::GetSingleton()->GenerateRandomInt(1, 100) > dodge_chance) {
-	// 	return;
-	// }
+	if (dodge::GetSingleton()->GenerateRandomFloat(0.0, 1.0) > dodge_chance) {
+		return;
+	}
 
-	if (dodge_chance > 0.0) {
-		logger::info("{}"sv, dodge_chance);
-		/* Make a copy and shuffle directions. */
-		dodge_dir_set directions_shuffled = *a_directions;
-		std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen);
+	
+	/* Make a copy and shuffle directions. */
+	dodge_dir_set directions_shuffled = *a_directions;
+	std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen); 
 
-		for (dodge_direction direction : directions_shuffled) {
-			RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
-			if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
-				bool bIsDodging = false;
-				if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-					do_dodge(a_actor, direction);
-				}
-				return;
-			} else {
-				return;
+
+	for (dodge_direction direction : directions_shuffled) {
+		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
+		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
+			bool bIsDodging = false;
+			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				do_dodge(a_actor, direction);
 			}
+			return;
+		} else {
+			
+			return;
 		}
 	}
-	
-	// /* Make a copy and shuffle directions. */
-	// dodge_dir_set directions_shuffled = *a_directions;
-	// std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen); 
-
-
-	// for (dodge_direction direction : directions_shuffled) {
-	// 	RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
-	// 	if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
-	// 		bool bIsDodging = false;
-	// 		if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-	// 			do_dodge(a_actor, direction);
-	// 		}
-	// 		return;
-	// 	} else {
-			
-	// 		return;
-	// 	}
-	// }
 }
 
 
@@ -664,6 +647,13 @@ int dodge::GenerateRandomInt(int value_a, int value_b) {
 
 	std::mt19937 generator(rd());
 	std::uniform_int_distribution<int> dist(value_a, value_b);
+	return dist(generator);
+}
+
+float dodge::GenerateRandomFloat(float value_a, float value_b)
+{
+	std::mt19937 generator(rd());
+	std::uniform_int_distribution<float> dist(value_a, value_b);
 	return dist(generator);
 }
 
