@@ -294,9 +294,6 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range, Movement::A
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 
-			if (r2 > R * R && (!is_powerattacking(a_attacker) || r2 > 500.0f * 500.0f)) {
-				return RE::BSContainer::ForEachResult::kContinue;
-			}
 			/*RE::Character* a_refr = refr->As<RE::Character>();*/
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
@@ -311,7 +308,7 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range, Movement::A
 	});
 }
 
-void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
+void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
@@ -348,7 +345,7 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 	});
 }
 
-void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
+void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;

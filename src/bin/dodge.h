@@ -100,8 +100,8 @@ public:
 
 	void react_to_melee(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info);
 	void react_to_bash(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info);
-	void react_to_ranged(RE::Actor* a_attacker, float attack_range);
-	void react_to_shouts_spells(RE::Actor* a_attacker, float attack_range);
+	void react_to_ranged(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info);
+	void react_to_shouts_spells(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info);
 
 	void set_dodge_phase(RE::Actor* a_dodger, bool a_isDodging);
 	bool get_is_dodging(RE::Actor* a_actor);

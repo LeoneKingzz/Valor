@@ -73,29 +73,33 @@ namespace hooks
 			break;
 	
 		case "preHitFrame"_h:
-			if (!actor->IsPlayerRef()) {
-				//actor->SetGraphVariableBool("bUND_IsDodgeRolling", false);//
-				if (settings::biFrames_enable) {
-					dodge::Reset_iFrames(actor);
-				}
+			if (actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kBash) {
+				Movement::AttackInfo* info;
+				dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor), info);
 			}
 			break;
 
 		case "Voice_SpellFire_Event"_h:
 		case "MLh_SpellFire_Event"_h:
 		case "MRh_SpellFire_Event"_h:
-			dodge::GetSingleton()->react_to_melee(actor,)
+		case "BeginCastVoice"_h:
+		case "BeginCastLeft"_h:
+		case "BeginCastRight"_h:
+			Movement::AttackInfo* info;
+			dodge::GetSingleton()->react_to_shouts_spells(actor, get_combat_reach(actor), info);
 			break;
 
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
 		case "NextPowerAttackInitiate"_h:
-			dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor), nullptr);
+		    Movement::AttackInfo* info;
+			dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor), info);
 			break;
 
 		case "bashPowerStart"_h:
 		case "BlockBashSprint"_h:
-			dodge::GetSingleton()->react_to_bash(actor, 300.0f, nullptr); 
+			Movement::AttackInfo* info;
+			dodge::GetSingleton()->react_to_bash(actor, 300.0f, info); 
 			break;
 
 		case "BowFullDrawn"_h:
