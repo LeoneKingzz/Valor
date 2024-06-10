@@ -128,22 +128,116 @@ bool dodge::BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm)
 
 
 /*Get the dodge chance of a reactive dodger in case of an incoming attack.*/
-float get_dodge_chance(RE::Actor* a_dodger) {
+int dodge::get_dodge_chance(RE::Actor* a_actor) {
+	float Score = 0.0f;
 
-	float score = 0.0f;
+	/////////////////////////////////////////////////Armour Weighting////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	auto Helm = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kHair);
 
-	if (a_dodger->GetActorRuntimeData().combatController) {
-		RE::TESCombatStyle* style = a_dodger->GetActorRuntimeData().combatController->combatStyle;
+	auto Chest = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kBody);
+
+	auto Gauntlet = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kHands);
+
+	auto Boots = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kFeet);
+
+	auto Shield = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kShield);
+
+	if (Helm) {
+		switch (Helm->GetArmorType()) {
+		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+			Score += Armour.Helm_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kLightArmor:
+			Score += Armour.Helm_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kClothing:
+			Score += Armour.Helm_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		}
+	} else {
+		Score += Armour.Helm_weight * Protagnist_Reflexes.Armour_Weighting;
+	}
+
+	if (Chest) {
+		switch (Chest->GetArmorType()) {
+		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+			Score += Armour.Chest_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kLightArmor:
+			Score += Armour.Chest_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kClothing:
+			Score += Armour.Chest_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		}
+	} else {
+		Score += Armour.Chest_weight * Protagnist_Reflexes.Armour_Weighting;
+	}
+
+	if (Gauntlet) {
+		switch (Gauntlet->GetArmorType()) {
+		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+			Score += Armour.Gauntlet_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kLightArmor:
+			Score += Armour.Gauntlet_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kClothing:
+			Score += Armour.Gauntlet_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		}
+	} else {
+		Score += Armour.Gauntlet_weight * Protagnist_Reflexes.Armour_Weighting;
+	}
+
+	if (Boots) {
+		switch (Boots->GetArmorType()) {
+		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+			Score += Armour.Boots_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kLightArmor:
+			Score += Armour.Boots_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kClothing:
+			Score += Armour.Boots_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		}
+	} else {
+		Score += Armour.Boots_weight * Protagnist_Reflexes.Armour_Weighting;
+	}
+
+	if (Utils::Actor::isEquippedShield(a_actor)) {
+		switch (Shield->GetArmorType()) {
+		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+			Score += Armour.Shield_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kLightArmor:
+			Score += Armour.Shield_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		}
+	} else {
+		Score += Armour.Shield_weight * Protagnist_Reflexes.Armour_Weighting;
+	}
+
+	/////////////////////////////////////////////////Defensive & Skirmish Weighting ///////////////////////////////////////////////////////////////////////////////////////////
+
+	if (a_actor->GetActorRuntimeData().combatController) {
+		RE::TESCombatStyle* style = a_actor->GetActorRuntimeData().combatController->combatStyle;
 		if (style) {
-			score += (style->generalData.avoidThreatChance / 1.0f) * 0.3f;
-		} else {
-			score += (0.1f / 1.0f) * 0.3f;
+			Score += style->generalData.defensiveMult * Protagnist_Reflexes.Defensive_Weighting;
+
+			Score += style->generalData.avoidThreatChance * CStyle.Skirmish_AvoidThreat_Weighting * Protagnist_Reflexes.Skirmish_Weighting;
+			Score += style->closeRangeData.circleMult * CStyle.Skirmish_Circle_Weighting * Protagnist_Reflexes.Skirmish_Weighting;
+			Score += style->closeRangeData.fallbackMult * CStyle.Skirmish_Fallback_Weighting * Protagnist_Reflexes.Skirmish_Weighting;
+			Score += style->longRangeData.strafeMult * CStyle.Skirmish_Strafe_Weighting * Protagnist_Reflexes.Skirmish_Weighting;
 		}
 	}
 
-	score += (a_dodger->AsActorValueOwner()->GetActorValue(RE::ActorValue::kSneak) / 100.0f) * 0.7f;
+	/////////////////////////////////////////////////Sneak Skill Weighting /////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	return score;
+	Score += (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kSneak) / 100.0f) * Protagnist_Reflexes.Sneak_Weighting;
+
+	return (static_cast<int>(Score)) * 100;
 }
 
 float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
@@ -413,7 +507,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	// 	return;
 	// }
 
-	int dodge_chance = a_forceDodge ? 100 : GetProtaganist_ReflexScore(a_actor);
+	int dodge_chance = a_forceDodge ? 100 : get_dodge_chance(a_actor);
 
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/

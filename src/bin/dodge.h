@@ -112,6 +112,7 @@ public:
 	bool get_is_dodging(RE::Actor* a_actor);
 
 	float Get_ReactiveDodge_Distance(RE::Actor *actor);
+	int get_dodge_chance(RE::Actor* a_actor);
 
 private:
 	
