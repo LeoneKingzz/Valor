@@ -90,7 +90,7 @@ bool is_moving(RE::Actor* a)
 	return state.running || state.walking || state.sprinting;
 }
 
-static float get_angle_he_me(RE::Actor* me, RE::Actor* he, RE::BGSAttackData* attackdata)
+float get_angle_he_me(RE::Actor* me, RE::Actor* he, RE::BGSAttackData* attackdata)
 {
 	auto he_me = PA(me->GetPosition() - he->GetPosition());
 	auto head = PA(he->GetHeading(false) * 180.0f / PI);
@@ -147,15 +147,6 @@ namespace Movement
 		Left,
 		Right,
 		Back
-	};
-
-	struct AttackInfo
-	{
-		float R;
-		float attackAngle;
-		float r;
-		PA me;
-		bool reflected;
 	};
 
 	static float _get_circle_angle(float attackAngle, float angle, bool notreflected)

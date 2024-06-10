@@ -62,6 +62,7 @@ namespace hooks
 				}
 			}
 			break;
+
 		case "TKDR_DodgeEnd"_h:
 			if (!actor->IsPlayerRef()) {
 				//actor->SetGraphVariableBool("bUND_IsDodgeRolling", false);//
@@ -69,6 +70,36 @@ namespace hooks
 					dodge::Reset_iFrames(actor);
 				}
 			}
+			break;
+	
+		case "preHitFrame"_h:
+			if (!actor->IsPlayerRef()) {
+				//actor->SetGraphVariableBool("bUND_IsDodgeRolling", false);//
+				if (settings::biFrames_enable) {
+					dodge::Reset_iFrames(actor);
+				}
+			}
+			break;
+
+		case "Voice_SpellFire_Event"_h:
+		case "MLh_SpellFire_Event"_h:
+		case "MRh_SpellFire_Event"_h:
+			dodge::GetSingleton()->react_to_melee(actor,)
+			break;
+
+		case "PowerAttack_Start_end"_h:
+		case "NextAttackInitiate"_h:
+		case "NextPowerAttackInitiate"_h:
+			dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor), nullptr);
+			break;
+
+		case "bashPowerStart"_h:
+		case "BlockBashSprint"_h:
+			dodge::GetSingleton()->react_to_bash(actor, 300.0f, nullptr); 
+			break;
+
+		case "BowFullDrawn"_h:
+			dodge::GetSingleton()->react_to_melee(actor, ) 
 			break;
 		}
 	}

@@ -4,6 +4,7 @@
 #include <algorithm>
 #include "RE/M/Misc.h"
 #include "CombatBehaviorConditions.h"
+#include "UselessFenixUtils.h"
 #define PI 3.1415926535f
 using writeLock = std::unique_lock<std::shared_mutex>;
 using readLock = std::shared_lock<std::shared_mutex>;
@@ -202,7 +203,7 @@ void dodge::Reset_iFrames(RE::Actor* actor){
 
 
 /*Trigger reactive AI surrounding the attacker.*/
-void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
+void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
@@ -212,22 +213,43 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			if (ValhallaUtils::isBackFacing(a_attacker, refr)) {  //no need to react to an attack if the attacker isn't facing you.
+
+			auto R = attack_range;
+			auto r2 = get_dist2(refr, a_attacker);
+
+			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
+			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
+
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
+
+			if (info) {
+				info->R = R;
+				info->r = sqrt(r2);
+				info->reflected = angle < 0.0f;
+				info->me = abs(angle);
+				info->attackAngle = attackAngle;
+			}
+
+			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			RE::Character* a_refr = refr->As<RE::Character>();
+
+			if (r2 > R * R && (!is_powerattacking(a_attacker) || r2 > 500.0f * 500.0f)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				Movement::Dodging::should(a_refr);
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
 				break;
 			case 1:
-				Movement::Dodging::should(a_refr);
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_all);
 				break;
 			}
 		}
@@ -235,8 +257,7 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 	});
 }
 
-
-void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
+void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range, Movement::AttackInfo* info)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
@@ -246,13 +267,34 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			if (ValhallaUtils::isBackFacing(a_attacker, refr)) {  //no need to react to an attack if the attacker isn't facing you.
+
+			auto R = attack_range;
+			auto r2 = get_dist2(refr, a_attacker);
+
+			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
+			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
+
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
+
+			if (info) {
+				info->R = R;
+				info->r = sqrt(r2);
+				info->reflected = angle < 0.0f;
+				info->me = abs(angle);
+				info->attackAngle = attackAngle;
+			}
+
+			if (abs(angle) > attackAngle) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
+			if (r2 > R * R && (!is_powerattacking(a_attacker) || r2 > 500.0f * 500.0f)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			/*RE::Character* a_refr = refr->As<RE::Character>();*/
@@ -269,7 +311,7 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 	});
 }
 
-void dodge::react_to_ranged_and_shouts(RE::Actor* a_attacker, float attack_range)
+void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 {
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
@@ -279,11 +321,48 @@ void dodge::react_to_ranged_and_shouts(RE::Actor* a_attacker, float attack_range
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || refr->IsInKillMove() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			bool hasLOS = false;
-			if (!(refr->HasLineOfSight(a_attacker, hasLOS) && hasLOS)) {
+			if (refr->HasLineOfSight(a_attacker, hasLOS) && !hasLOS) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (!Utils::Actor::isHumanoid(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (ValhallaUtils::isBackFacing(a_attacker, refr)) {  //no need to react to an attack if the attacker isn't facing you.
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
+			switch (settings::iDodgeAI_Framework) {
+			case 0:
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_reactive);
+				break;
+			case 1:
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
+				break;
+			}
+		}
+		return RE::BSContainer::ForEachResult::kContinue;
+	});
+}
+
+void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
+{
+	if (!settings::bDodgeAI_Reactive_enable) {
+		return;
+	}
+
+	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
+		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+			RE::Actor* refr = _refr->As<RE::Actor>();
+
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			bool hasLOS = false;
+			if (refr->HasLineOfSight(a_attacker, hasLOS) && !hasLOS) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
