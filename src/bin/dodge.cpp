@@ -421,13 +421,11 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range, Movement::
 
 			float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
 
-			if (info) {
-				info->R = R;
-				info->r = sqrt(r2);
-				info->reflected = angle < 0.0f;
-				info->me = abs(angle);
-				info->attackAngle = attackAngle;
-			}
+			info->R = R;
+			info->r = sqrt(r2);
+			info->reflected = angle < 0.0f;
+			info->me = abs(angle);
+			info->attackAngle = attackAngle;
 
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
@@ -475,13 +473,11 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range, Movement::A
 
 			float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
 
-			if (info) {
-				info->R = R;
-				info->r = sqrt(r2);
-				info->reflected = angle < 0.0f;
-				info->me = abs(angle);
-				info->attackAngle = attackAngle;
-			}
+			info->R = R;
+			info->r = sqrt(r2);
+			info->reflected = angle < 0.0f;
+			info->me = abs(angle);
+			info->attackAngle = attackAngle;
 
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
@@ -530,13 +526,11 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range, Movement:
 
 			float attackAngle = attackdata ? attackdata->data.strikeAngle : 10.0f;
 
-			if (info) {
-				info->R = R;
-				info->r = sqrt(r2);
-				info->reflected = angle < 0.0f;
-				info->me = abs(angle);
-				info->attackAngle = attackAngle;
-			}
+			info->R = R;
+			info->r = sqrt(r2);
+			info->reflected = angle < 0.0f;
+			info->me = abs(angle);
+			info->attackAngle = attackAngle;
 
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
@@ -584,13 +578,11 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range, Mo
 
 			float attackAngle = attackdata ? attackdata->data.strikeAngle : 40.0f;
 
-			if (info) {
-				info->R = R;
-				info->r = sqrt(r2);
-				info->reflected = angle < 0.0f;
-				info->me = abs(angle);
-				info->attackAngle = attackAngle;
-			}
+			info->R = R;
+			info->r = sqrt(r2);
+			info->reflected = angle < 0.0f;
+			info->me = abs(angle);
+			info->attackAngle = attackAngle;
 
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
