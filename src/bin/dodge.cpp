@@ -128,7 +128,7 @@ bool dodge::BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm)
 
 
 /*Get the dodge chance of a reactive dodger in case of an incoming attack.*/
-int dodge::get_dodge_chance(RE::Actor* a_actor) {
+float dodge::get_dodge_chance(RE::Actor* a_actor) {
 	float Score = 0.0f;
 
 	/////////////////////////////////////////////////Armour Weighting////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -237,7 +237,7 @@ int dodge::get_dodge_chance(RE::Actor* a_actor) {
 
 	Score += (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kSneak) / 100.0f) * Protagnist_Reflexes.Sneak_Weighting;
 
-	return (static_cast<int>(Score)) * 100;
+	return Score;
 }
 
 float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
@@ -507,7 +507,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	// 	return;
 	// }
 
-	int dodge_chance = a_forceDodge ? 100 : get_dodge_chance(a_actor);
+	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
@@ -520,7 +520,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	// 	return;
 	// }
 
-	if (dodge_chance > 0) {
+	if (dodge_chance > 0.0) {
 		logger::info("{}"sv, dodge_chance);
 		/* Make a copy and shuffle directions. */
 		dodge_dir_set directions_shuffled = *a_directions;
