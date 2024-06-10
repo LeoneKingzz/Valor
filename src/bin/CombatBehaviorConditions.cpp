@@ -1,6 +1,5 @@
-#include "UselessFenixUtils.h"
 #include "CombatBehaviorConditions.h"
-#include "dodge.h"
+
 
 
 
@@ -136,18 +135,7 @@ float get_combat_reach(RE::Actor* a)
 
 
 
-namespace Movement
-{
-	using PA = Utils::PolarAngle;
-	const float default_angle = 50.0f;
-
-	enum class CircleDirestions
-	{
-		None,
-		Left,
-		Right,
-		Back
-	};
+namespace Movement {
 
 	static float _get_circle_angle(float attackAngle, float angle, bool notreflected)
 	{

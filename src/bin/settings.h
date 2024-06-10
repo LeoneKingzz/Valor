@@ -1,6 +1,8 @@
 #pragma once
 #define SQRT2 1.4142135624f
 #include <SimpleIni.h>
+#include "include/Utils.h"
+#include "dodge.h"
 using EventResult = RE::BSEventNotifyControl;
 
 class settings

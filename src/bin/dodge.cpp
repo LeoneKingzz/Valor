@@ -1,10 +1,4 @@
 #include "dodge.h"
-#include "settings.h"
-#include "include/Utils.h"
-#include <algorithm>
-#include "RE/M/Misc.h"
-#include "CombatBehaviorConditions.h"
-#include "UselessFenixUtils.h"
 #define PI 3.1415926535f
 using writeLock = std::unique_lock<std::shared_mutex>;
 using readLock = std::shared_lock<std::shared_mutex>;

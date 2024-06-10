@@ -1,8 +1,4 @@
 #include "hooks.h"
-#include "settings.h"
-#include "dodge.h"
-#include "include/Utils.h"
-#include "CombatBehaviorConditions.h"
 
 namespace hooks
 {

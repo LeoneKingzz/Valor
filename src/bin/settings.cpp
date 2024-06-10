@@ -1,6 +1,4 @@
 #include "settings.h"
-#include "include/Utils.h"
-#include "dodge.h"
 // #define SETTINGFILE_PATH "Data\\SKSE\\Plugins\\UltimateNPCDodging.ini"
 
 // #define FETCH(setting) load(setting, #setting)

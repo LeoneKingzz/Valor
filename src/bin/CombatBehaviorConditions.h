@@ -1,9 +1,22 @@
 #pragma once
+#include "UselessFenixUtils.h"
+#include "dodge.h"
 
 namespace Movement
 {
+	using PA = Utils::PolarAngle;
+	const float default_angle = 50.0f;
+
 	float get_FallbackDistance(RE::Character* me);
 	// bool isInDanger(RE::Actor* me, AttackInfo* info = nullptr);
+
+	enum class CircleDirestions
+	{
+		None,
+		Left,
+		Right,
+		Back
+	};
 
 	struct AttackInfo
 	{

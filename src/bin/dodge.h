@@ -2,7 +2,12 @@
 #include "PCH.h"
 #include <unordered_set>
 #include <shared_mutex>
-
+#include "CombatBehaviorConditions.h"
+#include "UselessFenixUtils.h"
+#include "settings.h"
+#include "include/Utils.h"
+#include <algorithm>
+#include "RE/M/Misc.h"
 
 enum dodge_direction
 {

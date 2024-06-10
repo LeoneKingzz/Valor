@@ -1,4 +1,8 @@
 #include "SKSE/Trampoline.h"
+#include "settings.h"
+#include "dodge.h"
+#include "include/Utils.h"
+#include "CombatBehaviorConditions.h"
 #pragma warning(disable: 4100)
 
 
