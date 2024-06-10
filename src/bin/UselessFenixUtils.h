@@ -9,7 +9,7 @@ T _generic_foo(Args... args)
 	return func(std::forward<Args>(args)...);
 }
 
-static inline const float PI = 3.141592653f;
+static const float PI = 3.141592653f;
 
 namespace Utils
 {

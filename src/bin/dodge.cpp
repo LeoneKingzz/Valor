@@ -1,5 +1,5 @@
 #include "dodge.h"
-#define PI 3.1415926535f
+//#define PI 3.1415926535f
 using writeLock = std::unique_lock<std::shared_mutex>;
 using readLock = std::shared_lock<std::shared_mutex>;
 
