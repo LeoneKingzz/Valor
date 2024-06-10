@@ -365,9 +365,6 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range, Mo
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			if (ValhallaUtils::isBackFacing(a_attacker, refr)) {  //no need to react to an attack if the attacker isn't facing you.
-				return RE::BSContainer::ForEachResult::kContinue;
-			}
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
@@ -412,18 +409,7 @@ bool dodge::get_is_dodging(RE::Actor* a_actor)
 void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
 {
 
-	// auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
-
 	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
-	// 	return;
-	// }
-
-	// bool hasLOS = false;
-	// if (a_actor->HasLineOfSight(CombatTarget, hasLOS) && !hasLOS) {
-	// 	return;
-	// }
-
-	// if (a_actor->GetPosition().GetDistance(CombatTarget->GetPosition()) > get_combat_reach(CombatTarget)) {
 	// 	return;
 	// }
 

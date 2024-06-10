@@ -73,20 +73,34 @@ namespace hooks
 			break;
 	
 		case "preHitFrame"_h:
-			if (actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kBash) {
+			if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
 				Movement::AttackInfo* info;
 				dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor), info);
 			}
 			break;
 
 		case "Voice_SpellFire_Event"_h:
-		case "MLh_SpellFire_Event"_h:
-		case "MRh_SpellFire_Event"_h:
 		case "BeginCastVoice"_h:
+			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
+				Movement::AttackInfo* info;
+				dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f, info);
+			}
+			break;
+
+		case "MLh_SpellFire_Event"_h:
 		case "BeginCastLeft"_h:
+			if (actor->GetEquippedObject(true)->As<RE::MagicItem>()->IsHostile()) {
+				Movement::AttackInfo* info;
+				dodge::GetSingleton()->react_to_shouts_spells(actor, 2000.0f, info);
+			}
+			break;
+
+		case "MRh_SpellFire_Event"_h:
 		case "BeginCastRight"_h:
-			Movement::AttackInfo* info;
-			dodge::GetSingleton()->react_to_shouts_spells(actor, get_combat_reach(actor), info);
+			if (actor->GetEquippedObject(false)->As<RE::MagicItem>()->IsHostile()) {
+				Movement::AttackInfo* info;
+				dodge::GetSingleton()->react_to_shouts_spells(actor, 2000.0f, info);
+			}
 			break;
 
 		case "PowerAttack_Start_end"_h:
@@ -103,7 +117,8 @@ namespace hooks
 			break;
 
 		case "BowFullDrawn"_h:
-			dodge::GetSingleton()->react_to_melee(actor, ) 
+			Movement::AttackInfo* info;
+			dodge::GetSingleton()->react_to_ranged(actor, 1500.0f, info);
 			break;
 		}
 	}
