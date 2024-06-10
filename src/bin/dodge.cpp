@@ -460,8 +460,8 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 
-			auto R = attack_range;
-			auto r2 = get_dist2(refr, a_attacker);
+			// auto R = attack_range;
+			// auto r2 = get_dist2(refr, a_attacker);
 
 			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
 			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
@@ -507,8 +507,8 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 
-			auto R = attack_range;
-			auto r2 = get_dist2(refr, a_attacker);
+			// auto R = attack_range;
+			// auto r2 = get_dist2(refr, a_attacker);
 
 			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
 			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
@@ -553,8 +553,8 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 
-			auto R = attack_range;
-			auto r2 = get_dist2(refr, a_attacker);
+			// auto R = attack_range;
+			// auto r2 = get_dist2(refr, a_attacker);
 
 			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
 			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
