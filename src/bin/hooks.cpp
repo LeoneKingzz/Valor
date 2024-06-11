@@ -64,6 +64,7 @@ namespace hooks
 				if (settings::biFrames_enable) {
 					dodge::Reset_iFrames(actor);
 				}
+				dodge::GetSingleton()->set_dodge_phase(actor, false);
 			}
 			break;
 	
@@ -75,6 +76,11 @@ namespace hooks
 			break;
 
 		case "Voice_SpellFire_Event"_h:
+			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
+				dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
+			}
+			break;
+
 		case "BeginCastVoice"_h:
 			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
 				
@@ -83,6 +89,11 @@ namespace hooks
 			break;
 
 		case "MLh_SpellFire_Event"_h:
+			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
+				dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
+			}
+			break;
+
 		case "BeginCastLeft"_h:
 			if (actor->GetEquippedObject(true)->As<RE::MagicItem>()->IsHostile()) {
 				
@@ -91,6 +102,11 @@ namespace hooks
 			break;
 
 		case "MRh_SpellFire_Event"_h:
+			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
+				dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
+			}
+			break;
+
 		case "BeginCastRight"_h:
 			if (actor->GetEquippedObject(false)->As<RE::MagicItem>()->IsHostile()) {
 				
@@ -100,15 +116,21 @@ namespace hooks
 
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
+			dodge::GetSingleton()->react_to_melee_normal(actor, get_combat_reach(actor));
+			break;
+
 		case "NextPowerAttackInitiate"_h:
 
-			dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
+			dodge::GetSingleton()->react_to_melee_power(actor, get_combat_reach(actor));
 			break;
 
 		case "bashPowerStart"_h:
+			dodge::GetSingleton()->react_to_bash(actor, 250.0f);
+			break;
+
 		case "BlockBashSprint"_h:
 			
-			dodge::GetSingleton()->react_to_bash(actor, 300.0f); 
+			dodge::GetSingleton()->react_to_bash_sprint(actor, 400.0f); 
 			break;
 
 		case "BowFullDrawn"_h:

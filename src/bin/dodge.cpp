@@ -309,26 +309,118 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 
-			auto R = attack_range;
-			auto r2 = get_dist2(refr, a_attacker);
+			// auto R = attack_range;
+			// auto r2 = get_dist2(refr, a_attacker);
 
 			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
 			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
 
-			float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
 
 
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 
-			if (r2 > R * R && (!is_powerattacking(a_attacker) || r2 > 500.0f * 500.0f)) {
-				return RE::BSContainer::ForEachResult::kContinue;
-			}
+			// if (r2 > R * R && (!is_powerattacking(a_attacker) || r2 > 500.0f * 500.0f)) {
+			// 	return RE::BSContainer::ForEachResult::kContinue;
+			// }
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
+				break;
+			case 1:
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_all);
+				break;
+			}
+		}
+		return RE::BSContainer::ForEachResult::kContinue;
+	});
+}
+
+void dodge::react_to_melee_power(RE::Actor* a_attacker, float attack_range)
+{
+	if (!settings::bDodgeAI_Reactive_enable) {
+		return;
+	}
+
+	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
+		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+			RE::Actor* refr = _refr->As<RE::Actor>();
+
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (!Utils::Actor::isHumanoid(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
+			// auto R = attack_range;
+			// auto r2 = get_dist2(refr, a_attacker);
+
+			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
+			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
+
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
+
+			if (abs(angle) > attackAngle) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
+			// if (r2 > R * R && (!is_powerattacking(a_attacker) || r2 > 500.0f * 500.0f)) {
+			// 	return RE::BSContainer::ForEachResult::kContinue;
+			// }
+
+			switch (settings::iDodgeAI_Framework) {
+			case 0:
+				dodge::GetSingleton()->Powerattack_attempt_dodge(refr, &dodge_directions_tk_all);
+				break;
+			case 1:
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_all);
+				break;
+			}
+		}
+		return RE::BSContainer::ForEachResult::kContinue;
+	});
+}
+
+void dodge::react_to_melee_normal(RE::Actor* a_attacker, float attack_range)
+{
+	if (!settings::bDodgeAI_Reactive_enable) {
+		return;
+	}
+
+	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
+		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+			RE::Actor* refr = _refr->As<RE::Actor>();
+
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (!Utils::Actor::isHumanoid(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
+			// auto R = attack_range;
+			// auto r2 = get_dist2(refr, a_attacker);
+
+			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
+			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
+
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
+
+			if (abs(angle) > attackAngle) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
+			// if (r2 > R * R && (!is_powerattacking(a_attacker) || r2 > 500.0f * 500.0f)) {
+			// 	return RE::BSContainer::ForEachResult::kContinue;
+			// }
+
+			switch (settings::iDodgeAI_Framework) {
+			case 0:
+				dodge::GetSingleton()->NormalAttack_attempt_dodge(refr, &dodge_directions_tk_all);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_all);
@@ -362,7 +454,7 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
 			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
 
-			float attackAngle = attackdata ? attackdata->data.strikeAngle : 50.0f;
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
 
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
@@ -371,7 +463,50 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 			/*RE::Character* a_refr = refr->As<RE::Character>();*/
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
+				dodge::GetSingleton()->Bash_attempt_dodge(refr, &dodge_directions_tk_all);
+				break;
+			case 1:
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
+				break;
+			}
+		}
+		return RE::BSContainer::ForEachResult::kContinue;
+	});
+}
+
+void dodge::react_to_bash_sprint(RE::Actor* a_attacker, float attack_range)
+{
+	if (!settings::bDodgeAI_Reactive_enable) {
+		return;
+	}
+
+	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
+		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+			RE::Actor* refr = _refr->As<RE::Actor>();
+
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (!Utils::Actor::isHumanoid(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
+			// auto R = attack_range;
+			// auto r2 = get_dist2(refr, a_attacker);
+
+			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
+			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
+
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
+
+			if (abs(angle) > attackAngle) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
+			/*RE::Character* a_refr = refr->As<RE::Character>();*/
+			switch (settings::iDodgeAI_Framework) {
+			case 0:
+				dodge::GetSingleton()->BashSprint_attempt_dodge(refr, &dodge_directions_tk_all);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
@@ -409,7 +544,7 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
 			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
 
-			float attackAngle = attackdata ? attackdata->data.strikeAngle : 10.0f;
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 7.0f;
 
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
@@ -455,7 +590,53 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
 			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
 			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
 
-			float attackAngle = attackdata ? attackdata->data.strikeAngle : 40.0f;
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
+
+			if (abs(angle) > attackAngle) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
+			switch (settings::iDodgeAI_Framework) {
+			case 0:
+				dodge::GetSingleton()->Shouts_Spells_attempt_dodge(refr, &dodge_directions_tk_all);
+				break;
+			case 1:
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
+				break;
+			}
+		}
+		return RE::BSContainer::ForEachResult::kContinue;
+	});
+}
+
+void dodge::react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_range)
+{
+	if (!settings::bDodgeAI_Reactive_enable) {
+		return;
+	}
+
+	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
+		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+			RE::Actor* refr = _refr->As<RE::Actor>();
+
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			if (!Utils::Actor::isHumanoid(refr)) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			bool hasLOS = false;
+			if (refr->HasLineOfSight(a_attacker, hasLOS) && !hasLOS) {
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+
+			// auto R = attack_range;
+			// auto r2 = get_dist2(refr, a_attacker);
+
+			RE::BGSAttackData* attackdata = Utils::get_attackData(a_attacker);
+			auto angle = get_angle_he_me(refr, a_attacker, attackdata);
+
+			float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
 
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
@@ -500,51 +681,6 @@ bool dodge::get_is_dodging(RE::Actor* a_actor)
 	
 }
 
-/*Attempt to dodge an incoming threat, choosing one of the directions from A_DIRECTIONS.*/
-void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
-{
-
-	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
-	// 	return;
-	// }
-
-	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
-
-	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
-
-	std::mt19937 gen(rd());
-	// /*Check dodge chance using PRNG*/
-	// std::uniform_real_distribution<> dis(0.f, 1.f);
-	// if (dis(gen) > dodge_chance) {
-		
-	// 	return;
-	// }
-	if (dodge::GetSingleton()->GenerateRandomFloat(0.0, 1.0) > dodge_chance) {
-		return;
-	}
-
-	
-	/* Make a copy and shuffle directions. */
-	dodge_dir_set directions_shuffled = *a_directions;
-	std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen); 
-
-
-	for (dodge_direction direction : directions_shuffled) {
-		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
-		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
-			bool bIsDodging = false;
-			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-				do_dodge(a_actor, direction);
-			}
-			return;
-		} else {
-			
-			return;
-		}
-	}
-}
-
-
 
 /*Check if the actor is able to dodge.*/
 bool dodge::able_dodge(RE::Actor* a_actor)
@@ -586,55 +722,15 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	return false;
 }
 
-
+/*Attempt to dodge an incoming threat, choosing one of the directions from A_DIRECTIONS.*/
 void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
 {
-
 	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
 	// 	return;
 	// }
-
-	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
-
-	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
-
-	std::mt19937 gen(rd());
-	// /*Check dodge chance using PRNG*/
-	// std::uniform_real_distribution<> dis(0.f, 1.f);
-	// if (dis(gen) > dodge_chance) {
-		
-	// 	return;
-	// }
-	if (dodge::GetSingleton()->GenerateRandomFloat(0.0, 1.0) > dodge_chance) {
+	if (get_is_dodging(a_actor)) {
 		return;
 	}
-
-	
-	/* Make a copy and shuffle directions. */
-	dodge_dir_set directions_shuffled = *a_directions;
-	std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen); 
-
-
-	for (dodge_direction direction : directions_shuffled) {
-		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
-		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
-			bool bIsDodging = false;
-			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-				do_dodge(a_actor, direction);
-			}
-			return;
-		} else {
-			
-			return;
-		}
-	}
-}
-
-void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
-{
-	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
-	// 	return;
-	// }
 
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
@@ -660,6 +756,65 @@ void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			bool bIsDodging = false;
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				set_dodge_phase(a_actor, true);
+				do_dodge(a_actor, direction);
+			}
+			return;
+		} else {
+			return;
+		}
+	}
+}
+
+void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
+{
+	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
+	// 	return;
+	// }
+	if (get_is_dodging(a_actor)) {
+		return;
+	}
+
+	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+
+	auto CW = CombatTarget->GetActorRuntimeData().currentProcess->GetEquippedRightHand()->As<RE::TESObjectWEAP>()->GetWeaponType();
+
+	if (CW) {
+		if (CW == RE::WEAPON_TYPE::kTwoHandSword || RE::WEAPON_TYPE::kTwoHandAxe){
+			Sleep(dodge::GetSingleton()->GenerateRandomInt(300, 500));
+
+		} else {
+			Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
+		}
+	} else {
+		Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
+	}
+
+	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
+
+	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+
+	std::mt19937 gen(rd());
+	// /*Check dodge chance using PRNG*/
+	// std::uniform_real_distribution<> dis(0.f, 1.f);
+	// if (dis(gen) > dodge_chance) {
+
+	// 	return;
+	// }
+	if (dodge::GetSingleton()->GenerateRandomFloat(0.0, 1.0) > dodge_chance) {
+		return;
+	}
+
+	/* Make a copy and shuffle directions. */
+	dodge_dir_set directions_shuffled = *a_directions;
+	std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen);
+
+	for (dodge_direction direction : directions_shuffled) {
+		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
+		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
+			bool bIsDodging = false;
+			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				set_dodge_phase(a_actor, true);
 				do_dodge(a_actor, direction);
 			}
 			return;
@@ -675,6 +830,25 @@ void dodge::NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* 
 	// 	return;
 	// }
 
+	if (get_is_dodging(a_actor)) {
+		return;
+	}
+
+	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+
+	auto CW = CombatTarget->GetActorRuntimeData().currentProcess->GetEquippedRightHand()->As<RE::TESObjectWEAP>()->GetWeaponType();
+
+	if (CW) {
+		if (CW == RE::WEAPON_TYPE::kTwoHandSword || RE::WEAPON_TYPE::kTwoHandAxe) {
+			Sleep(dodge::GetSingleton()->GenerateRandomInt(50, 200));
+
+		} else {
+			Sleep(dodge::GetSingleton()->GenerateRandomInt(0, 150));
+		}
+	} else {
+		Sleep(dodge::GetSingleton()->GenerateRandomInt(0, 150));
+	}
+
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
 	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
@@ -699,6 +873,7 @@ void dodge::NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* 
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			bool bIsDodging = false;
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				set_dodge_phase(a_actor, true);
 				do_dodge(a_actor, direction);
 			}
 			return;
@@ -714,6 +889,13 @@ void dodge::Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set*
 	// 	return;
 	// }
 
+	if (get_is_dodging(a_actor)) {
+		return;
+	}
+
+	Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
+
+	
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
 	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
@@ -738,6 +920,7 @@ void dodge::Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set*
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			bool bIsDodging = false;
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				set_dodge_phase(a_actor, true);
 				do_dodge(a_actor, direction);
 			}
 			return;
@@ -753,6 +936,12 @@ void dodge::Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_direct
 	// 	return;
 	// }
 
+	if (get_is_dodging(a_actor)) {
+		return;
+	}
+
+	Sleep(dodge::GetSingleton()->GenerateRandomInt(100, 200));
+
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
 	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
@@ -777,6 +966,53 @@ void dodge::Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_direct
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			bool bIsDodging = false;
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				set_dodge_phase(a_actor, true);
+				do_dodge(a_actor, direction);
+			}
+			return;
+		} else {
+			return;
+		}
+	}
+}
+
+void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge)
+{
+	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
+	// 	return;
+	// }
+
+	if (get_is_dodging(a_actor)) {
+		return;
+	}
+
+	Sleep(dodge::GetSingleton()->GenerateRandomInt(500, 900));
+
+	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
+
+	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+
+	std::mt19937 gen(rd());
+	// /*Check dodge chance using PRNG*/
+	// std::uniform_real_distribution<> dis(0.f, 1.f);
+	// if (dis(gen) > dodge_chance) {
+
+	// 	return;
+	// }
+	if (dodge::GetSingleton()->GenerateRandomFloat(0.0, 1.0) > dodge_chance) {
+		return;
+	}
+
+	/* Make a copy and shuffle directions. */
+	dodge_dir_set directions_shuffled = *a_directions;
+	std::shuffle(directions_shuffled.begin(), directions_shuffled.end(), gen);
+
+	for (dodge_direction direction : directions_shuffled) {
+		RE::NiPoint3 dodge_dest = Utils::get_abs_pos(a_actor, get_dodge_vector(direction));
+		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
+			bool bIsDodging = false;
+			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
+				set_dodge_phase(a_actor, true);
 				do_dodge(a_actor, direction);
 			}
 			return;
@@ -983,7 +1219,6 @@ void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 
 void dodge::do_dodge(RE::Actor* a_actor, dodge_direction a_direction)
 {
-	Sleep(1000);
 	switch (a_direction) {
 	case dodge_direction::kForward:
 		switch (settings::iDodgeAI_Framework) {

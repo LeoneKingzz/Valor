@@ -62,9 +62,13 @@ public:
 	}
 
 	void react_to_melee(RE::Actor* a_attacker, float attack_range);
+	void react_to_melee_power(RE::Actor* a_attacker, float attack_range);
+	void react_to_melee_normal(RE::Actor* a_attacker, float attack_range);
 	void react_to_bash(RE::Actor* a_attacker, float attack_range);
+	void react_to_bash_sprint(RE::Actor* a_attacker, float attack_range);
 	void react_to_ranged(RE::Actor* a_attacker, float attack_range);
 	void react_to_shouts_spells(RE::Actor* a_attacker, float attack_range);
+	void react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_range);
 
 	struct
 	{
@@ -112,6 +116,7 @@ public:
 	void NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
 	void Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
 	void Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
+	void BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions, bool a_forceDodge = false);
 
 	static void Set_iFrames(RE::Actor* actor);
 	static void Reset_iFrames(RE::Actor* actor);
