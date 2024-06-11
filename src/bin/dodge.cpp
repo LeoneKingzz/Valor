@@ -179,7 +179,7 @@ PRECISION_API::PreHitCallbackReturn dodge::DodgeCallback_PreHit(const PRECISION_
 		return returnData;
 	}
 
-	dodge::GetSingleton()->NormalAttack_attempt_dodge(actor, &dodge_directions_tk_all);
+	dodge::GetSingleton()->NormalAttack_attempt_dodge(actor, &dodge_directions_tk_reactive);
 
 	return returnData;
 }
