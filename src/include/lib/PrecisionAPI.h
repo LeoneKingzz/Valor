@@ -1,5 +1,5 @@
 #pragma once
-#include "SKSE/Impl/WinAPI.h"
+// #include "SKSE/Impl/WinAPI.h"
 
 /*
  * For modders: Copy this file into your own project if you wish to use this API
