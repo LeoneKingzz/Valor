@@ -2,6 +2,8 @@
 #pragma once
 
 #pragma warning(push)
+#pragma warning(disable: 5105)
+#pragma warning(disable: 4189)
 #include <RE/Skyrim.h>
 #include <REL/Relocation.h>
 #include <SKSE/SKSE.h>
@@ -16,6 +18,8 @@
 #	include <spdlog/sinks/msvc_sink.h>
 #endif
 #pragma warning(pop)
+#define WIN32_LEAN_AND_MEAN
+#include <Windows.h>
 
 using namespace std::literals;
 
