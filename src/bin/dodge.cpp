@@ -133,13 +133,42 @@ PRECISION_API::PreHitCallbackReturn dodge::DodgeCallback_PreHit(const PRECISION_
 		return returnData;
 	}
 
+	auto actor = a_precisionHitData.target->As<RE::Actor>();
+
+	if (actor->IsPlayerRef()) {
+		return returnData;
+	}
+
+	if (!Utils::Actor::isHumanoid(actor)) {
+		return returnData;
+	}
+
+	if (!ValhallaUtils::is_adversary(actor, a_precisionHitData.attacker)) {
+		return returnData;
+	}
+
+	if (a_precisionHitData.attacker->GetEquippedObject(false)->As<RE::TESObjectWEAP>()->GetWeaponType() == RE::WEAPON_TYPE::kBow || a_precisionHitData.attacker->GetEquippedObject(false)->As<RE::TESObjectWEAP>()->GetWeaponType() == RE::WEAPON_TYPE::kCrossbow) {
+		return returnData;
+	}
+
 	bool bMaxsuWeaponParry_InWeaponParry = false;
 
-	if ((a_precisionHitData.target->As<RE::Actor>())
+	if ((actor)
 			->GetGraphVariableBool("bMaxsuWeaponParry_InWeaponParry", bMaxsuWeaponParry_InWeaponParry) &&
 		bMaxsuWeaponParry_InWeaponParry) {
-		returnData.bIgnoreHit = true;
+		return returnData;
 	}
+
+	RE::BGSAttackData* attackdata = Utils::get_attackData(a_precisionHitData.attacker);
+	auto angle = get_angle_he_me(actor, a_precisionHitData.attacker, attackdata);
+
+	float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
+
+	if (abs(angle) > attackAngle) {
+		return returnData;
+	}
+
+	dodge::GetSingleton()->NormalAttack_attempt_dodge(actor, &dodge_directions_tk_all);
 
 	return returnData;
 }
