@@ -6,11 +6,8 @@
   },
   "ExpandedNodes": [
     "",
-    "\\include",
-    "\\include\\lib",
     "\\src",
     "\\src\\bin"
   ],
-  "SelectedNode": "\\include\\lib\\PrecisionAPI.h",
   "PreviewInSolutionExplorer": false
 }
