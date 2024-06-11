@@ -7,48 +7,8 @@
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\PrecisionAPI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\vcpkg-configuration.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:vcpkg-configuration.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\vcpkg.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:vcpkg.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\CMakePresets.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMakePresets.json||{90A6B3A7-C1A3-4009-A288-E2FF89E96FA0}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\cmake\\version.rc.in||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:cmake\\version.rc.in||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\cmake\\Plugin.h.in||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:cmake\\Plugin.h.in||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\cmake\\packaging.cmake||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:cmake\\packaging.cmake||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\dodge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\dodge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\dodge.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\dodge.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\CombatBehaviorConditions.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\CMakeLists.txt||{8B382828-6202-11D1-8870-0000F87579D2}"
     }
   ],
   "DocumentGroupContainers": [
@@ -58,103 +18,20 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 8,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
               "DocumentIndex": 1,
-              "Title": "vcpkg-configuration.json",
-              "DocumentMoniker": "C:\\Code\\Valor\\vcpkg-configuration.json",
-              "RelativeDocumentMoniker": "vcpkg-configuration.json",
-              "ToolTip": "C:\\Code\\Valor\\vcpkg-configuration.json",
-              "RelativeToolTip": "vcpkg-configuration.json",
-              "ViewState": "AQIAAAYAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-11T21:21:08.368Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 3,
-              "Title": "CMakePresets.json",
-              "DocumentMoniker": "C:\\Code\\Valor\\CMakePresets.json",
-              "RelativeDocumentMoniker": "CMakePresets.json",
-              "ToolTip": "C:\\Code\\Valor\\CMakePresets.json",
-              "RelativeToolTip": "CMakePresets.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-11T21:18:23.717Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 2,
-              "Title": "vcpkg.json",
-              "DocumentMoniker": "C:\\Code\\Valor\\vcpkg.json",
-              "RelativeDocumentMoniker": "vcpkg.json",
-              "ToolTip": "C:\\Code\\Valor\\vcpkg.json",
-              "RelativeToolTip": "vcpkg.json",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001642|",
-              "WhenOpened": "2024-06-11T21:18:10.213Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 4,
-              "Title": "version.rc.in",
-              "DocumentMoniker": "C:\\Code\\Valor\\cmake\\version.rc.in",
-              "RelativeDocumentMoniker": "cmake\\version.rc.in",
-              "ToolTip": "C:\\Code\\Valor\\cmake\\version.rc.in",
-              "RelativeToolTip": "cmake\\version.rc.in",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-06-11T21:18:05.689Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 5,
-              "Title": "Plugin.h.in",
-              "DocumentMoniker": "C:\\Code\\Valor\\cmake\\Plugin.h.in",
-              "RelativeDocumentMoniker": "cmake\\Plugin.h.in",
-              "ToolTip": "C:\\Code\\Valor\\cmake\\Plugin.h.in",
-              "RelativeToolTip": "cmake\\Plugin.h.in",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-06-11T21:18:03.039Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 6,
-              "Title": "packaging.cmake",
-              "DocumentMoniker": "C:\\Code\\Valor\\cmake\\packaging.cmake",
-              "RelativeDocumentMoniker": "cmake\\packaging.cmake",
-              "ToolTip": "C:\\Code\\Valor\\cmake\\packaging.cmake",
-              "RelativeToolTip": "cmake\\packaging.cmake",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.001001|",
-              "WhenOpened": "2024-06-11T21:18:00.808Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 7,
               "Title": "CMakeLists.txt",
-              "DocumentMoniker": "C:\\Code\\Valor\\CMakeLists.txt",
-              "RelativeDocumentMoniker": "CMakeLists.txt",
-              "ToolTip": "C:\\Code\\Valor\\CMakeLists.txt",
-              "RelativeToolTip": "CMakeLists.txt",
+              "DocumentMoniker": "C:\\Code\\Valor\\src\\CMakeLists.txt",
+              "RelativeDocumentMoniker": "src\\CMakeLists.txt",
+              "ToolTip": "C:\\Code\\Valor\\src\\CMakeLists.txt",
+              "RelativeToolTip": "src\\CMakeLists.txt",
               "ViewState": "AQIAAAAAAAAAAAAAAAAAAAAAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.003109|",
-              "WhenOpened": "2024-06-11T21:13:40.085Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 9,
-              "Title": "main.cpp",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\main.cpp",
-              "RelativeDocumentMoniker": "src\\bin\\main.cpp",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\main.cpp",
-              "RelativeToolTip": "src\\bin\\main.cpp",
-              "ViewState": "AQIAAA8AAAAAAAAAAAAAAB0AAABQAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-06-11T15:52:26.514Z"
+              "WhenOpened": "2024-06-11T22:38:37.885Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
@@ -164,46 +41,10 @@
               "RelativeDocumentMoniker": "src\\bin\\PrecisionAPI.h",
               "ToolTip": "C:\\Code\\Valor\\src\\bin\\PrecisionAPI.h",
               "RelativeToolTip": "src\\bin\\PrecisionAPI.h",
-              "ViewState": "AQIAAHoBAAAAAAAAAAAAAIcBAAAhAAAA",
+              "ViewState": "AQIAAHQBAAAAAAAAAAAgwIYBAABeAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-06-11T11:54:52.667Z",
+              "WhenOpened": "2024-06-11T21:28:03.989Z",
               "EditorCaption": ""
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 11,
-              "Title": "CombatBehaviorConditions.h",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.h",
-              "RelativeDocumentMoniker": "src\\bin\\CombatBehaviorConditions.h",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.h",
-              "RelativeToolTip": "src\\bin\\CombatBehaviorConditions.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAMAAAAAAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-06-10T02:50:50.575Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 8,
-              "Title": "dodge.h",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\dodge.h",
-              "RelativeDocumentMoniker": "src\\bin\\dodge.h",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\dodge.h",
-              "RelativeToolTip": "src\\bin\\dodge.h",
-              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAoAAAAZAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-06-09T13:15:06.155Z"
-            },
-            {
-              "$type": "Document",
-              "DocumentIndex": 10,
-              "Title": "dodge.cpp",
-              "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\dodge.cpp",
-              "RelativeDocumentMoniker": "src\\bin\\dodge.cpp",
-              "ToolTip": "C:\\Code\\Valor\\src\\bin\\dodge.cpp",
-              "RelativeToolTip": "src\\bin\\dodge.cpp",
-              "ViewState": "AQIAAPIDAAAAAAAAAAAgwAEEAAAsAAAA",
-              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
-              "WhenOpened": "2024-05-12T03:20:44.644Z"
             }
           ]
         }

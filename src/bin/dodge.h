@@ -8,7 +8,7 @@
 #include "include/Utils.h"
 #include <algorithm>
 #include "RE/M/Misc.h"
-#include "PrecisionAPI.h"
+#include "include/lib/PrecisionAPI.h"
 
 using PRECISION_API::PreHitCallback;
 using std::string;

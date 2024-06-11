@@ -6,10 +6,9 @@
   },
   "ExpandedNodes": [
     "",
-    "\\cmake",
     "\\src",
-    "\\src\\bin",
-    "\\src\\include"
+    "\\src\\bin"
   ],
+  "SelectedNode": "\\CMakeLists.txt",
   "PreviewInSolutionExplorer": false
 }
