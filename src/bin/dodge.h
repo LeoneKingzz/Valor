@@ -8,7 +8,6 @@
 #include "include/Utils.h"
 #include <algorithm>
 #include "RE/M/Misc.h"
-#include <windows.h>
 
 enum dodge_direction
 {
