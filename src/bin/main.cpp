@@ -1,6 +1,7 @@
 #pragma once
-#include "hooks.h"
+#include "SKSE/Impl/WinAPI.h"
 #include "dodge.h"
+#include "hooks.h"
 #include "include/Utils.h"
 #include "settings.h"
 

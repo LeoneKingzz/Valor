@@ -7,8 +7,7 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\bin",
-    "build\\vcpkg_installed\\x64-windows-static-md\\include\\SKSE\\Impl"
+    "\\src\\bin"
   ],
   "PreviewInSolutionExplorer": false
 }
