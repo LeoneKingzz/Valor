@@ -21,8 +21,8 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 		}
 		settings::init();
 		break;
-	case SKSE::MessagingInterface::kPostLoad:
-		break;
+	// case SKSE::MessagingInterface::kPostLoad:
+	// 	break;
 
 	case SKSE::MessagingInterface::kPostPostLoad:
 		const auto precisionAPI = reinterpret_cast<PRECISION_API::IVPrecision4*>(PRECISION_API::RequestPluginAPI());
