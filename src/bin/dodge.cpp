@@ -4,6 +4,17 @@ using writeLock = std::unique_lock<std::shared_mutex>;
 using readLock = std::shared_lock<std::shared_mutex>;
 
 
+void dodge::init() {
+	_precision_API = reinterpret_cast<PRECISION_API::IVPrecision4*>(PRECISION_API::RequestPluginAPI());
+	if (_precision_API) {
+		// precisionAPI->AddWeaponWeaponCollisionCallback(SKSE::GetPluginHandle(), OnMeleeHit::PrecisionWeaponsCallback);
+		_precision_API->AddPreHitCallback(SKSE::GetPluginHandle(), DodgeCallback_PreHit);
+		// precisionAPI->AddPostHitCallback(SKSE::GetPluginHandle(), OnMeleeHit::PrecisionWeaponsCallback_Post);
+		logger::info("Enabled compatibility with Precision");
+	}
+}
+
+
 //Native Functions for Papyrus
 float dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
 	float Score = 0.0f;
