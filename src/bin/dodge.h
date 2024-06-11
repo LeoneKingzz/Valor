@@ -8,6 +8,7 @@
 #include "include/Utils.h"
 #include <algorithm>
 #include "RE/M/Misc.h"
+#include "PrecisionAPI.h"
 
 enum dodge_direction
 {
@@ -68,6 +69,8 @@ public:
 	void react_to_ranged(RE::Actor* a_attacker, float attack_range);
 	void react_to_shouts_spells(RE::Actor* a_attacker, float attack_range);
 	void react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_range);
+
+	PRECISION_API::PreHitCallbackReturn DodgeCallback_PreHit(const PRECISION_API::PrecisionHitData& a_precisionHitData);
 
 	struct
 	{

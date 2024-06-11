@@ -3,6 +3,7 @@
 #include "dodge.h"
 #include "include/Utils.h"
 #include "settings.h"
+#include "PrecisionAPI.h"
 
 // using namespace RE::BSScript;
 
@@ -22,6 +23,16 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 		break;
 	case SKSE::MessagingInterface::kPostLoad:
 		break;
+
+	case SKSE::MessagingInterface::kPostPostLoad:
+		const auto precisionAPI = reinterpret_cast<PRECISION_API::IVPrecision4*>(PRECISION_API::RequestPluginAPI());
+		if (precisionAPI) {
+			// precisionAPI->AddWeaponWeaponCollisionCallback(SKSE::GetPluginHandle(), OnMeleeHit::PrecisionWeaponsCallback);
+			precisionAPI->AddPreHitCallback(SKSE::GetPluginHandle(), dodge::DodgeCallback_PreHit);
+			// precisionAPI->AddPostHitCallback(SKSE::GetPluginHandle(), OnMeleeHit::PrecisionWeaponsCallback_Post);
+			logger::info("Enabled compatibility with Precision");
+		}
+		break; 
 	case SKSE::MessagingInterface::kPostLoadGame:
 	    settings::setglobals();
 		break;

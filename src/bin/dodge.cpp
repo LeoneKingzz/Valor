@@ -126,7 +126,23 @@ bool dodge::BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm)
 	return true;
 }
 
+PRECISION_API::PreHitCallbackReturn dodge::DodgeCallback_PreHit(const PRECISION_API::PrecisionHitData& a_precisionHitData)
+{
+	PRECISION_API::PreHitCallbackReturn returnData;
+	if (!a_precisionHitData.target || !a_precisionHitData.target->Is(RE::FormType::ActorCharacter)) {
+		return returnData;
+	}
 
+	bool bMaxsuWeaponParry_InWeaponParry = false;
+
+	if ((a_precisionHitData.target->As<RE::Actor>())
+			->GetGraphVariableBool("bMaxsuWeaponParry_InWeaponParry", bMaxsuWeaponParry_InWeaponParry) &&
+		bMaxsuWeaponParry_InWeaponParry) {
+		returnData.bIgnoreHit = true;
+	}
+
+	return returnData;
+}
 
 /*Get the dodge chance of a reactive dodger in case of an incoming attack.*/
 float dodge::get_dodge_chance(RE::Actor* a_actor) {
