@@ -775,20 +775,20 @@ void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a
 		return;
 	}
 
-	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+	// auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
 
-	auto CW = CombatTarget->GetActorRuntimeData().currentProcess->GetEquippedRightHand()->As<RE::TESObjectWEAP>()->GetWeaponType();
+	// auto CW = CombatTarget->GetActorRuntimeData().currentProcess->GetEquippedRightHand()->As<RE::TESObjectWEAP>()->GetWeaponType();
 
-	if (CW) {
-		if (CW == RE::WEAPON_TYPE::kTwoHandSword || RE::WEAPON_TYPE::kTwoHandAxe){
-			Sleep(dodge::GetSingleton()->GenerateRandomInt(300, 500));
+	// if (CW) {
+	// 	if (CW == RE::WEAPON_TYPE::kTwoHandSword || RE::WEAPON_TYPE::kTwoHandAxe){
+	// 		Sleep(dodge::GetSingleton()->GenerateRandomInt(300, 500));
 
-		} else {
-			Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
-		}
-	} else {
-		Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
-	}
+	// 	} else {
+	// 		Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
+	// 	}
+	// } else {
+	// 	Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
+	// }
 
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
@@ -834,20 +834,20 @@ void dodge::NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* 
 		return;
 	}
 
-	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+	// auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
 
-	auto CW = CombatTarget->GetActorRuntimeData().currentProcess->GetEquippedRightHand()->As<RE::TESObjectWEAP>()->GetWeaponType();
+	// auto CW = CombatTarget->GetActorRuntimeData().currentProcess->GetEquippedRightHand()->As<RE::TESObjectWEAP>()->GetWeaponType();
 
-	if (CW) {
-		if (CW == RE::WEAPON_TYPE::kTwoHandSword || RE::WEAPON_TYPE::kTwoHandAxe) {
-			Sleep(dodge::GetSingleton()->GenerateRandomInt(50, 200));
+	// if (CW) {
+	// 	if (CW == RE::WEAPON_TYPE::kTwoHandSword || RE::WEAPON_TYPE::kTwoHandAxe) {
+	// 		Sleep(dodge::GetSingleton()->GenerateRandomInt(50, 200));
 
-		} else {
-			Sleep(dodge::GetSingleton()->GenerateRandomInt(0, 150));
-		}
-	} else {
-		Sleep(dodge::GetSingleton()->GenerateRandomInt(0, 150));
-	}
+	// 	} else {
+	// 		Sleep(dodge::GetSingleton()->GenerateRandomInt(0, 150));
+	// 	}
+	// } else {
+	// 	Sleep(dodge::GetSingleton()->GenerateRandomInt(0, 150));
+	// }
 
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
@@ -893,7 +893,7 @@ void dodge::Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set*
 		return;
 	}
 
-	Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
+	// Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
 
 	
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
@@ -940,7 +940,7 @@ void dodge::Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_direct
 		return;
 	}
 
-	Sleep(dodge::GetSingleton()->GenerateRandomInt(100, 200));
+	// Sleep(dodge::GetSingleton()->GenerateRandomInt(100, 200));
 
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
@@ -986,7 +986,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 		return;
 	}
 
-	Sleep(dodge::GetSingleton()->GenerateRandomInt(500, 900));
+	// Sleep(dodge::GetSingleton()->GenerateRandomInt(500, 900));
 
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
