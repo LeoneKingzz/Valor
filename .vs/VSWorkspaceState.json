@@ -11,6 +11,6 @@
     "\\src\\bin",
     "\\src\\include"
   ],
-  "SelectedNode": "\\src\\bin\\main.cpp",
+  "SelectedNode": "\\vcpkg-configuration.json",
   "PreviewInSolutionExplorer": false
 }
