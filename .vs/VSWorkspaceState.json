@@ -6,10 +6,16 @@
   },
   "ExpandedNodes": [
     "",
+    "\\cmake",
+    "\\Local settings (.vs)",
+    "\\Local settings (.vs)\\Valor",
+    "\\Local settings (.vs)\\Valor\\FileContentIndex",
+    "\\Local settings (.vs)\\Valor\\v17",
     "\\src",
     "\\src\\bin",
     "\\src\\include",
     "\\src\\include\\lib"
   ],
+  "SelectedNode": "\\Local settings (.vs)\\VSWorkspaceState.json",
   "PreviewInSolutionExplorer": false
 }
