@@ -7,8 +7,9 @@
   "ExpandedNodes": [
     "",
     "\\src",
-    "\\src\\bin"
+    "\\src\\bin",
+    "\\src\\include",
+    "\\src\\include\\lib"
   ],
-  "SelectedNode": "\\vcpkg-configuration.json",
   "PreviewInSolutionExplorer": false
 }
