@@ -60,7 +60,7 @@ private:
 
 public:
 
-	inline void init();
+	void init();
 
 	static dodge* GetSingleton()
 	{

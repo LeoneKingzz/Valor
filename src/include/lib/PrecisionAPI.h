@@ -1,5 +1,5 @@
 #pragma once
-//#include "../../../build/vcpkg_installed/vcpkg/pkgs/commonlibsse-ng_x64-windows-static-md/include/SKSE/Impl/WinAPI.h"
+#include "../../../build/vcpkg_installed/vcpkg/pkgs/commonlibsse-ng_x64-windows-static-md/include/SKSE/Impl/WinAPI.h"
 // #include "SKSE/Impl/WinAPI.h"
 
 /*

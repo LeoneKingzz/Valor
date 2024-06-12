@@ -94,6 +94,7 @@ target_link_libraries(
 	PRIVATE
 		CommonLibSSE::CommonLibSSE
 		xbyak::xbyak
+		WINAPI
 )
 
 target_precompile_headers(
