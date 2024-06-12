@@ -10,6 +10,7 @@
 #include "RE/M/Misc.h"
 #include "include/lib/PrecisionAPI.h"
 
+
 using PRECISION_API::PreHitCallback;
 using std::string;
 
@@ -56,7 +57,10 @@ class dodge
 {
 private:
 	std::random_device rd;
+
 public:
+
+	inline void init();
 
 	static dodge* GetSingleton()
 	{
@@ -72,10 +76,6 @@ public:
 	void react_to_ranged(RE::Actor* a_attacker, float attack_range);
 	void react_to_shouts_spells(RE::Actor* a_attacker, float attack_range);
 	void react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_range);
-
-	void init();
-
-	PRECISION_API::IVPrecision4* _precision_API;
 
 	struct
 	{
@@ -135,6 +135,9 @@ public:
 	float get_dodge_chance(RE::Actor* a_actor);
 
 private:
+
+	PRECISION_API::IVPrecision4* _precision_API;
+
 	static PRECISION_API::PreHitCallbackReturn DodgeCallback_PreHit(const PRECISION_API::PrecisionHitData& a_precisionHitData);
 
 	bool able_dodge(RE::Actor* a_actor);

@@ -12,6 +12,7 @@ void dodge::init() {
 		// precisionAPI->AddPostHitCallback(SKSE::GetPluginHandle(), OnMeleeHit::PrecisionWeaponsCallback_Post);
 		logger::info("Enabled compatibility with Precision");
 	}
+	
 }
 
 
