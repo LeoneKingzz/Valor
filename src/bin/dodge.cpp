@@ -11,13 +11,8 @@ void dodge::init() {
 		// precisionAPI->AddWeaponWeaponCollisionCallback(SKSE::GetPluginHandle(), OnMeleeHit::PrecisionWeaponsCallback);
 		_precision_API->AddPreHitCallback(SKSE::GetPluginHandle(), DodgeCallback_PreHit);
 		// precisionAPI->AddPostHitCallback(SKSE::GetPluginHandle(), OnMeleeHit::PrecisionWeaponsCallback_Post);
-		settings::bUse_Precision_MeleeCallback = true;
 		logger::info("Enabled compatibility with Precision");
-		if (settings::bUse_Precision_MeleeCallback) {
-			logger::info("Using Precision's Melee Callback");
-		}
 	}
-	
 }
 
 

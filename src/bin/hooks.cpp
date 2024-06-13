@@ -68,13 +68,11 @@ namespace hooks
 			}
 			break;
 	
-		case "preHitFrame"_h:
-		    if (!settings::bUse_Precision_MeleeCallback) {
-				if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
-					dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
-				}
-				break;
-			}
+		// case "preHitFrame"_h:
+		// 	if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
+		// 		dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
+		// 	}
+		// 	break;
 
 		case "Voice_SpellFire_Event"_h:
 			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
