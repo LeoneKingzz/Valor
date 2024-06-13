@@ -181,6 +181,19 @@ PRECISION_API::PreHitCallbackReturn dodge::DodgeCallback_PreHit(const PRECISION_
 	// 	return returnData;
 	// }
 
+	if (a_precisionHitData.attacker->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash && is_powerattacking(a_precisionHitData.attacker) && !a_precisionHitData.attacker->AsActorState()->IsSprinting()) {
+		RE::BGSAttackData* attackdata = Utils::get_attackData(a_precisionHitData.attacker);
+		auto angle = get_angle_he_me(actor, a_precisionHitData.attacker, attackdata);
+
+		float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
+
+		if (abs(angle) > attackAngle) {
+			return returnData;
+		}
+
+		dodge::GetSingleton()->Bash_attempt_dodge(actor, &dodge_directions_tk_reactive);
+	}
+
 	// RE::BGSAttackData* attackdata = Utils::get_attackData(a_precisionHitData.attacker);
 	// auto angle = get_angle_he_me(actor, a_precisionHitData.attacker, attackdata);
 
@@ -653,7 +666,7 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-			    if (bHeavyarmour == 2) {
+				if (bHeavyarmour == 2 && (refr->GetEquippedObject(false)->As<RE::TESObjectWEAP>()->IsMelee())) {
 					dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_ranged);
 				} else {
 					dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_horizontal);

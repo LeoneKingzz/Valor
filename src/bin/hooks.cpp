@@ -68,13 +68,20 @@ namespace hooks
 			break;
 	
 		case "preHitFrame"_h:
-			if (!Utils::Actor::isHumanoid(actor) || is_powerattacking(actor))
+			if (!Utils::Actor::isHumanoid(actor) || is_powerattacking(actor)) {
 				if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
 					dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
 				}
-			else if(!is_powerattacking(actor)) {
+			}else if(!is_powerattacking(actor) && actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kBash) {
 				if (actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kDraw || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kSwing) {
 					dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
+				}
+			}else if(actor->AsActorState()->IsSprinting() && actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash) {
+				bool bMaxsuWeaponParry_InWeaponParry = false;
+				if ((actor)
+						->GetGraphVariableBool("bMaxsuWeaponParry_InWeaponParry", bMaxsuWeaponParry_InWeaponParry) &&
+					!bMaxsuWeaponParry_InWeaponParry) {
+					dodge::GetSingleton()->react_to_bash_sprint(actor, get_combat_reach(actor));
 				}
 			}
 			break;
@@ -93,7 +100,7 @@ namespace hooks
 		// 	break;
 
 		case "MLh_SpellFire_Event"_h:
-			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
+			if (actor->GetEquippedObject(true)->As<RE::MagicItem>()->IsHostile()) {
 				dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
 			}
 			break;
@@ -106,7 +113,7 @@ namespace hooks
 		// 	break;
 
 		case "MRh_SpellFire_Event"_h:
-			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
+			if (actor->GetEquippedObject(false)->As<RE::MagicItem>()->IsHostile()) {
 				dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
 			}
 			break;
