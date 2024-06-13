@@ -96,9 +96,10 @@ namespace hooks
 			break;
 
 		case "Voice_SpellFire_Event"_h:
-			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
-				dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
-			}
+			// if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
+			// 	dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
+			// }
+			dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
 			break;
 
 		// case "BeginCastVoice"_h:
