@@ -171,8 +171,6 @@ PRECISION_API::PreHitCallbackReturn dodge::DodgeCallback_PreHit(const PRECISION_
 		returnData.bIgnoreHit = true;
 	}
 
-	
-
 	// bool bMaxsuWeaponParry_InWeaponParry = false;
 
 	// if ((actor)
@@ -181,18 +179,18 @@ PRECISION_API::PreHitCallbackReturn dodge::DodgeCallback_PreHit(const PRECISION_
 	// 	return returnData;
 	// }
 
-	if (a_precisionHitData.attacker->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash && is_powerattacking(a_precisionHitData.attacker) && !a_precisionHitData.attacker->AsActorState()->IsSprinting()) {
-		RE::BGSAttackData* attackdata = Utils::get_attackData(a_precisionHitData.attacker);
-		auto angle = get_angle_he_me(actor, a_precisionHitData.attacker, attackdata);
+	// if (a_precisionHitData.attacker->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash && is_powerattacking(a_precisionHitData.attacker) && !a_precisionHitData.attacker->AsActorState()->IsSprinting()) {
+	// 	RE::BGSAttackData* attackdata = Utils::get_attackData(a_precisionHitData.attacker);
+	// 	auto angle = get_angle_he_me(actor, a_precisionHitData.attacker, attackdata);
 
-		float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
+	// 	float attackAngle = attackdata ? attackdata->data.strikeAngle : 35.0f;
 
-		if (abs(angle) > attackAngle) {
-			return returnData;
-		}
+	// 	if (abs(angle) > attackAngle) {
+	// 		return returnData;
+	// 	}
 
-		dodge::GetSingleton()->Bash_attempt_dodge(actor, &dodge_directions_tk_reactive);
-	}
+	// 	dodge::GetSingleton()->Bash_attempt_dodge(actor, &dodge_directions_tk_reactive);
+	// }
 
 	// RE::BGSAttackData* attackdata = Utils::get_attackData(a_precisionHitData.attacker);
 	// auto angle = get_angle_he_me(actor, a_precisionHitData.attacker, attackdata);

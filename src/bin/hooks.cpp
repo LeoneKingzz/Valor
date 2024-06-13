@@ -68,20 +68,29 @@ namespace hooks
 			break;
 	
 		case "preHitFrame"_h:
-			if (!Utils::Actor::isHumanoid(actor) || is_powerattacking(actor)) {
-				if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
-					dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
-				}
-			}else if(!is_powerattacking(actor) && actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kBash) {
-				if (actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kDraw || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kSwing) {
-					dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
-				}
-			}else if(actor->AsActorState()->IsSprinting() && actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash) {
+			if ((!Utils::Actor::isHumanoid(actor) || is_powerattacking(actor)) 
+			&& (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit))) {
+				
+				dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
+
+			} else if ((!is_powerattacking(actor) && actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kBash) 
+			&& (actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kDraw || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kSwing)) {
+				
+				dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
+
+			} else if (actor->AsActorState()->IsSprinting() && actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash) {
 				bool bMaxsuWeaponParry_InWeaponParry = false;
 				if ((actor)
 						->GetGraphVariableBool("bMaxsuWeaponParry_InWeaponParry", bMaxsuWeaponParry_InWeaponParry) &&
 					!bMaxsuWeaponParry_InWeaponParry) {
 					dodge::GetSingleton()->react_to_bash_sprint(actor, get_combat_reach(actor));
+				}
+			} else if (!actor->AsActorState()->IsSprinting() && actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash && is_powerattacking(actor)) {
+				bool bMaxsuWeaponParry_InWeaponParry = false;
+				if ((actor)
+						->GetGraphVariableBool("bMaxsuWeaponParry_InWeaponParry", bMaxsuWeaponParry_InWeaponParry) &&
+					!bMaxsuWeaponParry_InWeaponParry) {
+					dodge::GetSingleton()->react_to_bash(actor, get_combat_reach(actor));
 				}
 			}
 			break;
