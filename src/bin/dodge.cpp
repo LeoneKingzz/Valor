@@ -382,13 +382,13 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-
+            
 			// auto R = attack_range;
 			// auto r2 = get_dist2(refr, a_attacker);
 
@@ -429,7 +429,7 @@ void dodge::react_to_melee_power(RE::Actor* a_attacker, float attack_range)
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -475,7 +475,7 @@ void dodge::react_to_melee_normal(RE::Actor* a_attacker, float attack_range)
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -521,7 +521,7 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -564,7 +564,7 @@ void dodge::react_to_bash_sprint(RE::Actor* a_attacker, float attack_range)
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -607,7 +607,7 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -691,7 +691,7 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -737,7 +737,7 @@ void dodge::react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_rang
 		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -814,7 +814,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	if (settings::bZUPA_mod_Check) {
 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 		auto magicTarget = a_actor->AsMagicTarget();
-		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut()
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
@@ -822,7 +822,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 		}
 	} else if (settings::bUAPNG_mod_Check){
 		bool IUBusy = false;
-		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut()
 		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -830,7 +830,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 		}
 
 	} else{
-		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut()
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1142,7 +1142,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //	if (settings::bZUPA_mod_Check) {
 //		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 //		auto magicTarget = a_actor->AsMagicTarget();
-//		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+//		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut()
 //		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
@@ -1150,7 +1150,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //		}
 //	} else if (settings::bUAPNG_mod_Check){
 //		bool IUBusy = false;
-//		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+//		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut()
 //		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1158,7 +1158,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //		}
 //
 //	} else{
-//		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+//		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut()
 //		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1183,7 +1183,7 @@ bool dodge::Protagnist_can_dodge(RE::Actor* a_actor)
 	if (settings::bZUPA_mod_Check) {
 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 		auto magicTarget = a_actor->AsMagicTarget();
-		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut()
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
@@ -1191,7 +1191,7 @@ bool dodge::Protagnist_can_dodge(RE::Actor* a_actor)
 		}
 	} else if (settings::bUAPNG_mod_Check){
 		bool IUBusy = false;
-		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut()
 		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1199,7 +1199,7 @@ bool dodge::Protagnist_can_dodge(RE::Actor* a_actor)
 		}
 
 	} else{
-		if (!a_actor->IsInKillMove() && !CombatTarget->IsInKillMove() && !CombatTarget->AsActorState()->IsBleedingOut()
+		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut()
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
