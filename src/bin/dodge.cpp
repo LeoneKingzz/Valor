@@ -288,7 +288,7 @@ float dodge::get_dodge_chance(RE::Actor* a_actor) {
 	}
 
 	if (Utils::Actor::isEquippedShield(a_actor)) {
-		switch (Shield->GetArmorType()) {
+		switch (Shield->GetArmorType()) { //function tests for biped model; need some king of flag or keyword instead for sheilds, else crash
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
 			Score += Armour.Shield_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
 			break;
