@@ -67,11 +67,12 @@ namespace hooks
 			}
 			break;
 	
-		// case "preHitFrame"_h:
-		// 	if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
-		// 		dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
-		// 	}
-		// 	break;
+		case "preHitFrame"_h:
+			if (!Utils::Actor::isHumanoid(actor) || is_powerattacking(actor))
+				if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
+					dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
+				}
+			break;
 
 		case "Voice_SpellFire_Event"_h:
 			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
@@ -112,10 +113,10 @@ namespace hooks
 		// 	}
 		// 	break;
 
-		// case "PowerAttack_Start_end"_h:
-		// case "NextAttackInitiate"_h:
-		// 	dodge::GetSingleton()->react_to_melee_normal(actor, get_combat_reach(actor));
-		// 	break;
+		case "PowerAttack_Start_end"_h:
+		case "NextAttackInitiate"_h:
+			dodge::GetSingleton()->react_to_melee_normal(actor, get_combat_reach(actor));
+			break;
 
 		// case "NextPowerAttackInitiate"_h:
 
