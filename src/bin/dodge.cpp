@@ -6,7 +6,7 @@ using readLock = std::shared_lock<std::shared_mutex>;
 
 
 void dodge::init() {
-	auto _precision_API = reinterpret_cast<PRECISION_API::IVPrecision1*>(PRECISION_API::RequestPluginAPI());
+	_precision_API = reinterpret_cast<PRECISION_API::IVPrecision1*>(PRECISION_API::RequestPluginAPI());
 	if (_precision_API) {
 		// precisionAPI->AddWeaponWeaponCollisionCallback(SKSE::GetPluginHandle(), OnMeleeHit::PrecisionWeaponsCallback);
 		_precision_API->AddPreHitCallback(SKSE::GetPluginHandle(), DodgeCallback_PreHit);
