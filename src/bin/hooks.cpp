@@ -72,6 +72,11 @@ namespace hooks
 				if (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit)) {
 					dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
 				}
+			else if(!is_powerattacking(actor)) {
+				if (actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kDraw || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kSwing) {
+					dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
+				}
+			}
 			break;
 
 		case "Voice_SpellFire_Event"_h:
