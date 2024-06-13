@@ -221,7 +221,7 @@ float dodge::get_dodge_chance(RE::Actor* a_actor) {
 
 	auto Boots = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kFeet);
 
-	auto Shield = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kShield);
+	auto Shield = a_actor->GetEquippedObject(true);
 
 	if (Helm) {
 		switch (Helm->GetArmorType()) {
@@ -234,6 +234,8 @@ float dodge::get_dodge_chance(RE::Actor* a_actor) {
 		case RE::BIPED_MODEL::ArmorType::kClothing:
 			Score += Armour.Helm_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
 			break;
+		default:
+			Score += Armour.Helm_weight * Protagnist_Reflexes.Armour_Weighting;
 		}
 	} else {
 		Score += Armour.Helm_weight * Protagnist_Reflexes.Armour_Weighting;
@@ -250,6 +252,8 @@ float dodge::get_dodge_chance(RE::Actor* a_actor) {
 		case RE::BIPED_MODEL::ArmorType::kClothing:
 			Score += Armour.Chest_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
 			break;
+		default:
+			Score += Armour.Chest_weight * Protagnist_Reflexes.Armour_Weighting;
 		}
 	} else {
 		Score += Armour.Chest_weight * Protagnist_Reflexes.Armour_Weighting;
@@ -266,6 +270,8 @@ float dodge::get_dodge_chance(RE::Actor* a_actor) {
 		case RE::BIPED_MODEL::ArmorType::kClothing:
 			Score += Armour.Gauntlet_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
 			break;
+		default:
+			Score += Armour.Gauntlet_weight * Protagnist_Reflexes.Armour_Weighting;
 		}
 	} else {
 		Score += Armour.Gauntlet_weight * Protagnist_Reflexes.Armour_Weighting;
@@ -282,26 +288,28 @@ float dodge::get_dodge_chance(RE::Actor* a_actor) {
 		case RE::BIPED_MODEL::ArmorType::kClothing:
 			Score += Armour.Boots_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
 			break;
+		default:
+			Score += Armour.Boots_weight * Protagnist_Reflexes.Armour_Weighting;
 		}
 	} else {
 		Score += Armour.Boots_weight * Protagnist_Reflexes.Armour_Weighting;
 	}
 
-	if (Utils::Actor::isEquippedShield(a_actor)) {
-		if (Shield->IsArmor()) {
-			switch (Shield->GetArmorType()) {  //function tests for biped model; need some king of flag or keyword instead for sheilds, else crash
-			case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-				Score += Armour.Shield_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
-				break;
-			case RE::BIPED_MODEL::ArmorType::kLightArmor:
-				Score += Armour.Shield_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
-				break;
-			case RE::BIPED_MODEL::ArmorType::kClothing:
-				Score += Armour.Shield_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
-				break;
-			}
-		} else {
+	if (Shield && Shield->IsArmor()) {
+		// if (Shield->HasKeywordByEditorID())
+		switch (Shield->As<RE::TESObjectARMO>()->GetArmorType()) {  //function tests for biped model; need some king of flag or keyword instead for sheilds, else crash
+		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+			Score += Armour.Shield_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kLightArmor:
+			Score += Armour.Shield_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		case RE::BIPED_MODEL::ArmorType::kClothing:
+			Score += Armour.Shield_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
+			break;
+		default:
 			Score += Armour.Shield_weight * Protagnist_Reflexes.Armour_Weighting;
+			break;
 		}
 	} else {
 		Score += Armour.Shield_weight * Protagnist_Reflexes.Armour_Weighting;
