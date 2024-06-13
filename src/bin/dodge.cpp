@@ -288,13 +288,20 @@ float dodge::get_dodge_chance(RE::Actor* a_actor) {
 	}
 
 	if (Utils::Actor::isEquippedShield(a_actor)) {
-		switch (Shield->GetArmorType()) { //function tests for biped model; need some king of flag or keyword instead for sheilds, else crash
-		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			Score += Armour.Shield_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			Score += Armour.Shield_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
-			break;
+		if (Shield->IsArmor()) {
+			switch (Shield->GetArmorType()) {  //function tests for biped model; need some king of flag or keyword instead for sheilds, else crash
+			case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+				Score += Armour.Shield_weight * Armour.Heavyarm_mult * Protagnist_Reflexes.Armour_Weighting;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kLightArmor:
+				Score += Armour.Shield_weight * Armour.Lightarm_mult * Protagnist_Reflexes.Armour_Weighting;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kClothing:
+				Score += Armour.Shield_weight * Armour.clothing_mult * Protagnist_Reflexes.Armour_Weighting;
+				break;
+			}
+		} else {
+			Score += Armour.Shield_weight * Protagnist_Reflexes.Armour_Weighting;
 		}
 	} else {
 		Score += Armour.Shield_weight * Protagnist_Reflexes.Armour_Weighting;
