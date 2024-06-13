@@ -64,7 +64,6 @@ namespace hooks
 				if (settings::biFrames_enable) {
 					dodge::Reset_iFrames(actor);
 				}
-				dodge::GetSingleton()->set_dodge_phase(actor, false);
 			}
 			break;
 	

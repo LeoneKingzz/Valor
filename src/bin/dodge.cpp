@@ -785,9 +785,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
 	// 	return;
 	// }
-	if (get_is_dodging(a_actor)) {
-		return;
-	}
+	
 
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor);
 
@@ -813,7 +811,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			bool bIsDodging = false;
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-				set_dodge_phase(a_actor, true);
+				
 				do_dodge(a_actor, direction);
 			}
 			return;
@@ -828,9 +826,7 @@ void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a
 	// if (ValhallaUtils::isBackFacing(CombatTarget, a_actor)) {  //no need to react to an attack if the attacker isn't facing you.
 	// 	return;
 	// }
-	if (get_is_dodging(a_actor)) {
-		return;
-	}
+	
 
 	// auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
 
@@ -871,7 +867,7 @@ void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			bool bIsDodging = false;
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-				set_dodge_phase(a_actor, true);
+				
 				do_dodge(a_actor, direction);
 			}
 			return;
@@ -887,9 +883,7 @@ void dodge::NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* 
 	// 	return;
 	// }
 
-	if (get_is_dodging(a_actor)) {
-		return;
-	}
+	
 
 	// auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
 
@@ -930,7 +924,7 @@ void dodge::NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* 
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			bool bIsDodging = false;
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-				set_dodge_phase(a_actor, true);
+				
 				do_dodge(a_actor, direction);
 			}
 			return;
@@ -946,9 +940,7 @@ void dodge::Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set*
 	// 	return;
 	// }
 
-	if (get_is_dodging(a_actor)) {
-		return;
-	}
+	
 
 	// Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
 
@@ -977,7 +969,7 @@ void dodge::Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set*
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			bool bIsDodging = false;
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-				set_dodge_phase(a_actor, true);
+				
 				do_dodge(a_actor, direction);
 			}
 			return;
@@ -993,9 +985,7 @@ void dodge::Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_direct
 	// 	return;
 	// }
 
-	if (get_is_dodging(a_actor)) {
-		return;
-	}
+	
 
 	// Sleep(dodge::GetSingleton()->GenerateRandomInt(100, 200));
 
@@ -1023,7 +1013,7 @@ void dodge::Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_direct
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			bool bIsDodging = false;
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-				set_dodge_phase(a_actor, true);
+				
 				do_dodge(a_actor, direction);
 			}
 			return;
@@ -1039,9 +1029,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 	// 	return;
 	// }
 
-	if (get_is_dodging(a_actor)) {
-		return;
-	}
+	
 
 	// Sleep(dodge::GetSingleton()->GenerateRandomInt(500, 900));
 
@@ -1069,7 +1057,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 		if (can_goto(a_actor, dodge_dest) && able_dodge(a_actor) == true) {
 			bool bIsDodging = false;
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
-				set_dodge_phase(a_actor, true);
+				
 				do_dodge(a_actor, direction);
 			}
 			return;
