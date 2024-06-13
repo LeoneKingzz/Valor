@@ -619,7 +619,7 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_ranged);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);

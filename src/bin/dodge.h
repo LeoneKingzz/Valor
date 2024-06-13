@@ -32,6 +32,7 @@ const dodge_dir_set dodge_directions_tk_back = { dodge_direction::kBackward };
 const dodge_dir_set dodge_directions_tk_vertical = { dodge_direction::kForward, dodge_direction::kBackward };
 const dodge_dir_set dodge_directions_tk_all = { dodge_direction::kForward, dodge_direction::kBackward, dodge_direction::kLeft, dodge_direction::kRight };
 const dodge_dir_set dodge_directions_tk_reactive = { dodge_direction::kBackward, dodge_direction::kLeft, dodge_direction::kRight };
+const dodge_dir_set dodge_directions_tk_ranged = { dodge_direction::kForward, dodge_direction::kLeft, dodge_direction::kRight };
 const dodge_dir_set dodge_directions_tk_right = { dodge_direction::kRight };
 const dodge_dir_set dodge_directions_tk_left = { dodge_direction::kLeft };
 
