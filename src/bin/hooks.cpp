@@ -81,7 +81,7 @@ namespace hooks
 
 		case "Voice_SpellFire_Event"_h:
 			if (actor->GetCurrentShout()->variations->spell->As<RE::MagicItem>()->IsHostile()) {
-				dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
+				dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
 			}
 			break;
 

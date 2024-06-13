@@ -616,10 +616,48 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 			if (abs(angle) > attackAngle) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
+			int bHeavyarmour = 0;
+			auto Body = refr->GetWornArmor(RE::BIPED_OBJECTS::kBody);
+			auto Helm = refr->GetWornArmor(RE::BIPED_OBJECTS::kHair);
+			if (Body) {
+				switch (Body->GetArmorType()) {
+				case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+					bHeavyarmour += 1;
+					break;
+				case RE::BIPED_MODEL::ArmorType::kLightArmor:
+					bHeavyarmour += 0;
+					break;
+				case RE::BIPED_MODEL::ArmorType::kClothing:
+					bHeavyarmour += 0;
+					break;
+				}
+			} else {
+				bHeavyarmour += 0;
+			}
+
+			if (Helm) {
+				switch (Helm->GetArmorType()) {
+				case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+					bHeavyarmour += 1;
+					break;
+				case RE::BIPED_MODEL::ArmorType::kLightArmor:
+					bHeavyarmour += 0;
+					break;
+				case RE::BIPED_MODEL::ArmorType::kClothing:
+					bHeavyarmour += 0;
+					break;
+				}
+			} else {
+				bHeavyarmour += 0;
+			}
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_ranged);
+			    if (bHeavyarmour == 2) {
+					dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_ranged);
+				} else {
+					dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_horizontal);
+				}
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
@@ -665,7 +703,7 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->Shouts_Spells_attempt_dodge(refr, &dodge_directions_tk_all);
+				dodge::GetSingleton()->Shouts_Spells_attempt_dodge(refr, &dodge_directions_tk_horizontal);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
@@ -711,7 +749,7 @@ void dodge::react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_rang
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_horizontal);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
