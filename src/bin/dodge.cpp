@@ -141,27 +141,37 @@ bool dodge::BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm)
 PRECISION_API::PreHitCallbackReturn dodge::DodgeCallback_PreHit(const PRECISION_API::PrecisionHitData& a_precisionHitData)
 {
 	PRECISION_API::PreHitCallbackReturn returnData;
-	// if (!a_precisionHitData.target || !a_precisionHitData.target->Is(RE::FormType::ActorCharacter)) {
-	// 	return returnData;
-	// }
+	if (!a_precisionHitData.target || !a_precisionHitData.target->Is(RE::FormType::ActorCharacter)) {
+		return returnData;
+	}
 
-	// auto actor = a_precisionHitData.target->As<RE::Actor>();
+	auto actor = a_precisionHitData.target->As<RE::Actor>();
 
-	// if (actor->IsPlayerRef()) {
-	// 	return returnData;
-	// }
+	if (actor->IsPlayerRef()) {
+		return returnData;
+	}
 
-	// if (!Utils::Actor::isHumanoid(actor)) {
-	// 	return returnData;
-	// }
+	if (!Utils::Actor::isHumanoid(actor)) {
+		return returnData;
+	}
 
-	// if (!ValhallaUtils::is_adversary(actor, a_precisionHitData.attacker)) {
-	// 	return returnData;
-	// }
+	if (!ValhallaUtils::is_adversary(actor, a_precisionHitData.attacker)) {
+		return returnData;
+	}
 
 	// if (a_precisionHitData.attacker->GetEquippedObject(false)->As<RE::TESObjectWEAP>()->GetWeaponType() == RE::WEAPON_TYPE::kBow || a_precisionHitData.attacker->GetEquippedObject(false)->As<RE::TESObjectWEAP>()->GetWeaponType() == RE::WEAPON_TYPE::kCrossbow) {
 	// 	return returnData;
 	// }
+
+	bool bIsDodging = false;
+
+	if ((actor)
+			->GetGraphVariableBool("bIsDodging", bIsDodging) &&
+		bIsDodging) {
+		returnData.bIgnoreHit = true;
+	}
+
+	
 
 	// bool bMaxsuWeaponParry_InWeaponParry = false;
 
