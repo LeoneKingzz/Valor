@@ -1190,6 +1190,7 @@ bool dodge::Protagnist_can_dodge(RE::Actor* a_actor)
 	auto attackState = a_actor->AsActorState()->GetAttackState();
 	// auto IsStaggered = static_cast<bool>(a_actor->AsActorState()->actorState2.staggered);
 	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+	auto magicTarget = a_actor->AsMagicTarget();
 	// auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
 	// auto RecoilState = static_cast<int>(a_actor->AsActorState()->actorState2.recoil);
 	// auto CT_RecoilState = static_cast<int>(CombatTarget->AsActorState()->actorState2.recoil);
@@ -1197,7 +1198,7 @@ bool dodge::Protagnist_can_dodge(RE::Actor* a_actor)
 
 	if (settings::bZUPA_mod_Check) {
 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
-		auto magicTarget = a_actor->AsMagicTarget();
+		/*auto magicTarget = a_actor->AsMagicTarget();*/
 		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
