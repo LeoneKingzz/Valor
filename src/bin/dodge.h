@@ -11,7 +11,7 @@
 #include "include/lib/PrecisionAPI.h"
 
 
-using PRECISION_API::PreHitCallback;
+//using PRECISION_API::PreHitCallback;
 using std::string;
 
 enum dodge_direction
@@ -136,7 +136,7 @@ public:
 
 private:
 
-	PRECISION_API::IVPrecision4* _precision_API;
+	/*PRECISION_API::IVPrecision4* _precision_API;*/
 
 	static PRECISION_API::PreHitCallbackReturn DodgeCallback_PreHit(const PRECISION_API::PrecisionHitData& a_precisionHitData);
 

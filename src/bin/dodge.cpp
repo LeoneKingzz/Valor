@@ -1,11 +1,12 @@
 #include "dodge.h"
+
 //#define PI 3.1415926535f
 using writeLock = std::unique_lock<std::shared_mutex>;
 using readLock = std::shared_lock<std::shared_mutex>;
 
 
 void dodge::init() {
-	_precision_API = reinterpret_cast<PRECISION_API::IVPrecision4*>(PRECISION_API::RequestPluginAPI());
+	auto _precision_API = reinterpret_cast<PRECISION_API::IVPrecision4*>(PRECISION_API::RequestPluginAPI());
 	if (_precision_API) {
 		// precisionAPI->AddWeaponWeaponCollisionCallback(SKSE::GetPluginHandle(), OnMeleeHit::PrecisionWeaponsCallback);
 		_precision_API->AddPreHitCallback(SKSE::GetPluginHandle(), DodgeCallback_PreHit);
