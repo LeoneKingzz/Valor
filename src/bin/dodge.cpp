@@ -341,53 +341,61 @@ float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
 	auto aiProcess = actor->GetActorRuntimeData().currentProcess;
 
 	if (aiProcess && aiProcess->high && aiProcess->high->attackData) {
-		const RE::TESForm* equipped = aiProcess->high->attackData->IsLeftAttack() ? aiProcess->GetEquippedLeftHand() : aiProcess->GetEquippedRightHand();
+		// const RE::TESForm* 
+		auto equippedLi = aiProcess->high->attackData.get();
+		if (equippedLi) {
+			const RE::TESForm* equipped = equippedLi->IsLeftAttack() ? aiProcess->GetEquippedLeftHand() : aiProcess->GetEquippedRightHand();
+			if (equipped && equipped->IsWeapon()) {
+				switch (equipped->As<RE::TESObjectWEAP>()->GetWeaponType()) {
+				case RE::WEAPON_TYPE::kOneHandSword:
+					distance = 310.0f;
+					break;
+				case RE::WEAPON_TYPE::kOneHandAxe:
+					distance = 305.0f;
+					break;
+				case RE::WEAPON_TYPE::kOneHandMace:
+					distance = 300.0f;
+					break;
+				case RE::WEAPON_TYPE::kOneHandDagger:
+					distance = 250.0f;
+					break;
+				case RE::WEAPON_TYPE::kTwoHandAxe:
+					distance = 350.0f;
+					break;
+				case RE::WEAPON_TYPE::kTwoHandSword:
+					distance = 370.0;
+					break;
+				case RE::WEAPON_TYPE::kHandToHandMelee:
+					if (!Utils::Actor::isHumanoid(actor)) {
+						distance = 350.0f;
+					} else {
+						distance = 150.0f;
+					}
+					break;
+				case RE::WEAPON_TYPE::kBow:
+					distance = 1500.0;
+					break;
+				case RE::WEAPON_TYPE::kCrossbow:
+					distance = 2100.0;
+					break;
+				case RE::WEAPON_TYPE::kStaff:
+					distance = 320.0;
+					break;
+				default:
+					distance = 150.0f;
+					break;
+				}
 
-		if (equipped && equipped->IsWeapon()) {
-
-			switch (equipped->As<RE::TESObjectWEAP>()->GetWeaponType()) {
-			case RE::WEAPON_TYPE::kOneHandSword:
-				distance = 310.0f;
-				break;
-			case RE::WEAPON_TYPE::kOneHandAxe:
-				distance = 305.0f;
-				break;
-			case RE::WEAPON_TYPE::kOneHandMace:
-				distance = 300.0f;
-				break;
-			case RE::WEAPON_TYPE::kOneHandDagger:
+			} else if (equipped && equipped->IsArmor()) {
 				distance = 250.0f;
-				break;
-			case RE::WEAPON_TYPE::kTwoHandAxe:
-				distance = 350.0f;
-				break;
-			case RE::WEAPON_TYPE::kTwoHandSword:
-				distance = 370.0;
-				break;
-			case RE::WEAPON_TYPE::kHandToHandMelee:
+
+			} else {
 				if (!Utils::Actor::isHumanoid(actor)) {
 					distance = 350.0f;
 				} else {
 					distance = 150.0f;
 				}
-				break;
-			case RE::WEAPON_TYPE::kBow:
-				distance = 1500.0;
-				break;
-			case RE::WEAPON_TYPE::kCrossbow:
-				distance = 2100.0;
-				break;
-			case RE::WEAPON_TYPE::kStaff:
-				distance = 320.0;
-				break;
-			default:
-			    distance = 150.0f;
-				break;
 			}
-
-		}else if(equipped && equipped->IsArmor()){
-			distance = 250.0f;
-
 		} else {
 			if (!Utils::Actor::isHumanoid(actor)) {
 				distance = 350.0f;
@@ -405,6 +413,22 @@ float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
 	}
 
 	return distance;
+}
+
+bool dodge::GetAttackSpell(RE::Actor* actor) {
+	auto limbospell = actor->GetActorRuntimeData().currentProcess;
+
+	if (limbospell && limbospell->high && limbospell->high->attackData && limbospell->high->attackData.get()) {
+		auto equippedspell = limbospell->high->attackData.get()->data.attackSpell;
+
+		if (equippedspell) {
+			RE::MagicItem* effect = const_cast<RE::SpellItem*>(equippedspell)->As<RE::MagicItem>();
+			if (effect && effect->IsHostile()) {
+				return true;
+			}
+		}
+	}
+    return false;
 }
 
 // float dodge::Get_ReactiveDodge_Distance(RE::Actor* actor)
@@ -466,10 +490,10 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 	}
 
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
-		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -513,10 +537,10 @@ void dodge::react_to_melee_power(RE::Actor* a_attacker, float attack_range)
 	}
 
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
-		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -559,10 +583,10 @@ void dodge::react_to_melee_normal(RE::Actor* a_attacker, float attack_range)
 	}
 
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
-		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -605,10 +629,10 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 	}
 
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
-		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -648,10 +672,10 @@ void dodge::react_to_bash_sprint(RE::Actor* a_attacker, float attack_range)
 	}
 
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
-		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -691,10 +715,10 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 	}
 
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
-		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -775,10 +799,10 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
 	}
 
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
-		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
@@ -821,10 +845,10 @@ void dodge::react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_rang
 	}
 
 	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
-		if (!_refr->IsDisabled() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
-			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->Is3DLoaded() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
+			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!Utils::Actor::isHumanoid(refr)) {
