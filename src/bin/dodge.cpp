@@ -488,9 +488,10 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
 	}
+	RE::TESObjectREFR* _a_attacker = a_attacker->As<RE::TESObjectREFR>();
 
-	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
-		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+	RE::TES::GetSingleton()->ForEachReferenceInRange(_a_attacker, attack_range, [&](RE::TESObjectREFR*_refr) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(_a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
@@ -535,9 +536,10 @@ void dodge::react_to_melee_power(RE::Actor* a_attacker, float attack_range)
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
 	}
+	RE::TESObjectREFR* _a_attacker = a_attacker->As<RE::TESObjectREFR>();
 
-	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
-		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+	RE::TES::GetSingleton()->ForEachReferenceInRange(_a_attacker, attack_range, [&](RE::TESObjectREFR* _refr) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(_a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
@@ -581,9 +583,10 @@ void dodge::react_to_melee_normal(RE::Actor* a_attacker, float attack_range)
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
 	}
+	RE::TESObjectREFR* _a_attacker = a_attacker->As<RE::TESObjectREFR>();
 
-	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
-		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+	RE::TES::GetSingleton()->ForEachReferenceInRange(_a_attacker, attack_range, [&](RE::TESObjectREFR* _refr) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(_a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
@@ -627,9 +630,10 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
 	}
+	RE::TESObjectREFR* _a_attacker = a_attacker->As<RE::TESObjectREFR>();
 
-	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
-		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+	RE::TES::GetSingleton()->ForEachReferenceInRange(_a_attacker, attack_range, [&](RE::TESObjectREFR*_refr) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(_a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
@@ -670,9 +674,10 @@ void dodge::react_to_bash_sprint(RE::Actor* a_attacker, float attack_range)
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
 	}
+	RE::TESObjectREFR* _a_attacker = a_attacker->As<RE::TESObjectREFR>();
 
-	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
-		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+	RE::TES::GetSingleton()->ForEachReferenceInRange(_a_attacker, attack_range, [&](RE::TESObjectREFR* _refr) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(_a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
@@ -713,9 +718,10 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
 	}
+	RE::TESObjectREFR* _a_attacker = a_attacker->As<RE::TESObjectREFR>();
 
-	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR*_refr) {
-		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+	RE::TES::GetSingleton()->ForEachReferenceInRange(_a_attacker, attack_range, [&](RE::TESObjectREFR*_refr) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(_a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 			
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
@@ -797,9 +803,10 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
 	}
+	RE::TESObjectREFR* _a_attacker = a_attacker->As<RE::TESObjectREFR>();
 
-	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
-		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+	RE::TES::GetSingleton()->ForEachReferenceInRange(_a_attacker, attack_range, [&](RE::TESObjectREFR* _refr) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(_a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
@@ -843,9 +850,10 @@ void dodge::react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_rang
 	if (!settings::bDodgeAI_Reactive_enable) {
 		return;
 	}
+	RE::TESObjectREFR* _a_attacker = a_attacker->As<RE::TESObjectREFR>();
 
-	RE::TES::GetSingleton()->ForEachReference([&](RE::TESObjectREFR* _refr) {
-		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(a_attacker->GetPosition()) <= attack_range) {
+	RE::TES::GetSingleton()->ForEachReferenceInRange(_a_attacker, attack_range, [&](RE::TESObjectREFR* _refr) {
+		if (!_refr->IsDisabled() && _refr->Is3DLoaded() && _refr->GetFormType() == RE::FormType::ActorCharacter && _refr->GetPosition().GetDistance(_a_attacker->GetPosition()) <= attack_range) {
 			RE::Actor* refr = _refr->As<RE::Actor>();
 
 			if (!refr || refr->IsPlayerRef() || refr->IsDead() || !refr->IsInCombat() ||!ValhallaUtils::is_adversary(refr, a_attacker)) {
