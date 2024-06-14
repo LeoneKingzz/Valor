@@ -68,29 +68,29 @@ namespace hooks
 			break;
 	
 		case "preHitFrame"_h:
-			if ((!Utils::Actor::isHumanoid(actor) || is_powerattacking(actor)) 
+			if ((!Utils::Actor::isHumanoid(actor) || Utils::Actor::isPowerAttacking(actor)) 
 			&& (!(actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kHit))) {
 				
-				dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
+				dodge::GetSingleton()->react_to_melee(actor, dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor));
 
-			} else if ((!is_powerattacking(actor) && actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kBash) 
+			} else if ((!Utils::Actor::isPowerAttacking(actor) && actor->AsActorState()->GetAttackState() != RE::ATTACK_STATE_ENUM::kBash) 
 			&& (actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kDraw || actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kSwing)) {
 				
-				dodge::GetSingleton()->react_to_melee(actor, get_combat_reach(actor));
+				dodge::GetSingleton()->react_to_melee(actor, dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor));
 
 			} else if (actor->AsActorState()->IsSprinting() && actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash) {
 				bool bMaxsuWeaponParry_InWeaponParry = false;
 				if ((actor)
 						->GetGraphVariableBool("bMaxsuWeaponParry_InWeaponParry", bMaxsuWeaponParry_InWeaponParry) &&
 					!bMaxsuWeaponParry_InWeaponParry) {
-					dodge::GetSingleton()->react_to_bash_sprint(actor, get_combat_reach(actor));
+					dodge::GetSingleton()->react_to_bash_sprint(actor, dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor));
 				}
-			} else if (!actor->AsActorState()->IsSprinting() && actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash && is_powerattacking(actor)) {
+			} else if (!actor->AsActorState()->IsSprinting() && actor->AsActorState()->GetAttackState() == RE::ATTACK_STATE_ENUM::kBash && Utils::Actor::isPowerAttacking(actor)) {
 				bool bMaxsuWeaponParry_InWeaponParry = false;
 				if ((actor)
 						->GetGraphVariableBool("bMaxsuWeaponParry_InWeaponParry", bMaxsuWeaponParry_InWeaponParry) &&
 					!bMaxsuWeaponParry_InWeaponParry) {
-					dodge::GetSingleton()->react_to_bash(actor, get_combat_reach(actor));
+					dodge::GetSingleton()->react_to_bash(actor, dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor));
 				}
 			}
 			break;
@@ -137,12 +137,12 @@ namespace hooks
 
 		case "PowerAttack_Start_end"_h:
 		case "NextAttackInitiate"_h:
-			dodge::GetSingleton()->react_to_melee_normal(actor, get_combat_reach(actor));
+			dodge::GetSingleton()->react_to_melee_normal(actor, dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor));
 			break;
 
 		// case "NextPowerAttackInitiate"_h:
 
-		// 	dodge::GetSingleton()->react_to_melee_power(actor, get_combat_reach(actor));
+		// 	dodge::GetSingleton()->react_to_melee_power(actor, dodge::GetSingleton()->Get_ReactiveDodge_Distance(actor));
 		// 	break;
 
 		// case "bashPowerStart"_h:

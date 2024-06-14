@@ -336,41 +336,73 @@ float dodge::get_dodge_chance(RE::Actor* a_actor) {
 
 float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
 	
-	auto defenderRightEquipped = actor->GetEquippedObject(false);
-	auto distance = 250.0f;
+	auto aiProcess = actor->GetActorRuntimeData().currentProcess;
 
-	if (defenderRightEquipped && (defenderRightEquipped->IsWeapon())) {
-		RE::TESObjectWEAP* weapon = (defenderRightEquipped->As<RE::TESObjectWEAP>());
-		switch (weapon->GetWeaponType()) {
-		case RE::WEAPON_TYPE::kOneHandSword:
-			distance = 310.0f;
-			break;
-		case RE::WEAPON_TYPE::kOneHandAxe:
-			distance = 305.0f;
-			break;
-		case RE::WEAPON_TYPE::kOneHandMace:
-			distance = 300.0f;;
-			break;
-		case RE::WEAPON_TYPE::kOneHandDagger:
-			distance = 250.0f;
-			break;
-		case RE::WEAPON_TYPE::kTwoHandAxe:
-			distance = 350.0f;
-			break;
-		case RE::WEAPON_TYPE::kTwoHandSword:
-			distance = 370.0;
-			break;
-		case RE::WEAPON_TYPE::kHandToHandMelee:
-		    if (!Utils::Actor::isHumanoid(actor)) {
-				distance = 350.0f;
+	if (aiProcess && aiProcess->high && aiProcess->high->attackData) {
+		const RE::TESForm* equipped = aiProcess->high->attackData->IsLeftAttack() ? aiProcess->GetEquippedLeftHand() : aiProcess->GetEquippedRightHand();
+
+		if (equipped && equipped->IsWeapon()) {
+
+			return equipped->As<RE::TESObjectWEAP>()->GetReach();
+			
+		}else if(equipped && equipped->IsArmor()){
+			return 250.0f;
+
+		} else {
+			if (!Utils::Actor::isHumanoid(actor)) {
+				return 350.0f;
 			} else {
-				distance = 130.0f;
+				return 150.0f;
 			}
-			break;
+		}
+		
+	}else {
+		if (!Utils::Actor::isHumanoid(actor)) {
+			return 350.0f;
+		} else {
+			return 200.0f;
 		}
 	}
-	return distance;
 }
+
+// float dodge::Get_ReactiveDodge_Distance(RE::Actor* actor)
+// {
+// 	auto defenderRightEquipped = actor->GetEquippedObject(false);
+// 	auto distance = 250.0f;
+
+// 	if (defenderRightEquipped && (defenderRightEquipped->IsWeapon())) {
+// 		RE::TESObjectWEAP* weapon = (defenderRightEquipped->As<RE::TESObjectWEAP>());
+// 		switch (weapon->GetWeaponType()) {
+// 		case RE::WEAPON_TYPE::kOneHandSword:
+// 			distance = 310.0f;
+// 			break;
+// 		case RE::WEAPON_TYPE::kOneHandAxe:
+// 			distance = 305.0f;
+// 			break;
+// 		case RE::WEAPON_TYPE::kOneHandMace:
+// 			distance = 300.0f;
+// 			;
+// 			break;
+// 		case RE::WEAPON_TYPE::kOneHandDagger:
+// 			distance = 250.0f;
+// 			break;
+// 		case RE::WEAPON_TYPE::kTwoHandAxe:
+// 			distance = 350.0f;
+// 			break;
+// 		case RE::WEAPON_TYPE::kTwoHandSword:
+// 			distance = 370.0;
+// 			break;
+// 		case RE::WEAPON_TYPE::kHandToHandMelee:
+// 			if (!Utils::Actor::isHumanoid(actor)) {
+// 				distance = 350.0f;
+// 			} else {
+// 				distance = 130.0f;
+// 			}
+// 			break;
+// 		}
+// 	}
+// 	return distance;
+// }
 
 void dodge::Set_iFrames(RE::Actor* actor){
 	actor->SetGraphVariableBool("bIframeActive", true);
