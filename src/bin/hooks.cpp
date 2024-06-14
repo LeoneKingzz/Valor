@@ -113,9 +113,10 @@ namespace hooks
 			// if (actor->GetEquippedObject(true)->As<RE::MagicItem>()->IsHostile()) {
 			// 	dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
 			// }
-			if (dodge::GetSingleton()->GetAttackSpell(actor)) {
-				dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
-			}
+			// if (dodge::GetSingleton()->GetAttackSpell(actor)) {
+			// 	dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
+			// }
+			dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
 			break;
 
 		// case "BeginCastLeft"_h:
@@ -130,9 +131,10 @@ namespace hooks
 			// 	dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
 			// }
 			// break;
-			if (dodge::GetSingleton()->GetAttackSpell(actor)) {
-				dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
-			}
+			// if (dodge::GetSingleton()->GetAttackSpell(actor)) {
+			// 	dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
+			// }
+			dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
 			break;
 
 			// case "BeginCastRight"_h:
