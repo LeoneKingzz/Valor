@@ -112,7 +112,7 @@ public:
 
 	static float GetProtaganist_ReflexScore(RE::Actor* a_actor);
 
-	static bool Protagnist_can_dodge(RE::Actor* a_actor);
+	// static bool Protagnist_can_dodge(RE::Actor* a_actor);
 
 	static bool BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm);
 

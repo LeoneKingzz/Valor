@@ -134,7 +134,7 @@ float dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
 bool dodge::BindPapyrusFunctions(RE::BSScript::IVirtualMachine* vm)
 {
 	vm->RegisterFunction("GetProtaganist_ReflexScore", "_SM_UND_NativeFunctions", GetProtaganist_ReflexScore);
-	vm->RegisterFunction("Protagnist_can_dodge", "_SM_UND_NativeFunctions", Protagnist_can_dodge);
+	// vm->RegisterFunction("Protagnist_can_dodge", "_SM_UND_NativeFunctions", Protagnist_can_dodge);
 	return true;
 }
 
@@ -925,6 +925,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	auto attackState = a_actor->AsActorState()->GetAttackState();
 	// auto IsStaggered = static_cast<bool>(a_actor->AsActorState()->actorState2.staggered);
 	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+	auto CTMagicTarget = CombatTarget->AsMagicTarget();
 	auto magicTarget = a_actor->AsMagicTarget();
 	// magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize);
 	// auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
@@ -935,7 +936,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	if (settings::bZUPA_mod_Check) {
 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 		// auto magicTarget = a_actor->AsMagicTarget();
-		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !CTMagicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kParalysis) && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
@@ -943,7 +944,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 		}
 	} else if (settings::bUAPNG_mod_Check){
 		bool IUBusy = false;
-		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !CTMagicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kParalysis) && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -951,7 +952,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 		}
 
 	} else{
-		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !CTMagicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kParalysis) && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1263,7 +1264,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //	if (settings::bZUPA_mod_Check) {
 //		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 //		auto magicTarget = a_actor->AsMagicTarget();
-//		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+//		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !CTMagicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kParalysis) && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 //		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
@@ -1271,7 +1272,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //		}
 //	} else if (settings::bUAPNG_mod_Check){
 //		bool IUBusy = false;
-//		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+//		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !CTMagicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kParalysis) && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 //		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1279,7 +1280,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //		}
 //
 //	} else{
-//		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+//		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !CTMagicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kParalysis) && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 //		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1291,45 +1292,45 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 
 
 
-bool dodge::Protagnist_can_dodge(RE::Actor* a_actor)
-{
-	auto attackState = a_actor->AsActorState()->GetAttackState();
-	// auto IsStaggered = static_cast<bool>(a_actor->AsActorState()->actorState2.staggered);
-	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
-	auto magicTarget = a_actor->AsMagicTarget();
-	// auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
-	// auto RecoilState = static_cast<int>(a_actor->AsActorState()->actorState2.recoil);
-	// auto CT_RecoilState = static_cast<int>(CombatTarget->AsActorState()->actorState2.recoil);
+// bool dodge::Protagnist_can_dodge(RE::Actor* a_actor)
+// {
+// 	auto attackState = a_actor->AsActorState()->GetAttackState();
+// 	// auto IsStaggered = static_cast<bool>(a_actor->AsActorState()->actorState2.staggered);
+// 	auto CombatTarget = a_actor->GetActorRuntimeData().currentCombatTarget.get().get();
+// 	auto magicTarget = a_actor->AsMagicTarget();
+// 	// auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
+// 	// auto RecoilState = static_cast<int>(a_actor->AsActorState()->actorState2.recoil);
+// 	// auto CT_RecoilState = static_cast<int>(CombatTarget->AsActorState()->actorState2.recoil);
 
 
-	if (settings::bZUPA_mod_Check) {
-		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
-		/*auto magicTarget = a_actor->AsMagicTarget();*/
-		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
-		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
-		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
-			return true;
-		}
-	} else if (settings::bUAPNG_mod_Check){
-		bool IUBusy = false;
-		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
-		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
-		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
-			return true;
-		}
+// 	if (settings::bZUPA_mod_Check) {
+// 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
+// 		/*auto magicTarget = a_actor->AsMagicTarget();*/
+// 		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !CTMagicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kParalysis) && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+// 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
+// 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
+// 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
+// 			return true;
+// 		}
+// 	} else if (settings::bUAPNG_mod_Check){
+// 		bool IUBusy = false;
+// 		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !CTMagicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kParalysis) && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+// 		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
+// 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
+// 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
+// 			return true;
+// 		}
 
-	} else{
-		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
-		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
-		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
-			return true;
-		}
-	}
-	return false;
-}
+// 	} else{
+// 		if (!a_actor->IsInKillMove() /*&& !CombatTarget->IsInKillMove()*/ && !CombatTarget->AsActorState()->IsBleedingOut() && !CTMagicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kParalysis) && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+// 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= settings::fSideStep_staminacost 
+// 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
+// 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
+// 			return true;
+// 		}
+// 	}
+// 	return false;
+// }
 
 
 #define MAX_DIST_DIFFERENCE 50
