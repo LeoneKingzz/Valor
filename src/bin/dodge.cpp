@@ -335,6 +335,8 @@ float dodge::get_dodge_chance(RE::Actor* a_actor) {
 }
 
 float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
+
+	float distance = 200.0f;
 	
 	auto aiProcess = actor->GetActorRuntimeData().currentProcess;
 
@@ -343,26 +345,66 @@ float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
 
 		if (equipped && equipped->IsWeapon()) {
 
-			return equipped->As<RE::TESObjectWEAP>()->GetReach();
-			
+			switch (equipped->As<RE::TESObjectWEAP>()->GetWeaponType()) {
+			case RE::WEAPON_TYPE::kOneHandSword:
+				distance = 310.0f;
+				break;
+			case RE::WEAPON_TYPE::kOneHandAxe:
+				distance = 305.0f;
+				break;
+			case RE::WEAPON_TYPE::kOneHandMace:
+				distance = 300.0f;
+				break;
+			case RE::WEAPON_TYPE::kOneHandDagger:
+				distance = 250.0f;
+				break;
+			case RE::WEAPON_TYPE::kTwoHandAxe:
+				distance = 350.0f;
+				break;
+			case RE::WEAPON_TYPE::kTwoHandSword:
+				distance = 370.0;
+				break;
+			case RE::WEAPON_TYPE::kHandToHandMelee:
+				if (!Utils::Actor::isHumanoid(actor)) {
+					distance = 350.0f;
+				} else {
+					distance = 150.0f;
+				}
+				break;
+			case RE::WEAPON_TYPE::kBow:
+				distance = 1500.0;
+				break;
+			case RE::WEAPON_TYPE::kCrossbow:
+				distance = 2100.0;
+				break;
+			case RE::WEAPON_TYPE::kStaff:
+				distance = 320.0;
+				break;
+			default:
+			    distance = 150.0f;
+				break;
+			}
+
 		}else if(equipped && equipped->IsArmor()){
-			return 250.0f;
+			distance = 250.0f;
 
 		} else {
 			if (!Utils::Actor::isHumanoid(actor)) {
-				return 350.0f;
+				distance = 350.0f;
 			} else {
-				return 150.0f;
+				distance = 150.0f;
 			}
 		}
 		
 	}else {
 		if (!Utils::Actor::isHumanoid(actor)) {
-			return 350.0f;
+			distance = 350.0f;
 		} else {
-			return 200.0f;
+			distance = 200.0f;
 		}
 	}
+
+	return distance;
 }
 
 // float dodge::Get_ReactiveDodge_Distance(RE::Actor* actor)
