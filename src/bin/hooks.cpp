@@ -27,13 +27,15 @@ namespace hooks
 	// }
 	// break;
 
-	void on_animation_event::ProcessEvent(RE::BSTEventSink<RE::BSAnimationGraphEvent>* a_sink, RE::BSAnimationGraphEvent* a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* a_eventSource)
+	RE::BSEventNotifyControl on_animation_event::HookedProcessEvent(RE::BSAnimationGraphEvent& a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* src)
 	{
-		if (!a_event->holder) {
-			return;
+		FnProcessEvent fn = fnHash.at(*(uint64_t*)this);
+		//RE::ConsoleLog::GetSingleton()->Print(a_event.tag.c_str());
+		if (!a_event.holder) {
+			return fn ? (this->*fn)(a_event, src) : RE::BSEventNotifyControl::kContinue;
 		}
-		std::string_view eventTag = a_event->tag.data();
-		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event->holder)->As<RE::Actor>();
+		std::string_view eventTag = a_event.tag.data();
+		RE::Actor* actor = const_cast<RE::TESObjectREFR*>(a_event.holder)->As<RE::Actor>();
 		switch (hash(eventTag.data(), eventTag.size())) {
 		case "TKDR_DodgeStart"_h:
 		    if (!actor->IsPlayerRef()) {
@@ -168,19 +170,22 @@ namespace hooks
 			dodge::GetSingleton()->react_to_ranged(actor, 1500.0f);
 			break;
 		}
+		return fn ? (this->*fn)(a_event, src) : RE::BSEventNotifyControl::kContinue;
 	}
 
-	EventResult on_animation_event::ProcessEvent_NPC(RE::BSTEventSink<RE::BSAnimationGraphEvent>* a_sink, RE::BSAnimationGraphEvent* a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* a_eventSource)
-	{
-		ProcessEvent(a_sink, a_event, a_eventSource);
-		return _ProcessEvent_NPC(a_sink, a_event, a_eventSource);
-	}
+	std::unordered_map<uint64_t, on_animation_event::FnProcessEvent> on_animation_event::fnHash;
 
-	EventResult on_animation_event::ProcessEvent_PC(RE::BSTEventSink<RE::BSAnimationGraphEvent>* a_sink, RE::BSAnimationGraphEvent* a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* a_eventSource)
-	{
-		ProcessEvent(a_sink, a_event, a_eventSource);
-		return _ProcessEvent_PC(a_sink, a_event, a_eventSource);
-	}
+	// EventResult on_animation_event::ProcessEvent_NPC(RE::BSTEventSink<RE::BSAnimationGraphEvent>* a_sink, RE::BSAnimationGraphEvent* a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* a_eventSource)
+	// {
+	// 	ProcessEvent(a_sink, a_event, a_eventSource);
+	// 	return _ProcessEvent_NPC(a_sink, a_event, a_eventSource);
+	// }
+
+	// EventResult on_animation_event::ProcessEvent_PC(RE::BSTEventSink<RE::BSAnimationGraphEvent>* a_sink, RE::BSAnimationGraphEvent* a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* a_eventSource)
+	// {
+	// 	ProcessEvent(a_sink, a_event, a_eventSource);
+	// 	return _ProcessEvent_PC(a_sink, a_event, a_eventSource);
+	// }
 
 	ptr_CombatPath on_combatBehavior_backoff_createPath::create_path(RE::Actor* a_actor, RE::NiPoint3* a_newPos, float a3, int speed_ind)
 	{
