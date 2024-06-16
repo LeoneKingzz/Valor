@@ -511,6 +511,10 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
+			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
+			if (!CTarget){
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			if (!ValhallaUtils::is_adversary(refr, a_attacker)){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -571,6 +575,10 @@ void dodge::react_to_melee_power(RE::Actor* a_attacker, float attack_range)
 			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
 
 			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
+			if (!CTarget){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!ValhallaUtils::is_adversary(refr, a_attacker)){
@@ -634,6 +642,10 @@ void dodge::react_to_melee_normal(RE::Actor* a_attacker, float attack_range)
 			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
+			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
+			if (!CTarget){
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			if (!ValhallaUtils::is_adversary(refr, a_attacker)){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -695,6 +707,10 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
+			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
+			if (!CTarget){
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			if (!ValhallaUtils::is_adversary(refr, a_attacker)){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -753,6 +769,10 @@ void dodge::react_to_bash_sprint(RE::Actor* a_attacker, float attack_range)
 			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
+			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
+			if (!CTarget){
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			if (!ValhallaUtils::is_adversary(refr, a_attacker)){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -809,6 +829,10 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
 
 			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
+			if (!CTarget){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!ValhallaUtils::is_adversary(refr, a_attacker)){
@@ -910,6 +934,10 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
 			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
+			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
+			if (!CTarget){
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
 			if (!ValhallaUtils::is_adversary(refr, a_attacker)){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
@@ -969,6 +997,10 @@ void dodge::react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_rang
 			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
 
 			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+				return RE::BSContainer::ForEachResult::kContinue;
+			}
+			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
+			if (!CTarget){
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			if (!ValhallaUtils::is_adversary(refr, a_attacker)){
