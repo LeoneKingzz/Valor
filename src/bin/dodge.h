@@ -81,7 +81,7 @@ public:
 		float Chest_weight = 0.6f;
 		float Shield_weight = 0.1f;
 
-	} Armour;
+	} Armourr;
 
 	struct PReflex_factors
 	{
@@ -90,7 +90,7 @@ public:
 		float Defensive_Weighting = 0.3f;
 		float Armour_Weighting = 0.3f;
 
-	} Protagnist_Reflexes;
+	} Protagnist_Reflexess;
 
 	struct CStyle_factors
 	{
@@ -99,9 +99,9 @@ public:
 		float Skirmish_Circle_Weighting = 0.3f;
 		float Skirmish_Strafe_Weighting = 0.15f;
 
-	} CStyle;
+	} CStylee;
 
-	float get_dodge_chance(RE::Actor* a_actor, Armour_factors& Armour, PReflex_factors& Protagnist_Reflexes, CStyle_factors& CStyle);
+	float get_dodge_chance(RE::Actor* a_actor, const Armour_factors& Armour, const PReflex_factors& Protagnist_Reflexes, const CStyle_factors& CStyle);
 
 	void react_to_melee(RE::Actor* a_attacker, float attack_range);
 	void react_to_melee_power(RE::Actor* a_attacker, float attack_range);
