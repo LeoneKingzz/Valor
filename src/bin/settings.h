@@ -29,7 +29,7 @@ public:
 	{
 		float Heavyarm_mult = 0.25f;
 		float Lightarm_mult = 0.75f;
-		inline static float clothing_mult = 1.0f;
+		float clothing_mult = 1.0f;
 
 		float Helm_weight = 0.1f;
 		float Gauntlet_weight = 0.1f;
