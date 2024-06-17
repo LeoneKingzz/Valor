@@ -207,7 +207,7 @@ PRECISION_API::PreHitCallbackReturn dodge::DodgeCallback_PreHit(const PRECISION_
 }
 
 /*Get the dodge chance of a reactive dodger in case of an incoming attack.*/
-float dodge::get_dodge_chance(RE::Actor* a_actor, settings::Armour_factors& Armour, settings::PReflex_factors& Protagnist_Reflexes, settings::CStyle_factors& CStyle)
+float dodge::get_dodge_chance(RE::Actor* a_actor, const settings::Armour_factors& Armour, const settings::PReflex_factors& Protagnist_Reflexes, const settings::CStyle_factors& CStyle)
 {
 	float Score = 0.0f;
 

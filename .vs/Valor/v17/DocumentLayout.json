@@ -3,8 +3,20 @@
   "WorkspaceRootPath": "C:\\Code\\Valor\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\include\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\include\\Utils.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\include\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\include\\Utils.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\dodge.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\dodge.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\dodge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
+      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\dodge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\main.cpp||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -13,10 +25,6 @@
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\include\\lib\\PrecisionAPI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
       "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\include\\lib\\PrecisionAPI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
-    },
-    {
-      "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\src\\bin\\dodge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
-      "RelativeMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|solutionrelative:src\\bin\\dodge.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}"
     },
     {
       "AbsoluteMoniker": "D:0:0:{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}|\u003CMiscFiles\u003E|C:\\Code\\Valor\\build\\vcpkg_installed\\x64-windows-static-md\\include\\SKSE\\Impl\\WinAPI.h||{D0E1A5C6-B359-4E41-9B60-3365922C2A22}",
@@ -42,11 +50,11 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 2,
+          "SelectedChildIndex": 1,
           "Children": [
             {
               "$type": "Document",
-              "DocumentIndex": 1,
+              "DocumentIndex": 4,
               "Title": "main.cpp",
               "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\main.cpp",
               "RelativeDocumentMoniker": "src\\bin\\main.cpp",
@@ -59,7 +67,33 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 0,
+              "Title": "Utils.cpp",
+              "DocumentMoniker": "C:\\Code\\Valor\\src\\include\\Utils.cpp",
+              "RelativeDocumentMoniker": "src\\include\\Utils.cpp",
+              "ToolTip": "C:\\Code\\Valor\\src\\include\\Utils.cpp",
+              "RelativeToolTip": "src\\include\\Utils.cpp",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAEAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
+              "WhenOpened": "2024-06-17T18:54:19.3Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Utils.h",
+              "DocumentMoniker": "C:\\Code\\Valor\\src\\include\\Utils.h",
+              "RelativeDocumentMoniker": "src\\include\\Utils.h",
+              "ToolTip": "C:\\Code\\Valor\\src\\include\\Utils.h",
+              "RelativeToolTip": "src\\include\\Utils.h",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAAcAAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
+              "WhenOpened": "2024-06-17T18:53:57.281Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
               "Title": "PrecisionAPI.h",
               "DocumentMoniker": "C:\\Code\\Valor\\src\\include\\lib\\PrecisionAPI.h",
               "RelativeDocumentMoniker": "src\\include\\lib\\PrecisionAPI.h",
@@ -71,13 +105,13 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 2,
               "Title": "dodge.cpp",
               "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\dodge.cpp",
               "RelativeDocumentMoniker": "src\\bin\\dodge.cpp",
               "ToolTip": "C:\\Code\\Valor\\src\\bin\\dodge.cpp",
               "RelativeToolTip": "src\\bin\\dodge.cpp",
-              "ViewState": "AQIAAKoEAAAAAAAAAAAAAL4EAAAAAAAA",
+              "ViewState": "AQIAAMMAAAAAAAAAAAApwNQAAAAAAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000677|",
               "WhenOpened": "2024-06-13T01:27:23.603Z",
               "EditorCaption": ""
@@ -90,13 +124,14 @@
               "RelativeDocumentMoniker": "src\\bin\\dodge.h",
               "ToolTip": "C:\\Code\\Valor\\src\\bin\\dodge.h",
               "RelativeToolTip": "src\\bin\\dodge.h",
-              "ViewState": "AQIAAHwAAAAAAAAAAAApwIoAAAAsAAAA",
+              "ViewState": "AQIAAGAAAAAAAAAAAAAAAGkAAAARAAAA",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000680|",
-              "WhenOpened": "2024-06-12T17:53:28.092Z"
+              "WhenOpened": "2024-06-12T17:53:28.092Z",
+              "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 6,
+              "DocumentIndex": 8,
               "Title": "CombatBehaviorConditions.h",
               "DocumentMoniker": "C:\\Code\\Valor\\src\\bin\\CombatBehaviorConditions.h",
               "RelativeDocumentMoniker": "src\\bin\\CombatBehaviorConditions.h",
@@ -108,7 +143,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 4,
+              "DocumentIndex": 6,
               "Title": "WinAPI.h",
               "DocumentMoniker": "C:\\Code\\Valor\\build\\vcpkg_installed\\x64-windows-static-md\\include\\SKSE\\Impl\\WinAPI.h",
               "RelativeDocumentMoniker": "build\\vcpkg_installed\\x64-windows-static-md\\include\\SKSE\\Impl\\WinAPI.h",
@@ -120,7 +155,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 5,
+              "DocumentIndex": 7,
               "Title": "CMake Overview",
               "DocumentMoniker": "C:\\Code\\Valor\\.vs\\CMake Overview",
               "RelativeDocumentMoniker": ".vs\\CMake Overview",
@@ -131,7 +166,7 @@
             },
             {
               "$type": "Document",
-              "DocumentIndex": 7,
+              "DocumentIndex": 9,
               "Title": ".editorconfig",
               "DocumentMoniker": "C:\\Code\\Valor\\.editorconfig",
               "RelativeDocumentMoniker": ".editorconfig",
