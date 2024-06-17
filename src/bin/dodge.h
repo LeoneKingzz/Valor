@@ -78,37 +78,6 @@ public:
 	void react_to_shouts_spells(RE::Actor* a_attacker, float attack_range);
 	void react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_range);
 
-	struct
-	{
-		inline static float Heavyarm_mult = 0.25f;
-		inline static float Lightarm_mult = 0.75f;
-		inline static float clothing_mult = 1.0f;
-
-		inline static float Helm_weight = 0.1f;
-		inline static float Gauntlet_weight = 0.1f;
-		inline static float Boots_weight = 0.1f;
-		inline static float Chest_weight = 0.6f;
-		inline static float Shield_weight = 0.1f;
-
-	} inline static Armour;
-
-	struct
-	{
-		inline static float Sneak_Weighting = 0.2f;
-		inline static float Skirmish_Weighting = 0.2f;
-		inline static float Defensive_Weighting = 0.3f;
-		inline static float Armour_Weighting = 0.3f;
-
-	} inline static Protagnist_Reflexes;
-
-	struct
-	{
-		inline static float Skirmish_AvoidThreat_Weighting = 0.25f;
-		inline static float Skirmish_Fallback_Weighting = 0.3f;
-		inline static float Skirmish_Circle_Weighting = 0.3f;
-		inline static float Skirmish_Strafe_Weighting = 0.15f;
-
-	} inline static CStyle;
 
 	static float GetProtaganist_ReflexScore(RE::Actor* a_actor);
 
