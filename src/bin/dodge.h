@@ -103,7 +103,7 @@ public:
 
 	float Get_ReactiveDodge_Distance(RE::Actor *actor);
 	bool GetAttackSpell(RE::Actor* actor);
-	float get_dodge_chance(RE::Actor* a_actor);
+	float get_dodge_chance(RE::Actor* a_actor, settings::Armour_factors& Armour, settings::PReflex_factors& Protagnist_Reflexes, settings::CStyle_factors &CStyle);
 
 private:
 

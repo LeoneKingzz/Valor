@@ -47,25 +47,27 @@ void settings::read(const wchar_t* a_path)
 	bZUPA_mod_Check = ini.GetBoolValue("General", "bZUPA_mod_Check", bZUPA_mod_Check);
 	bUAPNG_mod_Check = ini.GetBoolValue("General", "bUAPNG_mod_Check", bUAPNG_mod_Check);
 
-	Protagnist_Reflexes.Armour_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Armour_Weighting", Protagnist_Reflexes.Armour_Weighting));
-	Protagnist_Reflexes.Defensive_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Defensive_Weighting", Protagnist_Reflexes.Defensive_Weighting));
-	Protagnist_Reflexes.Skirmish_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Skirmish_Weighting", Protagnist_Reflexes.Skirmish_Weighting));
-	Protagnist_Reflexes.Sneak_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Sneak_Weighting", Protagnist_Reflexes.Sneak_Weighting));
+	auto DS = settings::GetSingleton();
 
-	Armour.Heavyarm_mult = static_cast<float>(ini.GetDoubleValue("Armour", "Heavyarm_mult", Armour.Heavyarm_mult));
-	Armour.Lightarm_mult = static_cast<float>(ini.GetDoubleValue("Armour", "Lightarm_mult", Armour.Lightarm_mult));
-	Armour.clothing_mult = static_cast<float>(ini.GetDoubleValue("Armour", "clothing_mult", Armour.clothing_mult));
+	DS->Protagnist_Reflexes.Armour_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Armour_Weighting", DS->Protagnist_Reflexes.Armour_Weighting));
+	DS->Protagnist_Reflexes.Defensive_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Defensive_Weighting", DS->Protagnist_Reflexes.Defensive_Weighting));
+	DS->Protagnist_Reflexes.Skirmish_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Skirmish_Weighting", DS->Protagnist_Reflexes.Skirmish_Weighting));
+	DS->Protagnist_Reflexes.Sneak_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Sneak_Weighting", DS->Protagnist_Reflexes.Sneak_Weighting));
 
-	Armour.Helm_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Helm_weight", Armour.Helm_weight));
-	Armour.Chest_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Chest_weight", Armour.Chest_weight));
-	Armour.Gauntlet_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Gauntlet_weight", Armour.Gauntlet_weight));
-	Armour.Boots_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Boots_weight", Armour.Boots_weight));
-	Armour.Shield_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Shield_weight", Armour.Shield_weight));
+	DS->Armour.Heavyarm_mult = static_cast<float>(ini.GetDoubleValue("Armour", "Heavyarm_mult", DS->Armour.Heavyarm_mult));
+	DS->Armour.Lightarm_mult = static_cast<float>(ini.GetDoubleValue("Armour", "Lightarm_mult", DS->Armour.Lightarm_mult));
+	DS->Armour.clothing_mult = static_cast<float>(ini.GetDoubleValue("Armour", "clothing_mult", DS->Armour.clothing_mult));
 
-	CStyle.Skirmish_AvoidThreat_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_AvoidThreat_Weighting", CStyle.Skirmish_AvoidThreat_Weighting));
-	CStyle.Skirmish_Circle_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Circle_Weighting", CStyle.Skirmish_Circle_Weighting));
-	CStyle.Skirmish_Fallback_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Fallback_Weighting", CStyle.Skirmish_Fallback_Weighting));
-	CStyle.Skirmish_Strafe_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Strafe_Weighting", CStyle.Skirmish_Strafe_Weighting));
+	DS->Armour.Helm_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Helm_weight", DS->Armour.Helm_weight));
+	DS->Armour.Chest_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Chest_weight", DS->Armour.Chest_weight));
+	DS->Armour.Gauntlet_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Gauntlet_weight", DS->Armour.Gauntlet_weight));
+	DS->Armour.Boots_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Boots_weight", DS->Armour.Boots_weight));
+	DS->Armour.Shield_weight = static_cast<float>(ini.GetDoubleValue("Armour", "Shield_weight", DS->Armour.Shield_weight));
+
+	DS->CStyle.Skirmish_AvoidThreat_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_AvoidThreat_Weighting", DS->CStyle.Skirmish_AvoidThreat_Weighting));
+	DS->CStyle.Skirmish_Circle_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Circle_Weighting", DS->CStyle.Skirmish_Circle_Weighting));
+	DS->CStyle.Skirmish_Fallback_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Fallback_Weighting", DS->CStyle.Skirmish_Fallback_Weighting));
+	DS->CStyle.Skirmish_Strafe_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Strafe_Weighting", DS->CStyle.Skirmish_Strafe_Weighting));
 
 	(void)ini.SaveFile(a_path);
 	
