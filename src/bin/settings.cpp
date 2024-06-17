@@ -47,7 +47,7 @@ void settings::read(const wchar_t* a_path)
 	bZUPA_mod_Check = ini.GetBoolValue("General", "bZUPA_mod_Check", bZUPA_mod_Check);
 	bUAPNG_mod_Check = ini.GetBoolValue("General", "bUAPNG_mod_Check", bUAPNG_mod_Check);
 
-	auto DS = settings::GetSingleton();
+	auto DS = dodge::GetSingleton();
 
 	DS->Protagnist_Reflexes.Armour_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Armour_Weighting", DS->Protagnist_Reflexes.Armour_Weighting));
 	DS->Protagnist_Reflexes.Defensive_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Defensive_Weighting", DS->Protagnist_Reflexes.Defensive_Weighting));

@@ -69,6 +69,40 @@ public:
 		return &singleton;
 	}
 
+	struct Armour_factors
+	{
+		float Heavyarm_mult = 0.25f;
+		float Lightarm_mult = 0.75f;
+		float clothing_mult = 1.0f;
+
+		float Helm_weight = 0.1f;
+		float Gauntlet_weight = 0.1f;
+		float Boots_weight = 0.1f;
+		float Chest_weight = 0.6f;
+		float Shield_weight = 0.1f;
+
+	} Armour;
+
+	struct PReflex_factors
+	{
+		float Sneak_Weighting = 0.2f;
+		float Skirmish_Weighting = 0.2f;
+		float Defensive_Weighting = 0.3f;
+		float Armour_Weighting = 0.3f;
+
+	} Protagnist_Reflexes;
+
+	struct CStyle_factors
+	{
+		float Skirmish_AvoidThreat_Weighting = 0.25f;
+		float Skirmish_Fallback_Weighting = 0.3f;
+		float Skirmish_Circle_Weighting = 0.3f;
+		float Skirmish_Strafe_Weighting = 0.15f;
+
+	} CStyle;
+
+	float get_dodge_chance(RE::Actor* a_actor, const Armour_factors& Armour, const PReflex_factors& Protagnist_Reflexes, const CStyle_factors& CStyle);
+
 	void react_to_melee(RE::Actor* a_attacker, float attack_range);
 	void react_to_melee_power(RE::Actor* a_attacker, float attack_range);
 	void react_to_melee_normal(RE::Actor* a_attacker, float attack_range);
@@ -103,7 +137,7 @@ public:
 
 	float Get_ReactiveDodge_Distance(RE::Actor *actor);
 	bool GetAttackSpell(RE::Actor* actor);
-	float get_dodge_chance(RE::Actor* a_actor, const settings::Armour_factors& Armour, const settings::PReflex_factors& Protagnist_Reflexes, const settings::CStyle_factors &CStyle);
+	
 
 private:
 

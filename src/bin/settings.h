@@ -25,38 +25,6 @@ public:
 	static void init();
 	static void setglobals();
 
-	struct Armour_factors
-	{
-		float Heavyarm_mult = 0.25f;
-		float Lightarm_mult = 0.75f;
-		float clothing_mult = 1.0f;
-
-		float Helm_weight = 0.1f;
-		float Gauntlet_weight = 0.1f;
-		float Boots_weight = 0.1f;
-		float Chest_weight = 0.6f;
-		float Shield_weight = 0.1f;
-
-	} Armour;
-
-	struct PReflex_factors
-	{
-		float Sneak_Weighting = 0.2f;
-		float Skirmish_Weighting = 0.2f;
-		float Defensive_Weighting = 0.3f;
-		float Armour_Weighting = 0.3f;
-
-	} Protagnist_Reflexes;
-
-	struct CStyle_factors
-	{
-		float Skirmish_AvoidThreat_Weighting = 0.25f;
-		float Skirmish_Fallback_Weighting = 0.3f;
-		float Skirmish_Circle_Weighting = 0.3f;
-		float Skirmish_Strafe_Weighting = 0.15f;
-
-	}  CStyle;
-
 	/*Dodging*/
 	inline static bool bDodgeAI_Enable = true; /*Global switch for dodge AI*/
 	inline static bool bTacticalDodgeAI_enable = true; /*Passive dodge AI that's built on top of vanilla's combat movement AI.*/

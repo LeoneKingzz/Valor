@@ -207,7 +207,7 @@ PRECISION_API::PreHitCallbackReturn dodge::DodgeCallback_PreHit(const PRECISION_
 }
 
 /*Get the dodge chance of a reactive dodger in case of an incoming attack.*/
-float dodge::get_dodge_chance(RE::Actor* a_actor, const settings::Armour_factors& Armour, const settings::PReflex_factors& Protagnist_Reflexes, const settings::CStyle_factors& CStyle)
+float dodge::get_dodge_chance(RE::Actor* a_actor, const Armour_factors& Armour, const PReflex_factors& Protagnist_Reflexes, const CStyle_factors& CStyle)
 {
 	float Score = 0.0f;
 
@@ -1115,7 +1115,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	// 	return;
 	// }
 	
-    auto DS = settings::GetSingleton();
+    auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armour, DS->Protagnist_Reflexes, DS->CStyle);
 
 	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
@@ -1171,7 +1171,7 @@ void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a
 	// } else {
 	// 	Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
 	// }
-    auto DS = settings::GetSingleton();
+    auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armour, DS->Protagnist_Reflexes, DS->CStyle);
 
 	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
@@ -1228,7 +1228,7 @@ void dodge::NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* 
 	// } else {
 	// 	Sleep(dodge::GetSingleton()->GenerateRandomInt(0, 150));
 	// }
-    auto DS = settings::GetSingleton();
+    auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armour, DS->Protagnist_Reflexes, DS->CStyle);
 
 	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
@@ -1273,7 +1273,7 @@ void dodge::Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set*
 
 	// Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
 
-	    auto DS = settings::GetSingleton();
+	auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armour, DS->Protagnist_Reflexes, DS->CStyle);
 
 	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
@@ -1317,7 +1317,7 @@ void dodge::Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_direct
 	
 
 	// Sleep(dodge::GetSingleton()->GenerateRandomInt(100, 200));
-    auto DS = settings::GetSingleton();
+    auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armour, DS->Protagnist_Reflexes, DS->CStyle);
 
 	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
@@ -1361,7 +1361,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 	
 
 	// Sleep(dodge::GetSingleton()->GenerateRandomInt(500, 900));
-    auto DS = settings::GetSingleton();
+    auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armour, DS->Protagnist_Reflexes, DS->CStyle);
 
 	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
