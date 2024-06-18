@@ -352,13 +352,13 @@ float dodge::get_staminafactors(RE::Actor *a_actor, const Stamina_factors &Stami
 	if (Helm) {
 		switch (Helm->GetArmorType()) {
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += Stamina.Stamina_Helm_weight / Stamina.Stamina_HeavyArmour_mult;
+			A_Score += Stamina.Stamina_Helm_weight * Stamina.Stamina_HeavyArmour_mult;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += Stamina.Stamina_Helm_weight / Stamina.Stamina_LightArmour_mult;
+			A_Score += Stamina.Stamina_Helm_weight * Stamina.Stamina_LightArmour_mult;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += Stamina.Stamina_Helm_weight / Stamina.Stamina_Clothing_mult;
+			A_Score += Stamina.Stamina_Helm_weight * Stamina.Stamina_Clothing_mult;
 			break;
 		default:
 			A_Score += Stamina.Stamina_Helm_weight;
@@ -370,13 +370,13 @@ float dodge::get_staminafactors(RE::Actor *a_actor, const Stamina_factors &Stami
 	if (Chest) {
 		switch (Chest->GetArmorType()) {
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += Stamina.Stamina_Chest_weight / Stamina.Stamina_HeavyArmour_mult;
+			A_Score += Stamina.Stamina_Chest_weight * Stamina.Stamina_HeavyArmour_mult;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += Stamina.Stamina_Chest_weight / Stamina.Stamina_LightArmour_mult;
+			A_Score += Stamina.Stamina_Chest_weight * Stamina.Stamina_LightArmour_mult;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += Stamina.Stamina_Chest_weight / Stamina.Stamina_Clothing_mult;
+			A_Score += Stamina.Stamina_Chest_weight * Stamina.Stamina_Clothing_mult;
 			break;
 		default:
 			A_Score += Stamina.Stamina_Chest_weight;
@@ -388,13 +388,13 @@ float dodge::get_staminafactors(RE::Actor *a_actor, const Stamina_factors &Stami
 	if (Gauntlet) {
 		switch (Gauntlet->GetArmorType()) {
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += Stamina.Stamina_Gauntlet_weight / Stamina.Stamina_HeavyArmour_mult;
+			A_Score += Stamina.Stamina_Gauntlet_weight * Stamina.Stamina_HeavyArmour_mult;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += Stamina.Stamina_Gauntlet_weight / Stamina.Stamina_LightArmour_mult;
+			A_Score += Stamina.Stamina_Gauntlet_weight * Stamina.Stamina_LightArmour_mult;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += Stamina.Stamina_Gauntlet_weight / Stamina.Stamina_Clothing_mult;
+			A_Score += Stamina.Stamina_Gauntlet_weight * Stamina.Stamina_Clothing_mult;
 			break;
 		default:
 			A_Score += Stamina.Stamina_Gauntlet_weight;
@@ -406,13 +406,13 @@ float dodge::get_staminafactors(RE::Actor *a_actor, const Stamina_factors &Stami
 	if (Boots) {
 		switch (Boots->GetArmorType()) {
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += Stamina.Stamina_Boots_weight / Stamina.Stamina_HeavyArmour_mult;
+			A_Score += Stamina.Stamina_Boots_weight * Stamina.Stamina_HeavyArmour_mult;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += Stamina.Stamina_Boots_weight / Stamina.Stamina_LightArmour_mult;
+			A_Score += Stamina.Stamina_Boots_weight * Stamina.Stamina_LightArmour_mult;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += Stamina.Stamina_Boots_weight / Stamina.Stamina_Clothing_mult;
+			A_Score += Stamina.Stamina_Boots_weight * Stamina.Stamina_Clothing_mult;
 			break;
 		default:
 			A_Score += Stamina.Stamina_Boots_weight;
@@ -425,13 +425,13 @@ float dodge::get_staminafactors(RE::Actor *a_actor, const Stamina_factors &Stami
 		// if (Shield->HasKeywordByEditorID())
 		switch (Shield->As<RE::TESObjectARMO>()->GetArmorType()) {  //function tests for biped model; need some king of flag or keyword instead for sheilds, else crash
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += Stamina.Stamina_Shield_weight / Stamina.Stamina_HeavyArmour_mult;
+			A_Score += Stamina.Stamina_Shield_weight * Stamina.Stamina_HeavyArmour_mult;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += Stamina.Stamina_Shield_weight / Stamina.Stamina_LightArmour_mult;
+			A_Score += Stamina.Stamina_Shield_weight * Stamina.Stamina_LightArmour_mult;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += Stamina.Stamina_Shield_weight / Stamina.Stamina_Clothing_mult;
+			A_Score += Stamina.Stamina_Shield_weight * Stamina.Stamina_Clothing_mult;
 			break;
 		default:
 			A_Score += Stamina.Stamina_Shield_weight;
