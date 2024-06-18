@@ -472,64 +472,64 @@ float dodge::get_stamina_basecost(RE::Actor* a_actor, bool DodgeRoll)
 	if (Helm) {
 		switch (Helm->GetArmorType()) {
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += Helm->GetWeight() / Heavy_Skill;
+			A_Score += (Helm->GetWeight()/10.0f) / Heavy_Skill;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += Helm->GetWeight() / Light_skill;
+			A_Score += (Helm->GetWeight()/10.0f) / Light_skill;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += Helm->GetWeight();
+			A_Score += (Helm->GetWeight()/10.0f);
 			break;
 		default:
-			A_Score += Helm->GetWeight();
+			A_Score += (Helm->GetWeight()/10.0f);
 		}
 	} 
 
 	if (Chest) {
 		switch (Chest->GetArmorType()) {
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += Chest->GetWeight() / Heavy_Skill;
+			A_Score += (Chest->GetWeight()/10.0f) / Heavy_Skill;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += Chest->GetWeight() / Light_skill;
+			A_Score += (Chest->GetWeight()/10.0f) / Light_skill;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += Chest->GetWeight();
+			A_Score += (Chest->GetWeight()/10.0f);
 			break;
 		default:
-			A_Score += Chest->GetWeight();
+			A_Score += (Chest->GetWeight()/10.0f);
 		}
 	}
 
 	if (Gauntlet) {
 		switch (Gauntlet->GetArmorType()) {
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += Gauntlet->GetWeight() / Heavy_Skill;
+			A_Score += (Gauntlet->GetWeight()/10.0f) / Heavy_Skill;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += Gauntlet->GetWeight() / Light_skill;
+			A_Score += (Gauntlet->GetWeight()/10.0f) / Light_skill;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += Gauntlet->GetWeight();
+			A_Score += (Gauntlet->GetWeight()/10.0f);
 			break;
 		default:
-			A_Score += Gauntlet->GetWeight();
+			A_Score += (Gauntlet->GetWeight()/10.0f);
 		}
 	}
 
 	if (Boots) {
 		switch (Boots->GetArmorType()) {
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += Boots->GetWeight() / Heavy_Skill;
+			A_Score += (Boots->GetWeight()/10.0f) / Heavy_Skill;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += Boots->GetWeight() / Light_skill;
+			A_Score += (Boots->GetWeight()/10.0f) / Light_skill;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += Boots->GetWeight();
+			A_Score += (Boots->GetWeight()/10.0f);
 			break;
 		default:
-			A_Score += Boots->GetWeight();
+			A_Score += (Boots->GetWeight()/10.0f);
 		}
 	}
 
@@ -537,16 +537,16 @@ float dodge::get_stamina_basecost(RE::Actor* a_actor, bool DodgeRoll)
 		// if (Shield->HasKeywordByEditorID())
 		switch (Shield->As<RE::TESObjectARMO>()->GetArmorType()) {  //function tests for biped model; need some king of flag or keyword instead for sheilds, else crash
 		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += Shield->GetWeight() / Heavy_Skill;
+			A_Score += (Shield->GetWeight()/10.0f) / Heavy_Skill;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += Shield->GetWeight() / Light_skill;
+			A_Score += (Shield->GetWeight()/10.0f) / Light_skill;
 			break;
 		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += Shield->GetWeight();
+			A_Score += (Shield->GetWeight()/10.0f);
 			break;
 		default:
-			A_Score += Shield->GetWeight();
+			A_Score += (Shield->GetWeight()/10.0f);
 		}
 	}
 
