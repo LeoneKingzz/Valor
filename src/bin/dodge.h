@@ -101,7 +101,24 @@ public:
 
 	} CStylee;
 
+	struct Stamina_factors
+	{
+		// float Skirmish_AvoidThreat_Weighting = 0.25f;
+		float Stamina_HeavyArmour_mult = 0.15f;
+		float Stamina_LightArmour_mult = 0.7f;
+		float Stamina_Clothing_mult = 1.0f;
+
+		float Stamina_Helm_weight = 0.1f;
+		float Stamina_Gauntlet_weight = 0.1f;
+		float Stamina_Boots_weight = 0.1f;
+		float Stamina_Chest_weight = 0.6f;
+		float Stamina_Shield_weight = 0.1f;
+
+	} Staminaa;
+
 	float get_dodge_chance(RE::Actor* a_actor, const Armour_factors& Armour, const PReflex_factors& Protagnist_Reflexes, const CStyle_factors& CStyle);
+	float get_staminafactors(RE::Actor* a_actor, const Stamina_factors &Stamina);
+	float get_stamina_basecost(RE::Actor* a_actor, bool DodgeRoll = false);
 
 	void react_to_melee(RE::Actor* a_attacker, float attack_range);
 	void react_to_melee_power(RE::Actor* a_attacker, float attack_range);
