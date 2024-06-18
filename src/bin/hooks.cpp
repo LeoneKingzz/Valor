@@ -39,10 +39,11 @@ namespace hooks
 		    if (!actor->IsPlayerRef()) {
 				const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
 				const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
+				auto DS = dodge::GetSingleton();
 				int iStep = 0;
 				if (actor->GetGraphVariableInt("iStep", iStep) && iStep) {
 					if (settings::bStaminaCost_enable) {
-						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(settings::fDodgeRoll_staminacost), actor);
+						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DS->get_stamina_basecost(actor, true)/DS->get_staminafactors(actor, DS->Staminaa)), actor);
 					}
 					if (settings::biFrames_enable) {
 						dodge::Set_iFrames(actor);
@@ -50,7 +51,7 @@ namespace hooks
 					break;
 				} else {
 					if (settings::bStaminaCost_enable) {
-						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(settings::fSideStep_staminacost), actor);
+						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DS->get_stamina_basecost(actor) / DS->get_staminafactors(actor, DS->Staminaa)), actor);
 					}
 					if (settings::biFrames_enable) {
 						dodge::Set_iFrames(actor);
