@@ -69,6 +69,16 @@ void settings::read(const wchar_t* a_path)
 	DS->CStylee.Skirmish_Fallback_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Fallback_Weighting", DS->CStylee.Skirmish_Fallback_Weighting));
 	DS->CStylee.Skirmish_Strafe_Weighting = static_cast<float>(ini.GetDoubleValue("CombatStyle", "Skirmish_Strafe_Weighting", DS->CStylee.Skirmish_Strafe_Weighting));
 
+	DS->Staminaa.Stamina_HeavyArmour_mult = static_cast<float>(ini.GetDoubleValue("Stamina", "Stamina_HeavyArmour_mult", DS->Staminaa.Stamina_HeavyArmour_mult));
+	DS->Staminaa.Stamina_LightArmour_mult = static_cast<float>(ini.GetDoubleValue("Stamina", "Stamina_LightArmour_mult", DS->Staminaa.Stamina_LightArmour_mult));
+	DS->Staminaa.Stamina_Clothing_mult = static_cast<float>(ini.GetDoubleValue("Stamina", "Stamina_Clothing_mult", DS->Staminaa.Stamina_Clothing_mult));
+
+	DS->Staminaa.Stamina_Helm_weight = static_cast<float>(ini.GetDoubleValue("Stamina", "Stamina_Helm_weight", DS->Staminaa.Stamina_Helm_weight));
+	DS->Staminaa.Stamina_Chest_weight = static_cast<float>(ini.GetDoubleValue("Stamina", "Stamina_Chest_weight", DS->Staminaa.Stamina_Chest_weight));
+	DS->Staminaa.Stamina_Gauntlet_weight = static_cast<float>(ini.GetDoubleValue("Stamina", "Stamina_Gauntlet_weight", DS->Staminaa.Stamina_Gauntlet_weight));
+	DS->Staminaa.Stamina_Boots_weight = static_cast<float>(ini.GetDoubleValue("Stamina", "Stamina_Boots_weight", DS->Staminaa.Stamina_Boots_weight));
+	DS->Staminaa.Stamina_Shield_weight = static_cast<float>(ini.GetDoubleValue("Stamina", "Stamina_Shield_weight", DS->Staminaa.Stamina_Shield_weight));
+
 	(void)ini.SaveFile(a_path);
 	
 }
