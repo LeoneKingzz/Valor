@@ -46,7 +46,7 @@ namespace hooks
 				if (actor->GetGraphVariableInt("iStep", iStep) && iStep) {
 					if (settings::bStaminaCost_enable) {
 						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DodgeRoll_staminacost), actor);
-						logger::info("Protagnist {} DodgeRoll_StaminaCost {}"sv, actor->GetName(), DodgeRoll_staminacost);
+						logger::info("Protagnist {} DodgeRollCost {}"sv, actor->GetName(), DodgeRoll_staminacost);
 					}
 					if (settings::biFrames_enable) {
 						dodge::Set_iFrames(actor);
@@ -55,7 +55,7 @@ namespace hooks
 				} else {
 					if (settings::bStaminaCost_enable) {
 						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(SideStep_staminacost), actor);
-						logger::info("Protagnist {} SideStep_StaminaCost {}"sv, actor->GetName(), SideStep_staminacost);
+						logger::info("Protagnist {} SideStepCost {}"sv, actor->GetName(), SideStep_staminacost);
 					}
 					if (settings::biFrames_enable) {
 						dodge::Set_iFrames(actor);
