@@ -45,8 +45,8 @@ namespace hooks
 				int iStep = 0;
 				if (actor->GetGraphVariableInt("iStep", iStep) && iStep) {
 					if (settings::bStaminaCost_enable) {
-						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DS->get_stamina_basecost(actor, true) / DS->get_staminafactors(actor, DS->Staminaa)), actor);
-						logger::info("Protagnist {} DodgeRollCost {}"sv, actor->GetName(), (DS->get_stamina_basecost(actor, true) / DS->get_staminafactors(actor, DS->Staminaa)));
+						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DS->get_stamina_basecost(actor, DS->Staminaa, true) / DS->get_staminafactors(actor, DS->Staminaa)), actor);
+						logger::info("Protagnist {} DodgeRollCost {}"sv, actor->GetName(), (DS->get_stamina_basecost(actor, DS->Staminaa, true) / DS->get_staminafactors(actor, DS->Staminaa)));
 					}
 					if (settings::biFrames_enable) {
 						dodge::Set_iFrames(actor);
@@ -54,8 +54,8 @@ namespace hooks
 					break;
 				} else {
 					if (settings::bStaminaCost_enable) {
-						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DS->get_stamina_basecost(actor) / DS->get_staminafactors(actor, DS->Staminaa)), actor);
-						logger::info("Protagnist {} SideStepCost {}"sv, actor->GetName(), (DS->get_stamina_basecost(actor) / DS->get_staminafactors(actor, DS->Staminaa)));
+						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DS->get_stamina_basecost(actor, DS->Staminaa) / DS->get_staminafactors(actor, DS->Staminaa)), actor);
+						logger::info("Protagnist {} SideStepCost {}"sv, actor->GetName(), (DS->get_stamina_basecost(actor, DS->Staminaa) / DS->get_staminafactors(actor, DS->Staminaa)));
 					}
 					if (settings::biFrames_enable) {
 						dodge::Set_iFrames(actor);

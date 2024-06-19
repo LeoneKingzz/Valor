@@ -33,10 +33,10 @@ void settings::read(const wchar_t* a_path)
 		}
 	};
 
-	auto SD = settings::GetSingleton();
+	auto DS = dodge::GetSingleton();
 
-	SD->fSideStep_staminacost = static_cast<float>(ini.GetDoubleValue("General", "fSideStep_staminacost", SD->fSideStep_staminacost));
-	SD->fDodgeRoll_staminacost = static_cast<float>(ini.GetDoubleValue("General", "fDodgeRoll_staminacost", SD->fDodgeRoll_staminacost));
+	DS->Staminaa.fSideStep_staminacost = static_cast<float>(ini.GetDoubleValue("General", "fSideStep_staminacost", DS->Staminaa.fSideStep_staminacost));
+	DS->Staminaa.fDodgeRoll_staminacost = static_cast<float>(ini.GetDoubleValue("General", "fDodgeRoll_staminacost", DS->Staminaa.fDodgeRoll_staminacost));
 	iDodgeRoll_ActorScaled_Chance = (ini.GetLongValue("General", "iDodgeRoll_ActorScaled_Chance", iDodgeRoll_ActorScaled_Chance));
 	iReactiveDodgeAI_enable = (ini.GetLongValue("General", "iReactiveDodgeAI_enable", iReactiveDodgeAI_enable));
 
@@ -48,8 +48,6 @@ void settings::read(const wchar_t* a_path)
 
 	bZUPA_mod_Check = ini.GetBoolValue("General", "bZUPA_mod_Check", bZUPA_mod_Check);
 	bUAPNG_mod_Check = ini.GetBoolValue("General", "bUAPNG_mod_Check", bUAPNG_mod_Check);
-
-	auto DS = dodge::GetSingleton();
 
 	DS->Protagnist_Reflexess.Armour_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Armour_Weighting", DS->Protagnist_Reflexess.Armour_Weighting));
 	DS->Protagnist_Reflexess.Defensive_Weighting = static_cast<float>(ini.GetDoubleValue("Protagnist_Reflexes", "Defensive_Weighting", DS->Protagnist_Reflexess.Defensive_Weighting));
@@ -87,7 +85,7 @@ void settings::read(const wchar_t* a_path)
 
 void settings::setglobals(){
 
-	auto SD = settings::GetSingleton();
+	auto DS = dodge::GetSingleton();
 
 	auto HdSingle = RE::TESDataHandler::GetSingleton();
 	auto UND_fSideStep_staminacost = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80B, "Ultimate NPC Dodging.esp"));
@@ -96,8 +94,8 @@ void settings::setglobals(){
 	auto UND_bHasSilentRollperk_enable = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80E, "Ultimate NPC Dodging.esp"));
 	auto UND_iDodgeRoll_ActorScaled_Chance = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80F, "Ultimate NPC Dodging.esp"));
 
-	UND_fSideStep_staminacost->value = SD->fSideStep_staminacost;
-	UND_fDodgeRoll_staminacost->value = SD->fDodgeRoll_staminacost;
+	UND_fSideStep_staminacost->value = DS->Staminaa.fSideStep_staminacost;
+	UND_fDodgeRoll_staminacost->value = DS->Staminaa.fDodgeRoll_staminacost;
 	UND_bReactiveDodgeAI_enable->value = static_cast<float>(iReactiveDodgeAI_enable);
 	UND_bHasSilentRollperk_enable->value = static_cast<float>(bHasSilentRollperk_enable);
 	UND_iDodgeRoll_ActorScaled_Chance->value = static_cast<float>(iDodgeRoll_ActorScaled_Chance);
