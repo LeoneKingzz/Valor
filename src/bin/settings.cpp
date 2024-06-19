@@ -87,6 +87,8 @@ void settings::read(const wchar_t* a_path)
 
 void settings::setglobals(){
 
+	auto SD = settings::GetSingleton();
+
 	auto HdSingle = RE::TESDataHandler::GetSingleton();
 	auto UND_fSideStep_staminacost = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80B, "Ultimate NPC Dodging.esp"));
 	auto UND_bReactiveDodgeAI_enable = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80C, "Ultimate NPC Dodging.esp"));
@@ -94,8 +96,8 @@ void settings::setglobals(){
 	auto UND_bHasSilentRollperk_enable = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80E, "Ultimate NPC Dodging.esp"));
 	auto UND_iDodgeRoll_ActorScaled_Chance = skyrim_cast<RE::TESGlobal*>(HdSingle->LookupForm(0x80F, "Ultimate NPC Dodging.esp"));
 
-	UND_fSideStep_staminacost->value = fSideStep_staminacost;
-	UND_fDodgeRoll_staminacost->value = fDodgeRoll_staminacost;
+	UND_fSideStep_staminacost->value = SD->fSideStep_staminacost;
+	UND_fDodgeRoll_staminacost->value = SD->fDodgeRoll_staminacost;
 	UND_bReactiveDodgeAI_enable->value = static_cast<float>(iReactiveDodgeAI_enable);
 	UND_bHasSilentRollperk_enable->value = static_cast<float>(bHasSilentRollperk_enable);
 	UND_iDodgeRoll_ActorScaled_Chance->value = static_cast<float>(iDodgeRoll_ActorScaled_Chance);
