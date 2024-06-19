@@ -42,8 +42,8 @@ namespace hooks
 				auto DS = dodge::GetSingleton();
 				// auto DodgeRoll_staminacost = DS->get_stamina_basecost(actor, true)/DS->get_staminafactors(actor, DS->Staminaa);
 				// auto SideStep_staminacost = DS->get_stamina_basecost(actor) / DS->get_staminafactors(actor, DS->Staminaa);
-				int iStep = 0;
-				if (actor->GetGraphVariableInt("iStep", iStep) && iStep) {
+				bool bUND_IsDodgeRoll = false;
+				if (actor->GetGraphVariableBool("bUND_IsDodgeRoll", bUND_IsDodgeRoll) && bUND_IsDodgeRoll) {
 					if (settings::bStaminaCost_enable) {
 						logger::info("Protagnist {} DodgeRollCost {}"sv, actor->GetName(), (DS->get_stamina_basecost(actor, DS->Staminaa, true) / DS->get_staminafactors(actor, DS->Staminaa)));
 						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DS->get_stamina_basecost(actor, DS->Staminaa, true) / DS->get_staminafactors(actor, DS->Staminaa)), actor);

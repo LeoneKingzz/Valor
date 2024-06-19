@@ -1788,6 +1788,7 @@ void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 
 	if (backingoff) {
 		actor->SetGraphVariableInt("iStep", 2);
+		actor->SetGraphVariableBool("bUND_IsDodgeRoll", false);
 		actor->NotifyAnimationGraph(a_event);
 		return;
 	}
@@ -1796,17 +1797,21 @@ void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 		auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
 		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(actor, DS->Staminaa,true) / DS->get_staminafactors(actor, DS->Staminaa)) {
 			actor->SetGraphVariableInt("iStep", 0);
+			actor->SetGraphVariableBool("bUND_IsDodgeRoll", true);
 		} else {
 			actor->SetGraphVariableInt("iStep", 2);
+			actor->SetGraphVariableBool("bUND_IsDodgeRoll", false);
 		}
 		actor->NotifyAnimationGraph(a_event);
 		return;
 
 	} else {
 		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(actor, DS->Staminaa,true) / DS->get_staminafactors(actor, DS->Staminaa)) {
-			actor->SetGraphVariableInt("iStep", 0);	
+			actor->SetGraphVariableInt("iStep", 0);
+			actor->SetGraphVariableBool("bUND_IsDodgeRoll", true);	
 		} else {
 			actor->SetGraphVariableInt("iStep", 2);
+			actor->SetGraphVariableBool("bUND_IsDodgeRoll", false);
 		}
 		actor->NotifyAnimationGraph(a_event);
 
