@@ -445,14 +445,7 @@ float dodge::get_staminafactors(RE::Actor *a_actor, const Stamina_factors &Stami
 
 float dodge::get_stamina_basecost(RE::Actor* a_actor, const Stamina_factors& Stamina, bool DodgeRoll)
 {
-	float A_Score = 0.0f;
-
-	if (DodgeRoll){
-		A_Score += Stamina.fDodgeRoll_staminacost;
-
-	}else {
-		A_Score += Stamina.fSideStep_staminacost;
-	}
+	float A_Score = Stamina.fSideStep_staminacost;
 
 	
 	auto Helm = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHair);
@@ -550,7 +543,13 @@ float dodge::get_stamina_basecost(RE::Actor* a_actor, const Stamina_factors& Sta
 		}
 	}
 
-	return A_Score;
+	if (DodgeRoll){
+		return A_Score * Stamina.fDodgeRoll_staminacost;
+
+	}else {
+		return A_Score;
+	}
+
 }
 
 float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {

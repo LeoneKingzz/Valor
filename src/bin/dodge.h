@@ -115,7 +115,7 @@ public:
 		float Stamina_Shield_weight = 0.1f;
 
 		float fSideStep_staminacost = 25.0f;  
-		float fDodgeRoll_staminacost = 40.0f; 
+		float fDodgeRoll_staminacost = 1.6f; 
 	} Staminaa;
 
 	float get_dodge_chance(RE::Actor* a_actor, const Armour_factors& Armour, const PReflex_factors& Protagnist_Reflexes, const CStyle_factors& CStyle);
