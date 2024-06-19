@@ -452,7 +452,7 @@ float dodge::get_stamina_basecost(RE::Actor* a_actor, bool DodgeRoll)
 		A_Score += SD->fDodgeRoll_staminacost;
 
 	}else {
-		A_Score += SD->fDodgeRoll_staminacost;
+		A_Score += SD->fSideStep_staminacost;
 	}
 
 	
