@@ -544,12 +544,21 @@ float dodge::get_stamina_basecost(RE::Actor* a_actor, const Stamina_factors& Sta
 	}
 
 	if (DodgeRoll){
-		return A_Score * Stamina.fDodgeRoll_staminacost;
+		if (Stamina.fSideStep_staminacost == 0.0) {
+			return A_Score * Stamina.fSideStep_staminacost;
+
+		} else {
+			return A_Score * Stamina.fDodgeRoll_staminacost;
+		}
 
 	}else {
-		return A_Score;
-	}
+		if(Stamina.fSideStep_staminacost == 0.0) {
+			return A_Score * Stamina.fSideStep_staminacost;
 
+		} else {
+			return A_Score;
+		}
+	}
 }
 
 float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
