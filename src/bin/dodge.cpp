@@ -21,15 +21,15 @@ float dodge::GetProtaganist_ReflexScore(RE::Actor* a_actor){
 	float Score = 0.0f;
 
  /////////////////////////////////////////////////Armour Weighting////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 	auto Helm = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kHair);
+// 	auto Helm = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHair);
 
-// 	auto Chest = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kBody);
+// 	auto Chest = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
 
-// 	auto Gauntlet = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kHands);
+// 	auto Gauntlet = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHands);
 
-// 	auto Boots = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kFeet);
+// 	auto Boots = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kFeet);
 
-// 	auto Shield = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kShield);
+// 	auto Shield = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kShield);
 	
 
 
@@ -212,13 +212,13 @@ float dodge::get_dodge_chance(RE::Actor* a_actor, const Armour_factors& Armour, 
 	float Score = 0.0f;
 
 	/////////////////////////////////////////////////Armour Weighting////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	auto Helm = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kHair);
+	auto Helm = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHair);
 
-	auto Chest = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kBody);
+	auto Chest = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
 
-	auto Gauntlet = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kHands);
+	auto Gauntlet = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHands);
 
-	auto Boots = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kFeet);
+	auto Boots = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kFeet);
 
 	auto Shield = a_actor->GetEquippedObject(true);
 
@@ -339,13 +339,13 @@ float dodge::get_staminafactors(RE::Actor *a_actor, const Stamina_factors &Stami
 	float A_Score = 0.0f;
 
 	
-	auto Helm = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kHair);
+	auto Helm = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHair);
 
-	auto Chest = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kBody);
+	auto Chest = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
 
-	auto Gauntlet = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kHands);
+	auto Gauntlet = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHands);
 
-	auto Boots = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kFeet);
+	auto Boots = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kFeet);
 
 	auto Shield = a_actor->GetEquippedObject(true);
 
@@ -455,13 +455,13 @@ float dodge::get_stamina_basecost(RE::Actor* a_actor, const Stamina_factors& Sta
 	}
 
 	
-	auto Helm = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kHair);
+	auto Helm = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHair);
 
-	auto Chest = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kBody);
+	auto Chest = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
 
-	auto Gauntlet = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kHands);
+	auto Gauntlet = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHands);
 
-	auto Boots = a_actor->GetWornArmor(RE::BIPED_OBJECTS::kFeet);
+	auto Boots = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kFeet);
 
 	auto Shield = a_actor->GetEquippedObject(true);
 
@@ -1074,8 +1074,8 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			int bHeavyarmour = 0;
-			auto Body = refr->GetWornArmor(RE::BIPED_OBJECTS::kBody);
-			auto Helm = refr->GetWornArmor(RE::BIPED_OBJECTS::kHair);
+			auto Body = refr->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
+			auto Helm = refr->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHair);
 			if (Body) {
 				switch (Body->GetArmorType()) {
 				case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
