@@ -446,12 +446,13 @@ float dodge::get_staminafactors(RE::Actor *a_actor, const Stamina_factors &Stami
 float dodge::get_stamina_basecost(RE::Actor* a_actor, bool DodgeRoll)
 {
 	float A_Score = 0.0f;
+	auto SD = settings::GetSingleton();
 
 	if (DodgeRoll){
-		A_Score += settings::fDodgeRoll_staminacost;
+		A_Score += SD->fDodgeRoll_staminacost;
 
 	}else {
-		A_Score += settings::fSideStep_staminacost;
+		A_Score += SD->fDodgeRoll_staminacost;
 	}
 
 	

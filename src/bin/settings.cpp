@@ -33,8 +33,10 @@ void settings::read(const wchar_t* a_path)
 		}
 	};
 
-	fSideStep_staminacost = static_cast<float>(ini.GetDoubleValue("General", "fSideStep_staminacost", fSideStep_staminacost));
-	fDodgeRoll_staminacost = static_cast<float>(ini.GetDoubleValue("General", "fDodgeRoll_staminacost", fDodgeRoll_staminacost));
+	auto SD = settings::GetSingleton();
+
+	SD->fSideStep_staminacost = static_cast<float>(ini.GetDoubleValue("General", "fSideStep_staminacost", SD->fSideStep_staminacost));
+	SD->fDodgeRoll_staminacost = static_cast<float>(ini.GetDoubleValue("General", "fDodgeRoll_staminacost", SD->fDodgeRoll_staminacost));
 	iDodgeRoll_ActorScaled_Chance = (ini.GetLongValue("General", "iDodgeRoll_ActorScaled_Chance", iDodgeRoll_ActorScaled_Chance));
 	iReactiveDodgeAI_enable = (ini.GetLongValue("General", "iReactiveDodgeAI_enable", iReactiveDodgeAI_enable));
 

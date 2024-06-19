@@ -37,8 +37,8 @@ public:
 	inline static bool bZUPA_mod_Check = false;   /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bUAPNG_mod_Check = false;   /*Reactive dodge AI that dodges incoming attacks.*/
 
-	static inline float fSideStep_staminacost = 25.0f; /*Chance multiplier for reactive dodge AI.*/
-	static inline float fDodgeRoll_staminacost = 40.0f; /*Chance multiplier for reactive dodge AI.*/
+	float fSideStep_staminacost = 25.0f; /*Chance multiplier for reactive dodge AI.*/
+	float fDodgeRoll_staminacost = 40.0f; /*Chance multiplier for reactive dodge AI.*/
 	static inline int iDodgeRoll_ActorScaled_Chance = 2;           /*TKRE = 0; DMCO = 1*/
 	static inline int iReactiveDodgeAI_enable = 1;
 
