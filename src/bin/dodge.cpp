@@ -448,10 +448,10 @@ float dodge::get_stamina_basecost(RE::Actor* a_actor, const Stamina_factors& Sta
 	float A_Score = 0.0f;
 
 	if (DodgeRoll){
-		A_Score += Stamina.fDodgeRoll_staminacost
+		A_Score += Stamina.fDodgeRoll_staminacost;
 
 	}else {
-		A_Score += Stamina.fSideStep_staminacost
+		A_Score += Stamina.fSideStep_staminacost;
 	}
 
 	
@@ -1794,7 +1794,7 @@ void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 
 	if (settings::bHasSilentRollperk_enable == 1) {
 		auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
-		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(actor, true) / DS->get_staminafactors(actor, DS->Staminaa)) {
+		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(actor, DS->Staminaa,true) / DS->get_staminafactors(actor, DS->Staminaa)) {
 			actor->SetGraphVariableInt("iStep", 0);
 		} else {
 			actor->SetGraphVariableInt("iStep", 2);
@@ -1803,7 +1803,7 @@ void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 		return;
 
 	} else {
-		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(actor, true) / DS->get_staminafactors(actor, DS->Staminaa)) {
+		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(actor, DS->Staminaa,true) / DS->get_staminafactors(actor, DS->Staminaa)) {
 			actor->SetGraphVariableInt("iStep", 0);	
 		} else {
 			actor->SetGraphVariableInt("iStep", 2);
