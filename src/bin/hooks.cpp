@@ -40,13 +40,13 @@ namespace hooks
 				const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
 				const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
 				auto DS = dodge::GetSingleton();
-				// auto DodgeRoll_staminacost = DS->get_stamina_basecost(actor, true)/DS->get_staminafactors(actor, DS->Staminaa);
-				// auto SideStep_staminacost = DS->get_stamina_basecost(actor) / DS->get_staminafactors(actor, DS->Staminaa);
+				auto DodgeRoll_staminacost = DS->get_stamina_basecost(actor, DS->Staminaa, true);
+				auto SideStep_staminacost = DS->get_stamina_basecost(actor, DS->Staminaa);
 				bool bUND_IsDodgeRoll = false;
 				if (actor->GetGraphVariableBool("bUND_IsDodgeRoll", bUND_IsDodgeRoll) && bUND_IsDodgeRoll) {
 					if (settings::bStaminaCost_enable) {
-						logger::info("Protagnist {} DodgeRollCost {}"sv, actor->GetName(), (DS->get_stamina_basecost(actor, DS->Staminaa, true) / DS->get_staminafactors(actor, DS->Staminaa)));
-						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DS->get_stamina_basecost(actor, DS->Staminaa, true) / DS->get_staminafactors(actor, DS->Staminaa)), actor);
+						logger::info("Protagnist {} DodgeRollCost {}"sv, actor->GetName(), (DodgeRoll_staminacost));
+						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DodgeRoll_staminacost), actor);
 					}
 					if (settings::biFrames_enable) {
 						dodge::Set_iFrames(actor);
@@ -54,8 +54,8 @@ namespace hooks
 					break;
 				} else {
 					if (settings::bStaminaCost_enable) {
-						logger::info("Protagnist {} SideStepCost {}"sv, actor->GetName(), (DS->get_stamina_basecost(actor, DS->Staminaa) / DS->get_staminafactors(actor, DS->Staminaa)));
-						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(DS->get_stamina_basecost(actor, DS->Staminaa) / DS->get_staminafactors(actor, DS->Staminaa)), actor);
+						logger::info("Protagnist {} SideStepCost {}"sv, actor->GetName(), (SideStep_staminacost));
+						caster->CastSpellImmediate(StaminaCost, true, actor, 1, false, -(SideStep_staminacost), actor);
 					}
 					if (settings::biFrames_enable) {
 						dodge::Set_iFrames(actor);

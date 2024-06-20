@@ -34,6 +34,7 @@ public:
 	inline static bool biFrames_enable = true; /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static int bHasSilentRollperk_enable = 1; /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bStaminaCost_enable = true;   /*Reactive dodge AI that dodges incoming attacks.*/
+	inline static bool bStaminaCost_ArmourBasedSystem_enable = true;   /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bZUPA_mod_Check = false;   /*Reactive dodge AI that dodges incoming attacks.*/
 	inline static bool bUAPNG_mod_Check = false;   /*Reactive dodge AI that dodges incoming attacks.*/
 

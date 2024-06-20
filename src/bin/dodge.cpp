@@ -447,102 +447,104 @@ float dodge::get_stamina_basecost(RE::Actor* a_actor, const Stamina_factors& Sta
 {
 	float A_Score = Stamina.fSideStep_staminacost;
 
+	if (settings::bStaminaCost_ArmourBasedSystem_enable){
+		auto Helm = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHair);
+
+		auto Chest = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
+
+		auto Gauntlet = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHands);
+
+		auto Boots = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kFeet);
+
+		auto Shield = a_actor->GetEquippedObject(true);
+
+		auto Heavy_Skill = (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kHeavyArmor) / 100.0f);
+
+		auto Light_skill = (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kLightArmor) / 100.0f);
+
+		if (Helm) {
+			switch (Helm->GetArmorType()) {
+			case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+				A_Score += (Helm->GetWeight() * Stamina.Stamina_Helm_weight * Stamina.Stamina_HeavyArmour_mult) / Heavy_Skill;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kLightArmor:
+				A_Score += (Helm->GetWeight() * Stamina.Stamina_Helm_weight * Stamina.Stamina_LightArmour_mult) / Light_skill;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kClothing:
+				A_Score += (Helm->GetWeight() * Stamina.Stamina_Helm_weight * Stamina.Stamina_Clothing_mult);
+				break;
+			default:
+				A_Score += (Helm->GetWeight() * Stamina.Stamina_Helm_weight * Stamina.Stamina_Clothing_mult);
+			}
+		}
+
+		if (Chest) {
+			switch (Chest->GetArmorType()) {
+			case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+				A_Score += (Chest->GetWeight() * Stamina.Stamina_Chest_weight * Stamina.Stamina_HeavyArmour_mult) / Heavy_Skill;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kLightArmor:
+				A_Score += (Chest->GetWeight() * Stamina.Stamina_Chest_weight * Stamina.Stamina_LightArmour_mult) / Light_skill;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kClothing:
+				A_Score += (Chest->GetWeight() * Stamina.Stamina_Chest_weight * Stamina.Stamina_Clothing_mult);
+				break;
+			default:
+				A_Score += (Chest->GetWeight() * Stamina.Stamina_Chest_weight * Stamina.Stamina_Clothing_mult);
+			}
+		}
+
+		if (Gauntlet) {
+			switch (Gauntlet->GetArmorType()) {
+			case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+				A_Score += (Gauntlet->GetWeight() * Stamina.Stamina_Gauntlet_weight * Stamina.Stamina_HeavyArmour_mult) / Heavy_Skill;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kLightArmor:
+				A_Score += (Gauntlet->GetWeight() * Stamina.Stamina_Gauntlet_weight * Stamina.Stamina_LightArmour_mult) / Light_skill;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kClothing:
+				A_Score += (Gauntlet->GetWeight() * Stamina.Stamina_Gauntlet_weight * Stamina.Stamina_Clothing_mult);
+				break;
+			default:
+				A_Score += (Gauntlet->GetWeight() * Stamina.Stamina_Gauntlet_weight * Stamina.Stamina_Clothing_mult);
+			}
+		}
+
+		if (Boots) {
+			switch (Boots->GetArmorType()) {
+			case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+				A_Score += (Boots->GetWeight() * Stamina.Stamina_Boots_weight * Stamina.Stamina_HeavyArmour_mult) / Heavy_Skill;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kLightArmor:
+				A_Score += (Boots->GetWeight() * Stamina.Stamina_Boots_weight * Stamina.Stamina_LightArmour_mult) / Light_skill;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kClothing:
+				A_Score += (Boots->GetWeight() * Stamina.Stamina_Boots_weight * Stamina.Stamina_Clothing_mult);
+				break;
+			default:
+				A_Score += (Boots->GetWeight() * Stamina.Stamina_Boots_weight * Stamina.Stamina_Clothing_mult);
+			}
+		}
+
+		if (Shield && Shield->IsArmor()) {
+			// if (Shield->HasKeywordByEditorID())
+			switch (Shield->As<RE::TESObjectARMO>()->GetArmorType()) {  //function tests for biped model; need some king of flag or keyword instead for sheilds, else crash
+			case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
+				A_Score += (Shield->GetWeight() * Stamina.Stamina_Shield_weight * Stamina.Stamina_HeavyArmour_mult) / Heavy_Skill;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kLightArmor:
+				A_Score += (Shield->GetWeight() * Stamina.Stamina_Shield_weight * Stamina.Stamina_LightArmour_mult) / Light_skill;
+				break;
+			case RE::BIPED_MODEL::ArmorType::kClothing:
+				A_Score += (Shield->GetWeight() * Stamina.Stamina_Shield_weight * Stamina.Stamina_Clothing_mult);
+				break;
+			default:
+				A_Score += (Shield->GetWeight() * Stamina.Stamina_Shield_weight * Stamina.Stamina_Clothing_mult);
+			}
+		}
+	}
+
 	
-	auto Helm = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHair);
-
-	auto Chest = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
-
-	auto Gauntlet = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHands);
-
-	auto Boots = a_actor->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kFeet);
-
-	auto Shield = a_actor->GetEquippedObject(true);
-
-	auto Heavy_Skill = (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kHeavyArmor) / 100.0f);
-
-	auto Light_skill = (a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kLightArmor) / 100.0f);
-
-	if (Helm) {
-		switch (Helm->GetArmorType()) {
-		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += (Helm->GetWeight()/1.0f) / Heavy_Skill;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += (Helm->GetWeight()/1.0f) / Light_skill;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += (Helm->GetWeight()/1.0f);
-			break;
-		default:
-			A_Score += (Helm->GetWeight()/1.0f);
-		}
-	} 
-
-	if (Chest) {
-		switch (Chest->GetArmorType()) {
-		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += (Chest->GetWeight()/1.0f) / Heavy_Skill;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += (Chest->GetWeight()/1.0f) / Light_skill;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += (Chest->GetWeight()/1.0f);
-			break;
-		default:
-			A_Score += (Chest->GetWeight()/1.0f);
-		}
-	}
-
-	if (Gauntlet) {
-		switch (Gauntlet->GetArmorType()) {
-		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += (Gauntlet->GetWeight()/1.0f) / Heavy_Skill;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += (Gauntlet->GetWeight()/1.0f) / Light_skill;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += (Gauntlet->GetWeight()/1.0f);
-			break;
-		default:
-			A_Score += (Gauntlet->GetWeight()/1.0f);
-		}
-	}
-
-	if (Boots) {
-		switch (Boots->GetArmorType()) {
-		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += (Boots->GetWeight()/1.0f) / Heavy_Skill;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += (Boots->GetWeight()/1.0f) / Light_skill;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += (Boots->GetWeight()/1.0f);
-			break;
-		default:
-			A_Score += (Boots->GetWeight()/1.0f);
-		}
-	}
-
-	if (Shield && Shield->IsArmor()) {
-		// if (Shield->HasKeywordByEditorID())
-		switch (Shield->As<RE::TESObjectARMO>()->GetArmorType()) {  //function tests for biped model; need some king of flag or keyword instead for sheilds, else crash
-		case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
-			A_Score += (Shield->GetWeight()/1.0f) / Heavy_Skill;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kLightArmor:
-			A_Score += (Shield->GetWeight()/1.0f) / Light_skill;
-			break;
-		case RE::BIPED_MODEL::ArmorType::kClothing:
-			A_Score += (Shield->GetWeight()/1.0f);
-			break;
-		default:
-			A_Score += (Shield->GetWeight()/1.0f);
-		}
-	}
-
 	if (DodgeRoll){
 		if (Stamina.fSideStep_staminacost == 0.0) {
 			return A_Score * Stamina.fSideStep_staminacost;
@@ -1300,6 +1302,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	auto magicTarget = a_actor->AsMagicTarget();
 	bool IsShouting = false;
 	auto DS = dodge::GetSingleton();
+	auto SideStep_staminacost = DS->get_stamina_basecost(a_actor, DS->Staminaa);
 	// magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize);
 	// auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
 	// auto RecoilState = static_cast<int>(a_actor->AsActorState()->actorState2.recoil);
@@ -1310,7 +1313,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 		// auto magicTarget = a_actor->AsMagicTarget();
 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(a_actor, DS->Staminaa)/DS->get_staminafactors(a_actor, DS->Staminaa) 
+		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
 			return true;
@@ -1318,7 +1321,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	} else if (settings::bUAPNG_mod_Check){
 		bool IUBusy = false;
 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(a_actor, DS->Staminaa)/DS->get_staminafactors(a_actor, DS->Staminaa) 
+		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
 			return true;
@@ -1326,7 +1329,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 
 	} else{
 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(a_actor, DS->Staminaa)/DS->get_staminafactors(a_actor, DS->Staminaa) 
+		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
 			return true;
@@ -1345,7 +1348,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
     auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
-	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+	
 
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
@@ -1369,6 +1372,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
 				
 				do_dodge(a_actor, direction);
+				logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
 			}
 			return;
 		} else {
@@ -1401,7 +1405,7 @@ void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a
     auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
-	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+	
 
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
@@ -1425,6 +1429,7 @@ void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
 				
 				do_dodge(a_actor, direction);
+				logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
 			}
 			return;
 		} else {
@@ -1458,7 +1463,7 @@ void dodge::NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* 
     auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
-	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+	
 
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
@@ -1482,6 +1487,7 @@ void dodge::NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* 
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
 				
 				do_dodge(a_actor, direction);
+				logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
 			}
 			return;
 		} else {
@@ -1503,7 +1509,7 @@ void dodge::Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set*
 	auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
-	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+	
 
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
@@ -1527,6 +1533,7 @@ void dodge::Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set*
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
 				
 				do_dodge(a_actor, direction);
+				logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
 			}
 			return;
 		} else {
@@ -1547,7 +1554,7 @@ void dodge::Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_direct
     auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
-	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+	
 
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
@@ -1571,6 +1578,7 @@ void dodge::Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_direct
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
 				
 				do_dodge(a_actor, direction);
+				logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
 			}
 			return;
 		} else {
@@ -1591,7 +1599,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
     auto DS = dodge::GetSingleton();
 	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
-	logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
+	
 
 	std::mt19937 gen(rd());
 	// /*Check dodge chance using PRNG*/
@@ -1615,6 +1623,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 			if (a_actor->GetGraphVariableBool("bIsDodging", bIsDodging) && !bIsDodging) {
 				
 				do_dodge(a_actor, direction);
+				logger::info("Protagnist {} ReflexScore {}"sv, a_actor->GetName(), dodge_chance);
 			}
 			return;
 		} else {
@@ -1638,7 +1647,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 //		auto magicTarget = a_actor->AsMagicTarget();
 //		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-//		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(a_actor, DS->Staminaa)/DS->get_staminafactors(a_actor, DS->Staminaa) 
+//		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
 //			return true;
@@ -1646,7 +1655,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //	} else if (settings::bUAPNG_mod_Check){
 //		bool IUBusy = false;
 //		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-//		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(a_actor, DS->Staminaa)/DS->get_staminafactors(a_actor, DS->Staminaa) 
+//		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
 //			return true;
@@ -1654,7 +1663,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //
 //	} else{
 //		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-//		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(a_actor, DS->Staminaa)/DS->get_staminafactors(a_actor, DS->Staminaa) 
+//		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
 //			return true;
@@ -1680,7 +1689,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 // 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 // 		/*auto magicTarget = a_actor->AsMagicTarget();*/
 // 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-// 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(a_actor, DS->Staminaa)/DS->get_staminafactors(a_actor, DS->Staminaa) 
+// 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 // 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 // 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
 // 			return true;
@@ -1688,7 +1697,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 // 	} else if (settings::bUAPNG_mod_Check){
 // 		bool IUBusy = false;
 // 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-// 		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(a_actor, DS->Staminaa)/DS->get_staminafactors(a_actor, DS->Staminaa) 
+// 		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 // 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 // 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
 // 			return true;
@@ -1696,7 +1705,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 
 // 	} else{
 // 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
-// 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(a_actor, DS->Staminaa)/DS->get_staminafactors(a_actor, DS->Staminaa) 
+// 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 // 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 // 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
 // 			return true;
@@ -1793,6 +1802,7 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 {
 	auto DS = dodge::GetSingleton();
+	auto DodgeRoll_staminacost = DS->get_stamina_basecost(actor, DS->Staminaa, true);
 
 	if (backingoff) {
 		actor->SetGraphVariableInt("iStep", 2);
@@ -1803,7 +1813,7 @@ void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 
 	if (settings::bHasSilentRollperk_enable == 1) {
 		auto bSilentRoll = actor->HasPerk(RE::BGSPerk::LookupByEditorID("SilentRoll")->As<RE::BGSPerk>());
-		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(actor, DS->Staminaa,true) / DS->get_staminafactors(actor, DS->Staminaa)) {
+		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && bSilentRoll && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DodgeRoll_staminacost) {
 			actor->SetGraphVariableInt("iStep", 0);
 			actor->SetGraphVariableBool("bUND_IsDodgeRoll", true);
 		} else {
@@ -1814,7 +1824,7 @@ void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 		return;
 
 	} else {
-		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DS->get_stamina_basecost(actor, DS->Staminaa,true) / DS->get_staminafactors(actor, DS->Staminaa)) {
+		if (dodge::GetSingleton()->GenerateRandomInt(0, 10) <= settings::iDodgeRoll_ActorScaled_Chance && actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= DodgeRoll_staminacost) {
 			actor->SetGraphVariableInt("iStep", 0);
 			actor->SetGraphVariableBool("bUND_IsDodgeRoll", true);	
 		} else {
