@@ -978,6 +978,7 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 			int bHeavyarmour = 0;
 			auto Body = refr->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kBody);
 			auto Helm = refr->GetWornArmor(RE::BGSBipedObjectForm::BipedObjectSlot::kHair);
+			auto Shield = refr->GetEquippedObject(true);
 			if (Body) {
 				switch (Body->GetArmorType()) {
 				case RE::BIPED_MODEL::ArmorType::kHeavyArmor:
@@ -1010,9 +1011,15 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 				bHeavyarmour += 0;
 			}
 
+			if (Shield && Shield->IsArmor()){
+				bHeavyarmour += 1;
+			} else {
+				bHeavyarmour += 0;
+			}
+
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				if (bHeavyarmour == 2 && (refr->GetEquippedObject(false)->As<RE::TESObjectWEAP>()->IsMelee())) {
+				if (bHeavyarmour >= 2 && (refr->GetEquippedObject(false)->As<RE::TESObjectWEAP>()->IsMelee())) {
 					dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_ranged);
 				} else {
 					dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_horizontal);
@@ -1238,7 +1245,7 @@ void dodge::attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_directions,
 	// }
 	
     auto DS = dodge::GetSingleton();
-	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
+	const float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
 	
 
@@ -1295,7 +1302,7 @@ void dodge::Powerattack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a
 	// 	Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
 	// }
     auto DS = dodge::GetSingleton();
-	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
+	const float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
 	
 
@@ -1353,7 +1360,7 @@ void dodge::NormalAttack_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* 
 	// 	Sleep(dodge::GetSingleton()->GenerateRandomInt(0, 150));
 	// }
     auto DS = dodge::GetSingleton();
-	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
+	const float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
 	
 
@@ -1399,7 +1406,7 @@ void dodge::Shouts_Spells_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set*
 	// Sleep(dodge::GetSingleton()->GenerateRandomInt(200, 400));
 
 	auto DS = dodge::GetSingleton();
-	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
+	const float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
 	
 
@@ -1444,7 +1451,7 @@ void dodge::Bash_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_direct
 
 	// Sleep(dodge::GetSingleton()->GenerateRandomInt(100, 200));
     auto DS = dodge::GetSingleton();
-	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
+	const float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
 	
 
@@ -1489,7 +1496,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 
 	// Sleep(dodge::GetSingleton()->GenerateRandomInt(500, 900));
     auto DS = dodge::GetSingleton();
-	float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
+	const float dodge_chance = a_forceDodge ? 1.0f : get_dodge_chance(a_actor, DS->Armourr, DS->Protagnist_Reflexess, DS->CStylee);
 
 	
 
@@ -1695,6 +1702,7 @@ void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 {
 	auto DS = dodge::GetSingleton();
 	const float DodgeRoll_staminacost = DS->get_stamina_basecost(actor, DS->Staminaa, true);
+	actor->NotifyAnimationGraph("InterruptCast");
 
 	if (backingoff) {
 		actor->SetGraphVariableInt("iStep", 2);
