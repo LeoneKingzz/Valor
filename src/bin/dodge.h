@@ -119,7 +119,6 @@ public:
 	} Staminaa;
 
 	float get_dodge_chance(RE::Actor* a_actor, const Armour_factors& Armour, const PReflex_factors& Protagnist_Reflexes, const CStyle_factors& CStyle);
-	float get_staminafactors(RE::Actor* a_actor, const Stamina_factors &Stamina);
 	float get_stamina_basecost(RE::Actor* a_actor, const Stamina_factors& Stamina, bool DodgeRoll = false);
 
 	void react_to_melee(RE::Actor* a_attacker, float attack_range);
