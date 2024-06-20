@@ -40,8 +40,8 @@ namespace hooks
 				const auto StaminaCost = RE::TESForm::LookupByEditorID<RE::MagicItem>("StaminaCostSpell_UND");
 				const auto caster = actor->GetMagicCaster(RE::MagicSystem::CastingSource::kInstant);
 				auto DS = dodge::GetSingleton();
-				auto DodgeRoll_staminacost = DS->get_stamina_basecost(actor, DS->Staminaa, true);
-				auto SideStep_staminacost = DS->get_stamina_basecost(actor, DS->Staminaa);
+				const float DodgeRoll_staminacost = DS->get_stamina_basecost(actor, DS->Staminaa, true);
+				const float SideStep_staminacost = DS->get_stamina_basecost(actor, DS->Staminaa);
 				bool bUND_IsDodgeRoll = false;
 				if (actor->GetGraphVariableBool("bUND_IsDodgeRoll", bUND_IsDodgeRoll) && bUND_IsDodgeRoll) {
 					if (settings::bStaminaCost_enable) {

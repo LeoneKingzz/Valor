@@ -1194,7 +1194,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	auto magicTarget = a_actor->AsMagicTarget();
 	bool IsShouting = false;
 	auto DS = dodge::GetSingleton();
-	auto SideStep_staminacost = DS->get_stamina_basecost(a_actor, DS->Staminaa);
+	const float SideStep_staminacost = DS->get_stamina_basecost(a_actor, DS->Staminaa);
 	// magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize);
 	// auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
 	// auto RecoilState = static_cast<int>(a_actor->AsActorState()->actorState2.recoil);
@@ -1694,7 +1694,7 @@ void dmco_dodge(RE::Actor* a_actor, dodge_direction a_direction, const char* a_e
 void dodge::TRKE_dodge(RE::Actor* actor, const char* a_event, bool backingoff)
 {
 	auto DS = dodge::GetSingleton();
-	auto DodgeRoll_staminacost = DS->get_stamina_basecost(actor, DS->Staminaa, true);
+	const float DodgeRoll_staminacost = DS->get_stamina_basecost(actor, DS->Staminaa, true);
 
 	if (backingoff) {
 		actor->SetGraphVariableInt("iStep", 2);
