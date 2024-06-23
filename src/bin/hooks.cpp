@@ -101,10 +101,10 @@ namespace hooks
 			break;
 
 		case "Voice_SpellFire_Event"_h:
-			if (dodge::GetSingleton()->GetEquippedShout(actor)) {
-				dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
-			}
-			// dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
+			// if (dodge::GetSingleton()->GetEquippedShout(actor)) {
+			// 	dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
+			// }
+			dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
 			break;
 
 		// case "BeginCastVoice"_h:
