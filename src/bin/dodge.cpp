@@ -536,19 +536,27 @@ float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
 	return distance;
 }
 
-bool dodge::GetAttackSpell(RE::Actor* actor) {
+bool dodge::GetAttackSpell(RE::Actor* actor, bool lefthand) {
 	auto limbospell = actor->GetActorRuntimeData().currentProcess;
 
-	if (limbospell && limbospell->high && limbospell->high->attackData) {
-		auto equippedspell = limbospell->high->attackData.get()->data.attackSpell;
-
-		if (equippedspell) {
-			if (equippedspell->avEffectSetting->data.flags.all(RE::EffectSetting::EffectSettingData::Flag::kHostile)){
-				return true;
+	if (limbospell) {
+		if (lefthand){
+			auto eSpell = limbospell->GetEquippedLeftHand();
+			if (eSpell && eSpell->Is(RE::FormType::Spell)) {
+				if (eSpell->As<RE::SpellItem>()->avEffectSetting->data.flags.all(RE::EffectSetting::EffectSettingData::Flag::kHostile)) {
+					return true;
+				}
+			}
+		}else {
+			auto eSpell = limbospell->GetEquippedRightHand();
+			if (eSpell && eSpell->Is(RE::FormType::Spell)) {
+				if (eSpell->As<RE::SpellItem>()->avEffectSetting->data.flags.all(RE::EffectSetting::EffectSettingData::Flag::kHostile)) {
+					return true;
+				}
 			}
 		}
 	}
-    return false;
+	return false;
 }
 
 // float dodge::Get_ReactiveDodge_Distance(RE::Actor* actor)

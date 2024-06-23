@@ -154,7 +154,7 @@ public:
 	bool get_is_dodging(RE::Actor* a_actor);
 
 	float Get_ReactiveDodge_Distance(RE::Actor *actor);
-	bool GetAttackSpell(RE::Actor* actor);
+	bool GetAttackSpell(RE::Actor* actor, bool lefthand = false);
 	
 
 private:
