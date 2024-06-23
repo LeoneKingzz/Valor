@@ -155,6 +155,7 @@ public:
 
 	float Get_ReactiveDodge_Distance(RE::Actor *actor);
 	bool GetAttackSpell(RE::Actor* actor, bool lefthand = false);
+	bool GetEquippedShout(RE::Actor* actor);
 	
 
 private:

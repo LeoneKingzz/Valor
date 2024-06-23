@@ -559,6 +559,17 @@ bool dodge::GetAttackSpell(RE::Actor* actor, bool lefthand) {
 	return false;
 }
 
+bool dodge::GetEquippedShout(RE::Actor* actor){
+	auto limboshout = actor->GetActorRuntimeData().selectedPower;
+
+	if (limboshout && limboshout->Is(RE::FormType::Shout)){
+		if (limboshout->As<RE::TESShout>()->variations->spell->avEffectSetting->data.flags.all(RE::EffectSetting::EffectSettingData::Flag::kHostile)){
+			return true;
+		}
+	}
+	return false;
+}
+
 // float dodge::Get_ReactiveDodge_Distance(RE::Actor* actor)
 // {
 // 	auto defenderRightEquipped = actor->GetEquippedObject(false);
