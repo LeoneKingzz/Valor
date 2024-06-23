@@ -118,7 +118,7 @@ namespace hooks
 			// if (actor->GetEquippedObject(true)->As<RE::MagicItem>()->IsHostile()) {
 			// 	dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
 			// }
-			if (dodge::GetSingleton()->GetAttackSpell(actor)) {
+			if (dodge::GetSingleton()->GetAttackSpell(actor, true)) {
 				dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
 			}
 			// dodge::GetSingleton()->react_to_shouts_spells_fast(actor, 3000.0f);
