@@ -539,12 +539,11 @@ float dodge::Get_ReactiveDodge_Distance(RE::Actor *actor) {
 bool dodge::GetAttackSpell(RE::Actor* actor) {
 	auto limbospell = actor->GetActorRuntimeData().currentProcess;
 
-	if (limbospell && limbospell->high && limbospell->high->attackData && limbospell->high->attackData.get()) {
+	if (limbospell && limbospell->high && limbospell->high->attackData) {
 		auto equippedspell = limbospell->high->attackData.get()->data.attackSpell;
 
 		if (equippedspell) {
-			RE::MagicItem* effect = const_cast<RE::SpellItem*>(equippedspell)->As<RE::MagicItem>();
-			if (effect && effect->IsHostile()) {
+			if (equippedspell->avEffectSetting->data.flags.all(RE::EffectSetting::EffectSettingData::Flag::kHostile)){
 				return true;
 			}
 		}
