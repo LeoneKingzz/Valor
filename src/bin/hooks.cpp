@@ -101,7 +101,7 @@ namespace hooks
 			break;
 
 		case "Voice_SpellFire_Event"_h:
-			if (actor->GetCurrentShout()->variations->spell->avEffectSetting->data.flags.all(RE::EffectSetting::EffectSettingData::Flag::kHostile)) {
+			if (dodge::GetSingleton()->GetEquippedShout(actor)) {
 				dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
 			}
 			// dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
