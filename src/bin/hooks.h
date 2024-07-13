@@ -11,6 +11,12 @@ namespace hooks
 
 	using EventResult = RE::BSEventNotifyControl;
 
+	class IHooks
+	{
+	public:
+		static void install();
+	};
+
 	class on_animation_event
 	{
 	public:

@@ -645,12 +645,7 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			const auto ActorTypeNPC = RE::BGSKeyword::LookupByEditorID("ActorTypeNPC")->As<RE::BGSKeyword>();
-			const auto DLC2ActorTypeMiraak = RE::BGSKeyword::LookupByEditorID("DLC2ActorTypeMiraak")->As<RE::BGSKeyword>();
-			bool IsActorTypeNPC = refr->HasKeyword(ActorTypeNPC);
-			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
-
-			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+			if (!(refr->HasKeywordString("ActorTypeNPC") || refr->HasKeywordString("DLC2ActorTypeMiraak"))) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
@@ -714,12 +709,7 @@ void dodge::react_to_melee_power(RE::Actor* a_attacker, float attack_range)
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			const auto ActorTypeNPC = RE::BGSKeyword::LookupByEditorID("ActorTypeNPC")->As<RE::BGSKeyword>();
-			const auto DLC2ActorTypeMiraak = RE::BGSKeyword::LookupByEditorID("DLC2ActorTypeMiraak")->As<RE::BGSKeyword>();
-			bool IsActorTypeNPC = refr->HasKeyword(ActorTypeNPC);
-			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
-
-			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+			if (!(refr->HasKeywordString("ActorTypeNPC") || refr->HasKeywordString("DLC2ActorTypeMiraak"))) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
@@ -782,12 +772,7 @@ void dodge::react_to_melee_normal(RE::Actor* a_attacker, float attack_range)
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			const auto ActorTypeNPC = RE::BGSKeyword::LookupByEditorID("ActorTypeNPC")->As<RE::BGSKeyword>();
-			const auto DLC2ActorTypeMiraak = RE::BGSKeyword::LookupByEditorID("DLC2ActorTypeMiraak")->As<RE::BGSKeyword>();
-			bool IsActorTypeNPC = refr->HasKeyword(ActorTypeNPC);
-			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
-
-			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+			if (!(refr->HasKeywordString("ActorTypeNPC") || refr->HasKeywordString("DLC2ActorTypeMiraak"))) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
@@ -850,12 +835,7 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			const auto ActorTypeNPC = RE::BGSKeyword::LookupByEditorID("ActorTypeNPC")->As<RE::BGSKeyword>();
-			const auto DLC2ActorTypeMiraak = RE::BGSKeyword::LookupByEditorID("DLC2ActorTypeMiraak")->As<RE::BGSKeyword>();
-			bool IsActorTypeNPC = refr->HasKeyword(ActorTypeNPC);
-			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
-
-			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+			if (!(refr->HasKeywordString("ActorTypeNPC") || refr->HasKeywordString("DLC2ActorTypeMiraak"))) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
@@ -915,12 +895,7 @@ void dodge::react_to_bash_sprint(RE::Actor* a_attacker, float attack_range)
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			const auto ActorTypeNPC = RE::BGSKeyword::LookupByEditorID("ActorTypeNPC")->As<RE::BGSKeyword>();
-			const auto DLC2ActorTypeMiraak = RE::BGSKeyword::LookupByEditorID("DLC2ActorTypeMiraak")->As<RE::BGSKeyword>();
-			bool IsActorTypeNPC = refr->HasKeyword(ActorTypeNPC);
-			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
-
-			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+			if (!(refr->HasKeywordString("ActorTypeNPC") || refr->HasKeywordString("DLC2ActorTypeMiraak"))) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
@@ -980,12 +955,7 @@ void dodge::react_to_ranged(RE::Actor* a_attacker, float attack_range)
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			const auto ActorTypeNPC = RE::BGSKeyword::LookupByEditorID("ActorTypeNPC")->As<RE::BGSKeyword>();
-			const auto DLC2ActorTypeMiraak = RE::BGSKeyword::LookupByEditorID("DLC2ActorTypeMiraak")->As<RE::BGSKeyword>();
-			bool IsActorTypeNPC = refr->HasKeyword(ActorTypeNPC);
-			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
-
-			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+			if (!(refr->HasKeywordString("ActorTypeNPC") || refr->HasKeywordString("DLC2ActorTypeMiraak"))) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
@@ -1093,12 +1063,7 @@ void dodge::react_to_shouts_spells(RE::Actor* a_attacker, float attack_range)
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			const auto ActorTypeNPC = RE::BGSKeyword::LookupByEditorID("ActorTypeNPC")->As<RE::BGSKeyword>();
-			const auto DLC2ActorTypeMiraak = RE::BGSKeyword::LookupByEditorID("DLC2ActorTypeMiraak")->As<RE::BGSKeyword>();
-			bool IsActorTypeNPC = refr->HasKeyword(ActorTypeNPC);
-			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
-
-			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+			if (!(refr->HasKeywordString("ActorTypeNPC") || refr->HasKeywordString("DLC2ActorTypeMiraak"))) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
@@ -1161,12 +1126,7 @@ void dodge::react_to_shouts_spells_fast(RE::Actor* a_attacker, float attack_rang
 			if (!Utils::Actor::isHumanoid(refr)) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
-			const auto ActorTypeNPC = RE::BGSKeyword::LookupByEditorID("ActorTypeNPC")->As<RE::BGSKeyword>();
-			const auto DLC2ActorTypeMiraak = RE::BGSKeyword::LookupByEditorID("DLC2ActorTypeMiraak")->As<RE::BGSKeyword>();
-			bool IsActorTypeNPC = refr->HasKeyword(ActorTypeNPC);
-			bool IsDLC2ActorTypeMiraak = refr->HasKeyword(DLC2ActorTypeMiraak);
-
-			if (!(IsActorTypeNPC || IsDLC2ActorTypeMiraak)){
+			if (!(refr->HasKeywordString("ActorTypeNPC") || refr->HasKeywordString("DLC2ActorTypeMiraak"))) {
 				return RE::BSContainer::ForEachResult::kContinue;
 			}
 			auto CTarget = refr->GetActorRuntimeData().currentCombatTarget.get().get();
@@ -1244,6 +1204,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	bool IsShouting = false;
 	auto DS = dodge::GetSingleton();
 	const float SideStep_staminacost = DS->get_stamina_basecost(a_actor, DS->Staminaa);
+	bool bUND_InCombatFoundEnemy = false;
 	// magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize);
 	// auto IsStaggeredCT = static_cast<bool>(CombatTarget->AsActorState()->actorState2.staggered);
 	// auto RecoilState = static_cast<int>(a_actor->AsActorState()->actorState2.recoil);
@@ -1253,7 +1214,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 	if (settings::bZUPA_mod_Check) {
 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 		// auto magicTarget = a_actor->AsMagicTarget();
-		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("bUND_InCombatFoundEnemy", bUND_InCombatFoundEnemy) && bUND_InCombatFoundEnemy) && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
@@ -1261,7 +1222,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 		}
 	} else if (settings::bUAPNG_mod_Check){
 		bool IUBusy = false;
-		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("bUND_InCombatFoundEnemy", bUND_InCombatFoundEnemy) && bUND_InCombatFoundEnemy) && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1269,7 +1230,7 @@ bool dodge::able_dodge(RE::Actor* a_actor)
 		}
 
 	} else{
-		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("bUND_InCombatFoundEnemy", bUND_InCombatFoundEnemy) && bUND_InCombatFoundEnemy) && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1587,7 +1548,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //	if (settings::bZUPA_mod_Check) {
 //		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 //		auto magicTarget = a_actor->AsMagicTarget();
-//		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+//		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("bUND_InCombatFoundEnemy", bUND_InCombatFoundEnemy) && bUND_InCombatFoundEnemy) && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 //		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
@@ -1595,7 +1556,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //		}
 //	} else if (settings::bUAPNG_mod_Check){
 //		bool IUBusy = false;
-//		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+//		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("bUND_InCombatFoundEnemy", bUND_InCombatFoundEnemy) && bUND_InCombatFoundEnemy) && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 //		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1603,7 +1564,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 //		}
 //
 //	} else{
-//		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+//		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("bUND_InCombatFoundEnemy", bUND_InCombatFoundEnemy) && bUND_InCombatFoundEnemy) && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 //		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 //		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 //		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1629,7 +1590,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 // 	if (settings::bZUPA_mod_Check) {
 // 		const auto magicEffect = RE::TESForm::LookupByEditorID("zxlice_cooldownEffect")->As<RE::EffectSetting>();
 // 		/*auto magicTarget = a_actor->AsMagicTarget();*/
-// 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+// 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("bUND_InCombatFoundEnemy", bUND_InCombatFoundEnemy) && bUND_InCombatFoundEnemy) && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 // 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 // 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 // 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough) && !magicTarget->HasMagicEffect(magicEffect)) {
@@ -1637,7 +1598,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 // 		}
 // 	} else if (settings::bUAPNG_mod_Check){
 // 		bool IUBusy = false;
-// 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+// 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("bUND_InCombatFoundEnemy", bUND_InCombatFoundEnemy) && bUND_InCombatFoundEnemy) && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 // 		&& (a_actor->GetGraphVariableBool("IUBusy", IUBusy) && !IUBusy) && a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 // 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 // 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {
@@ -1645,7 +1606,7 @@ void dodge::BashSprint_attempt_dodge(RE::Actor* a_actor, const dodge_dir_set* a_
 // 		}
 
 // 	} else{
-// 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
+// 		if (!a_actor->IsInKillMove() && (a_actor->GetGraphVariableBool("bUND_InCombatFoundEnemy", bUND_InCombatFoundEnemy) && bUND_InCombatFoundEnemy) && (a_actor->GetGraphVariableBool("IsShouting", IsShouting) && !IsShouting) && !CombatTarget->AsActorState()->IsBleedingOut() && CTMagicTarget == 0.0 && !magicTarget->HasEffectWithArchetype(RE::EffectArchetypes::ArchetypeID::kDemoralize)
 // 		&& a_actor->AsActorValueOwner()->GetActorValue(RE::ActorValue::kStamina) >= SideStep_staminacost 
 // 		&& !(attackState == RE::ATTACK_STATE_ENUM::kSwing || attackState == RE::ATTACK_STATE_ENUM::kHit  || attackState == RE::ATTACK_STATE_ENUM::kFollowThrough || attackState == RE::ATTACK_STATE_ENUM::kBash 
 // 		|| attackState == RE::ATTACK_STATE_ENUM::kBowDrawn || attackState == RE::ATTACK_STATE_ENUM::kBowReleasing || attackState == RE::ATTACK_STATE_ENUM::kBowFollowThrough)) {

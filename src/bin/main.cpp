@@ -13,6 +13,7 @@ void MessageHandler(SKSE::MessagingInterface::Message* a_msg)
 	switch (a_msg->type) {
 	case SKSE::MessagingInterface::kDataLoaded:
 		hooks::on_animation_event::install();
+		hooks::IHooks::install();
 		// hooks::on_set_rotation::install();
 		if (settings::bTacticalDodgeAI_enable) {  //install hooks for passive dodge
 			hooks::on_combatBehavior_backoff_createPath::install();

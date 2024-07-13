@@ -175,6 +175,55 @@ namespace hooks
 		}
 	}
 
+	class OurEventSink : public RE::BSTEventSink<RE::TESCombatEvent>
+	{
+		OurEventSink() = default;
+		OurEventSink(const OurEventSink&) = delete;
+		OurEventSink(OurEventSink&&) = delete;
+		OurEventSink& operator=(const OurEventSink&) = delete;
+		OurEventSink& operator=(OurEventSink&&) = delete;
+
+	public:
+		static OurEventSink* GetSingleton()
+		{
+			static OurEventSink singleton;
+			return &singleton;
+		}
+
+		RE::BSEventNotifyControl ProcessEvent(const RE::TESCombatEvent* event, RE::BSTEventSource<RE::TESCombatEvent>*)
+		{
+			decltype(auto) sourceName = event->actor;
+			auto Protagonist = sourceName->As<RE::Actor>();
+
+			if (Protagonist->IsPlayerRef() || !Utils::Actor::isHumanoid(Protagonist)) {
+				return RE::BSEventNotifyControl::kContinue;
+			}
+
+			if (!(Protagonist->HasKeywordString("ActorTypeNPC") || Protagonist->HasKeywordString("DLC2ActorTypeMiraak"))) {
+				return RE::BSEventNotifyControl::kContinue;
+			}
+
+			auto getcombatstate = event->newState.get();
+
+			if (getcombatstate == RE::ACTOR_COMBAT_STATE::kCombat) {
+				Protagonist->SetGraphVariableBool("bUND_InCombatFoundEnemy", true);
+			} else {
+				Protagonist->SetGraphVariableBool("bUND_InCombatFoundEnemy", false);
+			}
+
+			return RE::BSEventNotifyControl::kContinue;
+		}
+	};
+
+	void IHooks::install()
+	{
+		auto eventSink = OurEventSink::GetSingleton();
+
+		// ScriptSource
+		auto* eventSourceHolder = RE::ScriptEventSourceHolder::GetSingleton();
+		eventSourceHolder->AddEventSink<RE::TESCombatEvent>(eventSink);
+	}
+
 	EventResult on_animation_event::ProcessEvent_NPC(RE::BSTEventSink<RE::BSAnimationGraphEvent>* a_sink, RE::BSAnimationGraphEvent* a_event, RE::BSTEventSource<RE::BSAnimationGraphEvent>* a_eventSource)
 	{
 		ProcessEvent(a_sink, a_event, a_eventSource);
