@@ -104,7 +104,9 @@ namespace hooks
 			// if (dodge::GetSingleton()->GetEquippedShout(actor)) {
 			// 	dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
 			// }
-			dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
+			if (GetEquippedShouts(actor)){
+				dodge::GetSingleton()->react_to_shouts_spells(actor, 3000.0f);
+			}
 			break;
 
 		// case "BeginCastVoice"_h:
@@ -173,6 +175,26 @@ namespace hooks
 			dodge::GetSingleton()->react_to_ranged(actor, 1500.0f);
 			break;
 		}
+	}
+
+	bool GetEquippedShouts(RE::Actor* actor)
+	{
+		auto limboshout = actor->GetActorRuntimeData().selectedPower;
+
+		if (limboshout && limboshout->Is(RE::FormType::Shout)) {
+			std::string_view Lsht = (clib_util::editorID::get_editorID(limboshout)).data();
+			switch (hash(Lsht.data(), Lsht.size())) {
+			case "HoY_PullofNirnShout_Miraak"_h:
+			case "SlowTimeShout"_h:
+			case "Serio_EDR_GravityBlastShoutPAAR"_h:
+			case "Serio_EDR_GravityBlastShoutODAH"_h:
+			case "KS_SlowTime_Alduin"_h:
+				return false;
+			default:
+			    return true;
+			}
+		}
+		return false;
 	}
 
 	class OurEventSink : public RE::BSTEventSink<RE::TESCombatEvent>
