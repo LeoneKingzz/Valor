@@ -3,6 +3,7 @@
 #include "dodge.h"
 #include "include/Utils.h"
 #include "CombatBehaviorConditions.h"
+#include "editorID.hpp"
 #pragma warning(disable: 4100)
 
 
