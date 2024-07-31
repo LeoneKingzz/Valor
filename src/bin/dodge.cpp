@@ -672,7 +672,7 @@ void dodge::react_to_melee(RE::Actor* a_attacker, float attack_range)
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_all);
+				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_tk_reactive);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_all);
@@ -732,7 +732,7 @@ void dodge::react_to_melee_power(RE::Actor* a_attacker, float attack_range)
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->Powerattack_attempt_dodge(refr, &dodge_directions_tk_all);
+				dodge::GetSingleton()->Powerattack_attempt_dodge(refr, &dodge_directions_tk_reactive);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_all);
@@ -792,7 +792,7 @@ void dodge::react_to_melee_normal(RE::Actor* a_attacker, float attack_range)
 
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->NormalAttack_attempt_dodge(refr, &dodge_directions_tk_all);
+				dodge::GetSingleton()->NormalAttack_attempt_dodge(refr, &dodge_directions_tk_reactive);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_all);
@@ -849,7 +849,7 @@ void dodge::react_to_bash(RE::Actor* a_attacker, float attack_range)
 			/*RE::Character* a_refr = refr->As<RE::Character>();*/
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->Bash_attempt_dodge(refr, &dodge_directions_tk_all);
+				dodge::GetSingleton()->Bash_attempt_dodge(refr, &dodge_directions_tk_reactive);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
@@ -906,7 +906,7 @@ void dodge::react_to_bash_sprint(RE::Actor* a_attacker, float attack_range)
 			/*RE::Character* a_refr = refr->As<RE::Character>();*/
 			switch (settings::iDodgeAI_Framework) {
 			case 0:
-				dodge::GetSingleton()->BashSprint_attempt_dodge(refr, &dodge_directions_tk_all);
+				dodge::GetSingleton()->BashSprint_attempt_dodge(refr, &dodge_directions_tk_reactive);
 				break;
 			case 1:
 				dodge::GetSingleton()->attempt_dodge(refr, &dodge_directions_dmco_reactive);
